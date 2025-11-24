@@ -1,0 +1,299 @@
+﻿📘 PetBeats – 기능명세서 (v1.0)
+반려동물 심박·음향 동조 오디오 테라피 앱
+벤치마킹: Endel + Pet 특화 알고리즘
+
+1. 🏠 온보딩(초기 시작 화면) 구성
+(Endel의 온보딩 흐름을 그대로 벤치마킹)
+1.1 웰컴 스크린
+• 로고(PetBeats) + 부제 “Pet Heart-Sync Audio Therapy”
+• “Continue” 버튼
+1.2 기능 소개 슬라이드
+화면 1: “Calm · Relax · Sleep for Pets”
+화면 2: “A new world needs new solutions for anxious pets”
+화면 3: “Powered by bioacoustic science”
+화면 4: “Improve your pet’s well-being with the power of sound”
+화면 5: “We live in an over-stimulating world – Noise, Stress, Separation”
+1.3 사용자 질문(Endel 방식 그대로 차용)
+• “How did you discover PetBeats?”
+• “What would you like to improve first?”
+o Focus & Calm / Sleep / Sound Desensitization
+• “Does your pet fall asleep easily?”
+• “Answer a few questions to personalize PetBeats to your pet”
+1.4 초기 개인화 변수 저장
+• Species: Dog / Cat
+• Age group: Puppy/Kitten, Adult, Senior
+• Stress triggers: Noise / Separation / Over-excitement
+• Preferred mode: Sleep / Calm / Play
+
+2. 🎵 사운드 카테고리 구조
+(대장님이 만든 구성 + Endel의 사운드 인덱싱 방식 통합)
+2.1 강아지 (Dog Mode)
+무료
+• Deep Sleep (60 BPM Piano)
+• Separation Anxiety Care (클래식+백색소음)
+유료
+• Noise Masking (공사장, 천둥, 오토바이 소음 마스킹)
+• Happy Play (실내 놀이용 경쾌 리듬)
+• Senior Pain Relief (528Hz Healing Tone)
+2.2 고양이 (Cat Mode)
+무료
+• Purr Healing (25~50Hz 앰비언트)
+• Rest After Hunt (사냥 후 진정 글리산도)
+유료
+• New Environment Calm (병원/이사 적응)
+• Grooming Time (플루트 진정 음악)
+• Kitten Sleep (젖 빨기 ASMR + Heartbeat)
+2.3 보호자 (Owner Mode)
+유료
+• Pet Loss Healing Music
+• Sync Meditation (반려동물과 함께 듣는 명상)
+
+3. 💓 핵심 기능 – 하트비트 싱크(Haptic-Audio Sync)
+(Endel에는 없음 → PetBeats만의 USP)
+Mode A. Mother’s Heartbeat
+• 60 BPM 규칙적 패턴
+• 진동 강도 일정
+• 사용: 분리불안, 아기 고양이/강아지
+Mode B. Purr Vibe
+• 지속 미세 진동
+• 25–50Hz 고양이 골골 주파수를 햅틱으로 재현
+• 진정 및 통증 완화 목적
+Mode C. Calming Ramp-down
+• 100 → 60 BPM 서서히 감소
+• 5분간 자동 조절
+• 산책 후 과흥분/소음 스트레스 완화
+Mode D. Sound-Adaptive Haptic (Endel 스타일)
+• 음악의 저음(EQ Low) 분석
+• 킥/베이스 타격에 맞추어 햅틱 동기화
+• 옵션: Auto / Manual
+
+4. 🌈 UI/UX 구성 (Endel 스타일 그대로 차용)
+4.1 홈 화면
+• 상단 Species Toggle (Dog / Cat / Owner)
+• 중앙에 큰 사운드 모드 카드
+o Sleep
+o Calm
+o Play
+o Desensitization
+• 하단 플레이어 영역:
+o ▶ 재생/일시정지
+o 🔊 볼륨
+o 💓 하트비트 ON/OFF
+o Mix 버튼(프리미엄)
+4.2 모드 상세 화면
+• 해당 사운드의 애니메이션 파형 (Endel Wave UI 참고)
+• 현재 BPM 표시
+• 진동 패턴 선택
+• 타이머(10/20/30/60분)
+
+5. 🛠 기술 명세 (Flutter 기준)
+5.1 오디오
+• just_audio 사용
+• Background audio + lock-screen control
+• EQ 분석(저음대 FFT)로 진동 패턴 생성 가능
+5.2 햅틱
+• vibration 패키지로 Custom Pattern
+• Android: VibrationEffect
+• iOS: CoreHaptics (중간 레벨 제어)
+5.3 광고
+• google_mobile_ads
+• Free Tier: 배너 + 모드 전환 시 전면 광고
+5.4 구독 결제
+• in_app_purchase
+• 월 1,100원 (광고 제거 + 모든 모드)
+
+6. 💰 수익 모델
+(Endel 스토어 전략 + 대장님 구성 결합)
+Free Tier
+• 10곡 무료
+• Mother Heartbeat만 가능
+• 광고 있음
+Premium (₩1,100/월)
+• 모든 사운드 잠금 해제
+• 고급 진동 모드
+• Mix 기능
+• 완전 광고 제거
+
+7. 🗓 개발 로드맵
+⚙ 1단계: Onboarding + UI Skeleton
+• Endel 스타일 온보딩 구현
+• 사운드 리스트 UI 완성
+🎧 2단계: 오디오 엔진 + 기본 사운드 재생
+• just_audio 셋업
+• 백그라운드 재생 완성
+💓 3단계: 하트비트 싱크 핵심 기능
+• Mother Heartbeat
+• Purr Vibe
+• Ramp-down
+• Auto Sync(BPM 기반)
+📦 4단계: 구독 + 광고
+• AdMob
+• IAP 구독 시스템
+🚀 5단계: 출시
+• 구글 플레이 + 앱스토어 동시에 출격
+
+8. 📌 PetBeats 기능명세 요약(한 페이지 버전)
+• Endel 온보딩·UI·음향 기반 개인화 → 그대로 벤치마킹
+• 강아지/고양이/보호자 3모드 지원
+• 핵심: 하트비트 싱크(3종) + Noise Masking
+• 무료 10곡, 유료 확장팩 구조
+• Flutter 기반 크로스 플랫폼
+• 광고 + 월 1,100원 구독
+• 감성 UI + 생체음향 기반 카테고리
+
+대장님, 원하시면
+• 전체 화면 와이어프레임(스케치)
+• Flutter 첫 프로젝트 구조
+• 폴더 구조 + GetX 상태관리 포함 코드 골격
+까지 바로 만들어드릴까요?
+
+
+📘 PetBeats – 기능명세서 (v1.0)
+반려동물 심박·음향 동조 오디오 테라피 앱
+벤치마킹: Endel + Pet 특화 알고리즘
+
+1. 🏠 온보딩(초기 시작 화면) 구성
+(Endel의 온보딩 흐름을 그대로 벤치마킹)
+1.1 웰컴 스크린
+• 로고(PetBeats) + 부제 “Pet Heart-Sync Audio Therapy”
+• “Continue” 버튼
+1.2 기능 소개 슬라이드
+화면 1: “Calm · Relax · Sleep for Pets”
+화면 2: “A new world needs new solutions for anxious pets”
+화면 3: “Powered by bioacoustic science”
+화면 4: “Improve your pet’s well-being with the power of sound”
+화면 5: “We live in an over-stimulating world – Noise, Stress, Separation”
+1.3 사용자 질문(Endel 방식 그대로 차용)
+• “How did you discover PetBeats?”
+• “What would you like to improve first?”
+o Focus & Calm / Sleep / Sound Desensitization
+• “Does your pet fall asleep easily?”
+• “Answer a few questions to personalize PetBeats to your pet”
+1.4 초기 개인화 변수 저장
+• Species: Dog / Cat
+• Age group: Puppy/Kitten, Adult, Senior
+• Stress triggers: Noise / Separation / Over-excitement
+• Preferred mode: Sleep / Calm / Play
+
+2. 🎵 사운드 카테고리 구조
+(대장님이 만든 구성 + Endel의 사운드 인덱싱 방식 통합)
+2.1 강아지 (Dog Mode)
+무료
+• Deep Sleep (60 BPM Piano)
+• Separation Anxiety Care (클래식+백색소음)
+유료
+• Noise Masking (공사장, 천둥, 오토바이 소음 마스킹)
+• Happy Play (실내 놀이용 경쾌 리듬)
+• Senior Pain Relief (528Hz Healing Tone)
+2.2 고양이 (Cat Mode)
+무료
+• Purr Healing (25~50Hz 앰비언트)
+• Rest After Hunt (사냥 후 진정 글리산도)
+유료
+• New Environment Calm (병원/이사 적응)
+• Grooming Time (플루트 진정 음악)
+• Kitten Sleep (젖 빨기 ASMR + Heartbeat)
+2.3 보호자 (Owner Mode)
+유료
+• Pet Loss Healing Music
+• Sync Meditation (반려동물과 함께 듣는 명상)
+
+3. 💓 핵심 기능 – 하트비트 싱크(Haptic-Audio Sync)
+(Endel에는 없음 → PetBeats만의 USP)
+Mode A. Mother’s Heartbeat
+• 60 BPM 규칙적 패턴
+• 진동 강도 일정
+• 사용: 분리불안, 아기 고양이/강아지
+Mode B. Purr Vibe
+• 지속 미세 진동
+• 25–50Hz 고양이 골골 주파수를 햅틱으로 재현
+• 진정 및 통증 완화 목적
+Mode C. Calming Ramp-down
+• 100 → 60 BPM 서서히 감소
+• 5분간 자동 조절
+• 산책 후 과흥분/소음 스트레스 완화
+Mode D. Sound-Adaptive Haptic (Endel 스타일)
+• 음악의 저음(EQ Low) 분석
+• 킥/베이스 타격에 맞추어 햅틱 동기화
+• 옵션: Auto / Manual
+
+4. 🌈 UI/UX 구성 (Endel 스타일 그대로 차용)
+4.1 홈 화면
+• 상단 Species Toggle (Dog / Cat / Owner)
+• 중앙에 큰 사운드 모드 카드
+o Sleep
+o Calm
+o Play
+o Desensitization
+• 하단 플레이어 영역:
+o ▶ 재생/일시정지
+o 🔊 볼륨
+o 💓 하트비트 ON/OFF
+o Mix 버튼(프리미엄)
+4.2 모드 상세 화면
+• 해당 사운드의 애니메이션 파형 (Endel Wave UI 참고)
+• 현재 BPM 표시
+• 진동 패턴 선택
+• 타이머(10/20/30/60분)
+
+5. 🛠 기술 명세 (Flutter 기준)
+5.1 오디오
+• just_audio 사용
+• Background audio + lock-screen control
+• EQ 분석(저음대 FFT)로 진동 패턴 생성 가능
+5.2 햅틱
+• vibration 패키지로 Custom Pattern
+• Android: VibrationEffect
+• iOS: CoreHaptics (중간 레벨 제어)
+5.3 광고
+• google_mobile_ads
+• Free Tier: 배너 + 모드 전환 시 전면 광고
+5.4 구독 결제
+• in_app_purchase
+• 월 1,100원 (광고 제거 + 모든 모드)
+
+6. 💰 수익 모델
+(Endel 스토어 전략 + 대장님 구성 결합)
+Free Tier
+• 10곡 무료
+• Mother Heartbeat만 가능
+• 광고 있음
+Premium (₩1,100/월)
+• 모든 사운드 잠금 해제
+• 고급 진동 모드
+• Mix 기능
+• 완전 광고 제거
+
+7. 🗓 개발 로드맵
+⚙ 1단계: Onboarding + UI Skeleton
+• Endel 스타일 온보딩 구현
+• 사운드 리스트 UI 완성
+🎧 2단계: 오디오 엔진 + 기본 사운드 재생
+• just_audio 셋업
+• 백그라운드 재생 완성
+💓 3단계: 하트비트 싱크 핵심 기능
+• Mother Heartbeat
+• Purr Vibe
+• Ramp-down
+• Auto Sync(BPM 기반)
+📦 4단계: 구독 + 광고
+• AdMob
+• IAP 구독 시스템
+🚀 5단계: 출시
+• 구글 플레이 + 앱스토어 동시에 출격
+
+8. 📌 PetBeats 기능명세 요약(한 페이지 버전)
+• Endel 온보딩·UI·음향 기반 개인화 → 그대로 벤치마킹
+• 강아지/고양이/보호자 3모드 지원
+• 핵심: 하트비트 싱크(3종) + Noise Masking
+• 무료 10곡, 유료 확장팩 구조
+• Flutter 기반 크로스 플랫폼
+• 광고 + 월 1,100원 구독
+• 감성 UI + 생체음향 기반 카테고리
+
+대장님, 원하시면
+• 전체 화면 와이어프레임(스케치)
+• Flutter 첫 프로젝트 구조
+• 폴더 구조 + GetX 상태관리 포함 코드 골격
+까지 바로 만들어드릴까요?
+

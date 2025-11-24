@@ -1,0 +1,182 @@
+﻿📦 PetBeats – Full Prompt Package v1.0 (PRO Edition)
+전체 UI 컨셉 / 생성 프롬프트 / 디자인 시스템 / 아이콘 세트 Spec 포함
+
+0) PetBeats GLOBAL SYSTEM PROMPT (전 화면 공통 규격)
+**모든 이미지 생성의 “뼈대 규칙”**입니다.
+아래 프롬프트는 이미지 생성 모델의 System Prompt로 항상 앞부분에 넣어주세요.
+Create a minimalist, premium mobile app UI for “PetBeats” using a white background (#F9FAFB) with PetBeats primary blue (#0A57FF) as the accent color. 
+
+Design rules:
+- Apple-style minimalism
+- Soft rounded corners (12–24px radius)
+- Wide spacing (24px margin)
+- Thin-line icons (1.5pt stroke), PetBeats blue color
+- Typography: Sans-serif, Medium/Bold, dark navy text (#0A1A33)
+- Waveform illustrations: geometric, symmetric, 1pt thin-line blue
+- Buttons: Full-width rounded pill buttons, blue fill (#0A57FF) with white text
+- No gradients except subtle soft blur backgrounds
+- No shadows unless extremely subtle
+- All screens must maintain identical proportions, spacing, margin rules, color palette, and illustration thickness for perfect visual consistency.
+이 prompt는 모든 이미지 생성 앞단에 고정 적용됩니다.
+=====================================================================
+1) 📱 전체 화면 10종 일괄 생성용 프롬프트 패키지
+각 화면은 반드시 위의 Global System Prompt를 앞에 붙이고
+아래 프롬프트를 이어서 사용하세요.
+
+1) Onboarding Main Screen
+Generate the PetBeats onboarding screen.
+Title: “PetBeats”
+Subtitle: “Calm · Relax · Sleep for Pets”
+Center illustration: symmetric thin-line waveform.
+Bottom: rounded blue 'Continue' button.
+
+2) Welcome Screen
+Generate the 'Welcome to PetBeats' screen.
+Subtitle: “Audio therapy tuned to your pet’s heartbeat”
+Central thin-line wave illustration.
+
+3) Pet Selector Screen (Dog / Cat / Owner)
+Generate the species selection screen.
+Three rounded cards: Dog / Cat / Owner.
+Icons: thin-line blue illustrations.
+
+4) Issue Selector Screen
+Generate a checklist-style screen.
+Title: “What does your pet struggle with?”
+Options: Separation Anxiety, Noise Sensitivity, Sleep Trouble, Over-excitement.
+
+5) Home Screen (Mode Cards)
+Generate the PetBeats home screen with top toggle (Dog / Cat / Owner).
+Main large mode card: “Sleep Mode – 60 BPM”
+Horizontal mode list: Calm / Sleep / Play / Desensitization.
+Bottom mini-player.
+
+6) Mode Detail – Dog Sleep Mode
+Generate a mode detail screen.
+Mode: Dog → Deep Sleep Mode (60 BPM)
+Large thin-line wave animation in center.
+Heartbeat Sync toggle section.
+Timer buttons: 10m / 20m / 30m / 60m.
+
+7) Mode Detail – Cat Purr Healing
+Generate a mode detail screen.
+Mode: Cat → Purr Healing (25–50Hz)
+Central purr-frequency style circular waves.
+
+8) Heartbeat Sync Options
+Generate a Heartbeat Sync settings screen.
+Patterns:
+- Mother’s Heartbeat (60 BPM)
+- Purr Vibe
+- Calming Ramp-down (100 → 60 BPM)
+Include intensity slider.
+
+9) Library (Dog & Cat Sound List)
+Generate the sound library screen for Dog Mode.
+Sections: Free sounds / Premium sounds.
+Each item is a card with thin-line icon + title.
+
+10) Premium Subscription Screen
+Generate the PetBeats Premium screen.
+Title: “PetBeats Premium”
+Benefits list with thin-line icons.
+Blue 'Start Premium — ₩1,100/month' button.
+=====================================================================
+2) 🎨 PetBeats Design System Document (컬러/간격/폰트/컴포넌트 규격)
+대장님이 개발자·디자이너에게 그대로 전달 가능한 문서 형식입니다.
+
+📘 PetBeats Design System (v1.0)
+2.1 Brand Colors
+PurposeColorHexNotesPrimaryPetBeats Blue#0A57FF버튼, 아이콘, 텍스트 액센트BackgroundPure White#F9FAFB전체 화면 BackdropTextDark Navy#0A1A33제목/본문LineLight Blue#C8DBFFDivider, outlineErrorSoft Red#FF6B6B잘 안 사용함SuccessMint Soft#A5F2C2부드러운 피드백
+2.2 Typography
+• Primary Font: San-serif (SF Pro, Noto Sans, Inter)
+• Title (H1): 32px / Bold / #0A1A33
+• Subtitle (H2): 22px / Medium / #0A1A33
+• Body: 16px / Regular / #0A1A33
+• Button: 18px / Medium / White
+
+2.3 Spacing Rules
+• Screen margin: 24px
+• Element spacing: 12px / 16px / 20px
+• Large section gaps: 32px
+
+2.4 Corner Radius
+• Buttons: 32px (Pill shape)
+• Cards: 20px
+• Icons: 1.5pt stroke radius alignment
+
+2.5 Buttons
+Primary Button
+• Full-width pill
+• Fill: PetBeats Blue #0A57FF
+• Text: White
+• Height: 56px
+Secondary Button
+• Outline 1.5pt Blue
+• Text Blue
+
+2.6 Illustration Style
+• 1pt 또는 1.5pt thin-line stroke
+• Waveforms: geometric, symmetric
+• No shading, no complex gradients
+• Pure flat-line style
+
+2.7 Component List
+• Navigation Top Bar
+• Toggle Segmented Control (Dog/Cat/Owner)
+• Mode Card
+• Sound Library Card
+• Mini Player
+• Timer Selector
+• Heartbeat Pattern Selector
+• Subscription Banner
+• Premium Benefits List
+=====================================================================
+3) 🐾 PetBeats Icon Set (30종 프롬프트)
+30종 모두 얇은 1.5pt 블루 라인 아이콘 규격으로 생성할 수 있도록 설계했습니다.
+
+아이콘 생성 공통 프롬프트
+Generate a thin-line (1.5pt stroke) blue (#0A57FF) vector-style icon for PetBeats. 
+Clean Apple-style minimalism. No fill, only outlines. Soft rounded edges.
+
+30개 아이콘 목록
+(각 아이콘 개별 생성 시 뒤에 이름만 붙이면 됨)
+펫/종 관련 (8개)
+1. Dog face
+2. Cat face
+3. Paw print
+4. Bone
+5. Fish
+6. Pet house
+7. Heart + paw
+8. Walking dog silhouette
+사운드/음악 관련 (10개)
+9. Waveform
+10. Heartbeat line (ECG)
+11. Speaker
+12. Volume up
+13. Volume down
+14. Play
+15. Pause
+16. Equalizer bars
+17. Metronome
+18. Headphones
+기능 관련 (7개)
+19. Timer
+20. Moon (Sleep)
+21. Sparkle (Calm)
+22. Noise cancel
+23. Battery (Low-stress energy)
+24. Sync symbol
+25. Settings gear
+UI / 네비게이션 (5개)
+26. Home
+27. Library
+28. Profile
+29. Premium crown
+30. Info / Help
+
+아이콘 생성 예시
+Generate a thin-line blue (#0A57FF) icon: “Heartbeat Line”
+Generate a thin-line blue (#0A57FF) icon: “Dog Face”
+
