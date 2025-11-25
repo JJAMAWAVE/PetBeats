@@ -73,22 +73,16 @@ class _SplashWelcomeViewState extends State<SplashWelcomeView> with TickerProvid
   }
 
   void _navigateToNext() async {
-    if (_isTransitioning) return; // 이미 전환 중이면 무시
+    if (_isTransitioning) return;
     
     setState(() {
       _isTransitioning = true;
     });
 
-    // 전환 애니메이션 시작
     _transitionController.forward();
     
-    // 파동이 화면을 가득 채웠을 때 자연스럽게 전환 (1.8초로 단축)
     Future.delayed(const Duration(milliseconds: 1800), () {
-      Get.off(
-        () => const OnboardingView(),
-        transition: Transition.fadeIn, // 밝았다가 서서히 뚜렷해짐
-        duration: const Duration(milliseconds: 1200), // 1.2초 동안 부드럽게
-      );
+      Get.offNamed(Routes.ONBOARDING);
     });
   }
 

@@ -22,13 +22,13 @@ class OnboardingController extends GetxController {
 
   // 다음 슬라이드로 이동
   void nextSlide() {
-    if (_pageIndex.value < 4) {
+    if (_pageIndex.value < 3) { // 4 steps (0, 1, 2, 3)
       pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeIn,
+        duration: const Duration(milliseconds: 600), // Slower, smoother transition
+        curve: Curves.easeInOutCubic, // More elegant curve
       );
     } else {
-      Get.toNamed(Routes.QUESTIONS);
+      Get.offNamed(Routes.QUESTIONS); // Use offNamed to prevent going back
     }
   }
 
