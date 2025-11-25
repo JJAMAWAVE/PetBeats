@@ -1,0 +1,1 @@
+{"inputs":["C:\\PetBeats\\web\\*\\index.html","C:\\PetBeats\\web\\flutter_bootstrap.js","C:\\PetBeats\\flutter\\bin\\internal\\engine.version"],"outputs":["C:\\PetBeats\\build\\web\\*\\index.html","C:\\PetBeats\\build\\web\\flutter_bootstrap.js"],"buildKey":"[{\"compileTarget\":\"dart2js\",\"renderer\":\"html\",\"mainJsPath\":\"main.dart.js\"}]"}

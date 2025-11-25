@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import '../../data/services/audio_service.dart';
-import '../../data/services/haptic_service.dart';
+import '../../../data/services/audio_service.dart';
+import '../../../data/services/haptic_service.dart';
 
 class HomeController extends GetxController {
   final AudioService _audioService = Get.put(AudioService());

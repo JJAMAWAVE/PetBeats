@@ -22,34 +22,48 @@ class CustomButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(32),
+          gradient: isSecondary
+              ? null
+              : const LinearGradient(
+                  colors: [
+                    Color(0xFF4B7BFF), // Lighter Blue (Highlight)
+                    AppColors.primaryBlue, // Main Blue
+                    AppColors.secondaryBlue, // Darker Blue
+                  ],
+                  stops: [0.0, 0.4, 1.0],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
           boxShadow: isSecondary
               ? []
               : [
                   BoxShadow(
                     color: AppColors.primaryBlue.withOpacity(0.3),
-                    blurRadius: 12,
-                    offset: const Offset(0, 6),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
+                    spreadRadius: 2,
                   ),
                 ],
         ),
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: isSecondary ? Colors.transparent : AppColors.primaryBlue,
+            backgroundColor: Colors.transparent, // 투명하게 해서 그라데이션 보이게 함
             foregroundColor: isSecondary ? AppColors.primaryBlue : Colors.white,
             elevation: 0,
             shadowColor: Colors.transparent,
-          side: isSecondary
-              ? const BorderSide(color: AppColors.primaryBlue, width: 1.5)
-              : BorderSide.none,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(32),
+            side: isSecondary
+                ? const BorderSide(color: AppColors.primaryBlue, width: 1.5)
+                : BorderSide.none,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(32),
+            ),
           ),
-        ),
-        child: Text(
-          text,
-          style: AppTextStyles.button.copyWith(
-            color: isSecondary ? AppColors.primaryBlue : Colors.white,
+          child: Text(
+            text,
+            style: AppTextStyles.button.copyWith(
+              color: isSecondary ? AppColors.primaryBlue : Colors.white,
+            ),
           ),
         ),
       ),
