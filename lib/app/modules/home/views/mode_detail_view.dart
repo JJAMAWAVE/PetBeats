@@ -46,12 +46,12 @@ class ModeDetailView extends GetView<HomeController> {
               const SizedBox(height: 40),
               Text(
                 '현재 재생 중',
-                style: AppTextStyles.body.copyWith(color: Colors.grey),
+                style: AppTextStyles.bodyMedium.copyWith(color: Colors.grey),
               ),
               const SizedBox(height: 8),
               Text(
                 '60 BPM • Deep Sleep',
-                style: AppTextStyles.title.copyWith(fontSize: 24),
+                style: AppTextStyles.titleLarge.copyWith(fontSize: 24),
               ),
               const Spacer(),
               // 하트비트 싱크 설정
@@ -69,8 +69,8 @@ class ModeDetailView extends GetView<HomeController> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('하트비트 싱크', style: AppTextStyles.body.copyWith(fontWeight: FontWeight.bold)),
-                        Text('진동으로 심박수 동기화', style: AppTextStyles.body.copyWith(fontSize: 12, color: Colors.grey)),
+                        Text('하트비트 싱크', style: AppTextStyles.bodyMedium.copyWith(fontWeight: FontWeight.bold)),
+                        Text('진동으로 심박수 동기화', style: AppTextStyles.bodyMedium.copyWith(fontSize: 12, color: Colors.grey)),
                       ],
                     ),
                     const Spacer(),

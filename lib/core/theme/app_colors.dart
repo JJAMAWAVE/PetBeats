@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors { // Main Colors
   static const Color primaryBlue = Color(0xFF2E5BFF); // Royal Blue
   static const Color secondaryBlue = Color(0xFF007AFF); // Cerulean Blue
+  static const Color secondarySoftBlue = Color(0xFF8EA7FF); // New Soft Blue
   static const Color pointCoral = Color(0xFFFF8A80); // Soft Coral (Point)
   
   // Background Colors

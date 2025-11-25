@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -29,32 +30,31 @@ class PremiumView extends GetView<PremiumController> {
               const SizedBox(height: 24),
               Text(
                 'PetBeats Premium',
-                style: AppTextStyles.title,
+                style: AppTextStyles.titleLarge,
               ),
               const SizedBox(height: 16),
               Text(
-                '모든 사운드와 기능을 제한 없이 이용하세요.',
-                style: AppTextStyles.body.copyWith(color: Colors.grey[600]),
+                '모든 기능을 제한 없이\n이용해보세요',
+                style: AppTextStyles.bodyMedium.copyWith(color: Colors.grey[600]),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 48),
-              _buildBenefitItem('모든 사운드 잠금 해제'),
-              _buildBenefitItem('광고 없는 쾌적한 환경'),
-              _buildBenefitItem('고급 하트비트 싱크 패턴'),
-              _buildBenefitItem('백그라운드 재생 무제한'),
+              const SizedBox(height: 40),
+              _buildFeatureItem('모든 힐링 사운드 잠금 해제'),
+              _buildFeatureItem('오프라인 재생 지원'),
+              _buildFeatureItem('광고 없는 쾌적한 환경'),
+              _buildFeatureItem('백그라운드 재생'),
               
               const Spacer(),
               CustomButton(
-                text: '월 1,100원에 시작하기',
-                onPressed: controller.subscribe,
+                text: '월 4,900원으로 시작하기',
+                onPressed: () {}, // 결제 로직 연결 필요
               ),
               const SizedBox(height: 16),
               TextButton(
-                onPressed: () {}, // 복구 로직 (생략)
+                onPressed: () => Get.back(),
                 child: Text(
-                  '구매 복구하기',
-                  style: AppTextStyles.body.copyWith(
-                    fontSize: 14,
+                  '나중에 하기',
+                  style: AppTextStyles.bodyMedium.copyWith(
                     color: Colors.grey,
                     decoration: TextDecoration.underline,
                   ),
@@ -68,14 +68,14 @@ class PremiumView extends GetView<PremiumController> {
     );
   }
 
-  Widget _buildBenefitItem(String text) {
+  Widget _buildFeatureItem(String text) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.only(bottom: 16.0),
       child: Row(
         children: [
           const Icon(Icons.check_circle, color: AppColors.primaryBlue),
-          const SizedBox(width: 16),
-          Text(text, style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w500)),
+          const SizedBox(width: 12),
+          Text(text, style: AppTextStyles.bodyMedium.copyWith(fontWeight: FontWeight.w500)),
         ],
       ),
     );

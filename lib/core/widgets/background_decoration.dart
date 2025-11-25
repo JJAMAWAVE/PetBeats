@@ -18,6 +18,8 @@ class BackgroundDecoration extends StatefulWidget {
 class _BackgroundDecorationState extends State<BackgroundDecoration>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  final List<ParticleModel> _particles = [];
+  final int _particleCount = 20;
 
   @override
   void initState() {
@@ -26,6 +28,11 @@ class _BackgroundDecorationState extends State<BackgroundDecoration>
       vsync: this,
       duration: const Duration(seconds: 10),
     )..repeat();
+
+    // 파티클 초기화
+    for (int i = 0; i < _particleCount; i++) {
+      _particles.add(ParticleModel.random());
+    }
   }
 
   @override
@@ -96,6 +103,23 @@ class _BackgroundDecorationState extends State<BackgroundDecoration>
           ),
         ),
 
+        // 3.5. 파티클 이펙트 (Particles)
+        Positioned.fill(
+          child: AnimatedBuilder(
+            animation: _controller,
+            builder: (context, child) {
+              return CustomPaint(
+                painter: ParticlePainter(
+                  particles: _particles,
+                  animationValue: _controller.value,
+                ),
+              );
+            },
+          ),
+        ),
+
+        // 3. 소리 파동 패턴 (Sound Wave Pattern) - Animated
+
         // 4. 실제 콘텐츠
         widget.child,
       ],
@@ -155,6 +179,68 @@ class WavePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant WavePainter oldDelegate) {
+    return oldDelegate.animationValue != animationValue;
+  }
+}
+
+class ParticleModel {
+  late double x;
+  late double y;
+  late double size;
+  late double speed;
+  late double opacity;
+
+  ParticleModel.random() {
+    final random = math.Random();
+    x = random.nextDouble();
+    y = random.nextDouble();
+    size = random.nextDouble() * 4 + 2; // 크기 증가 (2 ~ 6)
+    speed = random.nextDouble() * 0.2 + 0.05;
+    opacity = random.nextDouble() * 0.5 + 0.3; // 투명도 증가 (0.3 ~ 0.8)
+  }
+}
+
+class ParticlePainter extends CustomPainter {
+  final List<ParticleModel> particles;
+  final double animationValue;
+
+  ParticlePainter({required this.particles, required this.animationValue});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()..style = PaintingStyle.fill;
+
+    for (var particle in particles) {
+      // 위로 올라가는 움직임 구현
+      // animationValue (0~1)가 계속 반복되므로, 이를 이용하여 y좌표를 계산
+      // (초기y - 속도 * 시간) % 1.0 을 하면 1.0 -> 0.0 으로 자연스럽게 순환
+      
+      double currentY = (particle.y - (particle.speed * animationValue * 5)) % 1.0;
+      if (currentY < 0) currentY += 1.0;
+
+      final position = Offset(
+        particle.x * size.width,
+        currentY * size.height,
+      );
+
+      // 반짝이는 효과
+      final double twinkle = math.sin((animationValue * 10 + particle.x * 10) * math.pi);
+      final double currentOpacity = (particle.opacity + (twinkle * 0.1)).clamp(0.0, 1.0);
+
+      paint.color = Colors.white.withOpacity(currentOpacity);
+      
+      // Glow 효과를 위해 마스크 필터 적용 (성능 주의)
+      // 여기서는 간단히 원을 그림
+      canvas.drawCircle(position, particle.size, paint);
+      
+      // 외곽 Glow
+      paint.color = Colors.white.withOpacity(currentOpacity * 0.3);
+      canvas.drawCircle(position, particle.size * 2, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant ParticlePainter oldDelegate) {
     return oldDelegate.animationValue != animationValue;
   }
 }

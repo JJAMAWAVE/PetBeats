@@ -28,7 +28,7 @@ class HomeView extends GetView<HomeController> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('PetBeats', style: AppTextStyles.title.copyWith(fontSize: 24)),
+                  Text('PetBeats', style: AppTextStyles.titleLarge.copyWith(fontSize: 24)),
                   IconButton(
                     icon: const Icon(Icons.settings_outlined, color: AppColors.textDarkNavy),
                     onPressed: () {},

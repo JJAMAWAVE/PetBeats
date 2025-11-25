@@ -57,7 +57,7 @@ class SpeciesToggle extends GetView<HomeController> {
               const SizedBox(width: 8),
               Text(
                 label,
-                style: AppTextStyles.body.copyWith(
+                style: AppTextStyles.bodyMedium.copyWith(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                   color: isSelected ? AppColors.primaryBlue : Colors.grey,

@@ -64,13 +64,13 @@ class OnboardingView extends GetView<OnboardingController> {
                         const SizedBox(height: 40),
                         Text(
                           slides[index]["title"]!,
-                          style: AppTextStyles.title.copyWith(fontSize: 28),
+                          style: AppTextStyles.titleLarge.copyWith(fontSize: 28),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 16),
                         Text(
                           slides[index]["desc"]!,
-                          style: AppTextStyles.body.copyWith(color: Colors.grey[600]),
+                          style: AppTextStyles.bodyMedium.copyWith(color: Colors.grey[600]),
                           textAlign: TextAlign.center,
                         ),
                       ],

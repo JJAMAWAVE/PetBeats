@@ -23,7 +23,7 @@ class QuestionView extends GetView<OnboardingController> {
               const SizedBox(height: 40),
               Text(
                 '누구를 위한\nPetBeats인가요?',
-                style: AppTextStyles.title,
+                style: AppTextStyles.titleLarge,
               ),
               const SizedBox(height: 40),
               _buildOptionCard('강아지 (Dog)', Icons.pets, 'Dog'),
@@ -66,7 +66,7 @@ class QuestionView extends GetView<OnboardingController> {
               const SizedBox(width: 16),
               Text(
                 title,
-                style: AppTextStyles.body.copyWith(
+                style: AppTextStyles.bodyLarge.copyWith(
                   fontWeight: FontWeight.bold,
                   color: isSelected ? AppColors.primaryBlue : AppColors.textDarkNavy,
                 ),

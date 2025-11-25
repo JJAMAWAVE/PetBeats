@@ -55,7 +55,7 @@ class ModeCard extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               subtitle,
-              style: AppTextStyles.body.copyWith(
+              style: AppTextStyles.bodyMedium.copyWith(
                 fontSize: 14,
                 color: Colors.grey[600],
               ),
