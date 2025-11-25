@@ -5,7 +5,7 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../controllers/home_controller.dart';
 
 class ModeDetailView extends GetView<HomeController> {
-  const ModeDetailView({Key? key}) : super(key: key);
+  const ModeDetailView({super.key});
 
   @override
   Widget build(BuildContext context) {

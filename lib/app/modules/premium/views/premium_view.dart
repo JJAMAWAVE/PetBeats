@@ -7,7 +7,7 @@ import '../../../../core/widgets/custom_button.dart';
 import '../controllers/premium_controller.dart';
 
 class PremiumView extends GetView<PremiumController> {
-  const PremiumView({Key? key}) : super(key: key);
+  const PremiumView({super.key});
 
   @override
   Widget build(BuildContext context) {

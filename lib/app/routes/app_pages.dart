@@ -18,31 +18,37 @@ class AppPages {
       name: Routes.WELCOME,
       page: () => const SplashWelcomeView(),
       binding: OnboardingBinding(),
+      preventDuplicates: true,
     ),
     GetPage(
       name: Routes.ONBOARDING,
       page: () => const OnboardingView(),
       binding: OnboardingBinding(),
+      preventDuplicates: true,
     ),
     GetPage(
       name: Routes.QUESTIONS,
       page: () => const QuestionView(),
       binding: OnboardingBinding(),
+      preventDuplicates: true,
     ),
     GetPage(
       name: Routes.HOME,
       page: () => const HomeView(),
       binding: HomeBinding(),
+      preventDuplicates: true,
     ),
     GetPage(
       name: '/mode_detail',
       page: () => const ModeDetailView(),
       binding: HomeBinding(),
+      preventDuplicates: true,
     ),
     GetPage(
       name: '/premium',
       page: () => const PremiumView(),
       binding: PremiumBinding(),
+      preventDuplicates: true,
     ),
   ];
 }

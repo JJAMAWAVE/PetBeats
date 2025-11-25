@@ -4,13 +4,11 @@ import 'app_colors.dart';
 
 class AppTextStyles {
   // 기본 스타일 정의 (Noto Sans + Fallback)
-  static TextStyle get baseStyle => GoogleFonts.notoSans(
+  static TextStyle get baseStyle => GoogleFonts.notoSansKr(
     color: AppColors.textDarkNavy,
   ).copyWith(
     fontFamilyFallback: [
-      GoogleFonts.notoSansKr().fontFamily!,
-      GoogleFonts.notoSansSc().fontFamily!,
-      GoogleFonts.notoSansTc().fontFamily!,
+      GoogleFonts.notoSans().fontFamily!,
     ],
   );
 

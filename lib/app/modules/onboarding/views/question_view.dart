@@ -6,7 +6,7 @@ import '../../../../core/widgets/custom_button.dart';
 import '../controllers/onboarding_controller.dart';
 
 class QuestionView extends GetView<OnboardingController> {
-  const QuestionView({Key? key}) : super(key: key);
+  const QuestionView({super.key});
 
   @override
   Widget build(BuildContext context) {

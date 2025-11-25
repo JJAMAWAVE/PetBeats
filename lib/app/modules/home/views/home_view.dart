@@ -10,7 +10,7 @@ import '../../../../core/widgets/ad_banner_placeholder.dart';
 import '../../../../core/widgets/background_decoration.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -10,7 +10,7 @@ import '../../../routes/app_routes.dart';
 import 'onboarding_view.dart';
 
 class SplashWelcomeView extends StatefulWidget {
-  const SplashWelcomeView({Key? key}) : super(key: key);
+  const SplashWelcomeView({super.key});
 
   @override
   State<SplashWelcomeView> createState() => _SplashWelcomeViewState();
@@ -84,7 +84,7 @@ class _SplashWelcomeViewState extends State<SplashWelcomeView> with TickerProvid
     
     // 파동이 화면을 가득 채웠을 때 자연스럽게 전환 (1.8초로 단축)
     Future.delayed(const Duration(milliseconds: 1800), () {
-      Get.to(
+      Get.off(
         () => const OnboardingView(),
         transition: Transition.fadeIn, // 밝았다가 서서히 뚜렷해짐
         duration: const Duration(milliseconds: 1200), // 1.2초 동안 부드럽게
@@ -294,7 +294,7 @@ class _SplashWelcomeViewState extends State<SplashWelcomeView> with TickerProvid
 
 class _ShimmerBadge extends StatefulWidget {
   final Widget child;
-  const _ShimmerBadge({Key? key, required this.child}) : super(key: key);
+  const _ShimmerBadge({super.key, required this.child});
 
   @override
   State<_ShimmerBadge> createState() => _ShimmerBadgeState();

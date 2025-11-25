@@ -5,7 +5,7 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../controllers/home_controller.dart';
 
 class SpeciesToggle extends GetView<HomeController> {
-  const SpeciesToggle({Key? key}) : super(key: key);
+  const SpeciesToggle({super.key});
 
   @override
   Widget build(BuildContext context) {
