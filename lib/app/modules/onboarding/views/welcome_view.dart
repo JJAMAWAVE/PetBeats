@@ -55,9 +55,11 @@ class _WelcomeViewState extends State<WelcomeView> with SingleTickerProviderStat
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // 아이콘 (심박수/하트) - 이미지로 교체됨
+                    // 아이콘 (심박수/하트) - Flutter 아이콘 조합으로 변경
                     Container(
-                      padding: const EdgeInsets.all(4), // 테두리 여백 감소
+                      width: 140,
+                      height: 140,
+                      padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
                         color: AppColors.primaryBlue.withOpacity(0.1),
                         shape: BoxShape.circle,
@@ -69,13 +71,45 @@ class _WelcomeViewState extends State<WelcomeView> with SingleTickerProviderStat
                           ),
                         ],
                       ),
-                      child: ClipOval(
-                        child: Image.asset(
-                          'assets/images/logo_icon.jpg',
-                          width: 120, // 크기 증가
-                          height: 120,
-                          fit: BoxFit.cover,
-                        ),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          // 배경: 펫 발자국 (은은하게)
+                          Icon(
+                            Icons.pets,
+                            size: 90,
+                            color: AppColors.primaryBlue.withOpacity(0.3),
+                          ),
+                          // 전경: 심박수 하트 (강조)
+                          Positioned(
+                            bottom: 25,
+                            child: Icon(
+                              Icons.monitor_heart,
+                              size: 60,
+                              color: AppColors.primaryBlue,
+                            ),
+                          ),
+                          // 포인트: 코랄 점
+                          Positioned(
+                            top: 35,
+                            right: 35,
+                            child: Container(
+                              width: 12,
+                              height: 12,
+                              decoration: BoxDecoration(
+                                color: AppColors.pointCoral,
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.pointCoral.withOpacity(0.5),
+                                    blurRadius: 8,
+                                    spreadRadius: 2,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     const SizedBox(height: 24),
