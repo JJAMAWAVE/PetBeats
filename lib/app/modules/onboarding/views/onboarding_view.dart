@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -8,8 +9,52 @@ import '../controllers/onboarding_controller.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class OnboardingView extends GetView<OnboardingController> {
+class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
+
+  @override
+  State<OnboardingView> createState() => _OnboardingViewState();
+}
+
+class _OnboardingViewState extends State<OnboardingView> with TickerProviderStateMixin {
+  final OnboardingController controller = Get.find<OnboardingController>();
+  late AnimationController _rippleController;
+  Offset? _ripplePosition;
+  bool _showRipple = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _rippleController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+  }
+
+  @override
+  void dispose() {
+    _rippleController.dispose();
+    super.dispose();
+  }
+
+  void _handleTap(TapDownDetails details) {
+    setState(() {
+      _ripplePosition = details.localPosition;
+      _showRipple = true;
+    });
+    
+    _rippleController.forward(from: 0.0).then((_) {
+      setState(() {
+        _showRipple = false;
+      });
+      _rippleController.reset();
+    });
+    
+    // Navigate after showing ripple
+    Future.delayed(const Duration(milliseconds: 200), () {
+      controller.nextSlide();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,44 +68,45 @@ class OnboardingView extends GetView<OnboardingController> {
       {
         "title": "Bio-Acoustic Design",
         "desc": "사람보다 예민한 아이들을 위해,\n뇌파를 안정시키는 특수 음향을 설계했습니다.",
-        "image": "assets/images/onboarding/step2_brainwave_v2.png"
+        "image": "assets/images/onboarding/step2_brainwave_v4.png"
       },
       {
         "title": "Therapy Beyond Sound",
         "desc": "음악 그 이상입니다.\n심장 박동을 닮은 진동이 깊은 안정을 줍니다.",
-        "image": "assets/images/onboarding/step3_vibration_v2.png"
+        "image": "assets/images/onboarding/step3_vibration_v3.png"
       },
       {
         "title": "Resonate Together",
         "desc": "아이를 품에 안고 느껴보세요.\n심장이 맞춰지는 순간, 진정한 치유가 완성됩니다.",
-        "image": "assets/images/onboarding/step4_resonance_v2.png"
+        "image": "assets/images/onboarding/step4_resonance_v3.png"
       },
     ];
 
     return Scaffold(
-      backgroundColor: Colors.white, // White Background
-      body: GestureDetector(
-        onTap: controller.nextSlide, // Tap anywhere to continue
-        behavior: HitTestBehavior.translucent,
-        child: Stack(
-          children: [
-            // Subtle Warm Blue Background Effect
-            Positioned.fill(
-              child: Container(
-                decoration: const BoxDecoration(
-                  gradient: RadialGradient(
-                    center: Alignment(0.0, -0.2), // Slightly above center (behind image)
-                    radius: 0.8,
-                    colors: [
-                      Color(0xFFE8F0FE), // Very soft warm blue (Google Blue 50-ish)
-                      Colors.white,
-                    ],
-                    stops: [0.0, 1.0],
-                  ),
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          // Background gradient
+          Positioned.fill(
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: RadialGradient(
+                  center: Alignment(0.0, -0.2),
+                  radius: 0.8,
+                  colors: [
+                    Color(0xFFE8F0FE),
+                    Colors.white,
+                  ],
+                  stops: [0.0, 1.0],
                 ),
               ),
             ),
-            Column(
+          ),
+          // Content layer with touch detection
+          GestureDetector(
+            onTapDown: _handleTap,
+            behavior: HitTestBehavior.translucent,
+            child: Column(
               children: [
                 // 60% Image Area
                 Expanded(
@@ -68,24 +114,22 @@ class OnboardingView extends GetView<OnboardingController> {
                   child: PageView.builder(
                     controller: controller.pageController,
                     onPageChanged: controller.onPageChanged,
-                    physics: const NeverScrollableScrollPhysics(), // Disable swipe, tap only
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: slides.length,
                     itemBuilder: (context, index) {
                       return Stack(
                         alignment: Alignment.center,
                         children: [
-                          // Breathing Image
                           Container(
                             width: double.infinity,
                             padding: const EdgeInsets.all(40),
                             child: Transform.scale(
-                              scale: 0.8, // Reduced to 80% size
+                              scale: 0.8,
                               child: _BreathingImage(
                                 imagePath: slides[index]["image"]!,
                               ),
                             ),
                           ),
-                          // Glowing Light Animation Overlay (Only for first slide)
                           if (index == 0)
                             Positioned.fill(
                               child: Padding(
@@ -100,76 +144,77 @@ class OnboardingView extends GetView<OnboardingController> {
                     },
                   ),
                 ),
-                
-                // 40% Text Area
+                // Text Area (40%)
                 Expanded(
                   flex: 4,
                   child: Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0), // Reduced padding for wider text area
-                    child: Obx(() {
-                      final index = controller.pageIndex;
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center, // Center aligned
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          // Page Indicator moved here (above text)
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: List.generate(
-                              slides.length,
-                              (i) => _IndicatorDot(
-                                isActive: controller.pageIndex == i,
-                              ),
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // Page Indicator moved here (above text)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(
+                            slides.length,
+                            (i) => _IndicatorDot(
+                              isActive: controller.pageIndex == i,
                             ),
                           ),
-                          const SizedBox(height: 32),
-                          
-                          // Animated Text Switcher
-                          AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 500),
-                            child: FittedBox(
-                              fit: BoxFit.scaleDown,
-                              child: _AnimatedGradientText(
-                                text: slides[index]["title"]!,
-                                key: ValueKey('title_$index'),
-                              ),
+                        ),
+                        const SizedBox(height: 32),
+                        
+                        // Animated Text Switcher
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 500),
+                          child: _AnimatedGradientText(
+                            text: slides[controller.pageIndex]["title"]!,
+                            key: ValueKey('title_${controller.pageIndex}'),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        
+                        // Description
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 500),
+                          child: Text(
+                            slides[controller.pageIndex]["desc"]!,
+                            key: ValueKey('desc_${controller.pageIndex}'),
+                            textAlign: TextAlign.center,
+                            style: AppTextStyles.bodyMedium.copyWith(
+                              color: AppColors.textGrey,
+                              height: 1.6,
+                              fontSize: 16,
                             ),
                           ),
-                          const SizedBox(height: 24),
-
-                          AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 500),
-                            child: Text(
-                              slides[index]["desc"]!,
-                              key: ValueKey('desc_$index'),
-                              style: AppTextStyles.bodyMedium.copyWith(
-                                color: AppColors.textGrey, // Updated to match top image
-                                fontSize: 16,
-                                height: 1.6,
-                              ),
-                              textAlign: TextAlign.center, // Center text
-                            ),
-                          ),
-                        ],
-                      );
-                    }),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
-
-            // Bottom "Tap to continue" Indication
-            Positioned(
-              bottom: 40,
-              left: 0,
-              right: 0,
-              child: Center(
-                child: _BreathingText(),
+          ),
+          // Touch ripple overlay
+          if (_showRipple && _ripplePosition != null)
+            Positioned.fill(
+              child: IgnorePointer(
+                child: AnimatedBuilder(
+                  animation: _rippleController,
+                  builder: (context, child) {
+                    return CustomPaint(
+                      painter: TouchRipplePainter(
+                        center: _ripplePosition!,
+                        progress: _rippleController.value,
+                        color: const Color(0xFF0055FF),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
-          ],
-        ),
+        ],
       ),
     );
   }
@@ -550,6 +595,48 @@ class _ParticlePainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant _ParticlePainter oldDelegate) {
     return oldDelegate.progress != progress;
+  }
+}
+
+// 작은 터치 ripple painter
+class TouchRipplePainter extends CustomPainter {
+  final Offset center;
+  final double progress;
+  final Color color;
+
+  TouchRipplePainter({
+    required this.center,
+    required this.progress,
+    required this.color,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    // Larger max radius for better visibility - 150 pixels
+    const maxRadius = 150.0;
+    final radius = maxRadius * progress;
+    
+    // Higher opacity for better visibility
+    final opacity = (1.0 - progress) * 0.6;
+    
+    final paint = Paint()
+      ..color = color.withOpacity(opacity * 1.5)
+      ..style = PaintingStyle.fill;
+    
+    canvas.drawCircle(center, radius, paint);
+    
+    // Add a more visible ring effect
+    final ringPaint = Paint()
+      ..color = color.withOpacity(opacity)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 3.0;
+      
+    canvas.drawCircle(center, radius, ringPaint);
+  }
+
+  @override
+  bool shouldRepaint(TouchRipplePainter oldDelegate) {
+    return oldDelegate.progress != progress || oldDelegate.center != center;
   }
 }
 

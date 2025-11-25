@@ -6,8 +6,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'app/routes/app_pages.dart';
 import 'app/routes/app_routes.dart';
 import 'core/theme/app_text_styles.dart';
+import 'core/services/web_bgm_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // 웹용 BGM 사전 로딩
+  await WebBgmService().init();
   runApp(const MyApp());
 }
 

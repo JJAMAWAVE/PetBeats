@@ -71,6 +71,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/onboarding/
+    - assets/sound/BGM/
 
   fonts:
     - family: Pretendard

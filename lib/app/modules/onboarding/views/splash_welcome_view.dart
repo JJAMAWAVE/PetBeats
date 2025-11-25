@@ -8,6 +8,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../routes/app_routes.dart';
 import 'onboarding_view.dart';
+import '../../../../core/services/web_bgm_service.dart';
 
 class SplashWelcomeView extends StatefulWidget {
   const SplashWelcomeView({super.key});
@@ -20,9 +21,7 @@ class _SplashWelcomeViewState extends State<SplashWelcomeView> with TickerProvid
   late AnimationController _controller;
   late AnimationController _textFlowController;
   late AnimationController _transitionController; // 전환 애니메이션
-  late AnimationController _scaleController; // 터치 반응 스케일 애니메이션
   late Animation<double> _opacityAnimation;
-  late Animation<double> _scaleAnimation;
   bool _isTransitioning = false; // 전환 중 플래그
 
   @override
@@ -40,26 +39,11 @@ class _SplashWelcomeViewState extends State<SplashWelcomeView> with TickerProvid
 
     _transitionController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 3), // 3초로 늘려 부드럽게
-    );
-
-    // 터치 반응을 위한 스케일 컨트롤러 (점성 느낌)
-    _scaleController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 800), // 끈적하게 복귀하는 시간
+      duration: const Duration(seconds: 3),
     );
 
     _opacityAnimation = Tween<double>(begin: 0.3, end: 1.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
-    
-    // 끈적한 탄성 효과 (눌렸다가 띠용~ 하고 돌아오는 느낌)
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(
-        parent: _scaleController, 
-        curve: Curves.elasticOut, // 탄성 있는 커브
-        reverseCurve: Curves.easeOutQuad, // 눌릴 때는 빠르게
-      ),
     );
   }
 
@@ -68,7 +52,6 @@ class _SplashWelcomeViewState extends State<SplashWelcomeView> with TickerProvid
     _controller.dispose();
     _textFlowController.dispose();
     _transitionController.dispose();
-    _scaleController.dispose();
     super.dispose();
   }
 
@@ -93,25 +76,16 @@ class _SplashWelcomeViewState extends State<SplashWelcomeView> with TickerProvid
         children: [
           // 메인 컨텐츠
           GestureDetector(
-            onTapDown: (_) {
+            onTap: () {
               if (!_isTransitioning) {
-                _scaleController.forward(); // 누르면 끈적하게 들어감
-              }
-            },
-            onTapUp: (_) {
-              if (!_isTransitioning) {
-                _scaleController.reverse(); // 떼면 띠용~ 하고 나옴
+                // 웹에서는 첫 터치시 BGM 재생 시작
+                WebBgmService().play();
                 _navigateToNext();
               }
             },
-            onTapCancel: () {
-              if (!_isTransitioning) {
-                _scaleController.reverse();
-              }
-            },
             behavior: HitTestBehavior.opaque,
-            child: ScaleTransition(
-              scale: _scaleAnimation,
+            child: Container(
+              color: Colors.transparent,
               child: BackgroundDecoration(
                 child: SafeArea(
                   child: Column(
