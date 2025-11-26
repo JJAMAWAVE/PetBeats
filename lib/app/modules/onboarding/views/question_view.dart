@@ -99,17 +99,17 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
           // 메인 컨텐츠
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(32.0),
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0), // Reduced padding
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 20), // Reduced top spacing
                   
                   // 질문 텍스트
                   Text(
                     '반려동물에게 필요한\n도움은 무엇인가요?',
                     style: GoogleFonts.notoSans(
-                      fontSize: 32,
+                      fontSize: 28, // Slightly reduced font size
                       fontWeight: FontWeight.w700,
                       color: AppColors.textDarkNavy,
                       height: 1.3,
@@ -125,7 +125,7 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
                     ),
                   ),
                   
-                  const SizedBox(height: 48),
+                  const SizedBox(height: 24), // Reduced spacing
                   
                   // 옵션 리스트
                   Expanded(
@@ -133,7 +133,7 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
                       itemCount: options.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 16.0),
+                          padding: const EdgeInsets.only(bottom: 12.0), // Reduced item spacing
                           child: Obx(() {
                             final option = options[index];
                             final value = option['value'] as String;
@@ -236,7 +236,7 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16), // Reduced internal padding
         decoration: BoxDecoration(
           color: isSelected ? AppColors.primaryBlue.withOpacity(0.08) : Colors.transparent,
           borderRadius: BorderRadius.circular(16),
