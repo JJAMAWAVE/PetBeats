@@ -18,6 +18,9 @@ class HomeController extends GetxController {
 
   // 현재 선택된 모드
   final currentMode = Rx<Mode?>(null);
+
+  // 현재 재생 중인 트랙
+  final currentTrack = Rx<Track?>(null);
   
   // 자동 모드 여부
   final isAutoMode = false.obs;
@@ -60,16 +63,26 @@ class HomeController extends GetxController {
           (m) => m.id == selectedNeeds.first,
           orElse: () => modes.first,
         );
-        changeMode(recommendedMode);
+        // "Energy" 모드가 기본 선택되지 않도록 예외 처리 (사용자 요청)
+        if (recommendedMode.id == 'energy') {
+             changeMode(modes.firstWhere((m) => m.id != 'energy', orElse: () => modes.first));
+        } else {
+             changeMode(recommendedMode);
+        }
       } else {
-        // changeMode(modes.first); // Default selection removed
+        // 기본값: 첫 번째 모드 선택 (사용자 요청: 시작부터 첫번째 탭 선택)
+        if (modes.isNotEmpty) {
+           changeMode(modes.first);
+        }
       }
       
     } catch (e) {
       // OnboardingController를 찾지 못한 경우 기본값 설정
       print('OnboardingController not found: $e');
       _initSpeciesTabs(['dog']); // 기본값
-      changeMode(modes.first);
+      if (modes.isNotEmpty) {
+         changeMode(modes.first);
+      }
     }
   }
 
@@ -83,14 +96,14 @@ class HomeController extends GetxController {
         color: const Color(0xFF5C6BC0), // Indigo
         scientificFacts: ['느린 템포는 심박수를 낮춥니다.', '반복적인 리듬은 수면을 유도합니다.'],
         tracks: [
-          Track(id: 's1', title: '스탠다드 자장가', target: '공용', isPremium: false, description: '가장 표준적인 피아노', duration: '3:00'),
-          Track(id: 's2', title: '따뜻한 오후', target: '공용', isPremium: false, description: '먹먹하고 부드러운 소리', duration: '3:15'),
-          Track(id: 's3', title: '깊은 밤의 꿈', target: '대형', isPremium: true, description: '깊은 울림 (고급형)', duration: '3:30'),
-          Track(id: 's4', title: '엄마의 요람', target: '대형', isPremium: true, description: '3박자 왈츠 (차별화)', duration: '3:10'),
-          Track(id: 's5', title: '깊은 울림', target: '중형', isPremium: true, description: '중형견용 표준', duration: '3:20'),
-          Track(id: 's6', title: '포근한 왈츠', target: '중형', isPremium: true, description: '중형견용 왈츠', duration: '3:05'),
-          Track(id: 's7', title: '맑은 아침', target: '소형', isPremium: true, description: '소형견용 맑은 소리', duration: '2:55'),
-          Track(id: 's8', title: '사뿐한 왈츠', target: '소형', isPremium: true, description: '오르골 느낌 추가', duration: '3:00'),
+          Track(id: 's1', title: '스탠다드 자장가', target: '공용', isPremium: false, description: '가장 표준적인 피아노', duration: '3:00', instrument: 'Solo Piano', bpm: '60 BPM'),
+          Track(id: 's2', title: '따뜻한 오후', target: '공용', isPremium: false, description: '먹먹하고 부드러운 소리', duration: '3:15', instrument: 'Piano & Pad', bpm: '58 BPM'),
+          Track(id: 's3', title: '깊은 밤의 꿈', target: '대형', isPremium: true, description: '깊은 울림 (고급형)', duration: '3:30', instrument: 'Cello', bpm: '55 BPM'),
+          Track(id: 's4', title: '엄마의 요람', target: '대형', isPremium: true, description: '3박자 왈츠 (차별화)', duration: '3:10', instrument: 'Harp', bpm: '60 BPM'),
+          Track(id: 's5', title: '깊은 울림', target: '중형', isPremium: true, description: '중형견용 표준', duration: '3:20', instrument: 'Piano', bpm: '60 BPM'),
+          Track(id: 's6', title: '포근한 왈츠', target: '중형', isPremium: true, description: '중형견용 왈츠', duration: '3:05', instrument: 'Guitar', bpm: '62 BPM'),
+          Track(id: 's7', title: '맑은 아침', target: '소형', isPremium: true, description: '소형견용 맑은 소리', duration: '2:55', instrument: 'Music Box', bpm: '65 BPM'),
+          Track(id: 's8', title: '사뿐한 왈츠', target: '소형', isPremium: true, description: '오르골 느낌 추가', duration: '3:00', instrument: 'Celesta', bpm: '64 BPM'),
         ],
       ),
       Mode(
@@ -101,14 +114,14 @@ class HomeController extends GetxController {
         color: const Color(0xFF26A69A), // Teal
         scientificFacts: ['백색 소음은 외부 자극을 차단합니다.', '부드러운 멜로디는 정서적 안정을 돕습니다.'],
         tracks: [
-          Track(id: 'a7', title: '평온한 오후', target: '공용', isPremium: false, description: '기타(Guitar)의 따뜻한 울림', duration: '3:10'),
-          Track(id: 'a8', title: '숲속의 쉼터', target: '공용', isPremium: false, description: '관악기의 부드러운 호흡', duration: '3:25'),
-          Track(id: 'a1', title: '묵직한 위로', target: '대형', isPremium: true, description: '첼로의 묵직한 저음', duration: '3:40'),
-          Track(id: 'a2', title: '따뜻한 공명', target: '대형', isPremium: true, description: '공간을 채워주는 소리', duration: '3:30'),
-          Track(id: 'a3', title: '균형 잡힌 안정', target: '중형', isPremium: true, description: '너무 무겁지 않은 현악기', duration: '3:15'),
-          Track(id: 'a4', title: '포근한 공기', target: '중형', isPremium: true, description: '부드러운 공기 질감', duration: '3:20'),
-          Track(id: 'a5', title: '산뜻한 안정', target: '소형', isPremium: true, description: '하프(Harp)의 맑은 소리', duration: '3:00'),
-          Track(id: 'a6', title: '밝은 공기', target: '소형', isPremium: true, description: '밝고 가벼운 앰비언트', duration: '3:05'),
+          Track(id: 'a7', title: '평온한 오후', target: '공용', isPremium: false, description: '기타(Guitar)의 따뜻한 울림', duration: '3:10', instrument: 'Acoustic Guitar', bpm: '60 BPM'),
+          Track(id: 'a8', title: '숲속의 쉼터', target: '공용', isPremium: false, description: '관악기의 부드러운 호흡', duration: '3:25', instrument: 'Flute & Nature', bpm: '58 BPM'),
+          Track(id: 'a1', title: '묵직한 위로', target: '대형', isPremium: true, description: '첼로의 묵직한 저음', duration: '3:40', instrument: 'Cello', bpm: '50 BPM'),
+          Track(id: 'a2', title: '따뜻한 공명', target: '대형', isPremium: true, description: '공간을 채워주는 소리', duration: '3:30', instrument: 'Pad', bpm: '55 BPM'),
+          Track(id: 'a3', title: '균형 잡힌 안정', target: '중형', isPremium: true, description: '너무 무겁지 않은 현악기', duration: '3:15', instrument: 'Viola', bpm: '60 BPM'),
+          Track(id: 'a4', title: '포근한 공기', target: '중형', isPremium: true, description: '부드러운 공기 질감', duration: '3:20', instrument: 'Ambient', bpm: '58 BPM'),
+          Track(id: 'a5', title: '산뜻한 안정', target: '소형', isPremium: true, description: '하프(Harp)의 맑은 소리', duration: '3:00', instrument: 'Harp', bpm: '65 BPM'),
+          Track(id: 'a6', title: '밝은 공기', target: '소형', isPremium: true, description: '밝고 가벼운 앰비언트', duration: '3:05', instrument: 'Synth Pad', bpm: '62 BPM'),
         ],
       ),
       Mode(
@@ -119,14 +132,14 @@ class HomeController extends GetxController {
         color: const Color(0xFF7E57C2), // Deep Purple
         scientificFacts: ['일정한 소음은 갑작스러운 소리를 덮어줍니다.', '청각적 과부하를 줄여줍니다.'],
         tracks: [
-          Track(id: 'n7', title: '우주 여행', target: '공용', isPremium: false, description: '신비롭고 넓은 공간감', duration: '4:00'),
-          Track(id: 'n8', title: '깊은 바다', target: '공용', isPremium: false, description: '물속에 있는 듯한 차단력', duration: '4:10'),
-          Track(id: 'n1', title: '부드러운 장막', target: '대형', isPremium: true, description: '빗소리 믹스', duration: '3:50'),
-          Track(id: 'n2', title: '깊은 방패', target: '대형', isPremium: true, description: '저음 방어막 (천둥 대비)', duration: '4:00'),
-          Track(id: 'n3', title: '일상의 평온', target: '중형', isPremium: true, description: '시냇물 소리 믹스', duration: '3:45'),
-          Track(id: 'n4', title: '든든한 방음벽', target: '중형', isPremium: true, description: '꽉 찬 중저음', duration: '3:55'),
-          Track(id: 'n5', title: '산뜻한 보호막', target: '소형', isPremium: true, description: '새소리/바람소리 믹스', duration: '3:30'),
-          Track(id: 'n6', title: '포근한 담요', target: '소형', isPremium: true, description: '답답하지 않은 포근함', duration: '3:40'),
+          Track(id: 'n7', title: '우주 여행', target: '공용', isPremium: false, description: '신비롭고 넓은 공간감', duration: '4:00', instrument: 'Deep Synth', bpm: '40 BPM'),
+          Track(id: 'n8', title: '깊은 바다', target: '공용', isPremium: false, description: '물속에 있는 듯한 차단력', duration: '4:10', instrument: 'Brown Noise', bpm: 'N/A'),
+          Track(id: 'n1', title: '부드러운 장막', target: '대형', isPremium: true, description: '빗소리 믹스', duration: '3:50', instrument: 'Rain & Piano', bpm: '50 BPM'),
+          Track(id: 'n2', title: '깊은 방패', target: '대형', isPremium: true, description: '저음 방어막 (천둥 대비)', duration: '4:00', instrument: 'Low Drone', bpm: '45 BPM'),
+          Track(id: 'n3', title: '일상의 평온', target: '중형', isPremium: true, description: '시냇물 소리 믹스', duration: '3:45', instrument: 'Stream & Pad', bpm: '55 BPM'),
+          Track(id: 'n4', title: '든든한 방음벽', target: '중형', isPremium: true, description: '꽉 찬 중저음', duration: '3:55', instrument: 'Cello & Noise', bpm: '52 BPM'),
+          Track(id: 'n5', title: '산뜻한 보호막', target: '소형', isPremium: true, description: '새소리/바람소리 믹스', duration: '3:30', instrument: 'Wind & Chimes', bpm: '60 BPM'),
+          Track(id: 'n6', title: '포근한 담요', target: '소형', isPremium: true, description: '답답하지 않은 포근함', duration: '3:40', instrument: 'Soft Pad', bpm: '58 BPM'),
         ],
       ),
       Mode(
@@ -137,14 +150,14 @@ class HomeController extends GetxController {
         color: const Color(0xFFFFA726), // Orange
         scientificFacts: ['빠른 템포는 활동성을 높입니다.', '다양한 주파수는 호기심을 자극합니다.'],
         tracks: [
-          Track(id: 'e7', title: '피크닉', target: '공용', isPremium: false, description: '어쿠스틱 기타의 경쾌함', duration: '2:50'),
-          Track(id: 'e8', title: '댄스 타임', target: '공용', isPremium: false, description: '엉덩이가 들썩이는 리듬', duration: '3:00'),
-          Track(id: 'e1', title: '리드미컬 산책', target: '대형', isPremium: true, description: '재즈풍의 둥둥거리는 베이스', duration: '3:10'),
-          Track(id: 'e2', title: '활기찬 터그', target: '대형', isPremium: true, description: '신나는 록 비트', duration: '2:45'),
-          Track(id: 'e3', title: '경쾌한 총총', target: '중형', isPremium: true, description: '밝은 팝 스타일', duration: '3:00'),
-          Track(id: 'e4', title: '신나는 술래', target: '중형', isPremium: true, description: '통통 튀는 전자음', duration: '2:55'),
-          Track(id: 'e5', title: '사뿐한 총총', target: '소형', isPremium: true, description: '우쿨렐레의 귀여운 소리', duration: '2:50'),
-          Track(id: 'e6', title: '신나는 우다다', target: '소형', isPremium: true, description: '실로폰 같은 맑은 타격감', duration: '2:40'),
+          Track(id: 'e7', title: '피크닉', target: '공용', isPremium: false, description: '어쿠스틱 기타의 경쾌함', duration: '2:50', instrument: 'Guitar', bpm: '100 BPM'),
+          Track(id: 'e8', title: '댄스 타임', target: '공용', isPremium: false, description: '엉덩이가 들썩이는 리듬', duration: '3:00', instrument: 'Drums & Bass', bpm: '110 BPM'),
+          Track(id: 'e1', title: '리드미컬 산책', target: '대형', isPremium: true, description: '재즈풍의 둥둥거리는 베이스', duration: '3:10', instrument: 'Double Bass', bpm: '95 BPM'),
+          Track(id: 'e2', title: '활기찬 터그', target: '대형', isPremium: true, description: '신나는 록 비트', duration: '2:45', instrument: 'Rock Band', bpm: '120 BPM'),
+          Track(id: 'e3', title: '경쾌한 총총', target: '중형', isPremium: true, description: '밝은 팝 스타일', duration: '3:00', instrument: 'Synth Pop', bpm: '105 BPM'),
+          Track(id: 'e4', title: '신나는 술래', target: '중형', isPremium: true, description: '통통 튀는 전자음', duration: '2:55', instrument: 'Chiptune', bpm: '115 BPM'),
+          Track(id: 'e5', title: '사뿐한 총총', target: '소형', isPremium: true, description: '우쿨렐레의 귀여운 소리', duration: '2:50', instrument: 'Ukulele', bpm: '100 BPM'),
+          Track(id: 'e6', title: '신나는 우다다', target: '소형', isPremium: true, description: '실로폰 같은 맑은 타격감', duration: '2:40', instrument: 'Xylophone', bpm: '110 BPM'),
         ],
       ),
       Mode(
@@ -155,14 +168,14 @@ class HomeController extends GetxController {
         color: const Color(0xFF8D6E63), // Brown
         scientificFacts: ['낮은 주파수는 관절 통증 완화에 도움을 줄 수 있습니다.', '안정적인 리듬은 인지 기능을 돕습니다.'],
         tracks: [
-          Track(id: 'sn7', title: '영혼의 안식', target: '공용', isPremium: false, description: '사람 목소리(허밍) 느낌', duration: '4:00'),
-          Track(id: 'sn8', title: '자연의 품', target: '공용', isPremium: false, description: '자연 치유 느낌', duration: '4:15'),
-          Track(id: 'sn1', title: '치유의 주파수', target: '대형', isPremium: true, description: '싱잉볼의 웅웅거리는 진동', duration: '4:30'),
-          Track(id: 'sn2', title: '깊은 안정', target: '대형', isPremium: true, description: '아주 느린 현악기', duration: '4:20'),
-          Track(id: 'sn3', title: '부드러운 공명', target: '중형', isPremium: true, description: '끊기지 않는 따뜻한 소리', duration: '4:10'),
-          Track(id: 'sn4', title: '편안한 휴식', target: '중형', isPremium: true, description: '아주 느린 피아노', duration: '4:00'),
-          Track(id: 'sn5', title: '포근한 온기', target: '소형', isPremium: true, description: '무겁지 않은 온열감', duration: '3:50'),
-          Track(id: 'sn6', title: '산뜻한 평온', target: '소형', isPremium: true, description: '느리고 맑은 하프', duration: '3:45'),
+          Track(id: 'sn7', title: '영혼의 안식', target: '공용', isPremium: false, description: '사람 목소리(허밍) 느낌', duration: '4:00', instrument: 'Humming', bpm: '50 BPM'),
+          Track(id: 'sn8', title: '자연의 품', target: '공용', isPremium: false, description: '자연 치유 느낌', duration: '4:15', instrument: 'Nature Sounds', bpm: 'N/A'),
+          Track(id: 'sn1', title: '치유의 주파수', target: '대형', isPremium: true, description: '싱잉볼의 웅웅거리는 진동', duration: '4:30', instrument: 'Singing Bowl', bpm: 'Low Freq'),
+          Track(id: 'sn2', title: '깊은 안정', target: '대형', isPremium: true, description: '아주 느린 현악기', duration: '4:20', instrument: 'Slow Strings', bpm: '45 BPM'),
+          Track(id: 'sn3', title: '부드러운 공명', target: '중형', isPremium: true, description: '끊기지 않는 따뜻한 소리', duration: '4:10', instrument: 'Resonance Pad', bpm: '50 BPM'),
+          Track(id: 'sn4', title: '편안한 휴식', target: '중형', isPremium: true, description: '아주 느린 피아노', duration: '4:00', instrument: 'Slow Piano', bpm: '48 BPM'),
+          Track(id: 'sn5', title: '포근한 온기', target: '소형', isPremium: true, description: '무겁지 않은 온열감', duration: '3:50', instrument: 'Warm Pad', bpm: '55 BPM'),
+          Track(id: 'sn6', title: '산뜻한 평온', target: '소형', isPremium: true, description: '느리고 맑은 하프', duration: '3:45', instrument: 'Harp', bpm: '58 BPM'),
         ],
       ),
     ];
@@ -222,15 +235,52 @@ class HomeController extends GetxController {
 
   void stopSound() {
     isPlaying.value = false;
+    currentTrack.value = null; // Reset track on stop
     _audioService.pause();
     _hapticService.stop();
   }
 
   void playSound(String modeId) {
+    // Legacy method, might be used by HomeView play button
+    // If we have a current track, play it, otherwise play first track of mode
+    if (currentTrack.value != null && currentMode.value?.id == modeId) {
+       isPlaying.value = true;
+       _audioService.play(_testAudioUrl);
+       if (isHeartbeatSyncEnabled.value) {
+         _hapticService.startHeartbeat(60);
+       }
+    } else {
+      // Find mode and play first track
+      final mode = modes.firstWhere((m) => m.id == modeId, orElse: () => modes.first);
+      if (mode.tracks.isNotEmpty) {
+        playTrack(mode.tracks.first);
+      }
+    }
+  }
+
+  void playTrack(Track track) {
+    if (track.isPremium && !isPremiumUser.value) {
+      Get.toNamed('/subscription');
+      return;
+    }
+    
+    currentTrack.value = track;
     isPlaying.value = true;
+    
+    // In a real app, we would play the specific track.audioUrl
     _audioService.play(_testAudioUrl);
+    
     if (isHeartbeatSyncEnabled.value) {
-      _hapticService.startHeartbeat(60);
+      // Parse BPM if possible, else default to 60
+      int bpm = 60;
+      if (track.bpm.contains('BPM')) {
+        try {
+          bpm = int.parse(track.bpm.split(' ')[0]);
+        } catch (e) {
+          bpm = 60;
+        }
+      }
+      _hapticService.startHeartbeat(bpm);
     }
   }
 
@@ -238,8 +288,7 @@ class HomeController extends GetxController {
   void changeMode(Mode mode) {
     currentMode.value = mode;
     isAutoMode.value = false;
-    // 모드 변경 시 자동 재생은 하지 않음 (사용자가 재생 버튼을 눌러야 함)
-    // 하지만 상세 화면으로 이동하므로 거기서 재생할 수도 있음
+    // 모드 변경 시 자동 재생은 하지 않음
   }
   
   // 상황별 추천
@@ -259,16 +308,14 @@ class HomeController extends GetxController {
 
   // 재생 토글
   void togglePlay() {
-    isPlaying.value = !isPlaying.value;
-
     if (isPlaying.value) {
-      _audioService.play(_testAudioUrl);
-      if (isHeartbeatSyncEnabled.value) {
-        _hapticService.startHeartbeat(60);
-      }
+      stopSound();
     } else {
-      _audioService.pause();
-      _hapticService.stop();
+      if (currentTrack.value != null) {
+        playTrack(currentTrack.value!);
+      } else if (currentMode.value != null && currentMode.value!.tracks.isNotEmpty) {
+        playTrack(currentMode.value!.tracks.first);
+      }
     }
   }
   

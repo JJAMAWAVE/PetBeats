@@ -11,8 +11,12 @@ class MiniPlayer extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      final track = controller.currentTrack.value;
       final mode = controller.currentMode.value;
-      if (mode == null) return const SizedBox.shrink();
+      final isPlaying = controller.isPlaying.value;
+
+      // 재생 중이 아니거나 트랙이 없으면 숨김 (사용자 요청: 재생 시에만 노출)
+      if (!isPlaying || track == null || mode == null) return const SizedBox.shrink();
 
       return Container(
         margin: const EdgeInsets.all(16),
@@ -38,59 +42,60 @@ class MiniPlayer extends GetView<HomeController> {
                 color: mode.color.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(
-                _getIconData(mode.iconPath),
-                color: mode.color,
+              child: Image.asset(
+                mode.iconPath,
+                fit: BoxFit.contain,
+                colorBlendMode: BlendMode.multiply,
+                color: Colors.white.withOpacity(0.0),
               ),
             ),
             const SizedBox(width: 12),
             
-            // Title
+            // Title & Type
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    mode.title,
+                    track.title, // 곡 제목
                     style: AppTextStyles.bodyMedium.copyWith(
                       color: AppColors.textDarkNavy,
                       fontWeight: FontWeight.bold,
                     ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    controller.isPlaying.value ? '재생 중...' : '일시정지',
+                    '${mode.title} • ${track.target}', // 곡 타입 (모드 + 타겟)
                     style: AppTextStyles.labelSmall.copyWith(
                       color: AppColors.textGrey,
                     ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
             ),
             
-            // Visualizer (if playing)
-            if (controller.isPlaying.value)
-              const SizedBox(
-                width: 30,
-                height: 20,
-                child: BeatAnimation(color: AppColors.primaryBlue),
-              ),
+            // Visualizer
+            const SizedBox(
+              width: 30,
+              height: 20,
+              child: BeatAnimation(color: AppColors.primaryBlue),
+            ),
             
             const SizedBox(width: 12),
             
             // Play/Pause Button
             IconButton(
-              icon: Icon(
-                controller.isPlaying.value ? Icons.pause_circle_filled : Icons.play_circle_filled,
+              icon: const Icon(
+                Icons.pause_circle_filled,
                 color: AppColors.primaryBlue,
                 size: 40,
               ),
               onPressed: () {
-                if (controller.isPlaying.value) {
-                  controller.stopSound();
-                } else {
-                  controller.playSound(mode.id);
-                }
+                controller.stopSound();
               },
             ),
           ],

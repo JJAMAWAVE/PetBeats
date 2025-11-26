@@ -164,6 +164,8 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
                                     height: 100,
                                     fit: BoxFit.cover,
                                     filterQuality: FilterQuality.high,
+                                    colorBlendMode: BlendMode.multiply,
+                                    color: Colors.white.withOpacity(0.0),
                                   ),
                           ),
                           

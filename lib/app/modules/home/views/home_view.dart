@@ -310,6 +310,11 @@ class HomeView extends GetView<HomeController> {
     Color? color,
     bool isSpecial = false,
   }) {
+    // Note: PremiumModeButton needs to be updated to support these changes or we modify it here.
+    // Since PremiumModeButton is a separate widget, we should check if we can modify it or wrap it.
+    // For now, assuming PremiumModeButton handles the icon display, we might need to edit that file instead.
+    // However, looking at the code, it seems PremiumModeButton is imported.
+    // Let's verify PremiumModeButton content first.
     return PremiumModeButton(
       title: title,
       iconPath: iconPath,
@@ -348,13 +353,14 @@ class HomeView extends GetView<HomeController> {
               child: Image.asset(
                 iconPath,
                 fit: BoxFit.contain,
-                color: Colors.white, // Tint white for blue background
+                colorBlendMode: BlendMode.multiply,
+                color: Colors.white.withOpacity(0.0),
               ),
             ),
             const SizedBox(width: 8),
             Text(
               label,
-              style: AppTextStyles.bodyMedium.copyWith(
+              style: AppTextStyles.labelSmall.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.w600,
               ),

@@ -221,11 +221,13 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
         child: Row(
           children: [
             SizedBox(
-              width: 24,
-              height: 24,
+              width: 48,
+              height: 48,
               child: Image.asset(
                 iconPath,
                 fit: BoxFit.contain,
+                colorBlendMode: BlendMode.multiply,
+                color: Colors.white.withOpacity(0.0),
               ),
             ),
             const SizedBox(width: 16),

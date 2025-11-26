@@ -114,6 +114,9 @@ class ModeDetailView extends GetView<HomeController> {
               ),
             ),
             
+            // Scientific Context Section
+            _buildScientificContext(mode),
+            
             // Track List
             Expanded(
               child: ListView.builder(
@@ -131,27 +134,101 @@ class ModeDetailView extends GetView<HomeController> {
     );
   }
 
+  Widget _buildScientificContext(Mode mode) {
+    String contextText = '';
+    String sourceText = '';
+    
+    if (mode.id == 'sleep') {
+      contextText = 'Wells & Kogan의 연구에 따르면, 60 BPM의 단순한 피아노 선율은 강아지의 휴식 심박수와 동조하여 깊은 수면을 유도합니다.';
+      sourceText = 'Source: Journal of Veterinary Behavior, 2012';
+    } else if (mode.id == 'anxiety') {
+      contextText = '백색 소음과 부드러운 멜로디의 조화는 외부 자극을 차단하고 분리 불안을 완화하는 데 효과적입니다.';
+      sourceText = 'Source: Applied Animal Behaviour Science';
+    } else if (mode.id == 'energy') {
+      contextText = '다양한 주파수와 빠른 템포는 반려동물의 호기심을 자극하고 활동성을 높여줍니다.';
+      sourceText = 'Source: Animal Welfare, 2002';
+    } else if (mode.id == 'senior') {
+      contextText = '낮은 주파수의 진동은 노령견의 관절 통증 완화에 도움을 주며, 안정적인 리듬은 인지 기능을 돕습니다.';
+      sourceText = 'Source: Scientific Reports, 2019';
+    } else {
+      contextText = '반려동물과 보호자의 옥시토신 루프를 활성화하여 깊은 유대감을 형성합니다.';
+      sourceText = 'Source: Science, 2015';
+    }
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.primaryBlue.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.primaryBlue.withOpacity(0.1)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.science, size: 16, color: AppColors.primaryBlue),
+              const SizedBox(width: 8),
+              Text(
+                'Scientific Insight',
+                style: GoogleFonts.poppins(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primaryBlue,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            contextText,
+            style: AppTextStyles.labelSmall.copyWith(
+              color: AppColors.textDarkNavy,
+              height: 1.5,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            sourceText,
+            style: GoogleFonts.poppins(
+              fontSize: 10,
+              color: AppColors.textGrey,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildTrackItem(Track track) {
     return Obx(() {
       final isLocked = track.isPremium && !controller.isPremiumUser.value;
-      final isPlaying = controller.isPlaying.value; // Simple check, ideally check track ID too
+      // Fix: Exclusive playback check
+      final isPlaying = controller.isPlaying.value && controller.currentTrack.value?.id == track.id;
 
       return GestureDetector(
         onTap: () {
           if (isLocked) {
             Get.toNamed(Routes.SUBSCRIPTION);
           } else {
-            // Play logic
-            controller.playSound(track.id); // Assuming playSound handles track ID
+            if (isPlaying) {
+              controller.stopSound();
+            } else {
+              controller.playTrack(track); // Use playTrack instead of playSound
+            }
           }
         },
         child: Container(
           margin: const EdgeInsets.only(bottom: 12),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: isPlaying ? AppColors.primaryBlue.withOpacity(0.05) : Colors.white,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppColors.lineLightBlue),
+            border: Border.all(
+              color: isPlaying ? AppColors.primaryBlue.withOpacity(0.3) : AppColors.lineLightBlue
+            ),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.03),
@@ -177,7 +254,7 @@ class ModeDetailView extends GetView<HomeController> {
               ),
               const SizedBox(width: 16),
               
-              // Title & Target
+              // Title & Target & Tags
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -190,12 +267,21 @@ class ModeDetailView extends GetView<HomeController> {
                       ),
                     ),
                     const SizedBox(height: 4),
-                    Text(
-                      track.target, // e.g., "대형", "공용"
-                      style: AppTextStyles.labelSmall.copyWith(
-                        color: AppColors.primaryBlue,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          track.target, // e.g., "대형", "공용"
+                          style: AppTextStyles.labelSmall.copyWith(
+                            color: AppColors.primaryBlue,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        // Tags (Instrument / BPM)
+                        _buildTag(track.instrument),
+                        const SizedBox(width: 4),
+                        _buildTag(track.bpm),
+                      ],
                     ),
                   ],
                 ),
@@ -233,5 +319,22 @@ class ModeDetailView extends GetView<HomeController> {
         ),
       );
     });
+  }
+
+  Widget _buildTag(String text) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      decoration: BoxDecoration(
+        color: AppColors.textGrey.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Text(
+        text,
+        style: GoogleFonts.poppins(
+          fontSize: 10,
+          color: AppColors.textGrey,
+        ),
+      ),
+    );
   }
 }

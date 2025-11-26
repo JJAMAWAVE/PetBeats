@@ -232,11 +232,13 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
         child: Row(
           children: [
             SizedBox(
-              width: 24,
-              height: 24,
+              width: 48,
+              height: 48,
               child: Image.asset(
                 iconPath,
                 fit: BoxFit.contain,
+                colorBlendMode: BlendMode.multiply,
+                color: Colors.white.withOpacity(0.0), // Dummy color for blend mode if needed, or just rely on blend
               ),
             ),
             const SizedBox(width: 16),
