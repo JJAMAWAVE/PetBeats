@@ -56,7 +56,7 @@ class _LoadingViewState extends State<LoadingView> with TickerProviderStateMixin
 
     // Navigate to Home after 3.5 seconds
     Timer(const Duration(milliseconds: 3500), () {
-      Get.find<HapticService>().mediumImpact();
+      Get.find<HapticService>().lightImpact();
       Get.offAllNamed(Routes.HOME);
     });
   }

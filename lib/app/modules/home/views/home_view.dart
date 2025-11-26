@@ -6,6 +6,7 @@ import '../controllers/home_controller.dart';
 import '../widgets/premium_mode_button.dart';
 import '../widgets/species_toggle.dart';
 import '../widgets/mini_player.dart';
+import '../widgets/heartbeat_text.dart';
 import '../../../../core/widgets/background_decoration.dart';
 import '../../../../app/data/services/haptic_service.dart';
 import 'settings_view.dart';
@@ -38,7 +39,7 @@ class HomeView extends GetView<HomeController> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('PetBeats', style: AppTextStyles.titleLarge.copyWith(fontSize: 24)),
+                          const HeartbeatText('PetBeats', fontSize: 24),
                           Row(
                             children: [
                               IconButton(
@@ -329,7 +330,20 @@ class HomeView extends GetView<HomeController> {
   Widget _buildScenarioChip(String label, String iconPath) {
     return GestureDetector(
       onTap: () {
-        controller.recommendScenario(label);
+        // Navigate to corresponding mode detail view instead of auto-playing
+        final modeMap = {
+          '산책 후': 'energy',
+          '낮잠 시간': 'sleep',
+          '병원 방문': 'anxiety',
+          '미용 후': 'noise',
+          '천둥/번개': 'noise',
+          '분리 불안': 'anxiety',
+        };
+        final mode = controller.modes.firstWhere(
+          (m) => m.id == modeMap[label],
+          orElse: () => controller.modes.first,
+        );
+        Get.to(() => const ModeDetailView(), arguments: mode);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -353,8 +367,6 @@ class HomeView extends GetView<HomeController> {
               child: Image.asset(
                 iconPath,
                 fit: BoxFit.contain,
-                colorBlendMode: BlendMode.multiply,
-                color: Colors.white.withOpacity(0.0),
               ),
             ),
             const SizedBox(width: 8),

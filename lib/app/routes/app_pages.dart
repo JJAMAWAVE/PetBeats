@@ -3,6 +3,7 @@ import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
 import '../modules/onboarding/views/question_view.dart';
 import '../modules/onboarding/views/question2_view.dart';
+import '../modules/onboarding/views/loading_view.dart';
 import '../modules/onboarding/views/splash_welcome_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
@@ -36,6 +37,12 @@ class AppPages {
     GetPage(
       name: Routes.QUESTION2,
       page: () => const Question2View(),
+      binding: OnboardingBinding(),
+      preventDuplicates: true,
+    ),
+    GetPage(
+      name: Routes.LOADING,
+      page: () => const LoadingView(),
       binding: OnboardingBinding(),
       preventDuplicates: true,
     ),

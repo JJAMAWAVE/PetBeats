@@ -44,7 +44,7 @@ class OnboardingController extends GetxController {
   }
 
   void completeOnboarding() {
-    Get.offAllNamed(Routes.HOME);
+    Get.offAllNamed(Routes.LOADING);
   }
   
   @override

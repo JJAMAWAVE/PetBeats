@@ -92,7 +92,7 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
                   const SizedBox(height: 12),
                   
                   Text(
-                    '가장 적합한 사운드를 추천해드려요',
+                    '최대 3개까지 선택 가능합니다',
                     style: AppTextStyles.bodyMedium.copyWith(
                       color: AppColors.textGrey,
                     ),
@@ -117,7 +117,16 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
                               isSelected: isSelected,
                               onTap: () {
                                 hapticService.lightImpact();
-                                controller.species.value = [value];
+                                // Toggle selection with max 3 limit
+                                if (isSelected) {
+                                  // Remove if already selected
+                                  controller.species.remove(value);
+                                } else {
+                                  // Add if not at max limit (3)
+                                  if (controller.species.length < 3) {
+                                    controller.species.add(value);
+                                  }
+                                }
                               },
                             );
                           }),
@@ -226,8 +235,6 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
               child: Image.asset(
                 iconPath,
                 fit: BoxFit.contain,
-                colorBlendMode: BlendMode.multiply,
-                color: Colors.white.withOpacity(0.0),
               ),
             ),
             const SizedBox(width: 16),

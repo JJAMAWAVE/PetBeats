@@ -44,6 +44,7 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     _initModes();
+    _initScenarioPlaylists(); // 시나리오별 플레이리스트 초기화
     
     // OnboardingController에서 데이터 가져오기
     try {
@@ -56,33 +57,14 @@ class HomeController extends GetxController {
       final selectedSpecies = List<String>.from(onboardingController.species);
       _initSpeciesTabs(selectedSpecies);
       
-      // 3. 초기 모드 설정 (관심 항목 기반 추천)
-      if (selectedNeeds.isNotEmpty) {
-        // 첫 번째 관심 항목에 해당하는 모드 찾기
-        final recommendedMode = modes.firstWhere(
-          (m) => m.id == selectedNeeds.first,
-          orElse: () => modes.first,
-        );
-        // "Energy" 모드가 기본 선택되지 않도록 예외 처리 (사용자 요청)
-        if (recommendedMode.id == 'energy') {
-             changeMode(modes.firstWhere((m) => m.id != 'energy', orElse: () => modes.first));
-        } else {
-             changeMode(recommendedMode);
-        }
-      } else {
-        // 기본값: 첫 번째 모드 선택 (사용자 요청: 시작부터 첫번째 탭 선택)
-        if (modes.isNotEmpty) {
-           changeMode(modes.first);
-        }
-      }
+      // 3. 초기 모드 설정: 사용자 요청으로 기본 선택 없음
+      currentMode.value = null; // No default mode selection
       
     } catch (e) {
       // OnboardingController를 찾지 못한 경우 기본값 설정
       print('OnboardingController not found: $e');
       _initSpeciesTabs(['dog']); // 기본값
-      if (modes.isNotEmpty) {
-         changeMode(modes.first);
-      }
+      currentMode.value = null; // No default mode selection
     }
   }
 
@@ -289,6 +271,98 @@ class HomeController extends GetxController {
     currentMode.value = mode;
     isAutoMode.value = false;
     // 모드 변경 시 자동 재생은 하지 않음
+  }
+  
+  // 시나리오별 플레이리스트 저장소
+  final scenarioPlaylists = <String, List<String>>{}.obs;
+  
+  void _initScenarioPlaylists() {
+    // 논문 기반: 각 시나리오에 맞는 트랙 ID 순서 정의
+    scenarioPlaylists.value = {
+      '산책 후': [
+        'e7', 'e8', 'a7', 'a8', // 에너지 조절 → 분리불안 (Free tracks)
+        'e1', 'a1', 's1', 's2', // 점진적 진정 (Premium)
+      ],
+      '낮잠 시간': [
+        's1', 's2', // 수면 유도 무료
+        's3', 's5', 's7', // 수면 유도 프리미엄
+      ],
+      '병원 방문': [
+        'a7', 'a8', 's1', 's2', // 분리불안 → 수면 유도 무료
+        'a1', 'a3', 's3', 's5', // 프리미엄
+      ],
+      '미용 후': [
+        'n7', 'n8', 'a7', 'a8', // 소음 민감 → 분리불안 무료
+        'n1', 'a1', 's1', // 프리미엄
+      ],
+      '천둥/번개': [
+        'n7', 'n8', // 소음 차단 무료
+        'n1', 'n2', 'n3', 'n4', // 강력한 차단 프리미엄
+      ],
+      '분리 불안': [
+        'a7', 'a8', 's1', 's2', // 분리불안 → 수면 유도 무료
+        'a1', 'a2', 's3', 's5', // 프리미엄
+      ],
+    };
+  }
+  
+  // 상황별 추천: AI 플레이리스트 생성 및 재생
+  void playScenario(String scenario) {
+    final trackIds = scenarioPlaylists[scenario];
+    if (trackIds == null || trackIds.isEmpty) {
+      print('No playlist found for scenario: $scenario');
+      return;
+    }
+    
+    // 프리미엄 여부에 따라 필터링
+    final filteredTrackIds = isPremiumUser.value 
+        ? trackIds 
+        : trackIds.where((id) {
+            // 모든 모드에서 해당 ID 찾기
+            for (var mode in modes) {
+              final track = mode.tracks.firstWhere(
+                (t) => t.id == id,
+                orElse: () => Track(
+                  id: '',
+                  title: '',
+                  target: '',
+                  isPremium: false,
+                  description: '',
+                ),
+              );
+              if (track.id.isNotEmpty) {
+                return !track.isPremium; // 무료 곡만
+              }
+            }
+            return false;
+          }).toList();
+    
+    if (filteredTrackIds.isEmpty) {
+      // 모두 프리미엄인 경우 결제 페이지로 이동
+      Get.toNamed('/subscription');
+      return;
+    }
+    
+    // 첫 번째 곡 찾아 재생
+    for (var mode in modes) {
+      final firstTrack = mode.tracks.firstWhere(
+        (t) => t.id == filteredTrackIds.first,
+        orElse: () => Track(
+          id: '',
+          title: '',
+          target: '',
+          isPremium: false,
+          description: '',
+        ),
+      );
+      if (firstTrack.id.isNotEmpty) {
+        currentMode.value = mode;
+        playTrack(firstTrack);
+        print('Playing scenario "$scenario" with ${filteredTrackIds.length} tracks');
+        // TODO: 향후 연속 재생 기능 추가 (현재는 첫 곡만 재생)
+        break;
+      }
+    }
   }
   
   // 상황별 추천

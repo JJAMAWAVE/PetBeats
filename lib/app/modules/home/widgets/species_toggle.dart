@@ -54,18 +54,41 @@ class SpeciesToggle extends GetView<HomeController> {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 250),
             curve: Curves.easeOutCubic,
-            padding: const EdgeInsets.symmetric(vertical: 12),
+            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
             decoration: BoxDecoration(
-              color: Colors.transparent, // Transparent background for selected item
+              color: isSelected ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(28),
+              boxShadow: isSelected ? [
+                BoxShadow(
+                  color: AppColors.primaryBlue.withOpacity(0.15),
+                  blurRadius: 8,
+                  offset: const Offset(0, 3),
+                ),
+              ] : [],
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  iconPath,
-                  width: 24,
-                  height: 24,
+                AnimatedScale(
+                  scale: isSelected ? 1.1 : 1.0,
+                  duration: const Duration(milliseconds: 250),
+                  child: Container(
+                    decoration: isSelected ? BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.primaryBlue.withOpacity(0.3),
+                          blurRadius: 12,
+                          spreadRadius: 2,
+                        ),
+                      ],
+                    ) : null,
+                    child: Image.asset(
+                      iconPath,
+                      width: 48, // 2x original size (24 -> 48)
+                      height: 48,
+                    ),
+                  ),
                 ),
                 const SizedBox(width: 8),
                 Text(

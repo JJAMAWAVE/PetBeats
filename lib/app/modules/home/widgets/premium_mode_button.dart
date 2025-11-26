@@ -165,7 +165,7 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
                                     fit: BoxFit.cover,
                                     filterQuality: FilterQuality.high,
                                     colorBlendMode: BlendMode.multiply,
-                                    color: Colors.white.withOpacity(0.0),
+                                    color: Colors.white, // Background is White
                                   ),
                           ),
                           
@@ -196,20 +196,13 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
               ),
               const SizedBox(height: 12),
               
-              // Text with Effect
+              // Text with Effect (No highlight on selection - user request)
               Text(
                 widget.title,
                 style: AppTextStyles.labelSmall.copyWith(
-                  color: widget.isActive ? AppColors.textDarkNavy : AppColors.textGrey,
-                  fontWeight: widget.isActive ? FontWeight.bold : FontWeight.w500,
+                  color: AppColors.textGrey, // Always grey (no highlight)
+                  fontWeight: FontWeight.w500, // Always medium weight
                   fontSize: 13,
-                  shadows: widget.isActive ? [
-                    Shadow(
-                      color: activeColor.withOpacity(0.3),
-                      blurRadius: 8,
-                      offset: const Offset(0, 0),
-                    ),
-                  ] : null,
                 ),
               ),
             ],
