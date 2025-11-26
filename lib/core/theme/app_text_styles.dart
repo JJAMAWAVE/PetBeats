@@ -56,4 +56,10 @@ class AppTextStyles {
     color: Colors.white,
     letterSpacing: 0.5,
   );
+
+  static TextStyle get labelSmall => baseStyle.copyWith(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textGrey,
+  );
 }

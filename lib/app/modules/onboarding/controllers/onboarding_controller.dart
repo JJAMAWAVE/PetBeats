@@ -28,11 +28,7 @@ class OnboardingController extends GetxController {
         curve: Curves.easeInOutCubic, // More elegant curve
       );
     } else {
-      Get.offNamed(
-        Routes.QUESTIONS, 
-        transition: Transition.fadeIn,
-        duration: const Duration(milliseconds: 800),
-      );
+      Get.offNamed(Routes.QUESTION);
     }
   }
 
@@ -45,6 +41,10 @@ class OnboardingController extends GetxController {
     if (key == 'completed') {
       Get.offAllNamed(Routes.HOME);
     }
+  }
+
+  void completeOnboarding() {
+    Get.offAllNamed(Routes.HOME);
   }
   
   @override

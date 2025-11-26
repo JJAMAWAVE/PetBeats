@@ -12,6 +12,11 @@ class HapticService extends GetxService {
     HapticFeedback.lightImpact();
   }
 
+  // Selection click feedback
+  void selectionClick() {
+    lightImpact();
+  }
+
   // 하트비트 시작 (BPM 기준)
   void startHeartbeat(int bpm) {
     stop(); // 기존 진동 중지

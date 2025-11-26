@@ -8,7 +8,7 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/home/views/mode_detail_view.dart';
 import '../modules/premium/bindings/premium_binding.dart';
-import '../modules/premium/views/premium_view.dart';
+import '../modules/premium/views/subscription_view.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -28,7 +28,7 @@ class AppPages {
       preventDuplicates: true,
     ),
     GetPage(
-      name: Routes.QUESTIONS,
+      name: Routes.QUESTION,
       page: () => const QuestionView(),
       binding: OnboardingBinding(),
       preventDuplicates: true,
@@ -46,14 +46,14 @@ class AppPages {
       preventDuplicates: true,
     ),
     GetPage(
-      name: '/mode_detail',
+      name: Routes.MODE_DETAIL,
       page: () => const ModeDetailView(),
       binding: HomeBinding(),
       preventDuplicates: true,
     ),
     GetPage(
-      name: '/premium',
-      page: () => const PremiumView(),
+      name: Routes.SUBSCRIPTION,
+      page: () => const SubscriptionView(),
       binding: PremiumBinding(),
       preventDuplicates: true,
     ),

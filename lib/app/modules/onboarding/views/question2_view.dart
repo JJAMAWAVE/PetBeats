@@ -5,8 +5,7 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../controllers/onboarding_controller.dart';
 import '../../../routes/app_routes.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../../data/services/haptic_service.dart'; // HapticService import
+import '../../../data/services/haptic_service.dart';
 
 class Question2View extends StatefulWidget {
   const Question2View({super.key});
@@ -48,36 +47,17 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<OnboardingController>();
-    final hapticService = Get.find<HapticService>(); // HapticService 인스턴스
-
-    // 선택 가능한 옵션들 (단일 선택)
+    final hapticService = Get.find<HapticService>();
+    
     final options = [
-      {'value': 'dog', 'label': '강아지', 'icon': Icons.pets},
-      {'value': 'cat', 'label': '고양이', 'icon': Icons.cruelty_free},
-      {'value': 'owner', 'label': '보호자', 'icon': Icons.person},
+      {'value': 'dog', 'label': '강아지', 'icon': 'assets/icons/icon_species_dog.png'},
+      {'value': 'cat', 'label': '고양이', 'icon': 'assets/icons/icon_species_cat.png'},
+      {'value': 'owner', 'label': '보호자', 'icon': 'assets/icons/icon_species_owner.png'},
     ];
 
     return Scaffold(
       body: Stack(
         children: [
-          // 온보딩과 동일한 배경 그라데이션
-          Positioned.fill(
-            child: Container(
-              decoration: const BoxDecoration(
-                gradient: RadialGradient(
-                  center: Alignment(0.0, -0.2),
-                  radius: 0.8,
-                  colors: [
-                    Color(0xFFE8F0FE),
-                    Colors.white,
-                  ],
-                  stops: [0.0, 1.0],
-                ),
-              ),
-            ),
-          ),
-          
-          // 민들레 씨앗 라이트 효과
           Positioned.fill(
             child: AnimatedBuilder(
               animation: _bgAnimationController,
@@ -91,20 +71,18 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
             ),
           ),
           
-          // 메인 컨텐츠
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(32.0),
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 20),
                   
-                  // 질문 텍스트
                   Text(
-                    '누구를 위한\nPetBeats인가요?',
+                    '누구를 위한\n케어인가요?',
                     style: GoogleFonts.notoSans(
-                      fontSize: 32,
+                      fontSize: 28,
                       fontWeight: FontWeight.w700,
                       color: AppColors.textDarkNavy,
                       height: 1.3,
@@ -114,15 +92,14 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
                   const SizedBox(height: 12),
                   
                   Text(
-                    '최대 3개까지 선택 가능합니다',
+                    '가장 적합한 사운드를 추천해드려요',
                     style: AppTextStyles.bodyMedium.copyWith(
                       color: AppColors.textGrey,
                     ),
                   ),
                   
-                  const SizedBox(height: 48),
+                  const SizedBox(height: 40),
                   
-                  // 옵션 리스트
                   Expanded(
                     child: ListView.builder(
                       itemCount: options.length,
@@ -136,17 +113,11 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
                             
                             return _buildOptionButton(
                               label: option['label'] as String,
-                              icon: option['icon'] as IconData,
+                              iconPath: option['icon'] as String,
                               isSelected: isSelected,
                               onTap: () {
-                                hapticService.lightImpact(); // 햅틱 피드백
-                                if (isSelected) {
-                                  controller.species.remove(value);
-                                } else {
-                                  if (controller.species.length < 3) {
-                                    controller.species.add(value);
-                                  }
-                                }
+                                hapticService.lightImpact();
+                                controller.species.value = [value];
                               },
                             );
                           }),
@@ -157,11 +128,9 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
                   
                   const SizedBox(height: 24),
                   
-                  // 시작하기 버튼
                   Obx(() {
                     final hasSelection = controller.species.isNotEmpty;
                     
-                    // 버튼 애니메이션 제어
                     if (hasSelection) {
                       if (!_btnAnimationController.isAnimating) {
                         _btnAnimationController.repeat(reverse: true);
@@ -180,8 +149,8 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
                         child: ElevatedButton(
                           onPressed: hasSelection
                               ? () {
-                                  hapticService.lightImpact(); // 햅틱 피드백
-                                  controller.saveAnswerAndNext('completed', true);
+                                  hapticService.lightImpact();
+                                  controller.completeOnboarding();
                                 }
                               : null,
                           style: ElevatedButton.styleFrom(
@@ -189,7 +158,7 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
                                 ? AppColors.primaryBlue
                                 : AppColors.primaryBlue.withOpacity(0.3),
                             foregroundColor: Colors.white,
-                            elevation: hasSelection ? 8 : 0, // 그림자 효과 추가
+                            elevation: hasSelection ? 8 : 0,
                             shadowColor: AppColors.primaryBlue.withOpacity(0.4),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
@@ -222,7 +191,7 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
 
   Widget _buildOptionButton({
     required String label,
-    required IconData icon,
+    required String iconPath,
     required bool isSelected,
     required VoidCallback onTap,
   }) {
@@ -230,7 +199,7 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.primaryBlue.withOpacity(0.08) : Colors.transparent,
           borderRadius: BorderRadius.circular(16),
@@ -238,7 +207,6 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
             color: isSelected ? AppColors.primaryBlue : AppColors.lineLightBlue,
             width: isSelected ? 2.0 : 1.5,
           ),
-          // 선택 시 은은한 글로우 효과 (그림자)
           boxShadow: isSelected
               ? [
                   BoxShadow(
@@ -252,10 +220,13 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
         ),
         child: Row(
           children: [
-            Icon(
-              icon,
-              color: isSelected ? AppColors.primaryBlue : AppColors.textGrey,
-              size: 24,
+            SizedBox(
+              width: 24,
+              height: 24,
+              child: Image.asset(
+                iconPath,
+                fit: BoxFit.contain,
+              ),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -281,36 +252,6 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
   }
 }
 
-// 배경 별 효과 Painter
-class _StarsPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color(0xFF0055FF)
-      ..style = PaintingStyle.fill;
-
-    // 랜덤한 위치에 작은 별들 그리기
-    final stars = [
-      Offset(size.width * 0.1, size.height * 0.05),
-      Offset(size.width * 0.25, size.height * 0.15),
-      Offset(size.width * 0.85, size.height * 0.08),
-      Offset(size.width * 0.15, size.height * 0.25),
-      Offset(size.width * 0.92, size.height * 0.2),
-      Offset(size.width * 0.05, size.height * 0.35),
-      Offset(size.width * 0.75, size.height * 0.3),
-      Offset(size.width * 0.4, size.height * 0.12),
-    ];
-
-    for (final star in stars) {
-      canvas.drawCircle(star, 2.5, paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
-
-// 민들레 씨앗처럼 움직이는 푸른색 라이트 효과 (복사됨)
 class _DandelionLightsPainter extends CustomPainter {
   final double animationValue;
 
@@ -318,7 +259,6 @@ class _DandelionLightsPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // 민들레 씨앗 라이트들 (순차적으로 떨어지도록 y값 분산)
     final lights = [
       {'x': 0.1, 'y': -0.2, 'speed': 1.0, 'size': 4.0, 'opacity': 0.4},
       {'x': 0.25, 'y': 0.3, 'speed': 0.85, 'size': 3.5, 'opacity': 0.35},

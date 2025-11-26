@@ -5,8 +5,7 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../controllers/onboarding_controller.dart';
 import '../../../routes/app_routes.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../../data/services/haptic_service.dart'; // HapticService import
+import '../../../data/services/haptic_service.dart';
 
 class QuestionView extends StatefulWidget {
   const QuestionView({super.key});
@@ -48,41 +47,21 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<OnboardingController>();
-    final hapticService = Get.find<HapticService>(); // HapticService 인스턴스
+    final hapticService = Get.find<HapticService>();
     
-    // 선택된 항목들을 관리하는 리스트
     final selectedItems = <String>[].obs;
     
-    // 선택 가능한 옵션들 (5가지)
     final options = [
-      {'value': 'sleep', 'label': '수면 유도', 'icon': Icons.bedtime},
-      {'value': 'anxiety', 'label': '분리불안', 'icon': Icons.sentiment_very_dissatisfied},
-      {'value': 'noise', 'label': '소음 민감', 'icon': Icons.volume_up},
-      {'value': 'energy', 'label': '에너지 조절', 'icon': Icons.bolt},
-      {'value': 'senior', 'label': '시니어 펫 케어', 'icon': Icons.accessibility_new},
+      {'value': 'sleep', 'label': '수면 유도', 'icon': 'assets/icons/icon_mode_sleep.png'},
+      {'value': 'anxiety', 'label': '분리불안', 'icon': 'assets/icons/icon_mode_separation.png'},
+      {'value': 'noise', 'label': '소음 민감', 'icon': 'assets/icons/icon_mode_noise.png'},
+      {'value': 'energy', 'label': '에너지 조절', 'icon': 'assets/icons/icon_mode_energy.png'},
+      {'value': 'senior', 'label': '시니어 펫 케어', 'icon': 'assets/icons/icon_mode_senior.png'},
     ];
 
     return Scaffold(
       body: Stack(
         children: [
-          // 온보딩과 동일한 배경 그라데이션
-          Positioned.fill(
-            child: Container(
-              decoration: const BoxDecoration(
-                gradient: RadialGradient(
-                  center: Alignment(0.0, -0.2),
-                  radius: 0.8,
-                  colors: [
-                    Color(0xFFE8F0FE),
-                    Colors.white,
-                  ],
-                  stops: [0.0, 1.0],
-                ),
-              ),
-            ),
-          ),
-          
-          // 민들레 씨앗 라이트 효과
           Positioned.fill(
             child: AnimatedBuilder(
               animation: _bgAnimationController,
@@ -96,20 +75,18 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
             ),
           ),
           
-          // 메인 컨텐츠
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0), // Reduced padding
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 20), // Reduced top spacing
+                  const SizedBox(height: 20),
                   
-                  // 질문 텍스트
                   Text(
                     '반려동물에게 필요한\n도움은 무엇인가요?',
                     style: GoogleFonts.notoSans(
-                      fontSize: 28, // Slightly reduced font size
+                      fontSize: 28,
                       fontWeight: FontWeight.w700,
                       color: AppColors.textDarkNavy,
                       height: 1.3,
@@ -125,15 +102,14 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
                     ),
                   ),
                   
-                  const SizedBox(height: 24), // Reduced spacing
+                  const SizedBox(height: 24),
                   
-                  // 옵션 리스트
                   Expanded(
                     child: ListView.builder(
                       itemCount: options.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 12.0), // Reduced item spacing
+                          padding: const EdgeInsets.only(bottom: 12.0),
                           child: Obx(() {
                             final option = options[index];
                             final value = option['value'] as String;
@@ -141,10 +117,10 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
                             
                             return _buildOptionButton(
                               label: option['label'] as String,
-                              icon: option['icon'] as IconData,
+                              iconPath: option['icon'] as String,
                               isSelected: isSelected,
                               onTap: () {
-                                hapticService.lightImpact(); // 햅틱 피드백
+                                hapticService.lightImpact();
                                 if (isSelected) {
                                   selectedItems.remove(value);
                                 } else {
@@ -162,11 +138,9 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
                   
                   const SizedBox(height: 24),
                   
-                  // 시작하기 버튼
                   Obx(() {
                     final hasSelection = selectedItems.isNotEmpty;
                     
-                    // 버튼 애니메이션 제어
                     if (hasSelection) {
                       if (!_btnAnimationController.isAnimating) {
                         _btnAnimationController.repeat(reverse: true);
@@ -185,7 +159,7 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
                         child: ElevatedButton(
                           onPressed: hasSelection
                               ? () {
-                                  hapticService.lightImpact(); // 햅틱 피드백
+                                  hapticService.lightImpact();
                                   controller.stressTriggers.value = selectedItems.toList();
                                   Get.toNamed(Routes.QUESTION2);
                                 }
@@ -195,7 +169,7 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
                                 ? AppColors.primaryBlue
                                 : AppColors.primaryBlue.withOpacity(0.3),
                             foregroundColor: Colors.white,
-                            elevation: hasSelection ? 8 : 0, // 그림자 효과 추가
+                            elevation: hasSelection ? 8 : 0,
                             shadowColor: AppColors.primaryBlue.withOpacity(0.4),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
@@ -228,7 +202,7 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
 
   Widget _buildOptionButton({
     required String label,
-    required IconData icon,
+    required String iconPath,
     required bool isSelected,
     required VoidCallback onTap,
   }) {
@@ -236,7 +210,7 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16), // Reduced internal padding
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.primaryBlue.withOpacity(0.08) : Colors.transparent,
           borderRadius: BorderRadius.circular(16),
@@ -244,7 +218,6 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
             color: isSelected ? AppColors.primaryBlue : AppColors.lineLightBlue,
             width: isSelected ? 2.0 : 1.5,
           ),
-          // 선택 시 은은한 글로우 효과 (그림자)
           boxShadow: isSelected
               ? [
                   BoxShadow(
@@ -258,10 +231,13 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
         ),
         child: Row(
           children: [
-            Icon(
-              icon,
-              color: isSelected ? AppColors.primaryBlue : AppColors.textGrey,
-              size: 24,
+            SizedBox(
+              width: 24,
+              height: 24,
+              child: Image.asset(
+                iconPath,
+                fit: BoxFit.contain,
+              ),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -287,7 +263,6 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
   }
 }
 
-// 민들레 씨앗처럼 움직이는 푸른색 라이트 효과
 class _DandelionLightsPainter extends CustomPainter {
   final double animationValue;
 
@@ -295,7 +270,6 @@ class _DandelionLightsPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // 민들레 씨앗 라이트들 (순차적으로 떨어지도록 y값 분산)
     final lights = [
       {'x': 0.1, 'y': -0.2, 'speed': 1.0, 'size': 4.0, 'opacity': 0.4},
       {'x': 0.25, 'y': 0.3, 'speed': 0.85, 'size': 3.5, 'opacity': 0.35},
@@ -319,35 +293,26 @@ class _DandelionLightsPainter extends CustomPainter {
 
     for (final light in lights) {
       final x = light['x'] as double;
-      final startY = light['y'] as double; // 시작 위치
+      final startY = light['y'] as double;
       final speed = light['speed'] as double;
       final lightSize = light['size'] as double;
       final maxOpacity = light['opacity'] as double;
       
-      // 위에서 아래로 천천히 떨어지는 애니메이션
-      // startY에서 시작하여 animationValue만큼 이동
-      // % 1.5로 루프 (화면 높이보다 조금 더 길게 잡아서 자연스럽게)
       double currentY = (startY + animationValue * speed) % 1.5;
-      
-      // 화면 좌표로 변환 (-0.2 ~ 1.3 범위)
-      // -0.2를 해줘서 화면 위쪽에서 시작하는 느낌
       final animatedY = currentY - 0.2;
       
-      // 화면 밖이면 그리지 않음 (최적화)
       if (animatedY < -0.2 || animatedY > 1.2) continue;
       
       final position = Offset(size.width * x, size.height * animatedY);
       
-      // 투명도: 화면 상단/하단에서 부드럽게 페이드
       double fadeOpacity = 1.0;
       if (animatedY < 0.1) {
-        fadeOpacity = (animatedY + 0.2) / 0.3; // 나타날 때
+        fadeOpacity = (animatedY + 0.2) / 0.3;
       } else if (animatedY > 0.9) {
-        fadeOpacity = (1.2 - animatedY) / 0.3; // 사라질 때
+        fadeOpacity = (1.2 - animatedY) / 0.3;
       }
       fadeOpacity = fadeOpacity.clamp(0.0, 1.0);
       
-      // 큰 글로우 (외곽)
       final outerGlowPaint = Paint()
         ..color = const Color(0xFF0055FF).withOpacity(maxOpacity * fadeOpacity * 0.15)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 20)
@@ -355,7 +320,6 @@ class _DandelionLightsPainter extends CustomPainter {
       
       canvas.drawCircle(position, lightSize * 4, outerGlowPaint);
       
-      // 중간 글로우
       final midGlowPaint = Paint()
         ..color = const Color(0xFF0088FF).withOpacity(maxOpacity * fadeOpacity * 0.25)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 12)
@@ -363,7 +327,6 @@ class _DandelionLightsPainter extends CustomPainter {
       
       canvas.drawCircle(position, lightSize * 2.5, midGlowPaint);
       
-      // 내부 글로우 (밝은 중심)
       final innerGlowPaint = Paint()
         ..color = const Color(0xFF00AAFF).withOpacity(maxOpacity * fadeOpacity * 0.4)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6)

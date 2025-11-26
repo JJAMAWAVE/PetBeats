@@ -13,8 +13,16 @@ class SpeciesToggle extends GetView<HomeController> {
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: Colors.grey[200],
+        color: const Color(0xFFF5F7FA),
         borderRadius: BorderRadius.circular(32),
+        border: Border.all(color: Colors.transparent, width: 2), // Transparent border
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.03),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Obx(() {
         final tabs = controller.speciesTabs;
@@ -26,7 +34,7 @@ class SpeciesToggle extends GetView<HomeController> {
             return _buildToggleItem(
               index,
               tab.label,
-              tab.icon,
+              tab.iconPath,
             );
           }),
         );
@@ -34,7 +42,7 @@ class SpeciesToggle extends GetView<HomeController> {
     );
   }
 
-  Widget _buildToggleItem(int index, String label, IconData icon) {
+  Widget _buildToggleItem(int index, String label, String iconPath) {
     return Expanded(
       child: Obx(() {
         final isSelected = controller.selectedSpeciesIndex.value == index;
@@ -44,36 +52,28 @@ class SpeciesToggle extends GetView<HomeController> {
             controller.changeSpecies(index);
           },
           child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
+            duration: const Duration(milliseconds: 250),
+            curve: Curves.easeOutCubic,
             padding: const EdgeInsets.symmetric(vertical: 12),
             decoration: BoxDecoration(
-              color: isSelected ? Colors.white : Colors.transparent,
+              color: Colors.transparent, // Transparent background for selected item
               borderRadius: BorderRadius.circular(28),
-              boxShadow: isSelected
-                  ? [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 4,
-                        offset: const Offset(0, 2),
-                      )
-                    ]
-                  : [],
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  icon,
-                  size: 18,
-                  color: isSelected ? AppColors.primaryBlue : Colors.grey,
+                Image.asset(
+                  iconPath,
+                  width: 24,
+                  height: 24,
                 ),
                 const SizedBox(width: 8),
                 Text(
                   label,
                   style: AppTextStyles.bodyMedium.copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: isSelected ? AppColors.primaryBlue : Colors.grey,
+                    color: isSelected ? AppColors.primaryBlue : AppColors.textGrey,
+                    fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                    fontSize: 15,
                   ),
                 ),
               ],
