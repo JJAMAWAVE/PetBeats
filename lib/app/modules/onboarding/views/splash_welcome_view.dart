@@ -9,6 +9,7 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../routes/app_routes.dart';
 import 'onboarding_view.dart';
 import '../../../../core/services/web_bgm_service.dart';
+import '../../../data/services/haptic_service.dart';
 
 class SplashWelcomeView extends StatefulWidget {
   const SplashWelcomeView({super.key});
@@ -21,8 +22,11 @@ class _SplashWelcomeViewState extends State<SplashWelcomeView> with TickerProvid
   late AnimationController _controller;
   late AnimationController _textFlowController;
   late AnimationController _transitionController; // 전환 애니메이션
+  late AnimationController _rippleController; // 터치 파문 애니메이션
   late Animation<double> _opacityAnimation;
   bool _isTransitioning = false; // 전환 중 플래그
+  Offset? _ripplePosition; // 터치 위치
+  bool _showRipple = false; // 파문 표시 여부
 
   @override
   void initState() {
@@ -42,6 +46,11 @@ class _SplashWelcomeViewState extends State<SplashWelcomeView> with TickerProvid
       duration: const Duration(seconds: 3),
     );
 
+    _rippleController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+
     _opacityAnimation = Tween<double>(begin: 0.3, end: 1.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
@@ -52,7 +61,29 @@ class _SplashWelcomeViewState extends State<SplashWelcomeView> with TickerProvid
     _controller.dispose();
     _textFlowController.dispose();
     _transitionController.dispose();
+    _rippleController.dispose();
     super.dispose();
+  }
+
+  void _handleTap(TapDownDetails details) {
+    if (_isTransitioning) return;
+    
+    setState(() {
+      _ripplePosition = details.localPosition;
+      _showRipple = true;
+    });
+    
+    _rippleController.forward(from: 0.0).then((_) {
+      setState(() {
+        _showRipple = false;
+      });
+      _rippleController.reset();
+    });
+    
+    // Navigate after showing ripple
+    Future.delayed(const Duration(milliseconds: 200), () {
+      _navigateToNext();
+    });
   }
 
   void _navigateToNext() async {
@@ -76,14 +107,19 @@ class _SplashWelcomeViewState extends State<SplashWelcomeView> with TickerProvid
         children: [
           // 메인 컨텐츠
           GestureDetector(
-            onTap: () {
+            onTapDown: (details) {
               if (!_isTransitioning) {
                 // 웹에서는 첫 터치시 BGM 재생 시작
                 WebBgmService().play();
-                _navigateToNext();
+                try {
+                  Get.find<HapticService>().lightImpact();
+                } catch (e) {
+                  // ignore
+                }
+                _handleTap(details);
               }
             },
-            behavior: HitTestBehavior.opaque,
+            behavior: HitTestBehavior.translucent,
             child: Container(
               color: Colors.transparent,
               child: BackgroundDecoration(
@@ -201,6 +237,25 @@ class _SplashWelcomeViewState extends State<SplashWelcomeView> with TickerProvid
               ),
             ),
           ),
+          
+          // 터치 파문 오버레이
+          if (_showRipple && _ripplePosition != null)
+            Positioned.fill(
+              child: IgnorePointer(
+                child: AnimatedBuilder(
+                  animation: _rippleController,
+                  builder: (context, child) {
+                    return CustomPaint(
+                      painter: TouchRipplePainter(
+                        center: _ripplePosition!,
+                        progress: _rippleController.value,
+                        color: const Color(0xFF0055FF),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
           
           // 진동파 애니메이션 레이어
           if (_isTransitioning)
@@ -451,5 +506,47 @@ class RippleWavePainter extends CustomPainter {
   @override
   bool shouldRepaint(RippleWavePainter oldDelegate) {
     return oldDelegate.animationValue != animationValue;
+  }
+}
+
+// 작은 터치 파문 Painter (온보딩과 동일)
+class TouchRipplePainter extends CustomPainter {
+  final Offset center;
+  final double progress;
+  final Color color;
+
+  TouchRipplePainter({
+    required this.center,
+    required this.progress,
+    required this.color,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    // Larger max radius for better visibility - 150 pixels
+    const maxRadius = 150.0;
+    final radius = maxRadius * progress;
+    
+    // Higher opacity for better visibility
+    final opacity = (1.0 - progress) * 0.6;
+    
+    final paint = Paint()
+      ..color = color.withOpacity(opacity * 1.5)
+      ..style = PaintingStyle.fill;
+    
+    canvas.drawCircle(center, radius, paint);
+    
+    // Add a more visible ring effect
+    final ringPaint = Paint()
+      ..color = color.withOpacity(opacity)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 3.0;
+      
+    canvas.drawCircle(center, radius, ringPaint);
+  }
+
+  @override
+  bool shouldRepaint(TouchRipplePainter oldDelegate) {
+    return oldDelegate.progress != progress || oldDelegate.center != center;
   }
 }

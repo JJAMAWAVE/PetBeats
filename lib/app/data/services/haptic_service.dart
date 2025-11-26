@@ -1,10 +1,16 @@
 import 'dart:async';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:vibration/vibration.dart';
 
 class HapticService extends GetxService {
   Timer? _heartbeatTimer;
   bool _isVibrating = false;
+
+  // 짧고 경쾌한 햅틱 피드백 (UI 상호작용용)
+  void lightImpact() {
+    HapticFeedback.lightImpact();
+  }
 
   // 하트비트 시작 (BPM 기준)
   void startHeartbeat(int bpm) {

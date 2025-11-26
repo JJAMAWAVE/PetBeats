@@ -1,0 +1,1 @@
+ C:\\PetBeats\\.dart_tool\\flutter_build\\2c034a232a1bc525e2ea06e6047e456e\\native_assets.yaml: 

@@ -6,6 +6,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../controllers/onboarding_controller.dart';
+import '../../../data/services/haptic_service.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -38,6 +39,11 @@ class _OnboardingViewState extends State<OnboardingView> with TickerProviderStat
   }
 
   void _handleTap(TapDownDetails details) {
+    try {
+      Get.find<HapticService>().lightImpact();
+    } catch (e) {
+      // ignore
+    }
     setState(() {
       _ripplePosition = details.localPosition;
       _showRipple = true;
@@ -114,7 +120,7 @@ class _OnboardingViewState extends State<OnboardingView> with TickerProviderStat
                   child: PageView.builder(
                     controller: controller.pageController,
                     onPageChanged: controller.onPageChanged,
-                    physics: const NeverScrollableScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemCount: slides.length,
                     itemBuilder: (context, index) {
                       return Stack(
@@ -136,6 +142,33 @@ class _OnboardingViewState extends State<OnboardingView> with TickerProviderStat
                                 padding: const EdgeInsets.all(40),
                                 child: _GlowingPathOverlay(
                                   active: controller.pageIndex == 0,
+                                ),
+                              ),
+                            ),
+                          if (index == 1)
+                            Positioned.fill(
+                              child: Padding(
+                                padding: const EdgeInsets.all(40),
+                                child: _WindEffectOverlay(
+                                  active: controller.pageIndex == 1,
+                                ),
+                              ),
+                            ),
+                          if (index == 2)
+                            Positioned.fill(
+                              child: Padding(
+                                padding: const EdgeInsets.all(40),
+                                child: _HeartBeatOverlay(
+                                  active: controller.pageIndex == 2,
+                                ),
+                              ),
+                            ),
+                          if (index == 3)
+                            Positioned.fill(
+                              child: Padding(
+                                padding: const EdgeInsets.all(40),
+                                child: _ResonanceOverlay(
+                                  active: controller.pageIndex == 3,
                                 ),
                               ),
                             ),
@@ -271,16 +304,19 @@ class _AnimatedGradientTextState extends State<_AnimatedGradientText> with Singl
             ).createShader(bounds);
           },
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0), // Increased padding to prevent all clipping
-            child: Text(
-              widget.text,
-              style: AppTextStyles.titleLarge.copyWith(
-                color: Colors.white, // Required for ShaderMask
-                fontSize: 32,
-                height: 1.3, // Slightly increased line height to prevent vertical clipping
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0), // Reduced horizontal padding
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                widget.text,
+                style: AppTextStyles.titleLarge.copyWith(
+                  color: Colors.white, // Required for ShaderMask
+                  fontSize: 32,
+                  height: 1.3, // Slightly increased line height to prevent vertical clipping
+                ),
+                textAlign: TextAlign.center,
+                softWrap: false, // Force single line
               ),
-              textAlign: TextAlign.center,
-              softWrap: false, // Force single line
             ),
           ),
         );
@@ -640,4 +676,511 @@ class TouchRipplePainter extends CustomPainter {
   }
 }
 
+// 바람 효과 오버레이 (2번째 온보딩 이미지용)
+class _WindEffectOverlay extends StatefulWidget {
+  final bool active;
+  const _WindEffectOverlay({required this.active});
+
+  @override
+  State<_WindEffectOverlay> createState() => _WindEffectOverlayState();
+}
+
+class _WindEffectOverlayState extends State<_WindEffectOverlay> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 8), // 8초 주기로 더 느리게 바람 흐름
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!widget.active) return const SizedBox();
+    
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return CustomPaint(
+          painter: _WindPainter(
+            progress: _controller.value,
+            color: const Color(0xFF0055FF),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _WindPainter extends CustomPainter {
+  final double progress;
+  final Color color;
+
+  _WindPainter({
+    required this.progress,
+    required this.color,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    // 여러 개의 바람 라인 생성 (5개)
+    for (int i = 0; i < 5; i++) {
+      _drawWindLine(canvas, size, i);
+    }
+  }
+
+  void _drawWindLine(Canvas canvas, Size size, int index) {
+    // 각 바람 라인마다 시작 시간을 다르게 (0.15씩 차이로 더 자연스럽게)
+    final double offset = (index * 0.15);
+    final double lineProgress = (progress + offset) % 1.0;
+    
+    // 페이드 인/아웃 효과
+    double opacity = 0.0;
+    if (lineProgress < 0.2) {
+      opacity = lineProgress / 0.2; // 페이드 인
+    } else if (lineProgress > 0.8) {
+      opacity = (1.0 - lineProgress) / 0.2; // 페이드 아웃
+    } else {
+      opacity = 1.0; // 완전히 보임
+    }
+    
+    // 투명도가 0이면 그리지 않음
+    if (opacity <= 0.0) return;
+    
+    // 바람 경로 생성 (부드러운 곡선)
+    final Path windPath = Path();
+    
+    // 시작 위치 (왼쪽에서 오른쪽으로 흐름, 중앙 영역 통과)
+    final double startX = -size.width * 0.3 + (size.width * 1.6 * lineProgress);
+    final double yPosition = size.height * (0.35 + index * 0.08); // 중앙 영역 (0.35~0.67)
+    
+    windPath.moveTo(startX, yPosition);
+    
+    // 곡선 경로 그리기 (더 많은 웨이브로 자연스럽게)
+    final int waveCount = 4;
+    final double waveWidth = size.width * 0.12;
+    final double waveHeight = size.height * 0.04; // 더 부드러운 웨이브
+    
+    for (int j = 0; j < waveCount; j++) {
+      final double x1 = startX + (waveWidth * j * 2);
+      final double x2 = startX + (waveWidth * (j * 2 + 1));
+      final double x3 = startX + (waveWidth * (j * 2 + 2));
+      
+      windPath.quadraticBezierTo(
+        x1 + waveWidth / 2, yPosition - waveHeight,
+        x2, yPosition,
+      );
+      windPath.quadraticBezierTo(
+        x2 + waveWidth / 2, yPosition + waveHeight,
+        x3, yPosition,
+      );
+    }
+    
+    // 바람 라인 페인트 (메인)
+    final Paint windPaint = Paint()
+      ..color = color.withOpacity(opacity * 0.4)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2.0
+      ..strokeCap = StrokeCap.round;
+    
+    canvas.drawPath(windPath, windPaint);
+    
+    // 바람 라인 페인트 (글로우 효과)
+    final Paint glowPaint = Paint()
+      ..color = color.withOpacity(opacity * 0.2)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 4.0
+      ..strokeCap = StrokeCap.round
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4);
+    
+    canvas.drawPath(windPath, glowPaint);
+    
+    // 바람 라인 주변에 작은 파티클 추가
+    final PathMetrics pathMetrics = windPath.computeMetrics();
+    for (PathMetric metric in pathMetrics) {
+      // 경로를 따라 3개의 파티클 배치
+      for (int k = 0; k < 3; k++) {
+        final double particlePos = (k / 3.0);
+        final double distance = metric.length * particlePos;
+        final Tangent? tangent = metric.getTangentForOffset(distance);
+        
+        if (tangent != null) {
+          final Offset pos = tangent.position;
+          
+          // 파티클 글로우
+          final Paint particlePaint = Paint()
+            ..color = color.withOpacity(opacity * 0.5)
+            ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3)
+            ..style = PaintingStyle.fill;
+          
+          canvas.drawCircle(pos, 3.0, particlePaint);
+          
+          // 파티클 코어
+          final Paint corePaint = Paint()
+            ..color = Colors.white.withOpacity(opacity * 0.8)
+            ..style = PaintingStyle.fill;
+          
+          canvas.drawCircle(pos, 1.0, corePaint);
+        }
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _WindPainter oldDelegate) {
+    return oldDelegate.progress != progress;
+  }
+}
+
+// 하트 박동 효과 오버레이 (3번째 온보딩 이미지용)
+class _HeartBeatOverlay extends StatefulWidget {
+  final bool active;
+  const _HeartBeatOverlay({required this.active});
+
+  @override
+  State<_HeartBeatOverlay> createState() => _HeartBeatOverlayState();
+}
+
+class _HeartBeatOverlayState extends State<_HeartBeatOverlay> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200), // 심장 박동 주기 (1.2초)
+    )..repeat();
+
+    // 심장 박동 커브: 빠르게 커졌다가 천천히 작아짐
+    _scaleAnimation = TweenSequence<double>([
+      TweenSequenceItem(
+        tween: Tween<double>(begin: 1.0, end: 1.15)
+            .chain(CurveTween(curve: Curves.easeOut)),
+        weight: 20,
+      ),
+      TweenSequenceItem(
+        tween: Tween<double>(begin: 1.15, end: 1.0)
+            .chain(CurveTween(curve: Curves.easeIn)),
+        weight: 30,
+      ),
+      TweenSequenceItem(
+        tween: ConstantTween<double>(1.0),
+        weight: 50, // 잠시 멈춤
+      ),
+    ]).animate(_controller);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!widget.active) return const SizedBox();
+    
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return CustomPaint(
+          painter: _HeartBeatPainter(
+            scale: _scaleAnimation.value,
+            progress: _controller.value,
+            color: const Color(0xFF0055FF),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _HeartBeatPainter extends CustomPainter {
+  final double scale;
+  final double progress;
+  final Color color;
+
+  _HeartBeatPainter({
+    required this.scale,
+    required this.progress,
+    required this.color,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+    
+    // 하트 크기 (기준)
+    final double heartSize = size.width * 0.216; // 하트 크기 1.8배 증가
+    
+    // 박동에 따른 투명도 계산
+    double opacity = 0.0;
+    if (progress < 0.2) {
+      opacity = progress / 0.2 * 0.6; // 페이드 인
+    } else if (progress < 0.5) {
+      opacity = 0.6; // 유지
+    } else {
+      opacity = (1.0 - progress) / 0.5 * 0.6; // 페이드 아웃
+    }
+
+    // 글로우 효과 (여러 겹)
+    for (int i = 0; i < 3; i++) {
+      final double glowScale = scale + (i * 0.05);
+      final double glowOpacity = opacity * (1.0 - i * 0.3);
+      
+      final Paint glowPaint = Paint()
+        ..color = color.withOpacity(glowOpacity * 0.3)
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, 10.0 + i * 5.0)
+        ..style = PaintingStyle.fill;
+      
+      final Path heartPath = _createHeartPath(center, heartSize * glowScale);
+      canvas.drawPath(heartPath, glowPaint);
+    }
+    
+    // 메인 하트 외각선 제거 (글로우만 유지)
+  }
+
+  Path _createHeartPath(Offset center, double size) {
+    final Path path = Path();
+    
+    // 하트를 위로 이동 (center.dy - size * 0.3)
+    
+    // 하트 모양 그리기 (수학적 하트 곡선)
+    final double x = center.dx;
+    final double y = center.dy - size * 0.4; // 위로 이동
+    
+    path.moveTo(x, y + size * 0.3);
+    
+    // 왼쪽 상단 곡선
+    path.cubicTo(
+      x - size * 0.5, y - size * 0.3,
+      x - size * 0.8, y + size * 0.1,
+      x - size * 0.4, y + size * 0.6,
+    );
+    
+    // 하단 꼭지점
+    path.lineTo(x, y + size * 0.9);
+    
+    // 오른쪽으로
+    path.lineTo(x + size * 0.4, y + size * 0.6);
+    
+    // 오른쪽 상단 곡선
+    path.cubicTo(
+      x + size * 0.8, y + size * 0.1,
+      x + size * 0.5, y - size * 0.3,
+      x, y + size * 0.3,
+    );
+    
+    path.close();
+    
+    return path;
+  }
+
+  @override
+  bool shouldRepaint(covariant _HeartBeatPainter oldDelegate) {
+    return oldDelegate.scale != scale || oldDelegate.progress != progress;
+  }
+}
+
+// 공명 효과 오버레이 (4번째 온보딩 이미지용 - Resonate Together)
+class _ResonanceOverlay extends StatefulWidget {
+  final bool active;
+  const _ResonanceOverlay({required this.active});
+
+  @override
+  State<_ResonanceOverlay> createState() => _ResonanceOverlayState();
+}
+
+class _ResonanceOverlayState extends State<_ResonanceOverlay> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 6), // 6초 주기로 더 느리게
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!widget.active) return const SizedBox();
+    
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return CustomPaint(
+          painter: _ResonancePainter(
+            progress: _controller.value,
+            color: const Color(0xFF0055FF),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _ResonancePainter extends CustomPainter {
+  final double progress;
+  final Color color;
+
+  _ResonancePainter({
+    required this.progress,
+    required this.color,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+    final maxRadius = size.width * 0.4;
+
+    // 두 개의 파동 세트 그리기 (동기화 과정)
+    // 첫 번째 파동은 정상적으로
+    // 두 번째 파동은 위상이 다르게 시작했다가 점점 동기화됨
+    
+    // 동기화 정도 계산 (0~1, 처음엔 비동기, 끝에는 완전 동기화)
+    final syncLevel = (math.sin(progress * math.pi * 2) + 1) / 2;
+    
+    // 두 번째 파동의 위상 차이 (점점 줄어듦)
+    final phaseShift = (1.0 - syncLevel) * 0.5;
+
+    // 각 세트당 3개의 원 그리기
+    for (int set = 0; set < 2; set++) {
+      for (int i = 0; i < 3; i++) {
+        final double waveOffset = (i / 3.0);
+        double waveProgress = (progress + waveOffset) % 1.0;
+        
+        // 두 번째 세트는 위상 차이 적용
+        if (set == 1) {
+          waveProgress = (waveProgress + phaseShift) % 1.0;
+        }
+        
+        final radius = maxRadius * waveProgress;
+        
+        // 투명도 계산
+        double opacity = 0.0;
+        if (waveProgress < 0.1) {
+          opacity = waveProgress / 0.1;
+        } else if (waveProgress > 0.7) {
+          opacity = (1.0 - waveProgress) / 0.3;
+        } else {
+          opacity = 1.0;
+        }
+        
+        // 동기화 레벨에 따라 색상 변화
+        Color waveColor = set == 0 
+            ? color 
+            : Color.lerp(color.withOpacity(0.6), color, syncLevel)!;
+        
+        // 원 그리기 (투명도 감소)
+        final Paint paint = Paint()
+          ..color = waveColor.withOpacity(opacity * 0.2)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2.0;
+        
+        canvas.drawCircle(center, radius, paint);
+        
+        // 글로우 효과 (강도 감소)
+        final Paint glowPaint = Paint()
+          ..color = waveColor.withOpacity(opacity * 0.1)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 4.0
+          ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6);
+        
+        canvas.drawCircle(center, radius, glowPaint);
+      }
+    }
+    
+    // 동기화 순간 중심에서 빛나는 효과
+    if (syncLevel > 0.8) {
+      final syncIntensity = (syncLevel - 0.8) / 0.2;
+      
+      // 중심 글로우 (여러 겹)
+      for (int i = 0; i < 5; i++) {
+        final glowRadius = 20.0 + (i * 15.0);
+        final glowOpacity = syncIntensity * (1.0 - i * 0.15);
+        
+        final Paint centralGlow = Paint()
+          ..color = color.withOpacity(glowOpacity * 0.4)
+          ..maskFilter = MaskFilter.blur(BlurStyle.normal, 15.0 + i * 5.0)
+          ..style = PaintingStyle.fill;
+        
+        canvas.drawCircle(center, glowRadius, centralGlow);
+      }
+      
+      // 중심 별 효과 (십자가 형태)
+      final Paint starPaint = Paint()
+        ..color = Colors.white.withOpacity(syncIntensity * 0.8)
+        ..strokeWidth = 2.0
+        ..strokeCap = StrokeCap.round
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3);
+      
+      // 수평선
+      canvas.drawLine(
+        Offset(center.dx - 30, center.dy),
+        Offset(center.dx + 30, center.dy),
+        starPaint,
+      );
+      
+      // 수직선
+      canvas.drawLine(
+        Offset(center.dx, center.dy - 30),
+        Offset(center.dx, center.dy + 30),
+        starPaint,
+      );
+    }
+    
+    // 파동 간섭 패턴 (두 파동이 만나는 지점에 파티클)
+    for (int i = 0; i < 8; i++) {
+      final angle = (i / 8.0) * math.pi * 2;
+      final particleProgress = (progress * 3 + i * 0.125) % 1.0;
+      final distance = maxRadius * particleProgress;
+      
+      final x = center.dx + math.cos(angle) * distance;
+      final y = center.dy + math.sin(angle) * distance;
+      
+      // 간섭 강도 (동기화될수록 강해짐)
+      final interferenceIntensity = syncLevel * (1.0 - particleProgress);
+      
+      if (interferenceIntensity > 0.3) {
+        final Paint particlePaint = Paint()
+          ..color = color.withOpacity(interferenceIntensity * 0.6)
+          ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4)
+          ..style = PaintingStyle.fill;
+        
+        canvas.drawCircle(Offset(x, y), 4.0, particlePaint);
+        
+        // 파티클 코어
+        final Paint corePaint = Paint()
+          ..color = Colors.white.withOpacity(interferenceIntensity * 0.9)
+          ..style = PaintingStyle.fill;
+        
+        canvas.drawCircle(Offset(x, y), 1.5, corePaint);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _ResonancePainter oldDelegate) {
+    return oldDelegate.progress != progress;
+  }
+}
 

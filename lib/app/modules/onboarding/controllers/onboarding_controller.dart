@@ -11,7 +11,7 @@ class OnboardingController extends GetxController {
   int get pageIndex => _pageIndex.value;
 
   // 사용자 선택 데이터
-  final species = ''.obs; // Dog, Cat, Owner
+  final species = <String>[].obs; // Dog, Cat, Owner (다중 선택)
   final ageGroup = ''.obs;
   final stressTriggers = <String>[].obs;
   
@@ -28,7 +28,11 @@ class OnboardingController extends GetxController {
         curve: Curves.easeInOutCubic, // More elegant curve
       );
     } else {
-      Get.offNamed(Routes.QUESTIONS); // Use offNamed to prevent going back
+      Get.offNamed(
+        Routes.QUESTIONS, 
+        transition: Transition.fadeIn,
+        duration: const Duration(milliseconds: 800),
+      );
     }
   }
 

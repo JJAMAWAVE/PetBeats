@@ -16,7 +16,7 @@ class BgmService {
     try {
       // 웹에서는 큰 파일 로딩에 시간이 걸릴 수 있음
       print('[BgmService] Loading BGM...');
-      await _audioPlayer.setAsset('sound/BGM/sheep.mp3'); // assets/ 접두어 제거 (just_audio가 자동 추가)
+      await _audioPlayer.setAsset('assets/sound/BGM/sheep.mp3');
       await _audioPlayer.setLoopMode(LoopMode.one); // 무한 반복
       await _audioPlayer.setVolume(0.3); // 볼륨 30%로 낮춤
       _isInitialized = true;

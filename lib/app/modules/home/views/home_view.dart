@@ -8,12 +8,14 @@ import '../widgets/species_toggle.dart';
 import '../../../../core/widgets/ad_banner_placeholder.dart';
 
 import '../../../../core/widgets/background_decoration.dart';
+import '../../../../app/data/services/haptic_service.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final hapticService = Get.find<HapticService>();
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       body: BackgroundDecoration(
@@ -61,28 +63,40 @@ class HomeView extends GetView<HomeController> {
                       subtitle: '깊은 잠을 위해',
                       icon: Icons.nightlight_round,
                       color: Colors.indigo,
-                      onTap: () => controller.selectMode('수면 모드'),
+                      onTap: () {
+                        hapticService.lightImpact();
+                        controller.selectMode('수면 모드');
+                      },
                     ),
                     ModeCard(
                       title: '진정 모드',
                       subtitle: '불안감 해소',
                       icon: Icons.spa,
                       color: Colors.teal,
-                      onTap: () => controller.selectMode('진정 모드'),
+                      onTap: () {
+                        hapticService.lightImpact();
+                        controller.selectMode('진정 모드');
+                      },
                     ),
                     ModeCard(
                       title: '놀이 모드',
                       subtitle: '활기찬 에너지',
                       icon: Icons.sports_baseball,
                       color: Colors.orange,
-                      onTap: () => controller.selectMode('놀이 모드'),
+                      onTap: () {
+                        hapticService.lightImpact();
+                        controller.selectMode('놀이 모드');
+                      },
                     ),
                     ModeCard(
                       title: '둔감화 교육',
                       subtitle: '소음 적응 훈련',
                       icon: Icons.volume_up,
                       color: Colors.redAccent,
-                      onTap: () => controller.selectMode('둔감화 교육'),
+                      onTap: () {
+                        hapticService.lightImpact();
+                        controller.selectMode('둔감화 교육');
+                      },
                     ),
                   ],
                 ),
