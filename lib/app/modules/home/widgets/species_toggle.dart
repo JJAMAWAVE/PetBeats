@@ -54,7 +54,7 @@ class SpeciesToggle extends GetView<HomeController> {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 300), // Slower for smoother feel
             curve: Curves.easeOutCubic,
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
             decoration: BoxDecoration(
               color: isSelected ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(36),
@@ -86,8 +86,8 @@ class SpeciesToggle extends GetView<HomeController> {
                     ) : null,
                     child: Image.asset(
                       iconPath,
-                      width: 96, // 2x size (48 -> 96)
-                      height: 96,
+                      width: 70,
+                      height: 70,
                       fit: BoxFit.contain,
                     ),
                   ),

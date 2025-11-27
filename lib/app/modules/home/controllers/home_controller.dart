@@ -66,7 +66,7 @@ class HomeController extends GetxController {
     } catch (e) {
       // OnboardingController를 찾지 못한 경우 기본값 설정
       print('OnboardingController not found: $e');
-      _initSpeciesTabs(['dog']); // 기본값
+      _initSpeciesTabs(['dog', 'cat', 'owner']); // 모든 탭 표시
       _loadSavedSettings();
     }
   }

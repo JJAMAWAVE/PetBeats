@@ -194,7 +194,7 @@ class HomeView extends GetView<HomeController> {
                     const SizedBox(height: 40),
                     
                     // SECTION 2: Scenario Chips
-                    _buildSectionTitle('상황별 추천'),
+                    _buildSectionTitle('AI 맞춤 추천'),
                     const SizedBox(height: 16),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24.0),

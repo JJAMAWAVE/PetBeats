@@ -77,11 +77,11 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
           
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 40),
                   
                   Text(
                     '반려동물에게 필요한\n도움은 무엇인가요?',
@@ -109,7 +109,7 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
                       itemCount: options.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 12.0),
+                          padding: const EdgeInsets.only(bottom: 16.0),
                           child: Obx(() {
                             final option = options[index];
                             final value = option['value'] as String;
