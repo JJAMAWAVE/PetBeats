@@ -86,71 +86,106 @@ class HomeView extends GetView<HomeController> {
                     }),
                     const SizedBox(height: 16),
                     
-                    // Modes List
+                    // Modes List - Wrapped in Unified Layered Container
                     Obx(() {
-                      return SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
+                      return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: Row(
+                        child: Stack(
                           children: [
-                            // Special "AI Auto Recommend" Button
-                            Padding(
-                              padding: const EdgeInsets.only(right: 16),
-                              child: _buildCircularModeButton(
-                                title: 'AI 자동 추천',
-                                iconPath: 'assets/icons/icon_mode_auto.png',
-                                isActive: false,
-                                isPlaying: false,
-                                onTap: () {
-                                  hapticService.lightImpact();
-                                  // Show all modes bottom sheet or navigate
-                                },
-                                isSpecial: true,
-                                animationType: ModeAnimationType.pulse,
+                            // Bottom Depth Layer (for 3D effect)
+                            Transform.translate(
+                              offset: const Offset(0, 6),
+                              child: Container(
+                                height: 160,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: const Color(0xFFE0E5EA), // Darker shade for bottom
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.15),
+                                      blurRadius: 20,
+                                      offset: const Offset(0, 10),
+                                      spreadRadius: 2,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             
-                            // Individual Modes
-                            ...controller.modes.map((mode) {
-                              final isSelected = controller.currentMode.value?.id == mode.id && !controller.isAutoMode.value;
-                              final isPlaying = isSelected && controller.isPlaying.value;
-                              
-                              ModeAnimationType animType = ModeAnimationType.none;
-                              if (mode.id == 'sleep') animType = ModeAnimationType.sway;
-                              else if (mode.id == 'anxiety') animType = ModeAnimationType.breathe;
-                              else if (mode.id == 'noise') animType = ModeAnimationType.wave;
-                              else if (mode.id == 'energy') animType = ModeAnimationType.pulse;
-                              else if (mode.id == 'senior') animType = ModeAnimationType.heartbeat;
-
-                              return Padding(
-                                padding: const EdgeInsets.only(right: 16),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20), // Match button radius
-                                    boxShadow: isSelected ? [
-                                      BoxShadow(
-                                        color: mode.color.withOpacity(0.4),
-                                        blurRadius: 12,
-                                        offset: const Offset(0, 6),
-                                      )
-                                    ] : [],
-                                  ),
-                                  child: _buildCircularModeButton(
-                                    title: mode.title,
-                                    iconPath: mode.iconPath,
-                                    isActive: isSelected,
-                                    isPlaying: isPlaying,
-                                    onTap: () {
-                                      hapticService.lightImpact();
-                                      controller.changeMode(mode);
-                                      Get.to(() => const ModeDetailView(), arguments: mode);
-                                    },
-                                    color: mode.color,
-                                    animationType: animType,
-                                  ),
+                            // Main Container (Top Surface)
+                            Container(
+                              height: 160,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white,
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Colors.white,
+                                    const Color(0xFFF8F9FB),
+                                  ],
                                 ),
-                              );
-                            }).toList(),
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 2,
+                                ),
+                              ),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                child: Row(
+                                  children: [
+                                    // Special "AI Auto Recommend" Button
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 16),
+                                      child: _buildCircularModeButton(
+                                        title: 'AI 자동 추천',
+                                        iconPath: 'assets/icons/icon_mode_auto.png',
+                                        isActive: false,
+                                        isPlaying: false,
+                                        onTap: () {
+                                          hapticService.lightImpact();
+                                          // Show all modes bottom sheet or navigate
+                                        },
+                                        isSpecial: true,
+                                        animationType: ModeAnimationType.pulse,
+                                      ),
+                                    ),
+                                    
+                                    // Individual Modes
+                                    ...controller.modes.map((mode) {
+                                      final isSelected = controller.currentMode.value?.id == mode.id && !controller.isAutoMode.value;
+                                      final isPlaying = isSelected && controller.isPlaying.value;
+                                      
+                                      ModeAnimationType animType = ModeAnimationType.none;
+                                      if (mode.id == 'sleep') animType = ModeAnimationType.sway;
+                                      else if (mode.id == 'anxiety') animType = ModeAnimationType.breathe;
+                                      else if (mode.id == 'noise') animType = ModeAnimationType.wave;
+                                      else if (mode.id == 'energy') animType = ModeAnimationType.pulse;
+                                      else if (mode.id == 'senior') animType = ModeAnimationType.heartbeat;
+
+                                      return Padding(
+                                        padding: const EdgeInsets.only(right: 16),
+                                        child: _buildCircularModeButton(
+                                          title: mode.title,
+                                          iconPath: mode.iconPath,
+                                          isActive: isSelected,
+                                          isPlaying: isPlaying,
+                                          onTap: () {
+                                            hapticService.lightImpact();
+                                            controller.changeMode(mode);
+                                            Get.to(() => const ModeDetailView(), arguments: mode);
+                                          },
+                                          color: mode.color,
+                                          animationType: animType,
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       );

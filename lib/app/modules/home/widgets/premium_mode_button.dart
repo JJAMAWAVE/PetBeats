@@ -160,97 +160,48 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
               Stack(
                 alignment: Alignment.center,
                 children: [
-                  // Glow Effect (Behind)
+                  // Glow Effect (Behind) - Keep for active state
                   if (widget.isActive)
                     Container(
                       width: 100 * _glowAnimation.value,
                       height: 100 * _glowAnimation.value,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: widget.color?.withOpacity(0.4) ?? AppColors.primaryBlue.withOpacity(0.4),
+                        color: widget.color?.withOpacity(0.3) ?? AppColors.primaryBlue.withOpacity(0.3),
                         boxShadow: [
                           BoxShadow(
-                            color: widget.color?.withOpacity(0.6) ?? AppColors.primaryBlue.withOpacity(0.6),
-                            blurRadius: 30,
-                            spreadRadius: 5,
+                            color: widget.color?.withOpacity(0.4) ?? AppColors.primaryBlue.withOpacity(0.4),
+                            blurRadius: 20,
+                            spreadRadius: 3,
                           ),
                         ],
                       ),
                     ),
                   
-                  // Layer 1: Bottom Depth (Simulates thickness)
-                  Transform.translate(
-                    offset: const Offset(0, 6), // Push down for thickness
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: const Color(0xFFE0E0E0), // Darker shade for side/bottom
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.15),
-                            blurRadius: 15,
-                            offset: const Offset(0, 10), // Drop shadow below the whole button
-                            spreadRadius: 2,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  // Layer 2: Main Surface (The top face)
+                  // Simple Button (No individual layering)
                   Container(
                     width: 100,
                     height: 100,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Colors.white,
-                          const Color(0xFFF5F7FA), // Very subtle grey-blue
-                        ],
-                      ),
-                      // Inner highlight to make edges pop
-                      border: Border.all(
-                        color: Colors.white,
-                        width: 2,
-                      ),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        // Icon with Animation (Floating Effect)
-                        Transform.translate(
-                          offset: const Offset(0, -2), // Slight lift
-                          child: Center(
-                            child: widget.isPlaying
-                                ? SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: BeatAnimation(color: activeColor),
-                                  )
-                                : _buildAnimatedIcon(activeColor),
-                          ),
-                        ),
-                        
-                        // Shine Effect (Glossy overlay)
-                        Positioned(
-                          top: 8,
-                          right: 20,
-                          child: Container(
-                            width: 15,
-                            height: 8,
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.6),
-                              borderRadius: const BorderRadius.all(Radius.elliptical(15, 8)),
-                            ),
-                          ),
+                      boxShadow: [
+                        // Subtle shadow for depth
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
                         ),
                       ],
+                    ),
+                    child: Center(
+                      child: widget.isPlaying
+                          ? SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: BeatAnimation(color: activeColor),
+                            )
+                          : _buildAnimatedIcon(activeColor),
                     ),
                   ),
                 ],
