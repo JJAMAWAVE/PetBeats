@@ -7,6 +7,7 @@ import '../widgets/premium_mode_button.dart';
 import '../widgets/species_toggle.dart';
 import '../widgets/mini_player.dart';
 import '../widgets/heartbeat_text.dart';
+import '../widgets/header_icon_button.dart';
 import '../../../../core/widgets/background_decoration.dart';
 import '../../../../app/data/services/haptic_service.dart';
 import 'settings_view.dart';
@@ -42,27 +43,16 @@ class HomeView extends GetView<HomeController> {
                           const HeartbeatText('PetBeats', fontSize: 24),
                           Row(
                             children: [
-                              IconButton(
-                                icon: SizedBox(
-                                  width: 28,
-                                  height: 28,
-                                  child: Image.asset(
-                                    'assets/icons/icon_nav_notification.png',
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                                onPressed: () {},
+                              HeaderIconButton(
+                                iconPath: 'assets/icons/icon_nav_notification.png',
+                                animationType: HeaderIconAnimationType.shake,
+                                onTap: () {},
                               ),
-                              IconButton(
-                                icon: SizedBox(
-                                  width: 28,
-                                  height: 28,
-                                  child: Image.asset(
-                                    'assets/icons/icon_nav_settings.png',
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                                onPressed: () {
+                              const SizedBox(width: 8),
+                              HeaderIconButton(
+                                iconPath: 'assets/icons/icon_nav_settings.png',
+                                animationType: HeaderIconAnimationType.rotate,
+                                onTap: () {
                                   Get.to(() => const SettingsView());
                                 },
                               ),
@@ -103,11 +93,11 @@ class HomeView extends GetView<HomeController> {
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Row(
                           children: [
-                            // Special "All Modes" Button
+                            // Special "AI Auto Recommend" Button
                             Padding(
                               padding: const EdgeInsets.only(right: 16),
                               child: _buildCircularModeButton(
-                                title: '전체 보기',
+                                title: 'AI 자동 추천',
                                 iconPath: 'assets/icons/icon_mode_auto.png',
                                 isActive: false,
                                 isPlaying: false,
@@ -116,6 +106,7 @@ class HomeView extends GetView<HomeController> {
                                   // Show all modes bottom sheet or navigate
                                 },
                                 isSpecial: true,
+                                animationType: ModeAnimationType.pulse,
                               ),
                             ),
                             
@@ -124,6 +115,13 @@ class HomeView extends GetView<HomeController> {
                               final isSelected = controller.currentMode.value?.id == mode.id && !controller.isAutoMode.value;
                               final isPlaying = isSelected && controller.isPlaying.value;
                               
+                              ModeAnimationType animType = ModeAnimationType.none;
+                              if (mode.id == 'sleep') animType = ModeAnimationType.sway;
+                              else if (mode.id == 'anxiety') animType = ModeAnimationType.breathe;
+                              else if (mode.id == 'noise') animType = ModeAnimationType.wave;
+                              else if (mode.id == 'energy') animType = ModeAnimationType.pulse;
+                              else if (mode.id == 'senior') animType = ModeAnimationType.heartbeat;
+
                               return Padding(
                                 padding: const EdgeInsets.only(right: 16),
                                 child: Container(
@@ -148,6 +146,7 @@ class HomeView extends GetView<HomeController> {
                                       Get.to(() => const ModeDetailView(), arguments: mode);
                                     },
                                     color: mode.color,
+                                    animationType: animType,
                                   ),
                                 ),
                               );
@@ -310,12 +309,8 @@ class HomeView extends GetView<HomeController> {
     required VoidCallback onTap,
     Color? color,
     bool isSpecial = false,
+    ModeAnimationType animationType = ModeAnimationType.none,
   }) {
-    // Note: PremiumModeButton needs to be updated to support these changes or we modify it here.
-    // Since PremiumModeButton is a separate widget, we should check if we can modify it or wrap it.
-    // For now, assuming PremiumModeButton handles the icon display, we might need to edit that file instead.
-    // However, looking at the code, it seems PremiumModeButton is imported.
-    // Let's verify PremiumModeButton content first.
     return PremiumModeButton(
       title: title,
       iconPath: iconPath,
@@ -324,6 +319,7 @@ class HomeView extends GetView<HomeController> {
       onTap: onTap,
       color: color,
       isSpecial: isSpecial,
+      animationType: animationType,
     );
   }
 
@@ -348,22 +344,30 @@ class HomeView extends GetView<HomeController> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: AppColors.primaryBlue,
-          borderRadius: BorderRadius.circular(20),
+          color: const Color(0xFF5B67F2), // Blue-Purple Mix
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(
+            color: Colors.white.withOpacity(0.2),
+            width: 1.5,
+          ),
           boxShadow: [
             BoxShadow(
-              color: AppColors.primaryBlue.withOpacity(0.3),
-              blurRadius: 8,
+              color: const Color(0xFF5B67F2).withOpacity(0.4),
+              blurRadius: 10,
               offset: const Offset(0, 4),
             ),
+            // Inner shadow simulation via gradient or another box shadow if needed, 
+            // but double border usually means an outer ring. 
+            // Let's add a second outer ring using a container wrap if strictly needed, 
+            // but for now a distinct border + shadow looks premium.
           ],
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
-              width: 24, // Smaller icon for chip
-              height: 24,
+              width: 48, // 2x size (24 -> 48)
+              height: 48,
               child: Image.asset(
                 iconPath,
                 fit: BoxFit.contain,
@@ -374,7 +378,8 @@ class HomeView extends GetView<HomeController> {
               label,
               style: AppTextStyles.labelSmall.copyWith(
                 color: Colors.white,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w700,
+                fontSize: 16, // Slightly larger text
               ),
             ),
           ],

@@ -43,6 +43,7 @@ dependencies:
   flutter_svg: ^2.1.0
   google_fonts: ^6.3.0
   animate_do: ^4.2.0
+  get_storage: ^2.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

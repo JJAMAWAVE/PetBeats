@@ -12,9 +12,19 @@ class HapticService extends GetxService {
     HapticFeedback.lightImpact();
   }
 
+  // 중간 강도 햅틱 피드백
+  void mediumImpact() {
+    HapticFeedback.mediumImpact();
+  }
+
   // Selection click feedback
   void selectionClick() {
     lightImpact();
+  }
+
+  // 강한 햅틱 피드백 (완료/성공 등)
+  void heavyImpact() {
+    HapticFeedback.heavyImpact();
   }
 
   // 하트비트 시작 (BPM 기준)

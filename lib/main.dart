@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 import 'package:get/get.dart';
 import 'core/theme/app_colors.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -8,8 +9,11 @@ import 'app/routes/app_routes.dart';
 import 'core/theme/app_text_styles.dart';
 import 'core/services/web_bgm_service.dart';
 
+import 'package:get_storage/get_storage.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   // 웹용 BGM 사전 로딩
   await WebBgmService().init();
   runApp(const MyApp());
@@ -23,6 +27,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'PetBeats',
       debugShowCheckedModeBanner: false,
+      scrollBehavior: AppScrollBehavior(),
       theme: ThemeData(
         primaryColor: AppColors.primaryBlue,
         scaffoldBackgroundColor: AppColors.backgroundWhite,
@@ -49,4 +54,12 @@ class MyApp extends StatelessWidget {
       getPages: AppPages.routes,
     );
   }
+}
+
+class AppScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }

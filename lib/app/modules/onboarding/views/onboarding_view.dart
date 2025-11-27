@@ -8,6 +8,7 @@ import '../../../../core/widgets/custom_button.dart';
 import '../controllers/onboarding_controller.dart';
 import '../../../data/services/haptic_service.dart';
 
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OnboardingView extends StatefulWidget {
@@ -38,7 +39,7 @@ class _OnboardingViewState extends State<OnboardingView> with TickerProviderStat
     super.dispose();
   }
 
-  void _handleTap(TapDownDetails details) {
+  void _handleTapDown(TapDownDetails details) {
     try {
       Get.find<HapticService>().lightImpact();
     } catch (e) {
@@ -55,11 +56,11 @@ class _OnboardingViewState extends State<OnboardingView> with TickerProviderStat
       });
       _rippleController.reset();
     });
-    
-    // Navigate after showing ripple
-    Future.delayed(const Duration(milliseconds: 200), () {
-      controller.nextSlide();
-    });
+  }
+
+  void _handleTap() {
+    print('OnboardingView: Tap detected');
+    controller.nextSlide();
   }
 
   @override
@@ -90,7 +91,7 @@ class _OnboardingViewState extends State<OnboardingView> with TickerProviderStat
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(
+      body: Obx(() => Stack(
         children: [
           // Background gradient
           Positioned.fill(
@@ -110,7 +111,8 @@ class _OnboardingViewState extends State<OnboardingView> with TickerProviderStat
           ),
           // Content layer with touch detection
           GestureDetector(
-            onTapDown: _handleTap,
+            onTapDown: _handleTapDown,
+            onTap: _handleTap,
             behavior: HitTestBehavior.translucent,
             child: Column(
               children: [
@@ -222,6 +224,20 @@ class _OnboardingViewState extends State<OnboardingView> with TickerProviderStat
                             ),
                           ),
                         ),
+                        
+                        const SizedBox(height: 40),
+                        
+                        const SizedBox(height: 40),
+                        
+                        // Tap to Start Text (Always visible)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          child: GestureDetector(
+                            onTap: _handleTap,
+                            behavior: HitTestBehavior.translucent,
+                            child: _BreathingText(),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -248,7 +264,7 @@ class _OnboardingViewState extends State<OnboardingView> with TickerProviderStat
               ),
             ),
         ],
-      ),
+      )),
     );
   }
 }

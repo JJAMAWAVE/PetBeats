@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:flutter/material.dart';
 import '../../../data/services/audio_service.dart';
 import '../../../data/services/haptic_service.dart';
@@ -40,6 +41,8 @@ class HomeController extends GetxController {
   // 탭 정보
   final speciesTabs = <SpeciesTab>[].obs;
 
+  final _storage = GetStorage();
+
   @override
   void onInit() {
     super.onInit();
@@ -57,14 +60,30 @@ class HomeController extends GetxController {
       final selectedSpecies = List<String>.from(onboardingController.species);
       _initSpeciesTabs(selectedSpecies);
       
-      // 3. 초기 모드 설정: 사용자 요청으로 기본 선택 없음
-      currentMode.value = null; // No default mode selection
+      // 3. 초기 모드 설정: 저장된 값 또는 null
+      _loadSavedSettings();
       
     } catch (e) {
       // OnboardingController를 찾지 못한 경우 기본값 설정
       print('OnboardingController not found: $e');
       _initSpeciesTabs(['dog']); // 기본값
-      currentMode.value = null; // No default mode selection
+      _loadSavedSettings();
+    }
+  }
+
+  void _loadSavedSettings() {
+    // Load saved species index
+    if (_storage.hasData('selectedSpeciesIndex')) {
+      selectedSpeciesIndex.value = _storage.read('selectedSpeciesIndex');
+    }
+
+    // Load saved mode
+    if (_storage.hasData('lastModeId')) {
+      final lastModeId = _storage.read('lastModeId');
+      final mode = modes.firstWhereOrNull((m) => m.id == lastModeId);
+      if (mode != null) {
+        currentMode.value = mode;
+      }
     }
   }
 
@@ -184,18 +203,6 @@ class HomeController extends GetxController {
           tabs.add(tab);
         }
       }
-    } else {
-      if (selected.isNotEmpty) {
-        final tab = allTabs.firstWhere((t) => t.id == selected.first, orElse: () => SpeciesTab(id: '', label: '', iconPath: ''));
-        if (tab.id.isNotEmpty) tabs.add(tab);
-      } else {
-        tabs.add(allTabs[0]);
-      }
-      for (var tab in allTabs) {
-        if (!tabs.any((t) => t.id == tab.id)) {
-          tabs.add(tab);
-        }
-      }
     }
     
     speciesTabs.value = tabs;
@@ -203,10 +210,42 @@ class HomeController extends GetxController {
 
   // 테스트용 오디오 URL
   final String _testAudioUrl = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
-
+  final scenarioPlaylists = <String, List<String>>{}.obs;
+  
+  void _initScenarioPlaylists() {
+    // 논문 기반: 각 시나리오에 맞는 트랙 ID 순서 정의
+    scenarioPlaylists.value = {
+      '산책 후': [
+        'e7', 'e8', 'a7', 'a8', // 에너지 조절 → 분리불안 (Free tracks)
+        'e1', 'a1', 's1', 's2', // 점진적 진정 (Premium)
+      ],
+      '낮잠 시간': [
+        's1', 's2', // 수면 유도 무료
+        's3', 's5', 's7', // 수면 유도 프리미엄
+      ],
+      '병원 방문': [
+        'a7', 'a8', 's1', 's2', // 분리불안 → 수면 유도 무료
+        'a1', 'a3', 's3', 's5', // 프리미엄
+      ],
+      '미용 후': [
+        'n7', 'n8', 'a7', 'a8', // 소음 민감 → 분리불안 무료
+        'n1', 'a1', 's1', // 프리미엄
+      ],
+      '천둥/번개': [
+        'n7', 'n8', // 소음 차단 무료
+        'n1', 'n2', 'n3', 'n4', // 강력한 차단 프리미엄
+      ],
+      '분리 불안': [
+        'a7', 'a8', 's1', 's2', // 분리불안 → 수면 유도 무료
+        'a1', 'a2', 's3', 's5', // 프리미엄
+      ],
+    };
+  }
+  
   // 종 변경
   void changeSpecies(int index) {
     selectedSpeciesIndex.value = index;
+    _storage.write('selectedSpeciesIndex', index);
     _hapticService.selectionClick();
   }
 
@@ -269,43 +308,11 @@ class HomeController extends GetxController {
   // 모드 변경
   void changeMode(Mode mode) {
     currentMode.value = mode;
+    _storage.write('lastModeId', mode.id);
     isAutoMode.value = false;
     // 모드 변경 시 자동 재생은 하지 않음
   }
-  
-  // 시나리오별 플레이리스트 저장소
-  final scenarioPlaylists = <String, List<String>>{}.obs;
-  
-  void _initScenarioPlaylists() {
-    // 논문 기반: 각 시나리오에 맞는 트랙 ID 순서 정의
-    scenarioPlaylists.value = {
-      '산책 후': [
-        'e7', 'e8', 'a7', 'a8', // 에너지 조절 → 분리불안 (Free tracks)
-        'e1', 'a1', 's1', 's2', // 점진적 진정 (Premium)
-      ],
-      '낮잠 시간': [
-        's1', 's2', // 수면 유도 무료
-        's3', 's5', 's7', // 수면 유도 프리미엄
-      ],
-      '병원 방문': [
-        'a7', 'a8', 's1', 's2', // 분리불안 → 수면 유도 무료
-        'a1', 'a3', 's3', 's5', // 프리미엄
-      ],
-      '미용 후': [
-        'n7', 'n8', 'a7', 'a8', // 소음 민감 → 분리불안 무료
-        'n1', 'a1', 's1', // 프리미엄
-      ],
-      '천둥/번개': [
-        'n7', 'n8', // 소음 차단 무료
-        'n1', 'n2', 'n3', 'n4', // 강력한 차단 프리미엄
-      ],
-      '분리 불안': [
-        'a7', 'a8', 's1', 's2', // 분리불안 → 수면 유도 무료
-        'a1', 'a2', 's3', 's5', // 프리미엄
-      ],
-    };
-  }
-  
+
   // 상황별 추천: AI 플레이리스트 생성 및 재생
   void playScenario(String scenario) {
     final trackIds = scenarioPlaylists[scenario];
