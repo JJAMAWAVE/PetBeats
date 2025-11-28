@@ -141,22 +141,7 @@ class HomeView extends GetView<HomeController> {
                                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                                 child: Row(
                                   children: [
-                                    // Special "AI Auto Recommend" Button
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 16),
-                                      child: _buildCircularModeButton(
-                                        title: 'AI 자동 추천',
-                                        iconPath: 'assets/icons/icon_mode_auto.png',
-                                        isActive: false,
-                                        isPlaying: false,
-                                        onTap: () {
-                                          hapticService.lightImpact();
-                                          // Show all modes bottom sheet or navigate
-                                        },
-                                        isSpecial: true,
-                                        animationType: ModeAnimationType.pulse,
-                                      ),
-                                    ),
+
                                     
                                     // Individual Modes
                                     ...controller.modes.map((mode) {

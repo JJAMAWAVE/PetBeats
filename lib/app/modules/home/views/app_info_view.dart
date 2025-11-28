@@ -24,21 +24,6 @@ class AppInfoView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Banner Image Placeholder
-            Container(
-              width: double.infinity,
-              height: 250,
-              color: AppColors.primaryBlue.withOpacity(0.1),
-              child: Image.asset(
-                'assets/images/banner_image.png', // Will be generated
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return const Center(
-                    child: Icon(Icons.image, size: 64, color: AppColors.primaryBlue),
-                  );
-                },
-              ),
-            ),
             
             Padding(
               padding: const EdgeInsets.all(24.0),
