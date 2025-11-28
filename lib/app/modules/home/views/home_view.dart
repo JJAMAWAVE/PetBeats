@@ -16,6 +16,8 @@ import 'health_activity_detail_view.dart';
 import 'app_info_view.dart';
 import '../../../../app/data/services/daily_routine_service.dart';
 import '../../../routes/app_routes.dart';
+import '../widgets/ai_special_mode_widget.dart';
+import '../controllers/smart_care_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
@@ -57,7 +59,7 @@ class HomeView extends GetView<HomeController> {
                                 iconPath: 'assets/icons/icon_nav_settings.png',
                                 animationType: HeaderIconAnimationType.rotate,
                                 onTap: () {
-                                  Get.to(() => const SettingsView());
+                                  Get.toNamed(Routes.SETTINGS);
                                 },
                               ),
                             ],
@@ -183,7 +185,16 @@ class HomeView extends GetView<HomeController> {
 
                     const SizedBox(height: 40),
                     
-                    // SECTION 2: Scenario Chips
+                    // SECTION 2: AI Special Mode
+                    // _buildSectionTitle('AI 스마트 케어'), // Title is inside the widget now
+                    const SizedBox(height: 16),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 24.0),
+                      child: AISpecialModeWidget(),
+                    ),
+                    const SizedBox(height: 40),
+
+                    // SECTION 3: Scenario Chips
                     _buildSectionTitle('AI 맞춤 추천'),
                     const SizedBox(height: 16),
                     Padding(
@@ -276,7 +287,7 @@ class HomeView extends GetView<HomeController> {
     return GestureDetector(
       onTap: () {
         hapticService.lightImpact();
-        Get.to(() => const AppInfoView());
+        Get.toNamed(Routes.SUBSCRIPTION);
       },
       child: Container(
         height: 200,

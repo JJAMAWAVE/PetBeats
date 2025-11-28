@@ -43,6 +43,12 @@ class AppTextStyles {
     color: AppColors.textGrey,
   );
 
+  static TextStyle get bodySmall => baseStyle.copyWith(
+    fontSize: 12,
+    fontWeight: FontWeight.normal,
+    color: AppColors.textGrey,
+  );
+
   static TextStyle get subtitle => baseStyle.copyWith(
     fontSize: 18,
     fontWeight: FontWeight.w500,

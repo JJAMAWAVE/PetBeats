@@ -6,6 +6,10 @@ abstract class Routes {
   static const QUESTION2 = '/question2';
   static const LOADING = '/loading';
   static const MODE_DETAIL = '/mode_detail';
+  static const SETTINGS = '/settings';
   static const SUBSCRIPTION = '/subscription';
+  static const WEATHER_SPECIAL = '/weather-special';
+  static const TIME_SPECIAL = '/time-special';
+  static const REACTION_SPECIAL = '/reaction-special';
   static const INVITE_FRIENDS = '/invite_friends';
 }

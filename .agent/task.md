@@ -4,3 +4,22 @@
 - [x] 기본 UI 구조 구현 (Home, Onboarding)
 - [ ] 햅틱(진동) 기능 연동 확인
 - [ ] 프리미엄 기능 구현
+- [x] 반응형 디자인 구현 (flutter_screenutil)
+    - [x] 패키지 추가 (flutter_screenutil)
+    - [x] main.dart 초기화 (ScreenUtilInit)
+    - [x] ResponsiveLayout 유틸리티 위젯 생성
+- [x] 설정 및 데이터 페이지 구현
+    - [x] SettingsView 및 Controller 생성
+    - [x] 계정 연동 UI (Mock)
+    - [x] 권한 설정 토글 (위치, 알림)
+    - [x] 기기 연동 버튼 (IoT, Pet Cam)
+- [x] AI 스마트 케어 기능 구현
+    - [x] 기획 문서 작성 (ai_smart_care_strategy.md)
+    - [x] SmartCareController 생성 (Mock Logic & Debug)
+    - [x] SmartCareWidget UI 구현 (Carousel & Debug Dialog)
+    - [x] HomeView에 위젯 통합
+- [x] AI 특별 모드 구현 (AI Special Mode)
+    - [x] AISpecialModeWidget 구현 (3 Buttons)
+    - [x] 상세 페이지 구현 (Weather, Time, Reaction)
+    - [x] 라우트 등록 및 네비게이션 연결
+    - [x] HomeView 교체 (SmartCareWidget -> AISpecialModeWidget)

@@ -1,250 +1,148 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../controllers/premium_controller.dart';
 
-class SubscriptionView extends StatelessWidget {
+class SubscriptionView extends GetView<PremiumController> {
   const SubscriptionView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            // Background decoration (optional, keeping it clean white for now)
-            
-            Column(
+      backgroundColor: AppColors.backgroundWhite,
+      body: Stack(
+        children: [
+          // Background Image
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/MainBanner/MainBanner.png', // Reusing banner image for bg
+              fit: BoxFit.cover,
+              color: Colors.black.withOpacity(0.6),
+              colorBlendMode: BlendMode.darken,
+            ),
+          ),
+          
+          SafeArea(
+            child: Column(
               children: [
-                // Close Button
-                Align(
-                  alignment: Alignment.topRight,
-                  child: IconButton(
-                    icon: const Icon(Icons.close, color: AppColors.textDarkNavy, size: 30),
-                    onPressed: () => Get.back(),
-                  ),
-                ),
-                
-                const SizedBox(height: 20),
-                
-                // Title
-                Text(
-                  'PetBeats 프리미엄 플랜 선택',
-                  style: GoogleFonts.notoSans(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.textDarkNavy,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                
-                const SizedBox(height: 16),
-                
-                // Value Proposition
-                Text(
-                  '더 깊은 휴식과 안정을 경험하세요\n집중력 7배 향상\n스트레스 3.6배 감소',
-                  style: GoogleFonts.notoSans(
-                    fontSize: 16,
-                    color: AppColors.textGrey,
-                    height: 1.5,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                
-                const SizedBox(height: 40),
-                
-                // Subscription Options
+                // Header
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Column(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _buildOptionCard(
-                        title: '1년 이용권',
-                        price: '₩88,000',
-                        isSelected: true,
+                      IconButton(
+                        icon: const Icon(Icons.close, color: Colors.white),
+                        onPressed: () => Get.back(),
                       ),
-                      const SizedBox(height: 12),
-                      _buildOptionCard(
-                        title: '3개월 이용권',
-                        price: '₩27,250',
-                        isSelected: false,
-                      ),
-                      const SizedBox(height: 12),
-                      _buildOptionCard(
-                        title: '1개월 이용권',
-                        price: '₩10,900',
-                        isSelected: false,
-                      ),
-                      const SizedBox(height: 12),
-                      _buildOptionCard(
-                        title: '평생 소장',
-                        price: '₩290,000',
-                        subtitle: '단 한 번의 결제',
-                        isSelected: false,
+                      TextButton(
+                        onPressed: controller.restorePurchase,
+                        child: Text(
+                          '구매 복원',
+                          style: AppTextStyles.bodyMedium.copyWith(
+                            color: Colors.white.withOpacity(0.8),
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ),
-                
-                const Spacer(),
-                
-                // Subscribe Button
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 56,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Implement subscription logic
-                        Get.back();
-                        Get.snackbar(
-                          '구독 완료',
-                          '구독이 완료되었습니다 (데모)',
-                          snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: AppColors.primaryBlue,
-                          colorText: Colors.white,
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryBlue,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        elevation: 0,
-                      ),
-                      child: Text(
-                        '구독하기',
-                        style: GoogleFonts.notoSans(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                
-                const SizedBox(height: 24),
-                
-                // Footer Links
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _buildFooterButton('계정 전환'),
-                    const SizedBox(width: 16),
-                    _buildFooterButton('도움말'),
-                    const SizedBox(width: 16),
-                    _buildFooterButton('구매 복원'),
-                  ],
-                ),
-                
-                const SizedBox(height: 16),
-                
-                // Terms
-                Text(
-                  '계속 진행 시 다음 내용에 동의하게 됩니다\n개인정보 처리방침 및 이용약관',
-                  style: GoogleFonts.notoSans(
-                    fontSize: 12,
-                    color: AppColors.textGrey.withOpacity(0.7),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                
-                const SizedBox(height: 24),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
-  Widget _buildOptionCard({
-    required String title,
-    required String price,
-    String? subtitle,
-    required bool isSelected,
-  }) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
-      decoration: BoxDecoration(
-        color: isSelected ? AppColors.primaryBlue.withOpacity(0.05) : Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: isSelected ? AppColors.primaryBlue : AppColors.lineLightBlue,
-          width: isSelected ? 2 : 1,
-        ),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      title,
-                      style: GoogleFonts.notoSans(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.textDarkNavy,
+                const Spacer(),
+
+                // Content
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.w),
+                  child: Column(
+                    children: [
+                      Text(
+                        'PetBeats Premium',
+                        style: AppTextStyles.titleLarge.copyWith(
+                          color: Colors.white,
+                          fontSize: 32.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    const Spacer(),
-                    Text(
-                      price,
-                      style: GoogleFonts.notoSans(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.textDarkNavy,
+                      SizedBox(height: 16.h),
+                      Text(
+                        '반려동물을 위한\n모든 프리미엄 사운드를 경험하세요',
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.bodyLarge.copyWith(
+                          color: Colors.white.withOpacity(0.9),
+                          fontSize: 18.sp,
+                          height: 1.4,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                if (subtitle != null) ...[
-                  const SizedBox(height: 4),
-                  Text(
-                    subtitle,
-                    style: GoogleFonts.notoSans(
-                      fontSize: 14,
-                      color: AppColors.textGrey,
-                    ),
+                      SizedBox(height: 48.h),
+
+                      // Benefits List
+                      _buildBenefitItem('모든 상황별 모드 무제한 이용'),
+                      _buildBenefitItem('광고 없는 쾌적한 환경'),
+                      _buildBenefitItem('오프라인 재생 지원'),
+                      _buildBenefitItem('백그라운드 재생'),
+                      
+                      SizedBox(height: 48.h),
+
+                      // Subscribe Button
+                      SizedBox(
+                        width: double.infinity,
+                        height: 56.h,
+                        child: ElevatedButton(
+                          onPressed: controller.subscribe,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primaryBlue,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16.r),
+                            ),
+                            elevation: 8,
+                            shadowColor: AppColors.primaryBlue.withOpacity(0.5),
+                          ),
+                          child: Text(
+                            '월 4,900원으로 시작하기',
+                            style: AppTextStyles.titleMedium.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 16.h),
+                      Text(
+                        '첫 1개월 무료 체험, 언제든지 해지 가능',
+                        style: AppTextStyles.bodySmall.copyWith(
+                          color: Colors.white.withOpacity(0.6),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
+                SizedBox(height: 48.h),
               ],
             ),
           ),
-          const SizedBox(width: 16),
-          if (isSelected)
-            const Icon(Icons.check_circle, color: AppColors.primaryBlue, size: 24)
-          else
-            Container(
-              width: 24,
-              height: 24,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: AppColors.lineLightBlue, width: 1),
-              ),
-            ),
         ],
       ),
     );
   }
 
-  Widget _buildFooterButton(String text) {
-    return GestureDetector(
-      onTap: () {},
-      child: Text(
-        text,
-        style: GoogleFonts.notoSans(
-          fontSize: 14,
-          color: AppColors.textGrey,
-          decoration: TextDecoration.underline,
-        ),
+  Widget _buildBenefitItem(String text) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 16.h),
+      child: Row(
+        children: [
+          Icon(Icons.check_circle, color: AppColors.primaryBlue, size: 24.w),
+          SizedBox(width: 12.w),
+          Text(
+            text,
+            style: AppTextStyles.bodyLarge.copyWith(
+              color: Colors.white,
+              fontSize: 16.sp,
+            ),
+          ),
+        ],
       ),
     );
   }
