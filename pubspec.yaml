@@ -87,6 +87,7 @@ flutter:
     - assets/images/onboarding/
     - assets/images/InviteFriend/
     - assets/images/MainBanner/
+    - assets/images/AppInfo/
     - assets/sound/BGM/
     - assets/icons/
 

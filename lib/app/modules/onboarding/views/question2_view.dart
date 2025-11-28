@@ -52,7 +52,7 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
     final options = [
       {'value': 'dog', 'label': '강아지', 'icon': 'assets/icons/icon_species_dog.png'},
       {'value': 'cat', 'label': '고양이', 'icon': 'assets/icons/icon_species_cat.png'},
-      {'value': 'owner', 'label': '보호자', 'icon': 'assets/icons/icon_species_owner.png'},
+      // {'value': 'owner', 'label': '보호자', 'icon': 'assets/icons/icon_species_owner.png'}, // Removed
     ];
 
     return Scaffold(
@@ -92,7 +92,7 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
                   const SizedBox(height: 12),
                   
                   Text(
-                    '최대 3개까지 선택 가능합니다',
+                    '최대 2개까지 선택 가능합니다', // Updated text
                     style: AppTextStyles.bodyMedium.copyWith(
                       color: AppColors.textGrey,
                     ),
@@ -117,13 +117,13 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
                               isSelected: isSelected,
                               onTap: () {
                                 hapticService.lightImpact();
-                                // Toggle selection with max 3 limit
+                                // Toggle selection with max 2 limit
                                 if (isSelected) {
                                   // Remove if already selected
                                   controller.species.remove(value);
                                 } else {
-                                  // Add if not at max limit (3)
-                                  if (controller.species.length < 3) {
+                                  // Add if not at max limit (2)
+                                  if (controller.species.length < 2) {
                                     controller.species.add(value);
                                   }
                                 }

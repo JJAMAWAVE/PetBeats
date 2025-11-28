@@ -188,7 +188,7 @@ class HomeController extends GetxController {
     final allTabs = [
       SpeciesTab(id: 'dog', label: '강아지', iconPath: 'assets/icons/icon_species_dog.png'),
       SpeciesTab(id: 'cat', label: '고양이', iconPath: 'assets/icons/icon_species_cat.png'),
-      SpeciesTab(id: 'owner', label: '보호자', iconPath: 'assets/icons/icon_species_owner.png'),
+      // SpeciesTab(id: 'owner', label: '보호자', iconPath: 'assets/icons/icon_species_owner.png'), // Removed
     ];
 
     final tabs = <SpeciesTab>[];
