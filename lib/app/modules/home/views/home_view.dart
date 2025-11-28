@@ -413,6 +413,39 @@ class HomeView extends GetView<HomeController> {
   }
 
   Widget _buildScenarioChip(String label, String iconPath) {
+    // 시나리오별 컬러 코딩
+    Color chipColor;
+    Color shadowColor;
+    
+    switch (label) {
+      case '낮잠 시간':
+      case '분리 불안':
+        // 안정/수면 - Deep Indigo / Soft Purple
+        chipColor = AppColors.scenarioCalm;
+        shadowColor = AppColors.scenarioCalmLight;
+        break;
+        
+      case '산책 후':
+      case '미용 후':
+        // 활력/케어 - Sage Green / Warm Orange
+        chipColor = label == '산책 후' 
+            ? AppColors.scenarioVital 
+            : AppColors.scenarioVitalWarm;
+        shadowColor = chipColor;
+        break;
+        
+      case '병원 방문':
+      case '천둥/번개':
+        // 긴급/주의 - Muted Coral / Warm Gray
+        chipColor = AppColors.scenarioAlert;
+        shadowColor = AppColors.scenarioAlertSoft;
+        break;
+        
+      default:
+        chipColor = const Color(0xFF5B67F2);
+        shadowColor = chipColor;
+    }
+    
     return GestureDetector(
       onTap: () {
         // Navigate to corresponding mode detail view instead of auto-playing
@@ -433,7 +466,7 @@ class HomeView extends GetView<HomeController> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: const Color(0xFF5B67F2), // Blue-Purple Mix
+          color: chipColor,
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
             color: Colors.white.withOpacity(0.2),
@@ -441,21 +474,17 @@ class HomeView extends GetView<HomeController> {
           ),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF5B67F2).withOpacity(0.4),
+              color: shadowColor.withOpacity(0.4),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
-            // Inner shadow simulation via gradient or another box shadow if needed, 
-            // but double border usually means an outer ring. 
-            // Let's add a second outer ring using a container wrap if strictly needed, 
-            // but for now a distinct border + shadow looks premium.
           ],
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
-              width: 48, // 2x size (24 -> 48)
+              width: 48,
               height: 48,
               child: Image.asset(
                 iconPath,
@@ -468,7 +497,7 @@ class HomeView extends GetView<HomeController> {
               style: AppTextStyles.labelSmall.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.w700,
-                fontSize: 16, // Slightly larger text
+                fontSize: 16,
               ),
             ),
           ],

@@ -168,14 +168,15 @@ class ModeDetailView extends GetView<HomeController> {
         children: [
           Row(
             children: [
-              Icon(Icons.science, size: 16, color: AppColors.primaryBlue),
+              Icon(Icons.science, size: 18, color: AppColors.primaryBlue),
               const SizedBox(width: 8),
               Text(
                 'Scientific Insight',
                 style: GoogleFonts.poppins(
-                  fontSize: 12,
+                  fontSize: 14,
                   fontWeight: FontWeight.bold,
                   color: AppColors.primaryBlue,
+                  letterSpacing: 0.3,
                 ),
               ),
             ],
@@ -239,17 +240,34 @@ class ModeDetailView extends GetView<HomeController> {
           ),
           child: Row(
             children: [
-              // Play/Lock Icon
+              // Play/Crown Icon
               Container(
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: isLocked ? Colors.grey.withOpacity(0.1) : AppColors.primaryBlue.withOpacity(0.1),
+                  gradient: isLocked
+                      ? LinearGradient(
+                          colors: [
+                            Color(0xFFFFD700),
+                            Color(0xFFFFA500),
+                          ],
+                        )
+                      : null,
+                  color: isLocked ? null : AppColors.primaryBlue.withOpacity(0.1),
                   shape: BoxShape.circle,
+                  boxShadow: isLocked
+                      ? [
+                          BoxShadow(
+                            color: Color(0xFFFFD700).withOpacity(0.4),
+                            blurRadius: 8,
+                            offset: Offset(0, 2),
+                          ),
+                        ]
+                      : null,
                 ),
                 child: Icon(
-                  isLocked ? Icons.lock : (isPlaying ? Icons.pause : Icons.play_arrow),
-                  color: isLocked ? Colors.grey : AppColors.primaryBlue,
+                  isLocked ? Icons.workspace_premium : (isPlaying ? Icons.pause : Icons.play_arrow),
+                  color: isLocked ? Colors.white : AppColors.primaryBlue,
                 ),
               ),
               const SizedBox(width: 16),
@@ -293,19 +311,39 @@ class ModeDetailView extends GetView<HomeController> {
                 children: [
                   if (track.isPremium)
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       margin: const EdgeInsets.only(bottom: 4),
                       decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Text(
-                        'PRO',
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xFFFFD700),
+                            Color(0xFFFFA500),
+                          ],
                         ),
+                        borderRadius: BorderRadius.circular(6),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xFFFFD700).withOpacity(0.4),
+                            blurRadius: 6,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('👑', style: TextStyle(fontSize: 10)),
+                          SizedBox(width: 2),
+                          Text(
+                            'PRO',
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   Text(

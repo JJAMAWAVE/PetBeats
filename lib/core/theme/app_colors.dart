@@ -11,6 +11,7 @@ class AppColors { // Main Colors
   static const Color backgroundLightBlue = Color(0xFFF0F8FF); // Alice Blue
   static const Color backgroundGradientStart = Color(0xFFFFFFFF);
   static const Color backgroundGradientEnd = Color(0xFFE3F2FD); // Light Blue 100
+  static const Color backgroundDarkNavy = Color(0xFF0A0E21); // Deep Navy for immersive background
 
   // Text Colors
   static const Color textDarkNavy = Color(0xFF1A237E); // Deep Navy for text
@@ -31,4 +32,17 @@ class AppColors { // Main Colors
   static const Color pastelBlueStart = Color(0xFFE3F2FD); // Light Blue 50
   static const Color pastelBlueEnd = Color(0xFFBBDEFB); // Light Blue 100
   static const Color pastelBlueAccent = Color(0xFF90CAF9); // Light Blue 200
+  
+  // Scenario Color Coding (심리적 적절성)
+  // 안정/수면 (낮잠, 분리불안)
+  static const Color scenarioCalm = Color(0xFF5E60CE); // Deep Indigo
+  static const Color scenarioCalmLight = Color(0xFF8B8EDB); // Soft Purple
+  
+  // 활력/케어 (산책 후, 미용 후)
+  static const Color scenarioVital = Color(0xFF81B29A); // Sage Green
+  static const Color scenarioVitalWarm = Color(0xFFF2A65A); // Warm Orange
+  
+  // 긴급/주의 (병원, 천둥)
+  static const Color scenarioAlert = Color(0xFFE07A5F); // Muted Coral
+  static const Color scenarioAlertSoft = Color(0xFFA8A8A8); // Warm Gray
 }

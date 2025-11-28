@@ -7,6 +7,7 @@ abstract class Routes {
   static const LOADING = '/loading';
   static const MODE_DETAIL = '/mode_detail';
   static const SETTINGS = '/settings';
+  static const NOW_PLAYING = '/now-playing';
   static const SUBSCRIPTION = '/subscription';
   static const WEATHER_SPECIAL = '/weather-special';
   static const RHYTHM_SPECIAL = '/rhythm-special';

@@ -1,149 +1,568 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:animate_do/animate_do.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../controllers/premium_controller.dart';
+import '../controllers/subscription_controller.dart';
+import '../../../routes/app_routes.dart';
 
-class SubscriptionView extends GetView<PremiumController> {
+class SubscriptionView extends GetView<SubscriptionController> {
   const SubscriptionView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundWhite,
-      body: Stack(
-        children: [
-          // Background Image
-          Positioned.fill(
-            child: Image.asset(
-              'assets/images/MainBanner/MainBanner.png', // Reusing banner image for bg
-              fit: BoxFit.cover,
-              color: Colors.black.withOpacity(0.6),
-              colorBlendMode: BlendMode.darken,
-            ),
-          ),
-          
-          SafeArea(
-            child: Column(
-              children: [
-                // Header
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.close, color: Colors.white),
-                        onPressed: () => Get.back(),
-                      ),
-                      TextButton(
-                        onPressed: controller.restorePurchase,
-                        child: Text(
-                          '구매 복원',
-                          style: AppTextStyles.bodyMedium.copyWith(
-                            color: Colors.white.withOpacity(0.8),
-                          ),
-                        ),
-                      ),
-                    ],
+      backgroundColor: const Color(0xFFF8F9FB),
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            // Header
+            SliverAppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              automaticallyImplyLeading: false,
+              titleSpacing: 0,
+              title: Padding(
+                padding: EdgeInsets.only(left: 24.w),
+                child: TextButton(
+                  onPressed: () => controller.restorePurchases(),
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    minimumSize: Size.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                  child: Text(
+                    '구독 복원',
+                    style: TextStyle(
+                      color: AppColors.textGrey,
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w500,
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                 ),
-
-                const Spacer(),
-
-                // Content
+              ),
+              actions: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: Column(
-                    children: [
-                      Text(
-                        'PetBeats Premium',
-                        style: AppTextStyles.titleLarge.copyWith(
-                          color: Colors.white,
-                          fontSize: 32.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  padding: EdgeInsets.only(right: 24.w),
+                  child: GestureDetector(
+                    onTap: () => Get.back(),
+                    child: Container(
+                      width: 32.w,
+                      height: 32.w,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.05),
+                        shape: BoxShape.circle,
                       ),
-                      SizedBox(height: 16.h),
-                      Text(
-                        '반려동물을 위한\n모든 프리미엄 사운드를 경험하세요',
-                        textAlign: TextAlign.center,
-                        style: AppTextStyles.bodyLarge.copyWith(
-                          color: Colors.white.withOpacity(0.9),
-                          fontSize: 18.sp,
-                          height: 1.4,
-                        ),
-                      ),
-                      SizedBox(height: 48.h),
-
-                      // Benefits List
-                      _buildBenefitItem('모든 상황별 모드 무제한 이용'),
-                      _buildBenefitItem('광고 없는 쾌적한 환경'),
-                      _buildBenefitItem('오프라인 재생 지원'),
-                      _buildBenefitItem('백그라운드 재생'),
-                      
-                      SizedBox(height: 48.h),
-
-                      // Subscribe Button
-                      SizedBox(
-                        width: double.infinity,
-                        height: 56.h,
-                        child: ElevatedButton(
-                          onPressed: controller.subscribe,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primaryBlue,
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.r),
-                            ),
-                            elevation: 8,
-                            shadowColor: AppColors.primaryBlue.withOpacity(0.5),
-                          ),
-                          child: Text(
-                            '월 4,900원으로 시작하기',
-                            style: AppTextStyles.titleMedium.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 16.h),
-                      Text(
-                        '첫 1개월 무료 체험, 언제든지 해지 가능',
-                        style: AppTextStyles.bodySmall.copyWith(
-                          color: Colors.white.withOpacity(0.6),
-                        ),
-                      ),
-                    ],
+                      child: Icon(Icons.close, color: AppColors.textDarkNavy, size: 20.w),
+                    ),
                   ),
                 ),
-                SizedBox(height: 48.h),
               ],
             ),
-          ),
-        ],
+            
+            // Content
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: Column(
+                  children: [
+                    SizedBox(height: 8.h),
+                    
+                    // Value Proposition
+                    Text(
+                      '반려동물에게\n완벽한 평온을 선물하세요',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.notoSans(
+                        fontSize: 24.sp,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.textDarkNavy,
+                        height: 1.3,
+                      ),
+                    ),
+                    
+                    SizedBox(height: 32.h),
+                    
+                    // Benefits
+                    _buildBenefitRow(
+                      Icons.music_note,
+                      '90개',
+                      ' 전용 테라피 사운드 무제한',
+                    ),
+                    SizedBox(height: 16.h),
+                    _buildBenefitRow(
+                      Icons.psychology,
+                      'Smart Sync',
+                      ' (날씨/시간/돌봄) 잠금 해제',
+                    ),
+                    SizedBox(height: 16.h),
+                    _buildBenefitRow(
+                      Icons.vibration,
+                      'Haptic',
+                      ' (진동 테라피) 무제한 사용',
+                    ),
+                    
+                    SizedBox(height: 40.h),
+                    
+                    // Plan Selector
+                    Obx(() => Column(
+                      children: [
+                        _ShineEffect(
+                          child: _buildPlanCard(
+                            title: '1년 (Yearly)',
+                            price: '₩33,000',
+                            priceDetail: '월 2,750원',
+                            discount: '30% 할인',
+                            isBest: true,
+                            socialProof: '⭐ 92%의 보호자가 선택한 플랜',
+                            isSelected: controller.selectedPlan.value == SubscriptionPlan.yearly,
+                            onTap: () => controller.selectPlan(SubscriptionPlan.yearly),
+                          ),
+                        ),
+                        SizedBox(height: 12.h),
+                        _buildPlanCard(
+                          title: '6개월 (6 Months)',
+                          price: '₩19,900',
+                          priceDetail: '월 3,316원',
+                          discount: '15% 할인',
+                          isSelected: controller.selectedPlan.value == SubscriptionPlan.halfYearly,
+                          onTap: () => controller.selectPlan(SubscriptionPlan.halfYearly),
+                        ),
+                        SizedBox(height: 12.h),
+                        _buildPlanCard(
+                          title: '3개월 (3 Months)',
+                          price: '₩10,900',
+                          priceDetail: '월 3,633원',
+                          discount: '7% 할인',
+                          isSelected: controller.selectedPlan.value == SubscriptionPlan.quarterly,
+                          onTap: () => controller.selectPlan(SubscriptionPlan.quarterly),
+                        ),
+                        SizedBox(height: 12.h),
+                        _buildPlanCard(
+                          title: '1개월 (Monthly)',
+                          price: '₩3,900',
+                          priceDetail: '월 3,900원',
+                          discount: null,
+                          isSelected: controller.selectedPlan.value == SubscriptionPlan.monthly,
+                          onTap: () => controller.selectPlan(SubscriptionPlan.monthly),
+                        ),
+                      ],
+                    )),
+                    
+                    SizedBox(height: 24.h),
+                    
+                    // Referral Nudge
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(Routes.INVITE_FRIENDS); 
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 20.w),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16.r),
+                          border: Border.all(color: AppColors.primaryBlue.withOpacity(0.3)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              '💰 아직 결제가 망설여지시나요?',
+                              style: TextStyle(
+                                color: AppColors.textGrey,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            SizedBox(height: 6.h),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.card_giftcard, size: 18.w, color: AppColors.primaryBlue),
+                                SizedBox(width: 6.w),
+                                Text(
+                                  '친구 초대하고 무료 이용권 받기',
+                                  style: TextStyle(
+                                    color: AppColors.primaryBlue,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Icon(Icons.chevron_right, size: 18.w, color: AppColors.primaryBlue),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    
+                    SizedBox(height: 24.h),
+                    
+                    // CTA Button
+                    Obx(() => SizedBox(
+                      width: double.infinity,
+                      height: 56.h,
+                      child: ElevatedButton(
+                        onPressed: controller.isLoading.value
+                            ? null
+                            : () => controller.startFreeTrial(),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primaryBlue,
+                          foregroundColor: Colors.white,
+                          disabledBackgroundColor: AppColors.primaryBlue.withOpacity(0.5),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.r),
+                          ),
+                          elevation: 8,
+                          shadowColor: AppColors.primaryBlue.withOpacity(0.4),
+                        ),
+                        child: controller.isLoading.value
+                            ? SizedBox(
+                                width: 24.w,
+                                height: 24.w,
+                                child: const CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                  strokeWidth: 2,
+                                ),
+                              )
+                            : Text(
+                                '7일 무료로 시작하기',
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                      ),
+                    )),
+                    
+                    SizedBox(height: 12.h),
+                    
+                    // Micro-copy
+                    Text(
+                      '7일 동안 요금이 청구되지 않습니다.\n언제든 해지 가능합니다.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        color: AppColors.textDarkNavy.withOpacity(0.6),
+                        height: 1.4,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    
+                    SizedBox(height: 40.h),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildBenefitItem(String text) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 16.h),
-      child: Row(
-        children: [
-          Icon(Icons.check_circle, color: AppColors.primaryBlue, size: 24.w),
-          SizedBox(width: 12.w),
-          Text(
-            text,
-            style: AppTextStyles.bodyLarge.copyWith(
-              color: Colors.white,
-              fontSize: 16.sp,
+  Widget _buildBenefitRow(IconData icon, String highlight, String text) {
+    return Row(
+      children: [
+        Icon(icon, size: 28.w, color: AppColors.primaryBlue),
+        SizedBox(width: 12.w),
+        Expanded(
+          child: RichText(
+            text: TextSpan(
+              style: TextStyle(
+                fontSize: 15.sp,
+                color: AppColors.textDarkNavy,
+                height: 1.2,
+              ),
+              children: [
+                TextSpan(
+                  text: highlight,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primaryBlue,
+                  ),
+                ),
+                TextSpan(text: text),
+              ],
             ),
           ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPlanCard({
+    required String title,
+    required String price,
+    required String priceDetail,
+    String? discount,
+    bool isBest = false,
+    String? socialProof,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            padding: EdgeInsets.all(16.w),
+            decoration: BoxDecoration(
+              gradient: isBest
+                  ? const LinearGradient(
+                      colors: [Color(0xFFFFD700), Color(0xFFFFE55C)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    )
+                  : null,
+              color: isBest ? null : (isSelected ? AppColors.primaryBlue.withOpacity(0.05) : Colors.white),
+              borderRadius: BorderRadius.circular(16.r),
+              border: Border.all(
+                color: isBest
+                    ? const Color(0xFFFFD700)
+                    : (isSelected ? AppColors.primaryBlue : Colors.grey.shade300),
+                width: isBest ? 2 : (isSelected ? 2 : 1),
+              ),
+              boxShadow: [
+                if (isBest)
+                  BoxShadow(
+                    color: const Color(0xFFFFD700).withOpacity(0.3),
+                    blurRadius: 20,
+                    offset: const Offset(0, 8),
+                  ),
+              ],
+            ),
+            child: Row(
+              children: [
+                // Radio Button
+                Container(
+                  width: 24.w,
+                  height: 24.w,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: isBest ? Colors.white : (isSelected ? AppColors.primaryBlue : Colors.grey.shade400),
+                      width: 2,
+                    ),
+                    color: isSelected
+                        ? (isBest ? Colors.white : AppColors.primaryBlue)
+                        : Colors.transparent,
+                  ),
+                  child: isSelected
+                      ? Center(
+                          child: Container(
+                            width: 10.w,
+                            height: 10.w,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: isBest ? const Color(0xFFFFD700) : Colors.white,
+                            ),
+                          ),
+                        )
+                      : null,
+                ),
+                SizedBox(width: 12.w),
+                
+                // Plan Info
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            title,
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w600,
+                              color: isBest ? Colors.white : AppColors.textDarkNavy,
+                            ),
+                          ),
+                          if (isBest) ...[
+                            SizedBox(width: 6.w),
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(4.r),
+                              ),
+                              child: Text(
+                                'BEST',
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color(0xFFFFD700),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                      SizedBox(height: 4.h),
+                      // 가격 앵커링
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(
+                            priceDetail,
+                            style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.bold,
+                              color: isBest ? Colors.white : AppColors.textDarkNavy,
+                            ),
+                          ),
+                          SizedBox(width: 4.w),
+                          Text(
+                            '/ 월',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: isBest ? Colors.white.withOpacity(0.9) : AppColors.textGrey,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 2.h),
+                      Text(
+                        '총 $price',
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: isBest ? Colors.white.withOpacity(0.8) : AppColors.textGrey,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                
+                // Discount Badge
+                if (discount != null)
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                    decoration: BoxDecoration(
+                      color: isBest ? Colors.white.withOpacity(0.2) : AppColors.primaryBlue.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                    child: Text(
+                      discount,
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.bold,
+                        color: isBest ? Colors.white : AppColors.primaryBlue,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          
+          // Social Proof Badge
+          if (socialProof != null)
+            Positioned(
+              top: -10.h,
+              right: 16.w,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                decoration: BoxDecoration(
+                  color: AppColors.textDarkNavy,
+                  borderRadius: BorderRadius.circular(12.r),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Text(
+                  socialProof,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 11.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
+    );
+  }
+}
+
+class _ShineEffect extends StatefulWidget {
+  final Widget child;
+  const _ShineEffect({required this.child});
+
+  @override
+  State<_ShineEffect> createState() => _ShineEffectState();
+}
+
+class _ShineEffectState extends State<_ShineEffect> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2500),
+    )..repeat(reverse: false);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        widget.child,
+        Positioned.fill(
+          child: AnimatedBuilder(
+            animation: _controller,
+            builder: (context, child) {
+              return FractionallySizedBox(
+                widthFactor: 0.5,
+                heightFactor: 1.0,
+                alignment: AlignmentGeometry.lerp(
+                  Alignment.centerLeft - const Alignment(2.0, 0.0),
+                  Alignment.centerRight + const Alignment(2.0, 0.0),
+                  _controller.value,
+                )!,
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.white.withOpacity(0.0),
+                        Colors.white.withOpacity(0.4),
+                        Colors.white.withOpacity(0.0),
+                      ],
+                      stops: const [0.0, 0.5, 1.0],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(16.r),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

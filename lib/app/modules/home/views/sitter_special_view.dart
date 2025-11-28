@@ -195,9 +195,15 @@ class _SitterSpecialViewState extends State<SitterSpecialView> {
           Switch(
             value: _sitterModeEnabled,
             onChanged: (val) {
-              setState(() {
-                _sitterModeEnabled = val;
-              });
+              if (val) {
+                // 시터 모드를 켜려고 할 때 설정 페이지로 이동 (IOT 연동)
+                Get.toNamed('/settings');
+              } else {
+                // 시터 모드를 끌 때는 바로 상태 변경
+                setState(() {
+                  _sitterModeEnabled = false;
+                });
+              }
             },
             activeColor: AppColors.primaryBlue,
           ),

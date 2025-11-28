@@ -240,11 +240,15 @@ class _WeatherSpecialViewState extends State<WeatherSpecialView> {
               Switch(
                 value: _locationEnabled,
                 onChanged: (val) {
-                  setState(() {
-                    _locationEnabled = val;
-                    // 실제 구현 시 여기서 위치 권한 요청
-                    // if (val) requestLocationPermission();
-                  });
+                  if (val) {
+                    // 위치 정보를 켜려고 할 때 설정 페이지로 이동
+                    Get.toNamed('/settings');
+                  } else {
+                    // 위치 정보를 끌 때는 바로 상태 변경
+                    setState(() {
+                      _locationEnabled = false;
+                    });
+                  }
                 },
                 activeColor: AppColors.primaryBlue,
               ),

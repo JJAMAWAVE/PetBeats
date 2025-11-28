@@ -85,6 +85,9 @@ class HomeController extends GetxController {
         currentMode.value = mode;
       }
     }
+    
+    // Load premium status
+    isPremiumUser.value = _storage.read('isPremium') ?? false;
   }
 
   void _initModes() {
@@ -320,6 +323,9 @@ class HomeController extends GetxController {
       }
       _hapticService.startHeartbeat(bpm);
     }
+    
+    // Navigate to Immersive Player
+    Get.toNamed('/now-playing');
   }
 
   // 모드 변경

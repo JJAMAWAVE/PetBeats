@@ -1,34 +1,245 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '../../home/controllers/home_controller.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
+import '../../../../core/theme/app_colors.dart';
+
+enum SubscriptionPlan {
+  monthly,
+  quarterly,
+  halfYearly,
+  yearly,
+}
 
 class SubscriptionController extends GetxController {
-  final selectedPlanIndex = 0.obs;
+  final isPremium = false.obs;
   final isLoading = false.obs;
-
-  final plans = [
-    {'duration': '1년', 'price': '₩88,000', 'tag': '최고의 선택'},
-    {'duration': '3개월', 'price': '₩27,250', 'tag': ''},
-    {'duration': '1개월', 'price': '₩10,900', 'tag': ''},
-    {'duration': '평생 소장', 'price': '₩290,000', 'tag': '한 번 결제로 평생 이용'},
-  ];
-
-  void selectPlan(int index) {
-    selectedPlanIndex.value = index;
+  final selectedPlan = SubscriptionPlan.yearly.obs;
+  final _storage = GetStorage();
+  
+  // RevenueCat 설정
+  static const _revenueCatApiKey = 'YOUR_REVENUECAT_API_KEY_HERE';
+  
+  @override
+  void onInit() {
+    super.onInit();
+    _configureRevenueCat();
+    _checkSubscriptionStatus();
   }
-
-  void subscribe() async {
-    isLoading.value = true;
-    // Simulate API call
-    await Future.delayed(const Duration(seconds: 2));
-    isLoading.value = false;
+  
+  Future<void> _configureRevenueCat() async {
+    try {
+      await Purchases.setLogLevel(LogLevel.debug);
+      
+      final configuration = PurchasesConfiguration(_revenueCatApiKey);
+      await Purchases.configure(configuration);
+      
+      print('✅ RevenueCat configured successfully');
+    } catch (e) {
+      print('❌ RevenueCat configuration error: $e');
+    }
+  }
+  
+  void selectPlan(SubscriptionPlan plan) {
+    selectedPlan.value = plan;
+  }
+  
+  Future<void> _checkSubscriptionStatus() async {
+    try {
+      final customerInfo = await Purchases.getCustomerInfo();
+      
+      // 'premium' entitlement가 활성화되어 있는지 확인
+      isPremium.value = customerInfo.entitlements.active.containsKey('premium');
+      
+      // 로컬 저장소에도 동기화
+      _storage.write('isPremium', isPremium.value);
+      
+      if (isPremium.value) {
+        print('✅ User is Premium');
+      } else {
+        print('ℹ️ User is Free');
+      }
+    } catch (e) {
+      print('❌ Error checking subscription: $e');
+      // 오프라인 시 로컬 캐시 사용
+      isPremium.value = _storage.read('isPremium') ?? false;
+    }
+  }
+  
+  Future<void> startFreeTrial() async {
+    try {
+      isLoading.value = true;
+      
+      // 1. Offerings 가져오기
+      final offerings = await Purchases.getOfferings();
+      
+      if (offerings.current == null) {
+        throw 'No active offerings found';
+      }
+      
+      // 2. 선택된 플랜에 맞는 Package 가져오기
+      final package = _getPackageFromOffering(offerings.current!);
+      
+      if (package == null) {
+        throw 'No package found for selected plan';
+      }
+      
+      // 3. 구매 처리
+      final customerInfo = await Purchases.purchasePackage(package);
+      
+      // 4. 구매 성공 처리
+      if (customerInfo.entitlements.active.containsKey('premium')) {
+        await _handlePurchaseSuccess();
+      } else {
+        throw 'Purchase completed but premium not activated';
+      }
+      
+    } on PlatformException catch (e) {
+      final errorCode = PurchasesErrorHelper.getErrorCode(e);
+      
+      if (errorCode == PurchasesErrorCode.purchaseCancelledError) {
+        print('ℹ️ User cancelled purchase');
+      } else if (errorCode == PurchasesErrorCode.productAlreadyPurchasedError) {
+        Get.snackbar(
+          '이미 구독 중',
+          '이미 프리미엄 구독 중입니다.',
+          backgroundColor: Colors.orange.shade100,
+          colorText: Colors.orange.shade900,
+        );
+      } else {
+        Get.snackbar(
+          '오류',
+          '구독 처리 중 문제가 발생했습니다: ${e.message}',
+          backgroundColor: Colors.red.shade100,
+          colorText: Colors.red.shade900,
+        );
+      }
+    } catch (e) {
+      Get.snackbar(
+        '오류',
+        '구독 처리 중 문제가 발생했습니다.',
+        backgroundColor: Colors.red.shade100,
+        colorText: Colors.red.shade900,
+      );
+    } finally {
+      isLoading.value = false;
+    }
+  }
+  
+  Package? _getPackageFromOffering(Offering offering) {
+    switch (selectedPlan.value) {
+      case SubscriptionPlan.monthly:
+        return offering.monthly;
+      case SubscriptionPlan.quarterly:
+        return offering.threeMonth;
+      case SubscriptionPlan.halfYearly:
+        return offering.sixMonth;
+      case SubscriptionPlan.yearly:
+        return offering.annual;
+    }
+  }
+  
+  Future<void> _handlePurchaseSuccess() async {
+    // 1. Premium 상태 업데이트
+    isPremium.value = true;
     
-    // Grant premium access
-    Get.find<HomeController>().upgradeToPremium();
-    Get.back();
-    Get.snackbar('프리미엄 활성화', 'PetBeats 프리미엄에 오신 것을 환영합니다!', 
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Get.theme.primaryColor,
-      colorText: Get.theme.colorScheme.onPrimary,
+    // 2. GetStorage에 저장 (오프라인 캐시용)
+    _storage.write('isPremium', true);
+    _storage.write('subscriptionPlan', selectedPlan.value.toString());
+    _storage.write('subscriptionDate', DateTime.now().toIso8601String());
+    
+    // 3. 성공 메시지
+    Get.back(); // 구독 페이지 닫기
+    Get.snackbar(
+      '✅ 구독 완료!',
+      '7일 무료 체험이 시작되었습니다.\n모든 프리미엄 기능을 사용하실 수 있습니다.',
+      backgroundColor: AppColors.successMintSoft,
+      colorText: AppColors.textDarkNavy,
+      duration: Duration(seconds: 4),
+      margin: EdgeInsets.all(16),
+      borderRadius: 12,
+      icon: Icon(Icons.check_circle, color: Colors.green.shade600),
     );
+  }
+  
+  Future<void> restorePurchases() async {
+    try {
+      isLoading.value = true;
+      
+      // RevenueCat에서 구독 복원
+      final customerInfo = await Purchases.restorePurchases();
+      
+      // Premium 상태 확인
+      final wasPremium = customerInfo.entitlements.active.containsKey('premium');
+      
+      if (wasPremium) {
+        isPremium.value = true;
+        _storage.write('isPremium', true);
+        
+        Get.snackbar(
+          '복원 완료',
+          '구독이 복원되었습니다.',
+          backgroundColor: AppColors.successMintSoft,
+          colorText: AppColors.textDarkNavy,
+        );
+      } else {
+        Get.snackbar(
+          '복원 실패',
+          '복원할 구독을 찾을 수 없습니다.',
+          backgroundColor: Colors.orange.shade100,
+          colorText: Colors.orange.shade900,
+        );
+      }
+      
+    } catch (e) {
+      Get.snackbar(
+        '오류',
+        '복원 중 문제가 발생했습니다: $e',
+        backgroundColor: Colors.red.shade100,
+        colorText: Colors.red.shade900,
+      );
+    } finally {
+      isLoading.value = false;
+    }
+  }
+  
+  String getPlanPrice() {
+    switch (selectedPlan.value) {
+      case SubscriptionPlan.monthly:
+        return '₩3,900';
+      case SubscriptionPlan.quarterly:
+        return '₩10,900';
+      case SubscriptionPlan.halfYearly:
+        return '₩19,900';
+      case SubscriptionPlan.yearly:
+        return '₩33,000';
+    }
+  }
+  
+  String getPlanTitle() {
+    switch (selectedPlan.value) {
+      case SubscriptionPlan.monthly:
+        return '1개월';
+      case SubscriptionPlan.quarterly:
+        return '3개월';
+      case SubscriptionPlan.halfYearly:
+        return '6개월';
+      case SubscriptionPlan.yearly:
+        return '1년';
+    }
+  }
+  
+  String getPlanProductId() {
+    switch (selectedPlan.value) {
+      case SubscriptionPlan.monthly:
+        return 'petbeats_monthly';
+      case SubscriptionPlan.quarterly:
+        return 'petbeats_quarterly';
+      case SubscriptionPlan.halfYearly:
+        return 'petbeats_halfyearly';
+      case SubscriptionPlan.yearly:
+        return 'petbeats_yearly';
+    }
   }
 }
