@@ -25,13 +25,16 @@ class InviteFriendsView extends GetView<InviteController> {
                 children: [
                   const SizedBox(height: 60),
                   
-                  // 헤더 이미지 (사용자 제공 이미지 사용)
+                  // 이미지 1: 페이지 가장 위 (Invite Friends_1.png)
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: Image.asset(
-                      'assets/images/InviteFriend/main_illustration.jpg',
-                      height: 200,
-                      fit: BoxFit.contain,
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.asset(
+                        'assets/images/InviteFriend/invite_friends_1.png',
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   
@@ -45,10 +48,40 @@ class InviteFriendsView extends GetView<InviteController> {
                   // 진행 상황
                   _buildProgress(),
                   
+                  const SizedBox(height: 24),
+                  
+                  // 이미지 2: 0/3 Friends Joined 바로 밑 (Invite Friends_2.png)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.asset(
+                        'assets/images/InviteFriend/invite_friends_2.png',
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  
                   const SizedBox(height: 32),
                   
                   // 보상 카드
                   _buildRewardCards(),
+                  
+                  const SizedBox(height: 24),
+                  
+                  // 이미지 3: 프리미엄 1개월 무료 구독 바로 밑 (Invite Friends_3.png)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.asset(
+                        'assets/images/InviteFriend/invite_friends_3.png',
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                   
                   const SizedBox(height: 40),
                   

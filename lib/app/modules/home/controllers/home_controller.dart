@@ -183,6 +183,8 @@ class HomeController extends GetxController {
   }
 
   void _initSpeciesTabs(List<String> selected) {
+    print('DEBUG: Initializing species tabs with: $selected');
+    
     final allTabs = [
       SpeciesTab(id: 'dog', label: '강아지', iconPath: 'assets/icons/icon_species_dog.png'),
       SpeciesTab(id: 'cat', label: '고양이', iconPath: 'assets/icons/icon_species_cat.png'),
@@ -191,9 +193,23 @@ class HomeController extends GetxController {
 
     final tabs = <SpeciesTab>[];
 
-    if (selected.length >= 3) {
+    if (selected.isEmpty || selected.length >= 3) {
+      // No species selected or all selected - show all tabs
       tabs.addAll(allTabs);
+    } else if (selected.length == 1) {
+      // Only 1 species selected - show that one first, then others
+      final selectedTab = allTabs.firstWhere(
+        (t) => t.id == selected[0],
+        orElse: () => allTabs[0],
+      );
+      tabs.add(selectedTab);
+      for (var tab in allTabs) {
+        if (tab.id != selected[0]) {
+          tabs.add(tab);
+        }
+      }
     } else if (selected.length == 2) {
+      // 2 species selected - show those first, then the remaining one
       for (var id in selected) {
         final tab = allTabs.firstWhere((t) => t.id == id, orElse: () => SpeciesTab(id: '', label: '', iconPath: ''));
         if (tab.id.isNotEmpty) tabs.add(tab);
@@ -206,6 +222,7 @@ class HomeController extends GetxController {
     }
     
     speciesTabs.value = tabs;
+    print('DEBUG: Species tabs initialized: ${tabs.map((t) => t.label).toList()}');
   }
 
   // 테스트용 오디오 URL
