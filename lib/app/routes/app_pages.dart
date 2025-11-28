@@ -10,6 +10,8 @@ import '../modules/home/views/home_view.dart';
 import '../modules/home/views/mode_detail_view.dart';
 import '../modules/premium/bindings/premium_binding.dart';
 import '../modules/premium/views/subscription_view.dart';
+import '../modules/invite/bindings/invite_binding.dart';
+import '../modules/invite/views/invite_friends_view.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -62,6 +64,12 @@ class AppPages {
       name: Routes.SUBSCRIPTION,
       page: () => const SubscriptionView(),
       binding: PremiumBinding(),
+      preventDuplicates: true,
+    ),
+    GetPage(
+      name: Routes.INVITE_FRIENDS,
+      page: () => const InviteFriendsView(),
+      binding: InviteBinding(),
       preventDuplicates: true,
     ),
   ];

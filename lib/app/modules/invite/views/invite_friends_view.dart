@@ -1,0 +1,447 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../controllers/invite_controller.dart';
+import '../../../../app/data/services/haptic_service.dart';
+
+class InviteFriendsView extends GetView<InviteController> {
+  const InviteFriendsView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final hapticService = Get.find<HapticService>();
+    
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            // 메인 콘텐츠
+            SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  const SizedBox(height: 60),
+                  
+                  // 헤더 이미지 (사용자 제공 이미지 사용)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    child: Image.asset(
+                      'assets/images/InviteFriend/main_illustration.jpg',
+                      height: 200,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  
+                  const SizedBox(height: 32),
+                  
+                  // 메인 헤드라인
+                  _buildHeadline(),
+                  
+                  const SizedBox(height: 40),
+                  
+                  // 진행 상황
+                  _buildProgress(),
+                  
+                  const SizedBox(height: 32),
+                  
+                  // 보상 카드
+                  _buildRewardCards(),
+                  
+                  const SizedBox(height: 40),
+                  
+                  // 참여 방법
+                  _buildHowItWorks(),
+                  
+                  const SizedBox(height: 32),
+                  
+                  // 유의 사항
+                  _buildFinePrint(),
+                  
+                  const SizedBox(height: 100),
+                ],
+              ),
+            ),
+            
+            // 상단 닫기 버튼
+            Positioned(
+              top: 16,
+              right: 16,
+              child: GestureDetector(
+                onTap: () {
+                  hapticService.lightImpact();
+                  Get.back();
+                },
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Icon(
+                    Icons.close,
+                    color: AppColors.textDarkNavy,
+                    size: 24,
+                  ),
+                ),
+              ),
+            ),
+            
+            // 하단 CTA 버튼
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: _buildBottomCTA(hapticService),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeadline() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40),
+      child: Column(
+        children: [
+          Text(
+            '친구에게 평온을 선물하고,\n무료 이용권을 받으세요.',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.notoSans(
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+              color: AppColors.textDarkNavy,
+              height: 1.4,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            '친구를 초대할 때마다 PetBeats 프리미엄 기간이 늘어납니다.',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.notoSans(
+              fontSize: 15,
+              fontWeight: FontWeight.w400,
+              color: AppColors.textGrey,
+              height: 1.5,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProgress() {
+    return Obx(() {
+      return Container(
+        margin: const EdgeInsets.symmetric(horizontal: 40),
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: const Color(0xFFF0F4FF),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: AppColors.primaryBlue.withOpacity(0.2),
+            width: 1.5,
+          ),
+        ),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '${controller.friendsJoined.value}',
+                  style: GoogleFonts.notoSans(
+                    fontSize: 48,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.primaryBlue,
+                  ),
+                ),
+                Text(
+                  ' / ${controller.totalFriendsNeeded}',
+                  style: GoogleFonts.notoSans(
+                    fontSize: 32,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.textGrey,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'FRIENDS JOINED',
+              style: GoogleFonts.notoSans(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: AppColors.primaryBlue,
+                letterSpacing: 1.2,
+              ),
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
+  Widget _buildRewardCards() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40),
+      child: Column(
+        children: [
+          _buildRewardCard(
+            friends: 1,
+            title: '1 FRIEND',
+            reward: '프리미엄 1주일 무료 체험',
+            isReached: controller.tier1Reached,
+          ),
+          const SizedBox(height: 16),
+          _buildRewardCard(
+            friends: 3,
+            title: '3 FRIENDS',
+            reward: '프리미엄 1개월 무료 구독',
+            isReached: controller.tier2Reached,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRewardCard({
+    required int friends,
+    required String title,
+    required String reward,
+    required RxBool isReached,
+  }) {
+    return Obx(() {
+      final reached = isReached.value;
+      
+      return AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: reached ? AppColors.primaryBlue : Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: AppColors.primaryBlue,
+            width: 2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primaryBlue.withOpacity(reached ? 0.3 : 0.1),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            // 아이콘
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: reached ? Colors.white : AppColors.primaryBlue.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: Icon(
+                  reached ? Icons.check : Icons.group,
+                  color: reached ? AppColors.primaryBlue : AppColors.primaryBlue,
+                  size: 24,
+                ),
+              ),
+            ),
+            const SizedBox(width: 16),
+            // 텍스트
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: GoogleFonts.notoSans(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: reached ? Colors.white : AppColors.primaryBlue,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    reward,
+                    style: GoogleFonts.notoSans(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: reached ? Colors.white : AppColors.textDarkNavy,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
+  Widget _buildHowItWorks() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'HOW IT WORKS',
+            style: GoogleFonts.notoSans(
+              fontSize: 13,
+              fontWeight: FontWeight.w700,
+              color: AppColors.textDarkNavy,
+              letterSpacing: 1.5,
+            ),
+          ),
+          const SizedBox(height: 24),
+          _buildStep(
+            number: 1,
+            text: '아래 버튼을 눌러 친구에게 초대 링크를 보내세요.',
+          ),
+          const SizedBox(height: 20),
+          _buildStep(
+            number: 2,
+            text: '친구가 링크를 통해 가입하고 앱을 실행하면 카운트됩니다.',
+          ),
+          const SizedBox(height: 20),
+          _buildStep(
+            number: 3,
+            text: '목표를 달성하면 알림을 보내드리고, 무료 기간이 자동으로 추가됩니다.',
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStep({required int number, required String text}) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 32,
+          height: 32,
+          decoration: BoxDecoration(
+            color: AppColors.primaryBlue,
+            shape: BoxShape.circle,
+          ),
+          child: Center(
+            child: Text(
+              '$number',
+              style: GoogleFonts.notoSans(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Text(
+              text,
+              style: GoogleFonts.notoSans(
+                fontSize: 15,
+                fontWeight: FontWeight.w400,
+                color: AppColors.textDarkNavy,
+                height: 1.5,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFinePrint() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 40),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF8F9FB),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Please note:',
+            style: GoogleFonts.notoSans(
+              fontSize: 13,
+              fontWeight: FontWeight.w700,
+              color: AppColors.textDarkNavy,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            '신규 가입하는 친구만 카운트됩니다. 무료 기간은 현재 구독 기간이 끝난 뒤 자동으로 적용됩니다.',
+            style: GoogleFonts.notoSans(
+              fontSize: 13,
+              fontWeight: FontWeight.w400,
+              color: AppColors.textGrey,
+              height: 1.5,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBottomCTA(HapticService hapticService) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 16,
+            offset: const Offset(0, -4),
+          ),
+        ],
+      ),
+      child: SafeArea(
+        top: false,
+        child: ElevatedButton(
+          onPressed: () {
+            hapticService.lightImpact();
+            controller.shareInvite();
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.primaryBlue,
+            foregroundColor: Colors.white,
+            elevation: 0,
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+          child: Text(
+            '친구 초대하기',
+            style: GoogleFonts.notoSans(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

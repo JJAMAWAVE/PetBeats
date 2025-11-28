@@ -7,4 +7,5 @@ abstract class Routes {
   static const LOADING = '/loading';
   static const MODE_DETAIL = '/mode_detail';
   static const SUBSCRIPTION = '/subscription';
+  static const INVITE_FRIENDS = '/invite_friends';
 }

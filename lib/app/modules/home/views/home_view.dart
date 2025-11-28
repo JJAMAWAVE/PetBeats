@@ -15,6 +15,7 @@ import 'mode_detail_view.dart';
 import 'health_activity_detail_view.dart';
 import 'app_info_view.dart';
 import '../../../../app/data/services/daily_routine_service.dart';
+import '../../../routes/app_routes.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
@@ -46,7 +47,10 @@ class HomeView extends GetView<HomeController> {
                               HeaderIconButton(
                                 iconPath: 'assets/icons/icon_nav_notification.png',
                                 animationType: HeaderIconAnimationType.shake,
-                                onTap: () {},
+                                onTap: () {
+                                  hapticService.lightImpact();
+                                  Get.toNamed(Routes.INVITE_FRIENDS);
+                                },
                               ),
                               const SizedBox(width: 8),
                               HeaderIconButton(
