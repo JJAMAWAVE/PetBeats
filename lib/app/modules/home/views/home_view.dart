@@ -92,14 +92,15 @@ class HomeView extends GetView<HomeController> {
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Stack(
                           children: [
-                            // Bottom Depth Layer (for 3D effect)
-                            Transform.translate(
-                              offset: const Offset(0, 6),
+                            // Shadow Layer (Bottom)
+                            Positioned(
+                              top: 8,
+                              left: 4,
+                              right: 4,
                               child: Container(
-                                height: 160,
+                                height: 210,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
-                                  color: const Color(0xFFE0E5EA), // Darker shade for bottom
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.black.withOpacity(0.15),
@@ -114,7 +115,7 @@ class HomeView extends GetView<HomeController> {
                             
                             // Main Container (Top Surface)
                             Container(
-                              height: 160,
+                              height: 210,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.white,

@@ -52,6 +52,7 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
   @override
   void initState() {
     super.initState();
+    
     // Scale Animation (Press effect)
     _scaleController = AnimationController(
       vsync: this,
@@ -74,7 +75,7 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
     // Specific Effect Animation
     _effectController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 2000), // Base duration
+      duration: const Duration(milliseconds: 2000),
     );
 
     if (widget.animationType != ModeAnimationType.none) {
@@ -109,7 +110,6 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
         _effectController.repeat(reverse: true);
         break;
       case ModeAnimationType.wave:
-         // Simple rotation for wave effect representation
         _effectAnimation = TweenSequence<double>([
           TweenSequenceItem(tween: Tween(begin: 0.0, end: 0.05), weight: 25),
           TweenSequenceItem(tween: Tween(begin: 0.05, end: -0.05), weight: 50),
@@ -160,37 +160,56 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
               Stack(
                 alignment: Alignment.center,
                 children: [
-                  // Glow Effect (Behind) - Keep for active state
+                  // Glow Effect (Behind) - Rounded Rectangle
                   if (widget.isActive)
                     Container(
-                      width: 100 * _glowAnimation.value,
-                      height: 100 * _glowAnimation.value,
+                      width: 130 * _glowAnimation.value,
+                      height: 130 * _glowAnimation.value,
                       decoration: BoxDecoration(
-                        shape: BoxShape.circle,
+                        borderRadius: BorderRadius.circular(24),
                         color: widget.color?.withOpacity(0.3) ?? AppColors.primaryBlue.withOpacity(0.3),
                         boxShadow: [
                           BoxShadow(
                             color: widget.color?.withOpacity(0.4) ?? AppColors.primaryBlue.withOpacity(0.4),
-                            blurRadius: 20,
-                            spreadRadius: 3,
+                            blurRadius: 24,
+                            spreadRadius: 4,
                           ),
                         ],
                       ),
                     ),
                   
-                  // Simple Button (No individual layering)
+                  // Main Button - Rounded Rectangle with 3D Effect
                   Container(
-                    width: 100,
-                    height: 100,
+                    width: 130,
+                    height: 130,
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
+                      borderRadius: BorderRadius.circular(24),
                       color: Colors.white,
+                      border: Border.all(
+                        color: AppColors.primaryBlue,
+                        width: 2.5,
+                      ),
                       boxShadow: [
-                        // Subtle shadow for depth
+                        // Deep outer shadow
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
+                          color: AppColors.primaryBlue.withOpacity(0.2),
+                          blurRadius: 16,
+                          offset: const Offset(0, 8),
+                          spreadRadius: 0,
+                        ),
+                        // Mid shadow for depth
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
                           blurRadius: 8,
-                          offset: const Offset(0, 2),
+                          offset: const Offset(0, 4),
+                          spreadRadius: 0,
+                        ),
+                        // Inner highlight (simulated with lighter shadow on top)
+                        BoxShadow(
+                          color: Colors.white.withOpacity(0.8),
+                          blurRadius: 4,
+                          offset: const Offset(0, -1),
+                          spreadRadius: 0,
                         ),
                       ],
                     ),
@@ -206,13 +225,13 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 8),
               AnimatedDefaultTextStyle(
                 duration: const Duration(milliseconds: 200),
                 style: AppTextStyles.bodyMedium.copyWith(
                   color: widget.isActive ? (widget.color ?? AppColors.primaryBlue) : AppColors.textGrey,
                   fontWeight: widget.isActive ? FontWeight.bold : FontWeight.w500,
-                  fontSize: 14,
+                  fontSize: 12,
                   shadows: widget.isActive ? [
                     Shadow(
                       color: (widget.color ?? AppColors.primaryBlue).withOpacity(0.3),
@@ -224,6 +243,8 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
                 child: Text(
                   widget.title,
                   textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],
@@ -236,12 +257,12 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
   Widget _buildAnimatedIcon(Color activeColor) {
     Widget icon = Image.asset(
       widget.iconPath,
-      width: 100,
-      height: 100,
-      fit: BoxFit.cover,
+      width: 80,
+      height: 80,
+      fit: BoxFit.contain,
       filterQuality: FilterQuality.high,
       colorBlendMode: BlendMode.multiply,
-      color: Colors.white, // Background is White
+      color: Colors.white,
     );
 
     if (widget.animationType == ModeAnimationType.sway || widget.animationType == ModeAnimationType.wave) {
