@@ -9,7 +9,7 @@ abstract class Routes {
   static const SETTINGS = '/settings';
   static const SUBSCRIPTION = '/subscription';
   static const WEATHER_SPECIAL = '/weather-special';
-  static const TIME_SPECIAL = '/time-special';
-  static const REACTION_SPECIAL = '/reaction-special';
+  static const RHYTHM_SPECIAL = '/rhythm-special';
+  static const SITTER_SPECIAL = '/sitter-special';
   static const INVITE_FRIENDS = '/invite_friends';
 }

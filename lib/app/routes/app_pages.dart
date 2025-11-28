@@ -1,23 +1,24 @@
 import 'package:get/get.dart';
+import '../modules/home/bindings/home_binding.dart';
+import '../modules/home/views/home_view.dart';
+import '../modules/home/views/mode_detail_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
 import '../modules/onboarding/views/question_view.dart';
 import '../modules/onboarding/views/question2_view.dart';
 import '../modules/onboarding/views/loading_view.dart';
 import '../modules/onboarding/views/splash_welcome_view.dart';
-import '../modules/home/bindings/home_binding.dart';
-import '../modules/home/views/home_view.dart';
-import '../modules/home/views/mode_detail_view.dart';
-import '../modules/home/views/mode_detail_view.dart';
+import '../modules/settings/views/settings_view.dart';
+import '../modules/premium/bindings/premium_binding.dart';
 import '../modules/premium/views/subscription_view.dart';
-import '../modules/premium/controllers/premium_controller.dart';
 import '../modules/home/views/weather_special_view.dart';
-import '../modules/home/views/time_special_view.dart';
-import '../modules/home/views/reaction_special_view.dart';
+import '../modules/home/views/rhythm_special_view.dart';
+import '../modules/home/views/sitter_special_view.dart';
+import '../modules/home/views/app_info_view.dart';
 import '../modules/invite/bindings/invite_binding.dart';
 import '../modules/invite/views/invite_friends_view.dart';
-import '../modules/settings/views/settings_view.dart';
 import '../modules/settings/controllers/settings_controller.dart';
+import '../modules/premium/controllers/premium_controller.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -68,10 +69,8 @@ class AppPages {
     ),
     GetPage(
       name: Routes.SUBSCRIPTION,
-      page: () => const SubscriptionView(),
-      binding: BindingsBuilder(() {
-        Get.put(PremiumController());
-      }),
+      page: () => const AppInfoView(),
+      binding: PremiumBinding(),
       preventDuplicates: true,
     ),
     GetPage(
@@ -79,12 +78,12 @@ class AppPages {
       page: () => const WeatherSpecialView(),
     ),
     GetPage(
-      name: Routes.TIME_SPECIAL,
-      page: () => const TimeSpecialView(),
+      name: Routes.RHYTHM_SPECIAL,
+      page: () => const RhythmSpecialView(),
     ),
     GetPage(
-      name: Routes.REACTION_SPECIAL,
-      page: () => const ReactionSpecialView(),
+      name: Routes.SITTER_SPECIAL,
+      page: () => const SitterSpecialView(),
     ),
     GetPage(
       name: Routes.INVITE_FRIENDS,

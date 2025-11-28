@@ -14,7 +14,7 @@ class AISpecialModeWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'AI 특별 모드',
+          'Smart Sync (스마트 싱크)',
           style: AppTextStyles.titleLarge.copyWith(
             color: AppColors.textDarkNavy,
             fontWeight: FontWeight.bold,
@@ -25,26 +25,29 @@ class AISpecialModeWidget extends StatelessWidget {
           children: [
             _buildModeButton(
               context,
+              'Weather',
               '날씨',
-              Icons.cloud,
+              'assets/icons/icon_special_weather.png',
               Colors.blue.shade400,
               () => Get.toNamed(Routes.WEATHER_SPECIAL),
             ),
             SizedBox(width: 12.w),
             _buildModeButton(
               context,
-              '시간',
-              Icons.access_time_filled,
+              'Rhythm',
+              '리듬',
+              'assets/icons/icon_special_time.png',
               Colors.orange.shade400,
-              () => Get.toNamed(Routes.TIME_SPECIAL),
+              () => Get.toNamed(Routes.RHYTHM_SPECIAL),
             ),
             SizedBox(width: 12.w),
             _buildModeButton(
               context,
-              '반응',
-              Icons.sensors,
+              'Sitter',
+              '시터',
+              'assets/icons/icon_special_reaction.png',
               Colors.purple.shade400,
-              () => Get.toNamed(Routes.REACTION_SPECIAL),
+              () => Get.toNamed(Routes.SITTER_SPECIAL),
             ),
           ],
         ),
@@ -54,8 +57,9 @@ class AISpecialModeWidget extends StatelessWidget {
 
   Widget _buildModeButton(
     BuildContext context,
-    String label,
-    IconData icon,
+    String title,
+    String subtitle,
+    String imagePath,
     Color color,
     VoidCallback onTap,
   ) {
@@ -63,13 +67,13 @@ class AISpecialModeWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          height: 100.h,
+          height: 120.h,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20.r),
             boxShadow: [
               BoxShadow(
-                color: color.withOpacity(0.2),
+                color: color.withOpacity(0.15),
                 blurRadius: 12,
                 offset: const Offset(0, 6),
               ),
@@ -80,19 +84,32 @@ class AISpecialModeWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: EdgeInsets.all(12.w),
+                padding: EdgeInsets.all(10.w),
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
+                  color: color.withOpacity(0.05),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(icon, color: color, size: 28.w),
+                child: Image.asset(
+                  imagePath,
+                  width: 28.w,
+                  height: 28.w,
+                  fit: BoxFit.contain,
+                ),
               ),
               SizedBox(height: 8.h),
               Text(
-                label,
+                title,
                 style: AppTextStyles.bodyMedium.copyWith(
                   fontWeight: FontWeight.bold,
                   color: AppColors.textDarkNavy,
+                  fontSize: 14.sp,
+                ),
+              ),
+              Text(
+                subtitle,
+                style: AppTextStyles.bodySmall.copyWith(
+                  color: AppColors.textGrey,
+                  fontSize: 12.sp,
                 ),
               ),
             ],
