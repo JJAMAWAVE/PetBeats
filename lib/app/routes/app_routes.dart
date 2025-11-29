@@ -13,4 +13,5 @@ abstract class Routes {
   static const RHYTHM_SPECIAL = '/rhythm-special';
   static const SITTER_SPECIAL = '/sitter-special';
   static const INVITE_FRIENDS = '/invite_friends';
+  static const REVIEW = '/review';
 }

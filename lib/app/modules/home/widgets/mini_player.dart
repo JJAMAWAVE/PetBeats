@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../controllers/home_controller.dart';
-import 'beat_animation.dart';
+import '../../player/widgets/reactive_visualizer.dart';
 import '../../../routes/app_routes.dart';
 
 class MiniPlayer extends GetView<HomeController> {
@@ -82,10 +82,14 @@ class MiniPlayer extends GetView<HomeController> {
               ),
               
               // Visualizer
-              const SizedBox(
-                width: 30,
-                height: 20,
-                child: BeatAnimation(color: AppColors.primaryBlue),
+              SizedBox(
+                width: 40,
+                height: 24,
+                child: ReactiveVisualizer(
+                  isPlaying: isPlaying,
+                  color: AppColors.primaryBlue,
+                  barCount: 4,
+                ),
               ),
               
               const SizedBox(width: 12),

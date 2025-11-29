@@ -22,6 +22,8 @@ import '../modules/settings/controllers/settings_controller.dart';
 import '../modules/premium/controllers/premium_controller.dart';
 import '../modules/player/views/now_playing_view.dart';
 import '../modules/player/bindings/player_binding.dart';
+import '../modules/review/views/review_view.dart';
+import '../modules/review/controllers/review_controller.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -107,6 +109,13 @@ class AppPages {
       page: () => const NowPlayingView(),
       binding: PlayerBinding(),
       transition: Transition.downToUp,
+    ),
+    GetPage(
+      name: Routes.REVIEW,
+      page: () => const ReviewView(),
+      binding: BindingsBuilder(() {
+        Get.put(ReviewController());
+      }),
     ),
   ];
 }
