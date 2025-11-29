@@ -13,24 +13,24 @@ class AISpecialModeWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
-        // 프리미엄 그라데이션 배경
+        // 프리미엄 그라데이션 배경 (Smart/Tech Blue Theme)
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Color(0xFFFFF9E6), // 연한 골드
-            Color(0xFFFFE8CC), // 따뜻한 피치
-            Color(0xFFFFF4E6), // 부드러운 크림
+            Color(0xFFE8EAF6), // Soft Indigo
+            Color(0xFFE3F2FD), // Light Blue
+            Color(0xFFF3E5F5), // Soft Purple
           ],
         ),
         borderRadius: BorderRadius.circular(24.r),
         border: Border.all(
-          color: Color(0xFFFFD700).withOpacity(0.3), // 골드 테두리
+          color: Color(0xFF5C6BC0).withOpacity(0.3), // Indigo Border
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: Color(0xFFFFD700).withOpacity(0.2),
+            color: Color(0xFF3949AB).withOpacity(0.15), // Indigo Shadow
             blurRadius: 20,
             offset: Offset(0, 8),
             spreadRadius: 2,
@@ -69,14 +69,14 @@ class AISpecialModeWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Color(0xFFFFD700), // Gold
-                      Color(0xFFFFA500), // Orange
+                      Color(0xFF5C6BC0), // Indigo
+                      Color(0xFF29B6F6), // Light Blue
                     ],
                   ),
                   borderRadius: BorderRadius.circular(8.r),
                   boxShadow: [
                     BoxShadow(
-                      color: Color(0xFFFFD700).withOpacity(0.4),
+                      color: Color(0xFF5C6BC0).withOpacity(0.4),
                       blurRadius: 8,
                       offset: Offset(0, 2),
                     ),

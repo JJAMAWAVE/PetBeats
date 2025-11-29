@@ -287,7 +287,7 @@ class HomeView extends GetView<HomeController> {
     return GestureDetector(
       onTap: () {
         hapticService.lightImpact();
-        Get.toNamed(Routes.SUBSCRIPTION);
+        Get.to(() => const AppInfoView());
       },
       child: Container(
         height: 200,
