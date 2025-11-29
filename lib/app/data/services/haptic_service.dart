@@ -2,10 +2,15 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:vibration/vibration.dart';
+import '../models/midi_note_event.dart';
 
 class HapticService extends GetxService {
   Timer? _heartbeatTimer;
   bool _isVibrating = false;
+
+  // MIDI 노트 이벤트 스트림
+  final StreamController<MidiNoteEvent> _midiNoteController = StreamController<MidiNoteEvent>.broadcast();
+  Stream<MidiNoteEvent> get midiNoteStream => _midiNoteController.stream;
 
   // 짧고 경쾌한 햅틱 피드백 (UI 상호작용용)
   void lightImpact() {

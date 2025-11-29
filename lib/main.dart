@@ -9,6 +9,8 @@ import 'app/routes/app_routes.dart';
 import 'core/theme/app_text_styles.dart';
 import 'core/services/web_bgm_service.dart';
 import 'app/data/services/haptic_service.dart';
+import 'app/data/services/playback_tracking_service.dart';
+import 'app/data/services/review_service.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:petbeats/core/theme/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,6 +21,8 @@ void main() async {
   
   // 전역 서비스 초기화
   Get.put(HapticService(), permanent: true);
+  Get.put(PlaybackTrackingService(), permanent: true);
+  Get.put(ReviewService(), permanent: true);
   
   // 웹용 BGM 사전 로딩
   await WebBgmService().init();

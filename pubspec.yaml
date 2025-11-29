@@ -47,6 +47,7 @@ dependencies:
   share_plus: ^10.1.2
   flutter_screenutil: ^5.9.3
   purchases_flutter: ^8.11.0  # RevenueCat IAP
+  in_app_review: ^2.0.11  # Native app store review
 dev_dependencies:
   flutter_test:
     sdk: flutter

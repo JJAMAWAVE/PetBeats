@@ -68,6 +68,20 @@ class PlayerController extends GetxController {
   void togglePlay() {
     homeController.togglePlay();
   }
+  
+  String get currentVisualizerMode {
+    final mode = homeController.currentMode.value;
+    if (mode == null) return 'sleep';
+    
+    final modeId = mode.id;
+    if (modeId == 'sleep' || modeId == 'anxiety' || modeId == 'senior') {
+      return 'sleep';
+    } else if (modeId == 'energy' || modeId == 'noise') {
+      return 'energy';
+    } else {
+      return 'focus';
+    }
+  }
 
   void setHapticIntensity(HapticIntensity intensity) {
     hapticIntensity.value = intensity;

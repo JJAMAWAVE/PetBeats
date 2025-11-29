@@ -1,0 +1,1 @@
+ C:\\PetBeats\\.dart_tool\\flutter_gen\\gen_l10n\\app_localizations_en.dart C:\\PetBeats\\.dart_tool\\flutter_gen\\gen_l10n\\app_localizations_ko.dart C:\\PetBeats\\.dart_tool\\flutter_gen\\gen_l10n\\app_localizations.dart:  C:\\PetBeats\\l10n.yaml C:\\PetBeats\\lib/l10n\\app_en.arb C:\\PetBeats\\lib/l10n\\app_ko.arb
