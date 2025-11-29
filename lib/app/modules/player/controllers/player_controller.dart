@@ -4,36 +4,49 @@ import '../widgets/therapy_control_panel.dart';
 import '../../home/controllers/home_controller.dart';
 import '../../../data/services/haptic_service.dart';
 import 'package:get_storage/get_storage.dart';
+import '../../../data/services/audio_analyzer_service.dart';
+import '../models/visualizer_theme.dart';
+import '../widgets/first_run_guide_dialog.dart';
 
 class PlayerController extends GetxController {
   final HomeController homeController = Get.find<HomeController>();
   final HapticService _hapticService = Get.find<HapticService>();
   final _storage = GetStorage();
   
+  final AudioAnalyzerService _audioAnalyzer = Get.put(AudioAnalyzerService());
+
   @override
   void onInit() {
     super.onInit();
     _showHapticTipIfFirstTime();
+    
+    // Playback state listener for Audio Analyzer
+    ever(homeController.isPlaying, (playing) {
+      if (playing) {
+        _audioAnalyzer.startAnalysis();
+      } else {
+        _audioAnalyzer.stopAnalysis();
+      }
+    });
   }
   
-  // 첫 재생 시 햅틱 사용 안내
+  @override
+  void onClose() {
+    _audioAnalyzer.stopAnalysis();
+    super.onClose();
+  }
+  
+  // 첫 재생 시 햅틱 사용 안내 (교감 가이드)
   void _showHapticTipIfFirstTime() {
-    final hasSeenTip = _storage.read('has_seen_haptic_tip') ?? false;
+    final hasSeenGuide = _storage.read('has_seen_haptic_guide') ?? false;
     
-    if (!hasSeenTip && isPlaying) {
-      Future.delayed(Duration(seconds: 2), () {
-        Get.snackbar(
-          '💡 Haptic Therapy 사용 팁',
-          '아이의 등이나 배에 폰을 가볍게 올려주세요.\n심장 박동 진동이 깊은 안정을 선물합니다.',
-          duration: Duration(seconds: 5),
-          backgroundColor: Colors.black.withOpacity(0.8),
-          colorText: Colors.white,
-          icon: Icon(Icons.favorite, color: Colors.pinkAccent),
-          margin: EdgeInsets.all(16),
-          borderRadius: 12,
+    if (!hasSeenGuide && isPlaying) {
+      Future.delayed(Duration(seconds: 1), () {
+        Get.dialog(
+          const FirstRunGuideDialog(),
+          barrierDismissible: false,
         );
-        
-        _storage.write('has_seen_haptic_tip', true);
+        _storage.write('has_seen_haptic_guide', true);
       });
     }
   }
@@ -68,7 +81,27 @@ class PlayerController extends GetxController {
   void togglePlay() {
     homeController.togglePlay();
   }
-  
+
+  VisualizerTheme get currentVisualizerTheme {
+    final modeId = homeController.currentMode.value?.id;
+    
+    switch (modeId) {
+      case 'sleep':
+        return VisualizerTheme.sleep;
+      case 'energy':
+        return VisualizerTheme.energy;
+      case 'anxiety':
+        return VisualizerTheme.anxiety;
+      case 'senior':
+        return VisualizerTheme.senior;
+      case 'noise':
+        return VisualizerTheme.noise;
+      default:
+        return VisualizerTheme.sleep;
+    }
+  }
+
+  // Legacy getter support
   String get currentVisualizerMode {
     final mode = homeController.currentMode.value;
     if (mode == null) return 'sleep';

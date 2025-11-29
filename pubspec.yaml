@@ -47,7 +47,8 @@ dependencies:
   share_plus: ^10.1.2
   flutter_screenutil: ^5.9.3
   purchases_flutter: ^8.11.0  # RevenueCat IAP
-  in_app_review: ^2.0.9
+  flutter_audio_capture: ^1.1.11  # 실시간 오디오 캡처
+  fftea: ^1.0.0  # FFT 주파수 분석
 
 dev_dependencies:
   flutter_test:
@@ -93,6 +94,8 @@ flutter:
     - assets/images/MainBanner/
     - assets/images/AppInfo/
     - assets/sound/BGM/
+    - assets/sound/TEST.mid
+    - assets/sound/TEST.mp3
     - assets/icons/
 
   fonts:

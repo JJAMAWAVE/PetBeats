@@ -4,6 +4,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../controllers/home_controller.dart';
 import '../../player/widgets/reactive_visualizer.dart';
+import '../../player/models/visualizer_theme.dart';
 import '../../../routes/app_routes.dart';
 
 class MiniPlayer extends GetView<HomeController> {
@@ -87,7 +88,12 @@ class MiniPlayer extends GetView<HomeController> {
                 height: 24,
                 child: ReactiveVisualizer(
                   isPlaying: isPlaying,
-                  color: AppColors.primaryBlue,
+                  theme: VisualizerTheme(
+                    colorPalette: [AppColors.primaryBlue, AppColors.primaryBlue.withOpacity(0.5)],
+                    blurIntensity: 2,
+                    rippleSpeed: 1.0,
+                    particleType: ParticleEffect.none,
+                  ),
                   barCount: 4,
                 ),
               ),

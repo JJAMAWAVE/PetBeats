@@ -6,6 +6,7 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../controllers/player_controller.dart';
 import '../widgets/bio_pulse_widget.dart';
 import '../widgets/therapy_control_panel.dart';
+import '../widgets/rolling_tip_widget.dart';
 
 class NowPlayingView extends GetView<PlayerController> {
   const NowPlayingView({super.key});
@@ -20,6 +21,7 @@ class NowPlayingView extends GetView<PlayerController> {
             _buildHeader(),
             Expanded(child: _buildVisualizerZone()),
             _buildTherapyControlZone(),
+            _buildRollingTipZone(),
             _buildPlaybackControlZone(),
           ],
         ),
@@ -103,6 +105,13 @@ class NowPlayingView extends GetView<PlayerController> {
       isWeatherActive: controller.isWeatherActive.value,
       onWeatherToggle: controller.toggleWeather,
     ));
+  }
+
+  Widget _buildRollingTipZone() {
+    return const Padding(
+      padding: EdgeInsets.only(bottom: 16),
+      child: RollingTipWidget(),
+    );
   }
 
   Widget _buildPlaybackControlZone() {
