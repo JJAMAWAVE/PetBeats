@@ -148,7 +148,7 @@ class ModeDetailView extends GetView<HomeController> {
       contextText = '다양한 주파수와 빠른 템포는 반려동물의 호기심을 자극하고 활동성을 높여줍니다.';
       sourceText = 'Source: Animal Welfare, 2002';
     } else if (mode.id == 'senior') {
-      contextText = '낮은 주파수의 진동은 노령견의 관절 통증 완화에 도움을 주며, 안정적인 리듬은 인지 기능을 돕습니다.';
+      contextText = '낮은 주파수의 진동은 시니어 펫의 관절 통증 완화에 도움을 주며, 안정적인 리듬은 인지 기능을 돕습니다.';
       sourceText = 'Source: Scientific Reports, 2019';
     } else {
       contextText = '반려동물과 보호자의 옥시토신 루프를 활성화하여 깊은 유대감을 형성합니다.';

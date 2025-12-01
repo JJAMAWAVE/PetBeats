@@ -30,6 +30,11 @@ class SubscriptionController extends GetxController {
   
   Future<void> _configureRevenueCat() async {
     try {
+      if (_revenueCatApiKey == 'YOUR_REVENUECAT_API_KEY_HERE') {
+        print('⚠️ RevenueCat API Key not set. Using Simulation Mode.');
+        return;
+      }
+      
       await Purchases.setLogLevel(LogLevel.debug);
       
       final configuration = PurchasesConfiguration(_revenueCatApiKey);
@@ -71,6 +76,13 @@ class SubscriptionController extends GetxController {
     try {
       isLoading.value = true;
       
+      // Simulation Mode Check
+      if (_revenueCatApiKey == 'YOUR_REVENUECAT_API_KEY_HERE') {
+        await Future.delayed(const Duration(seconds: 2)); // Simulate network
+        await _handlePurchaseSuccess();
+        return;
+      }
+
       // 1. Offerings 가져오기
       final offerings = await Purchases.getOfferings();
       

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../data/services/weather_service.dart';
 
 class WeatherSpecialView extends StatefulWidget {
   const WeatherSpecialView({super.key});
@@ -30,6 +31,16 @@ class _WeatherSpecialViewState extends State<WeatherSpecialView> {
     {'title': '눈', 'desc': '포근한 앰비언트', 'icon': Icons.ac_unit, 'color': Colors.lightBlue},
     {'title': '강풍', 'desc': '브라운 노이즈', 'icon': Icons.air, 'color': Colors.grey},
   ];
+
+  final WeatherService _weatherService = Get.find<WeatherService>();
+
+  @override
+  void initState() {
+    super.initState();
+    if (_locationEnabled) {
+      _weatherService.fetchCurrentWeather();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,19 +88,39 @@ class _WeatherSpecialViewState extends State<WeatherSpecialView> {
   }
 
   Widget _buildWeatherHeader() {
-    return Row(
-      children: [
-        Icon(Icons.wb_sunny, size: 48.w, color: Colors.orange),
-        SizedBox(width: 16.w),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('현재 날씨: 맑음', style: AppTextStyles.titleMedium),
-            Text('서울, 24°C', style: AppTextStyles.bodyMedium),
-          ],
-        ),
-      ],
-    );
+    return Obx(() {
+      final condition = _weatherService.weatherCondition.value;
+      final temp = _weatherService.temperature.value;
+      final location = _weatherService.locationName.value;
+      
+      IconData icon = Icons.wb_sunny;
+      Color color = Colors.orange;
+      
+      if (condition.contains('Rain')) {
+        icon = Icons.water_drop;
+        color = Colors.blue;
+      } else if (condition.contains('Snow')) {
+        icon = Icons.ac_unit;
+        color = Colors.lightBlue;
+      } else if (condition.contains('Cloud')) {
+        icon = Icons.cloud;
+        color = Colors.grey;
+      }
+
+      return Row(
+        children: [
+          Icon(icon, size: 48.w, color: color),
+          SizedBox(width: 16.w),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('현재 날씨: $condition', style: AppTextStyles.titleMedium),
+              Text('$location, ${temp.toStringAsFixed(1)}°C', style: AppTextStyles.bodyMedium),
+            ],
+          ),
+        ],
+      );
+    });
   }
 
   Widget _buildWeatherStateCard(int index) {
@@ -240,14 +271,11 @@ class _WeatherSpecialViewState extends State<WeatherSpecialView> {
               Switch(
                 value: _locationEnabled,
                 onChanged: (val) {
+                  setState(() {
+                    _locationEnabled = val;
+                  });
                   if (val) {
-                    // 위치 정보를 켜려고 할 때 설정 페이지로 이동
-                    Get.toNamed('/settings');
-                  } else {
-                    // 위치 정보를 끌 때는 바로 상태 변경
-                    setState(() {
-                      _locationEnabled = false;
-                    });
+                    _weatherService.fetchCurrentWeather();
                   }
                 },
                 activeColor: AppColors.primaryBlue,

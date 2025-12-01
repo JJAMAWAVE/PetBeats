@@ -251,7 +251,7 @@ class TrackData {
     ),
     Track(
       id: 'senior_04',
-      title: '노령견의 활력',
+      title: '시니어 펫의 활력',
       description: '복합 진동 케어',
       audioUrl: 'assets/audio/senior_04.mp3',
       coverUrl: 'assets/images/senior_cover.jpg',

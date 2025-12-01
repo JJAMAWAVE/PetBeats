@@ -49,6 +49,14 @@ dependencies:
   purchases_flutter: ^8.11.0  # RevenueCat IAP
   flutter_audio_capture: ^1.1.11  # 실시간 오디오 캡처
   fftea: ^1.0.0  # FFT 주파수 분석
+  
+  # New Features Dependencies
+  firebase_core: ^2.17.0
+  firebase_auth: ^4.10.0
+  google_sign_in: ^6.1.6
+  geolocator: ^10.1.0
+  http: ^1.1.2
+  # flutter_blue_plus: ^1.31.17
 
 dev_dependencies:
   flutter_test:

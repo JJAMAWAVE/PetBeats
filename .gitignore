@@ -39,3 +39,4 @@ app.*.map.json
 *.ipr
 *.iws
 .idea/
+google-services.json

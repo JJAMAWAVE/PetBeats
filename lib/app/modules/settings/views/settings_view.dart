@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../data/services/auth_service.dart';
 import '../controllers/settings_controller.dart';
 
 class SettingsView extends GetView<SettingsController> {
@@ -103,51 +104,65 @@ class SettingsView extends GetView<SettingsController> {
   }
 
   Widget _buildAccountCard() {
-    return Container(
-      padding: EdgeInsets.all(20.w),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 48.w,
-            height: 48.w,
-            decoration: const BoxDecoration(
-              color: AppColors.primaryBlue,
-              shape: BoxShape.circle,
+    final authService = Get.find<AuthService>();
+    
+    return GestureDetector(
+      onTap: controller.handleLogin,
+      child: Container(
+        padding: EdgeInsets.all(20.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
             ),
-            child: Icon(Icons.person, color: Colors.white, size: 24.w),
-          ),
-          SizedBox(width: 16.w),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'PetBeats 회원',
-                  style: AppTextStyles.titleLarge.copyWith(fontSize: 16.sp),
+          ],
+        ),
+        child: Obx(() {
+          final user = authService.currentUser.value;
+          final isLoggedIn = user != null;
+          
+          return Row(
+            children: [
+              Container(
+                width: 48.w,
+                height: 48.w,
+                decoration: const BoxDecoration(
+                  color: AppColors.primaryBlue,
+                  shape: BoxShape.circle,
                 ),
-                SizedBox(height: 4.h),
-                Text(
-                  '로그인하여 데이터를 동기화하세요',
-                  style: AppTextStyles.bodyMedium.copyWith(
-                    color: AppColors.textGrey,
-                    fontSize: 12.sp,
-                  ),
+                clipBehavior: Clip.antiAlias,
+                child: isLoggedIn && user.photoURL != null
+                    ? Image.network(user.photoURL!, fit: BoxFit.cover)
+                    : Icon(Icons.person, color: Colors.white, size: 24.w),
+              ),
+              SizedBox(width: 16.w),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      isLoggedIn ? (user.displayName ?? 'PetBeats 회원') : '로그인 필요',
+                      style: AppTextStyles.titleLarge.copyWith(fontSize: 16.sp),
+                    ),
+                    SizedBox(height: 4.h),
+                    Text(
+                      isLoggedIn ? (user.email ?? '로그인됨') : '탭하여 구글 계정으로 로그인',
+                      style: AppTextStyles.bodyMedium.copyWith(
+                        color: AppColors.textGrey,
+                        fontSize: 12.sp,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-        ],
+              ),
+              Icon(Icons.arrow_forward_ios, size: 16.w, color: AppColors.textGrey),
+            ],
+          );
+        }),
       ),
     );
   }

@@ -11,6 +11,9 @@ import 'core/services/web_bgm_service.dart';
 import 'app/data/services/haptic_service.dart';
 import 'app/data/services/playback_tracking_service.dart';
 import 'app/data/services/review_service.dart';
+import 'app/data/services/auth_service.dart';
+import 'app/data/services/weather_service.dart';
+import 'app/data/services/iot_service.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:petbeats/core/theme/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,6 +26,11 @@ void main() async {
   Get.put(HapticService(), permanent: true);
   Get.put(PlaybackTrackingService(), permanent: true);
   Get.put(ReviewService(), permanent: true);
+  
+  // New Feature Services
+  Get.put(AuthService(), permanent: true);
+  Get.put(WeatherService(), permanent: true);
+  Get.put(IotService(), permanent: true);
   
   // 웹용 BGM 사전 로딩
   await WebBgmService().init();
