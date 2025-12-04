@@ -5,6 +5,7 @@ class Track {
   final String duration;
   final bool isPremium;
   final String audioUrl;
+  final String? midiUrl;
   final String description; // AIVA settings or diversity point
   final String instrument;
   final String bpm;
@@ -16,6 +17,7 @@ class Track {
     this.duration = '3:00',
     required this.isPremium,
     this.audioUrl = '',
+    this.midiUrl,
     required this.description,
     this.instrument = 'Piano',
     this.bpm = '60 BPM',

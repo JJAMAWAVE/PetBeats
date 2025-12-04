@@ -1,0 +1,852 @@
+[
+    {
+        "category": "Dog - Deep Sleep",
+        "tracks": [
+            {
+                "no": 1,
+                "target": "All",
+                "title_ko": "스탠다드 자장가",
+                "title_en": "Standard Lullaby",
+                "style": "Solo Piano",
+                "tempo": "60",
+                "key": "C Major",
+                "instrument": "Grand Piano"
+            },
+            {
+                "no": 2,
+                "target": "All",
+                "title_ko": "따뜻한 오후",
+                "title_en": "Warm Afternoon",
+                "style": "Solo Piano",
+                "tempo": "60",
+                "key": "G Major",
+                "instrument": "Felt Piano"
+            },
+            {
+                "no": 3,
+                "target": "Large",
+                "title_ko": "깊은 밤의 꿈",
+                "title_en": "Deep Night Dream",
+                "style": "Cinematic (Slow)",
+                "tempo": "55",
+                "key": "D Major",
+                "instrument": "Cello + Piano"
+            },
+            {
+                "no": 4,
+                "target": "Large",
+                "title_ko": "엄마의 요람",
+                "title_en": "Mother's Cradle",
+                "style": "Chamber",
+                "tempo": "60",
+                "key": "Eb Major",
+                "instrument": "String Quartet"
+            },
+            {
+                "no": 5,
+                "target": "Medium",
+                "title_ko": "깊은 울림",
+                "title_en": "Deep Resonance",
+                "style": "Solo Piano",
+                "tempo": "70",
+                "key": "A Major",
+                "instrument": "Steinway"
+            },
+            {
+                "no": 6,
+                "target": "Medium",
+                "title_ko": "포근한 왈츠",
+                "title_en": "Cozy Waltz",
+                "style": "Solo Piano",
+                "tempo": "70",
+                "key": "F Major",
+                "instrument": "Felt Piano"
+            },
+            {
+                "no": 7,
+                "target": "Small",
+                "title_ko": "맑은 아침",
+                "title_en": "Clear Morning",
+                "style": "Solo Harp",
+                "tempo": "80",
+                "key": "C Major",
+                "instrument": "Harp"
+            },
+            {
+                "no": 8,
+                "target": "Small",
+                "title_ko": "사뿐한 왈츠",
+                "title_en": "Light Waltz",
+                "style": "Ensemble",
+                "tempo": "80",
+                "key": "Bb Major",
+                "instrument": "Celesta + Piano"
+            }
+        ]
+    },
+    {
+        "category": "Dog - Calm Shelter",
+        "tracks": [
+            {
+                "no": 1,
+                "target": "Large",
+                "title_ko": "묵직한 위로",
+                "title_en": "Heavy Comfort",
+                "style": "Cello Solo",
+                "tempo": "60",
+                "key": "C Minor",
+                "instrument": "Cello"
+            },
+            {
+                "no": 2,
+                "target": "Large",
+                "title_ko": "따뜻한 공명",
+                "title_en": "Warm Resonance",
+                "style": "Ambient",
+                "tempo": "Slow",
+                "key": "Auto",
+                "instrument": "Low Pad"
+            },
+            {
+                "no": 3,
+                "target": "Medium",
+                "title_ko": "균형 잡힌 안정",
+                "title_en": "Balanced Peace",
+                "style": "String Ens.",
+                "tempo": "70",
+                "key": "Auto",
+                "instrument": "Viola"
+            },
+            {
+                "no": 4,
+                "target": "Medium",
+                "title_ko": "포근한 공기",
+                "title_en": "Cozy Air",
+                "style": "Ambient",
+                "tempo": "Slow",
+                "key": "Auto",
+                "instrument": "Warm Pad"
+            },
+            {
+                "no": 5,
+                "target": "Small",
+                "title_ko": "산뜻한 안정",
+                "title_en": "Fresh Stability",
+                "style": "Solo Harp",
+                "tempo": "80",
+                "key": "C Major",
+                "instrument": "Harp"
+            },
+            {
+                "no": 6,
+                "target": "Small",
+                "title_ko": "밝은 공기",
+                "title_en": "Bright Air",
+                "style": "Ambient",
+                "tempo": "Slow",
+                "key": "Auto",
+                "instrument": "Bright Pad"
+            },
+            {
+                "no": 7,
+                "target": "All",
+                "title_ko": "평온한 오후",
+                "title_en": "Peaceful Afternoon",
+                "style": "Guitar",
+                "tempo": "65",
+                "key": "G Major",
+                "instrument": "Classical Guitar"
+            },
+            {
+                "no": 8,
+                "target": "All",
+                "title_ko": "숲속의 쉼터",
+                "title_en": "Forest Shelter",
+                "style": "Meditation",
+                "tempo": "65",
+                "key": "Auto",
+                "instrument": "Flute + Piano"
+            }
+        ]
+    },
+    {
+        "category": "Dog - Noise Masking",
+        "tracks": [
+            {
+                "no": 1,
+                "target": "Large",
+                "title_ko": "부드러운 장막",
+                "title_en": "Soft Curtain",
+                "style": "Ambient",
+                "tempo": "N/A",
+                "key": "N/A",
+                "instrument": "Pink Noise Mix"
+            },
+            {
+                "no": 2,
+                "target": "Large",
+                "title_ko": "깊은 방패",
+                "title_en": "Deep Shield",
+                "style": "Dark Ambient",
+                "tempo": "Very Slow",
+                "key": "Auto",
+                "instrument": "Sub-bass"
+            },
+            {
+                "no": 3,
+                "target": "Medium",
+                "title_ko": "일상의 평온",
+                "title_en": "Daily Peace",
+                "style": "Ambient",
+                "tempo": "N/A",
+                "key": "N/A",
+                "instrument": "Stream Mix"
+            },
+            {
+                "no": 4,
+                "target": "Medium",
+                "title_ko": "든든한 방음벽",
+                "title_en": "Strong Wall",
+                "style": "Ambient",
+                "tempo": "Very Slow",
+                "key": "Auto",
+                "instrument": "Low-Mid Pad"
+            },
+            {
+                "no": 5,
+                "target": "Small",
+                "title_ko": "산뜻한 보호막",
+                "title_en": "Fresh Shield",
+                "style": "Nature",
+                "tempo": "N/A",
+                "key": "N/A",
+                "instrument": "Birds Mix"
+            },
+            {
+                "no": 6,
+                "target": "Small",
+                "title_ko": "포근한 담요",
+                "title_en": "Cozy Blanket",
+                "style": "Ambient",
+                "tempo": "Medium",
+                "key": "Auto",
+                "instrument": "Warm Pad"
+            },
+            {
+                "no": 7,
+                "target": "All",
+                "title_ko": "우주 여행",
+                "title_en": "Space Travel",
+                "style": "Space",
+                "tempo": "No Beat",
+                "key": "Auto",
+                "instrument": "Shimmer"
+            },
+            {
+                "no": 8,
+                "target": "All",
+                "title_ko": "깊은 바다",
+                "title_en": "Deep Ocean",
+                "style": "Drone",
+                "tempo": "No Beat",
+                "key": "Auto",
+                "instrument": "Low Filter"
+            }
+        ]
+    },
+    {
+        "category": "Dog - Happy Play",
+        "tracks": [
+            {
+                "no": 1,
+                "target": "Large",
+                "title_ko": "리드미컬 산책",
+                "title_en": "Rhythmic Walk",
+                "style": "Cool Jazz",
+                "tempo": "95",
+                "key": "Auto",
+                "instrument": "Upright Bass"
+            },
+            {
+                "no": 2,
+                "target": "Large",
+                "title_ko": "활기찬 터그",
+                "title_en": "Energetic Tug",
+                "style": "Soft Rock",
+                "tempo": "105",
+                "key": "Auto",
+                "instrument": "Clean Guitar"
+            },
+            {
+                "no": 3,
+                "target": "Medium",
+                "title_ko": "경쾌한 총총",
+                "title_en": "Light Trot",
+                "style": "Acoustic Pop",
+                "tempo": "105",
+                "key": "Auto",
+                "instrument": "Piano + Guitar"
+            },
+            {
+                "no": 4,
+                "target": "Medium",
+                "title_ko": "신나는 술래",
+                "title_en": "Exciting Tag",
+                "style": "Synth Pop",
+                "tempo": "115",
+                "key": "Auto",
+                "instrument": "Plucky Synth"
+            },
+            {
+                "no": 5,
+                "target": "Small",
+                "title_ko": "사뿐한 총총",
+                "title_en": "Light Steps",
+                "style": "Folk",
+                "tempo": "115",
+                "key": "Auto",
+                "instrument": "Ukulele"
+            },
+            {
+                "no": 6,
+                "target": "Small",
+                "title_ko": "신나는 우다다",
+                "title_en": "Exciting Zoomies",
+                "style": "Indie Pop",
+                "tempo": "125",
+                "key": "Auto",
+                "instrument": "Glockenspiel"
+            },
+            {
+                "no": 7,
+                "target": "All",
+                "title_ko": "피크닉",
+                "title_en": "Picnic",
+                "style": "Country",
+                "tempo": "100",
+                "key": "Auto",
+                "instrument": "Acoustic Guitar"
+            },
+            {
+                "no": 8,
+                "target": "All",
+                "title_ko": "댄스 타임",
+                "title_en": "Dance Time",
+                "style": "Disco (Soft)",
+                "tempo": "110",
+                "key": "Auto",
+                "instrument": "Funky Bass"
+            }
+        ]
+    },
+    {
+        "category": "Dog - Senior Care",
+        "tracks": [
+            {
+                "no": 1,
+                "target": "Large",
+                "title_ko": "치유의 주파수",
+                "title_en": "Healing Frequency",
+                "style": "Meditation",
+                "tempo": "No Beat",
+                "key": "Auto",
+                "instrument": "Singing Bowl"
+            },
+            {
+                "no": 2,
+                "target": "Large",
+                "title_ko": "깊은 안정",
+                "title_en": "Deep Stability",
+                "style": "Slow Strings",
+                "tempo": "45",
+                "key": "Auto",
+                "instrument": "Cello + Bass"
+            },
+            {
+                "no": 3,
+                "target": "Medium",
+                "title_ko": "부드러운 공명",
+                "title_en": "Soft Resonance",
+                "style": "Drone",
+                "tempo": "No Beat",
+                "key": "Auto",
+                "instrument": "Warm Pad"
+            },
+            {
+                "no": 4,
+                "target": "Medium",
+                "title_ko": "편안한 휴식",
+                "title_en": "Comfortable Rest",
+                "style": "Solo Piano",
+                "tempo": "50",
+                "key": "G Major",
+                "instrument": "Piano (Soft)"
+            },
+            {
+                "no": 5,
+                "target": "Small",
+                "title_ko": "포근한 온기",
+                "title_en": "Cozy Warmth",
+                "style": "Ambient",
+                "tempo": "No Beat",
+                "key": "Auto",
+                "instrument": "Mid-Pad"
+            },
+            {
+                "no": 6,
+                "target": "Small",
+                "title_ko": "산뜻한 평온",
+                "title_en": "Fresh Peace",
+                "style": "Solo Harp",
+                "tempo": "50",
+                "key": "F Major",
+                "instrument": "Harp"
+            },
+            {
+                "no": 7,
+                "target": "All",
+                "title_ko": "영혼의 안식",
+                "title_en": "Soul Rest",
+                "style": "Choral",
+                "tempo": "45",
+                "key": "Auto",
+                "instrument": "Soft Voice"
+            },
+            {
+                "no": 8,
+                "target": "All",
+                "title_ko": "자연의 품",
+                "title_en": "Nature's Embrace",
+                "style": "Nature",
+                "tempo": "Slow",
+                "key": "Auto",
+                "instrument": "Flute"
+            }
+        ]
+    },
+    {
+        "category": "Cat - Deep Sleep",
+        "tracks": [
+            {
+                "no": 1,
+                "target": "All",
+                "title_ko": "골골송 자장가",
+                "title_en": "Purr Lullaby",
+                "style": "Ambient",
+                "tempo": "No Beat",
+                "key": "Auto",
+                "instrument": "Synth Pad + Sub Bass"
+            },
+            {
+                "no": 2,
+                "target": "All",
+                "title_ko": "꿈꾸는 젤리",
+                "title_en": "Dreaming Paws",
+                "style": "Solo Piano (Ambient)",
+                "tempo": "Slow",
+                "key": "F Major",
+                "instrument": "Piano (Soft)"
+            },
+            {
+                "no": 3,
+                "target": "Kitten",
+                "title_ko": "아기냥의 낮잠",
+                "title_en": "Kitten's Nap",
+                "style": "Lullaby",
+                "tempo": "Slow",
+                "key": "C Major",
+                "instrument": "Celesta"
+            },
+            {
+                "no": 4,
+                "target": "Kitten",
+                "title_ko": "엄마의 품",
+                "title_en": "Mother's Warmth",
+                "style": "Meditation",
+                "tempo": "Very Slow",
+                "key": "Auto",
+                "instrument": "Harp + Flute"
+            },
+            {
+                "no": 5,
+                "target": "Adult",
+                "title_ko": "깊은 밤의 우주",
+                "title_en": "Cosmic Sleep",
+                "style": "Space Ambient",
+                "tempo": "Slow",
+                "key": "Auto",
+                "instrument": "Shimmer Pad"
+            },
+            {
+                "no": 6,
+                "target": "Adult",
+                "title_ko": "달빛 소나타",
+                "title_en": "Moonlight Purr",
+                "style": "Classical (Slow)",
+                "tempo": "Slow",
+                "key": "Auto",
+                "instrument": "Piano + Cello"
+            },
+            {
+                "no": 7,
+                "target": "Senior",
+                "title_ko": "따뜻한 온돌",
+                "title_en": "Heated Floor",
+                "style": "Drone",
+                "tempo": "No Beat",
+                "key": "Auto",
+                "instrument": "Low-Mid Pad"
+            },
+            {
+                "no": 8,
+                "target": "Senior",
+                "title_ko": "치유의 단잠",
+                "title_en": "Healing Nap",
+                "style": "Meditation",
+                "tempo": "Slow",
+                "key": "G Major",
+                "instrument": "Singing Bowl"
+            }
+        ]
+    },
+    {
+        "category": "Cat - Calm Shelter",
+        "tracks": [
+            {
+                "no": 1,
+                "target": "All",
+                "title_ko": "안전 가옥",
+                "title_en": "Safe House",
+                "style": "Chamber Pop",
+                "tempo": "60-70",
+                "key": "Auto",
+                "instrument": "Harp Solo"
+            },
+            {
+                "no": 2,
+                "target": "All",
+                "title_ko": "창가 자리",
+                "title_en": "Window Seat",
+                "style": "Classical",
+                "tempo": "Slow",
+                "key": "D Major",
+                "instrument": "Flute + Piano"
+            },
+            {
+                "no": 3,
+                "target": "Sensitive",
+                "title_ko": "숨숨집의 평화",
+                "title_en": "Hiding Spot",
+                "style": "Ambient (Minimal)",
+                "tempo": "Slow",
+                "key": "Auto",
+                "instrument": "Soft Pad"
+            },
+            {
+                "no": 4,
+                "target": "Sensitive",
+                "title_ko": "부드러운 공기",
+                "title_en": "Soft Breeze",
+                "style": "Meditation",
+                "tempo": "Slow",
+                "key": "Auto",
+                "instrument": "Wind Chimes (Soft)"
+            },
+            {
+                "no": 5,
+                "target": "Lonely",
+                "title_ko": "친구의 목소리",
+                "title_en": "Friendly Voice",
+                "style": "Solo Cello",
+                "tempo": "Slow",
+                "key": "A Major",
+                "instrument": "Cello (High Octave)"
+            },
+            {
+                "no": 6,
+                "target": "Lonely",
+                "title_ko": "오후의 햇살",
+                "title_en": "Afternoon Sun",
+                "style": "Acoustic Pop (Slow)",
+                "tempo": "Slow",
+                "key": "Auto",
+                "instrument": "Nylon Guitar"
+            },
+            {
+                "no": 7,
+                "target": "All",
+                "title_ko": "그루밍 타임",
+                "title_en": "Grooming Time",
+                "style": "Lo-fi (Chill)",
+                "tempo": "70",
+                "key": "Auto",
+                "instrument": "Electric Piano"
+            },
+            {
+                "no": 8,
+                "target": "All",
+                "title_ko": "평온한 관찰",
+                "title_en": "Quiet Watch",
+                "style": "Cinematic (Nature)",
+                "tempo": "Slow",
+                "key": "Auto",
+                "instrument": "Strings (Sustain)"
+            }
+        ]
+    },
+    {
+        "category": "Cat - Noise Masking",
+        "tracks": [
+            {
+                "no": 1,
+                "target": "All",
+                "title_ko": "빗소리 커튼",
+                "title_en": "Rainy Curtain",
+                "style": "Lo-fi",
+                "tempo": "N/A",
+                "key": "Auto",
+                "instrument": "Soft Rain + Piano"
+            },
+            {
+                "no": 2,
+                "target": "All",
+                "title_ko": "바람의 노래",
+                "title_en": "Wind Song",
+                "style": "Nature",
+                "tempo": "N/A",
+                "key": "Auto",
+                "instrument": "Wind + Harp"
+            },
+            {
+                "no": 3,
+                "target": "Fear",
+                "title_ko": "두꺼운 담요",
+                "title_en": "Thick Blanket",
+                "style": "Deep Ambient",
+                "tempo": "Very Slow",
+                "key": "Auto",
+                "instrument": "Low-pass Pad"
+            },
+            {
+                "no": 4,
+                "target": "Fear",
+                "title_ko": "심해의 고요",
+                "title_en": "Deep Ocean",
+                "style": "Underwater Ambient",
+                "tempo": "No Beat",
+                "key": "Auto",
+                "instrument": "Sub-bass"
+            },
+            {
+                "no": 5,
+                "target": "Daily",
+                "title_ko": "새들의 정원",
+                "title_en": "Bird Garden",
+                "style": "Nature",
+                "tempo": "N/A",
+                "key": "Auto",
+                "instrument": "Forest + Birds"
+            },
+            {
+                "no": 6,
+                "target": "Daily",
+                "title_ko": "흐르는 시내",
+                "title_en": "Flowing Stream",
+                "style": "Nature",
+                "tempo": "N/A",
+                "key": "Auto",
+                "instrument": "Water + Flute"
+            },
+            {
+                "no": 7,
+                "target": "All",
+                "title_ko": "우주 방어막",
+                "title_en": "Space Shield",
+                "style": "Sci-fi Ambient",
+                "tempo": "Slow",
+                "key": "Auto",
+                "instrument": "Synth Pad (Smooth)"
+            },
+            {
+                "no": 8,
+                "target": "All",
+                "title_ko": "핑크 노이즈",
+                "title_en": "Pink Comfort",
+                "style": "Noise",
+                "tempo": "N/A",
+                "key": "Auto",
+                "instrument": "Pink Noise (Softened)"
+            }
+        ]
+    },
+    {
+        "category": "Cat - Happy Play",
+        "tracks": [
+            {
+                "no": 1,
+                "target": "Kitten",
+                "title_ko": "우다다 타임",
+                "title_en": "Zoomies!",
+                "style": "Cartoon",
+                "tempo": "130",
+                "key": "Auto",
+                "instrument": "Xylophone"
+            },
+            {
+                "no": 2,
+                "target": "Kitten",
+                "title_ko": "잡아라 쥐돌이",
+                "title_en": "Catch the Mouse",
+                "style": "Classical (Pizzicato)",
+                "tempo": "Fast",
+                "key": "C Major",
+                "instrument": "Strings (Pizzicato)"
+            },
+            {
+                "no": 3,
+                "target": "Adult",
+                "title_ko": "새 사냥",
+                "title_en": "Bird Hunt",
+                "style": "Classical (Scherzo)",
+                "tempo": "Fast",
+                "key": "Auto",
+                "instrument": "Flute (Staccato)"
+            },
+            {
+                "no": 4,
+                "target": "Adult",
+                "title_ko": "점프 & 런",
+                "title_en": "Jump & Run",
+                "style": "Jazz (Swing)",
+                "tempo": "120",
+                "key": "Auto",
+                "instrument": "Piano"
+            },
+            {
+                "no": 5,
+                "target": "Hunt",
+                "title_ko": "수풀 속으로",
+                "title_en": "Into the Bush",
+                "style": "Ethnic (Percussive)",
+                "tempo": "110",
+                "key": "Auto",
+                "instrument": "Marimba"
+            },
+            {
+                "no": 6,
+                "target": "Hunt",
+                "title_ko": "낚싯대 놀이",
+                "title_en": "Toy Wand",
+                "style": "Electronic (Pluck)",
+                "tempo": "Fast",
+                "key": "Auto",
+                "instrument": "Synth Pluck"
+            },
+            {
+                "no": 7,
+                "target": "All",
+                "title_ko": "캣닙 파티",
+                "title_en": "Catnip Party",
+                "style": "Funk (Upbeat)",
+                "tempo": "115",
+                "key": "Auto",
+                "instrument": "Funky Bass"
+            },
+            {
+                "no": 8,
+                "target": "All",
+                "title_ko": "궁디 팡팡",
+                "title_en": "Butt Wiggle",
+                "style": "Polka",
+                "tempo": "120",
+                "key": "Auto",
+                "instrument": "Accordion"
+            }
+        ]
+    },
+    {
+        "category": "Cat - Senior Care",
+        "tracks": [
+            {
+                "no": 1,
+                "target": "Pain",
+                "title_ko": "치유의 골골송",
+                "title_en": "Healing Purr",
+                "style": "Drone",
+                "tempo": "No Beat",
+                "key": "Auto",
+                "instrument": "25-50Hz Boost"
+            },
+            {
+                "no": 2,
+                "target": "Pain",
+                "title_ko": "따뜻한 찜질",
+                "title_en": "Warm Compress",
+                "style": "Ambient (Warm)",
+                "tempo": "Slow",
+                "key": "Auto",
+                "instrument": "Low Strings"
+            },
+            {
+                "no": 3,
+                "target": "Senior",
+                "title_ko": "느린 오후",
+                "title_en": "Slow Afternoon",
+                "style": "Solo Piano (Slow)",
+                "tempo": "Very Slow",
+                "key": "G Major",
+                "instrument": "Piano (Sparse)"
+            },
+            {
+                "no": 4,
+                "target": "Senior",
+                "title_ko": "기억의 저편",
+                "title_en": "Memory Lane",
+                "style": "Classical (Nostalgic)",
+                "tempo": "Slow",
+                "key": "Auto",
+                "instrument": "Harp"
+            },
+            {
+                "no": 5,
+                "target": "Care",
+                "title_ko": "영혼의 공명",
+                "title_en": "Soul Resonance",
+                "style": "Meditation",
+                "tempo": "Slow",
+                "key": "Auto",
+                "instrument": "Singing Bowl (Low)"
+            },
+            {
+                "no": 6,
+                "target": "Care",
+                "title_ko": "엄마의 심장",
+                "title_en": "Mother's Heart",
+                "style": "Lullaby",
+                "tempo": "60",
+                "key": "Auto",
+                "instrument": "Heartbeat FX"
+            },
+            {
+                "no": 7,
+                "target": "All",
+                "title_ko": "고요한 쉼터",
+                "title_en": "Silent Rest",
+                "style": "Minimal Ambient",
+                "tempo": "No Beat",
+                "key": "Auto",
+                "instrument": "Soft Pad"
+            },
+            {
+                "no": 8,
+                "target": "All",
+                "title_ko": "편안한 호흡",
+                "title_en": "Gentle Breath",
+                "style": "Choir (Humming)",
+                "tempo": "Slow",
+                "key": "Auto",
+                "instrument": "Human Voice (Soft)"
+            }
+        ]
+    }
+]

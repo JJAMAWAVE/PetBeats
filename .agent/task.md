@@ -48,3 +48,7 @@
     - [x] Update Routes (RHYTHM_SPECIAL, SITTER_SPECIAL)
     - [x] Update AppPages (Import & Register new views)
     - [x] 브라우저 재시작 필요 (hot reload 미적용) 교체
+- [ ] 오디오 콘텐츠 생성 자동화 (AIVA)
+    - [x] 곡 데이터 JSON 파싱 (aiva_tracks.json)
+    - [x] 자동화 스크립트 작성 (aiva_automation.py)
+    - [ ] 스크립트 실행 및 곡 생성 완료

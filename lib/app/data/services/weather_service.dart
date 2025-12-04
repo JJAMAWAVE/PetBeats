@@ -1,12 +1,12 @@
 import 'dart:convert';
-import 'package:geolocator/geolocator.dart';
+// import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart';
 
 class WeatherService extends GetxService {
   // Replace with your OpenWeatherMap API Key
-  static const String _apiKey = 'YOUR_OPENWEATHER_API_KEY'; 
+  static const String _apiKey = '69bb5b896f02481527e34546b0c358d9'; 
   static const String _baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
   final RxString weatherCondition = 'Clear'.obs; // Clear, Rain, Clouds, Snow, etc.
@@ -17,6 +17,7 @@ class WeatherService extends GetxService {
   Future<void> fetchCurrentWeather() async {
     isLoading.value = true;
     try {
+      /*
       // 1. Get Location Permission
       LocationPermission permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
@@ -31,14 +32,19 @@ class WeatherService extends GetxService {
       Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high
       );
+      */
+      
+      // Mock Position (Seoul)
+      double lat = 37.5665;
+      double lon = 126.9780;
 
       // 3. Call API
       if (_apiKey == 'YOUR_OPENWEATHER_API_KEY') {
         // Simulation Mode if no key provided
-        await _simulateWeather(position);
+        // await _simulateWeather(position);
       } else {
         final url = Uri.parse(
-          '$_baseUrl?lat=${position.latitude}&lon=${position.longitude}&appid=$_apiKey&units=metric'
+          '$_baseUrl?lat=$lat&lon=$lon&appid=$_apiKey&units=metric'
         );
         
         final response = await http.get(url);
@@ -59,6 +65,7 @@ class WeatherService extends GetxService {
     }
   }
 
+  /*
   Future<void> _simulateWeather(Position position) async {
     await Future.delayed(const Duration(seconds: 1));
     // Randomly pick a weather for testing
@@ -69,4 +76,5 @@ class WeatherService extends GetxService {
     locationName.value = 'Seoul (Simulated)';
     debugPrint('Simulated Weather: ${weatherCondition.value}');
   }
+  */
 }
