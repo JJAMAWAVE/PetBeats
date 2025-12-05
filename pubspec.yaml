@@ -105,6 +105,7 @@ flutter:
     - assets/sound/BGM/
     - assets/sound/TEST.mid
     - assets/sound/TEST.mp3
+    - assets/haptic_patterns/
     - assets/icons/
 
   fonts:

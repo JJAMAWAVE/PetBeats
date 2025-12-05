@@ -11,6 +11,16 @@ class AudioService extends GetxService {
     // 루프 모드 설정 (무한 반복)
     _player.setLoopMode(LoopMode.one);
   }
+  
+  // Position stream (현재 재생 위치)
+  Stream<Duration> get positionStream => _player.positionStream;
+  
+  // Duration stream (총 길이)
+  Stream<Duration?> get durationStream => _player.durationStream;
+  
+  // Get current values
+  Duration get position => _player.position;
+  Duration? get duration => _player.duration;
 
   // URL 재생
   Future<void> play(String url) async {
@@ -44,7 +54,20 @@ class AudioService extends GetxService {
 
   // 일시정지
   Future<void> pause() async {
+    print("🎵 [AudioService] pause() called");
     await _player.pause();
+  }
+
+  // 재개 (resume)
+  Future<void> resume() async {
+    print("🎵 [AudioService] resume() called");
+    await _player.play();
+  }
+  
+  // Seek to position
+  Future<void> seek(Duration position) async {
+    print("🎵 [AudioService] seek() to $position");
+    await _player.seek(position);
   }
 
   // 정지
@@ -56,7 +79,7 @@ class AudioService extends GetxService {
   Future<void> setVolume(double volume) async {
     await _player.setVolume(volume);
   }
-
+  
   @override
   void onClose() {
     _player.dispose();

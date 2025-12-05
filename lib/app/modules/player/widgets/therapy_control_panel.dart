@@ -5,7 +5,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import 'dart:ui';
 
-enum HapticIntensity { off, soft, deep }
+enum HapticIntensity { off, light, medium, strong, deep }
 
 class TherapyControlPanel extends StatelessWidget {
   final HapticIntensity hapticIntensity;
@@ -122,21 +122,12 @@ class TherapyControlPanel extends StatelessWidget {
                   overlayColor: AppColors.primaryBlue.withOpacity(0.2),
                 ),
                 child: Slider(
-                  value: hapticIntensity == HapticIntensity.off
-                      ? 0
-                      : (hapticIntensity == HapticIntensity.soft ? 1 : 2),
+                  value: _getSliderValue(hapticIntensity),
                   min: 0,
-                  max: 2,
-                  divisions: 2,
+                  max: 4,
+                  divisions: 4,
                   onChanged: (value) {
-                    HapticIntensity newIntensity;
-                    if (value == 0) {
-                      newIntensity = HapticIntensity.off;
-                    } else if (value == 1) {
-                      newIntensity = HapticIntensity.soft;
-                    } else {
-                      newIntensity = HapticIntensity.deep;
-                    }
+                    HapticIntensity newIntensity = _getIntensityFromValue(value);
                     
                     // 즉시 햅틱 피드백 제공
                     _provideHapticFeedback(newIntensity);
@@ -148,7 +139,7 @@ class TherapyControlPanel extends StatelessWidget {
               ),
             ),
             Text(
-              'DEEP',
+              'MAX',
               style: TextStyle(
                 color: hapticIntensity == HapticIntensity.deep 
                     ? Colors.white 
@@ -163,14 +154,47 @@ class TherapyControlPanel extends StatelessWidget {
     );
   }
 
+  double _getSliderValue(HapticIntensity intensity) {
+    switch (intensity) {
+      case HapticIntensity.off:
+        return 0;
+      case HapticIntensity.light:
+        return 1;
+      case HapticIntensity.medium:
+        return 2;
+      case HapticIntensity.strong:
+        return 3;
+      case HapticIntensity.deep:
+        return 4;
+    }
+  }
+
+  HapticIntensity _getIntensityFromValue(double value) {
+    if (value == 0) return HapticIntensity.off;
+    if (value == 1) return HapticIntensity.light;
+    if (value == 2) return HapticIntensity.medium;
+    if (value == 3) return HapticIntensity.strong;
+    return HapticIntensity.deep;
+  }
+
   void _provideHapticFeedback(HapticIntensity intensity) {
     // Flutter 햅틱 서비스 사용
-    if (intensity == HapticIntensity.off) {
-      // No feedback
-    } else if (intensity == HapticIntensity.soft) {
-      HapticFeedback.selectionClick();
-    } else if (intensity == HapticIntensity.deep) {
-      HapticFeedback.mediumImpact();
+    switch (intensity) {
+      case HapticIntensity.off:
+        // No feedback
+        break;
+      case HapticIntensity.light:
+        HapticFeedback.selectionClick();
+        break;
+      case HapticIntensity.medium:
+        HapticFeedback.lightImpact();
+        break;
+      case HapticIntensity.strong:
+        HapticFeedback.mediumImpact();
+        break;
+      case HapticIntensity.deep:
+        HapticFeedback.heavyImpact();
+        break;
     }
   }
 

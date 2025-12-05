@@ -287,7 +287,8 @@ class HomeController extends GetxController {
 
   void stopSound() {
     isPlaying.value = false;
-    currentTrack.value = null; // Reset track on stop
+    // Don't reset currentTrack - keep it to show track title even when stopped
+    // currentTrack.value = null; // REMOVED
     _audioService.pause();
     _hapticService.stop();
   }
@@ -316,14 +317,17 @@ class HomeController extends GetxController {
     print('🎵 [DEBUG] playTrack called for: ${track.title}');
     print('🎵 [DEBUG] Track audio URL: ${track.audioUrl}');
     print('🎵 [DEBUG] Track isPremium: ${track.isPremium}');
-    print('🎵 [DEBUG] User isPremium: ${isPremiumUser.value}');
+    print('🎵 [DEBUG] User isPremiumUser: ${isPremiumUser.value}');
+    print('🔍 [DEBUG] Checking premium access...');
     
     if (track.isPremium && !isPremiumUser.value) {
-      print('🎵 [DEBUG] Premium track, redirecting to subscription');
+      print('🚫 [DEBUG] Premium track blocked - redirecting to subscription');
+      print('🔍 [DEBUG] isPremiumUser.value = ${isPremiumUser.value}');
       Get.toNamed('/subscription');
       return;
     }
     
+    print('✅ [DEBUG] Premium check passed or free track');
     print('🎵 [DEBUG] Stopping BGM...');
     // Stop BGM when playing track
     _bgmService.pause();
@@ -357,6 +361,40 @@ class HomeController extends GetxController {
     print('🎵 [DEBUG] playTrack completed');
   }
 
+  void togglePlay() {
+    if (isPlaying.value) {
+      // Pause
+      print('⏸️ [DEBUG] Pausing playback');
+      isPlaying.value = false;
+      _audioService.pause();
+      _hapticService.stop();
+    } else {
+      // Resume
+      print('▶️ [DEBUG] Resuming playback');
+      if (currentTrack.value != null) {
+        isPlaying.value = true;
+        _audioService.resume(); // Resume instead of play() to continue from current position
+        
+        if (isHeartbeatSyncEnabled.value) {
+          int bpm = 60;
+          if (currentTrack.value!.bpm != null && currentTrack.value!.bpm!.contains('BPM')) {
+            try {
+              bpm = int.parse(currentTrack.value!.bpm!.split(' ')[0]);
+            } catch (e) {
+              bpm = 60;
+            }
+          }
+          _hapticService.startHeartbeat(bpm);
+        }
+      }
+    }
+  }
+
+  void seekTo(Duration position) {
+    print('⏩ [DEBUG] Seeking to $position');
+    _audioService.seek(position);
+  }
+
   // 모드 변경
   void changeMode(Mode mode) {
     currentMode.value = mode;
@@ -364,20 +402,6 @@ class HomeController extends GetxController {
     isAutoMode.value = false;
   }
 
-  // 재생 토글
-  void togglePlay() {
-    if (isPlaying.value) {
-      stopSound();
-    } else {
-      if (currentTrack.value != null) {
-        playTrack(currentTrack.value!);
-      } else if (currentMode.value != null && currentMode.value!.tracks.isNotEmpty) {
-        playTrack(currentMode.value!.tracks.first);
-      }
-    }
-  }
-  
-  // 하트비트 싱크 토글
   void toggleHeartbeatSync(bool value) {
     isHeartbeatSyncEnabled.value = value;
     if (isPlaying.value) {

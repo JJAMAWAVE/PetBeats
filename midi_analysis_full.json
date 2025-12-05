@@ -1,0 +1,305 @@
+{
+  "sleep_01": {
+    "title": "스탠다드 자장가",
+    "tempo": 60.0,
+    "instruments": [
+      "Acoustic Grand Piano"
+    ]
+  },
+  "sleep_02": {
+    "title": "따뜻한 오후",
+    "tempo": 60.0,
+    "instruments": [
+      "Acoustic Grand Piano",
+      "Orchestral Harp"
+    ]
+  },
+  "sleep_03": {
+    "title": "깊은 밤의 꿈",
+    "tempo": 55.0,
+    "instruments": [
+      "Contrabass",
+      "Acoustic Grand Piano"
+    ]
+  },
+  "sleep_04": {
+    "title": "엄마의 요람",
+    "tempo": 60.0,
+    "instruments": [
+      "String Ensemble 2",
+      "Acoustic Grand Piano"
+    ]
+  },
+  "sleep_05": {
+    "title": "깊은 울림",
+    "tempo": 65.0,
+    "instruments": [
+      "Acoustic Grand Piano",
+      "String Ensemble 2"
+    ]
+  },
+  "sleep_06": {
+    "title": "포근한 왈츠",
+    "tempo": 65.0,
+    "instruments": [
+      "Acoustic Grand Piano",
+      "Contrabass"
+    ]
+  },
+  "sleep_07": {
+    "title": "맑은 아침",
+    "tempo": 80.0,
+    "instruments": [
+      "Orchestral Harp",
+      "Bassoon"
+    ]
+  },
+  "sleep_08": {
+    "title": "사뿐한 왈츠",
+    "tempo": 60.0,
+    "instruments": [
+      "Celesta",
+      "Bassoon"
+    ]
+  },
+  "separation_01": {
+    "title": "묵직한 위로",
+    "tempo": 55.0,
+    "instruments": [
+      "Cello",
+      "Contrabass"
+    ]
+  },
+  "separation_02": {
+    "title": "따뜻한 공명",
+    "tempo": 55.0,
+    "instruments": [
+      "Acoustic Grand Piano"
+    ]
+  },
+  "separation_03": {
+    "title": "균형 잡힌 안정",
+    "tempo": 70.0,
+    "instruments": [
+      "Viola",
+      "Contrabass"
+    ]
+  },
+  "separation_04": {
+    "title": "포근한 공기",
+    "tempo": 70.0,
+    "instruments": [
+      "Acoustic Grand Piano"
+    ]
+  },
+  "separation_05": {
+    "title": "산뜻한 안정",
+    "tempo": 80.0,
+    "instruments": [
+      "Orchestral Harp",
+      "Contrabass"
+    ]
+  },
+  "separation_06": {
+    "title": "밝은 공기",
+    "tempo": 75.0,
+    "instruments": [
+      "Acoustic Grand Piano",
+      "Contrabass"
+    ]
+  },
+  "separation_07": {
+    "title": "평온한 오후",
+    "tempo": 65.0,
+    "instruments": [
+      "Acoustic Guitar (steel)",
+      "Electric Bass (pick)"
+    ]
+  },
+  "separation_08": {
+    "title": "숲속의 쉼터",
+    "tempo": 70.0,
+    "instruments": [
+      "Acoustic Grand Piano",
+      "Bassoon"
+    ]
+  },
+  "noise_01": {
+    "title": "부드러운 장막",
+    "tempo": 55.0,
+    "instruments": [
+      "Acoustic Grand Piano"
+    ]
+  },
+  "noise_02": {
+    "title": "깊은 방패",
+    "tempo": 60.0,
+    "instruments": [
+      "Acoustic Grand Piano"
+    ]
+  },
+  "noise_03": {
+    "title": "일상의 평온",
+    "tempo": 55.0,
+    "instruments": [
+      "Acoustic Grand Piano",
+      "Contrabass"
+    ]
+  },
+  "noise_04": {
+    "title": "든든한 방음벽",
+    "tempo": 60.0,
+    "instruments": [
+      "Electric Guitar (clean)",
+      "Acoustic Grand Piano"
+    ]
+  },
+  "noise_05": {
+    "title": "산뜻한 보호막",
+    "tempo": 75.0,
+    "instruments": [
+      "Acoustic Grand Piano",
+      "Contrabass"
+    ]
+  },
+  "noise_06": {
+    "title": "포근한 담요",
+    "tempo": 65.0,
+    "instruments": [
+      "Contrabass",
+      "Cello"
+    ]
+  },
+  "noise_07": {
+    "title": "우주 여행",
+    "tempo": 75.0,
+    "instruments": [
+      "Acoustic Grand Piano"
+    ]
+  },
+  "noise_08": {
+    "title": "깊은 바다",
+    "tempo": 85.0,
+    "instruments": [
+      "Electric Guitar (clean)",
+      "Trombone"
+    ]
+  },
+  "energy_01": {
+    "title": "리드미컬 산책",
+    "tempo": 100.0,
+    "instruments": [
+      "Acoustic Grand Piano",
+      "Contrabass"
+    ]
+  },
+  "energy_02": {
+    "title": "활기찬 터그",
+    "tempo": 110.0,
+    "instruments": [
+      "Distortion Guitar",
+      "Electric Bass (pick)"
+    ]
+  },
+  "energy_03": {
+    "title": "경쾌한 총총",
+    "tempo": 110.0,
+    "instruments": [
+      "Acoustic Grand Piano",
+      "Electric Bass (pick)"
+    ]
+  },
+  "energy_04": {
+    "title": "신나는 술래",
+    "tempo": 115.0,
+    "instruments": [
+      "Acoustic Grand Piano"
+    ]
+  },
+  "energy_05": {
+    "title": "사뿐한 총총",
+    "tempo": 115.0,
+    "instruments": [
+      "Electric Guitar (clean)"
+    ]
+  },
+  "energy_06": {
+    "title": "신나는 우다다",
+    "tempo": 130.0,
+    "instruments": [
+      "Acoustic Grand Piano"
+    ]
+  },
+  "energy_07": {
+    "title": "피크닉",
+    "tempo": 100.0,
+    "instruments": [
+      "Clarinet",
+      "Oboe"
+    ]
+  },
+  "energy_08": {
+    "title": "댄스 타임",
+    "tempo": 115.0,
+    "instruments": [
+      "Acoustic Grand Piano"
+    ]
+  },
+  "senior_01": {
+    "title": "치유의 주파수",
+    "tempo": 65.0,
+    "instruments": [
+      "Acoustic Grand Piano"
+    ]
+  },
+  "senior_02": {
+    "title": "깊은 안정",
+    "tempo": 60.0,
+    "instruments": [
+      "Contrabass"
+    ]
+  },
+  "senior_03": {
+    "title": "부드러운 공명",
+    "tempo": 55.0,
+    "instruments": [
+      "Acoustic Grand Piano"
+    ]
+  },
+  "senior_04": {
+    "title": "편안한 휴식",
+    "tempo": 65.0,
+    "instruments": [
+      "Acoustic Grand Piano"
+    ]
+  },
+  "senior_05": {
+    "title": "포근한 온기",
+    "tempo": 75.0,
+    "instruments": [
+      "Acoustic Grand Piano"
+    ]
+  },
+  "senior_06": {
+    "title": "산뜻한 평온",
+    "tempo": 75.0,
+    "instruments": [
+      "Orchestral Harp"
+    ]
+  },
+  "senior_07": {
+    "title": "영혼의 안식",
+    "tempo": 85.0,
+    "instruments": [
+      "Acoustic Grand Piano"
+    ]
+  },
+  "senior_08": {
+    "title": "자연의 품",
+    "tempo": 85.0,
+    "instruments": [
+      "Flute",
+      "Acoustic Guitar (steel)"
+    ]
+  }
+}

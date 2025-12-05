@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:vibration/vibration.dart';
 import '../models/midi_note_event.dart';
+import '../models/haptic_envelope.dart';
 
 class HapticService extends GetxService {
   Timer? _heartbeatTimer;
@@ -86,7 +87,7 @@ class HapticService extends GetxService {
     }
   }
 
-  // MIDI 노트 재생 및 이벤트 발행
+  // MIDI 노트 재생 및 이벤트 발행 (ADSR Envelope 적용)
   void playNote(int note, int velocity) async {
     // 이벤트 발행 (비주얼라이저용) - 원본 데이터 전송
     _midiNoteController.add(MidiNoteEvent(
@@ -97,21 +98,30 @@ class HapticService extends GetxService {
 
     if (!_isVibrating) return; // Safety Mute 상태면 진동 안함
 
-    // 실제 햅틱 재생
+    // ADSR Envelope을 적용한 부드러운 진동
     if (await Vibration.hasAmplitudeControl() ?? false) {
-      // 1. Velocity Mapping (0-127 -> 0-255)
-      // 2. Soft Envelope (Max 80%)
-      // 3. Master Gain (Ramp-up)
+      // 1. Base amplitude 계산
+      double baseAmplitude = (velocity * 2).toDouble();
+      baseAmplitude *= _maxAmplitudeScale; // Limit to 80%
+      baseAmplitude *= _masterGain; // Apply Soft Start Gain
       
-      double targetAmplitude = (velocity * 2).toDouble();
-      targetAmplitude *= _maxAmplitudeScale; // Limit to 80%
-      targetAmplitude *= _masterGain; // Apply Soft Start Gain
-
-      final amplitude = targetAmplitude.round().clamp(1, 255);
-      
-      if (amplitude > 5) { // 의미 있는 진동만 재생
-        Vibration.vibrate(duration: 100, amplitude: amplitude);
-      }
+      // 2. ADSR Envelope 적용 (150ms 총 지속시간)
+      Timer.periodic(Duration(milliseconds: 10), (timer) {
+        final elapsedMs = timer.tick * 10;
+        
+        if (elapsedMs >= HapticEnvelope.totalDuration) {
+          timer.cancel();
+          return;
+        }
+        
+        // Envelope gain 계산
+        final envelopeGain = HapticEnvelope.getGain(elapsedMs);
+        final finalAmplitude = (baseAmplitude * envelopeGain).round().clamp(1, 255);
+        
+        if (finalAmplitude > 5) {
+          Vibration.vibrate(duration: 10, amplitude: finalAmplitude);
+        }
+      });
     } else {
       // Fallback for devices without amplitude control
       if (_masterGain > 0.5) {

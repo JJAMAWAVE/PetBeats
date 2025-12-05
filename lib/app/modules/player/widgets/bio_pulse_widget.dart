@@ -3,7 +3,7 @@ import 'dart:math' as math;
 
 class BioPulseWidget extends StatefulWidget {
   final int bpm;
-  final bool isHapticActive;
+  final bool isPlaying;  // Renamed from isHapticActive
   final Color color;
   final double bassIntensity;  // FFT bass (0.0 ~ 1.0)
   final double midIntensity;   // FFT mid (0.0 ~ 1.0)
@@ -12,7 +12,7 @@ class BioPulseWidget extends StatefulWidget {
   const BioPulseWidget({
     super.key,
     required this.bpm,
-    this.isHapticActive = false,
+    this.isPlaying = false,  // Renamed from isHapticActive
     required this.color,
     this.bassIntensity = 0.0,
     this.midIntensity = 0.0,
@@ -74,25 +74,38 @@ class _BioPulseWidgetState extends State<BioPulseWidget>
         .animate(_secondaryController);
 
     _primaryController.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
+      if (status == AnimationStatus.completed && widget.isPlaying) {
         // Trigger secondary beat right after primary
         _secondaryController.forward(from: 0);
         // Restart primary beat
         Future.delayed(Duration(milliseconds: (beatDuration * 0.4).round()), () {
-          if (mounted) {
+          if (mounted && widget.isPlaying) {
             _primaryController.forward(from: 0);
           }
         });
       }
     });
 
-    // Start the heartbeat
-    _primaryController.forward();
+    // Start the heartbeat only if playing
+    if (widget.isPlaying) {
+      _primaryController.forward();
+    }
   }
 
   @override
   void didUpdateWidget(BioPulseWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
+    
+    // Control animation based on isPlaying
+    if (oldWidget.isPlaying != widget.isPlaying) {
+      if (widget.isPlaying) {
+        _primaryController.forward();
+      } else {
+        _primaryController.stop();
+        _secondaryController.stop();
+      }
+    }
+    
     if (oldWidget.bpm != widget.bpm) {
       _primaryController.dispose();
       _secondaryController.dispose();
@@ -118,7 +131,7 @@ class _BioPulseWidgetState extends State<BioPulseWidget>
           painter: BioPulsePainter(
             scale: combinedScale,
             color: widget.color,
-            showRipple: widget.isHapticActive,
+            showRipple: widget.isPlaying,
             rippleProgress: _primaryController.value,
             bassIntensity: widget.bassIntensity,
             midIntensity: widget.midIntensity,
@@ -222,31 +235,31 @@ class BioPulsePainter extends CustomPainter {
       }
     }
     
-    // Draw particles based on bass + mid intensity
-    final totalEnergy = (bassIntensity * 0.6) + (midIntensity * 0.4);
-    if (totalEnergy > 0.05) {  // Lowered from 0.1 for even more visibility
-      // Spawn particles on energy peaks
-      final particleCount = (totalEnergy * 15).round().clamp(4, 15);  // 4-15 particles (increased)
-      for (int i = 0; i < particleCount; i++) {
-        final angle = (i / particleCount) * 2 * math.pi;
-        final distance = currentRadius * (1.1 + rippleProgress * 0.5);
-        final particleX = center.dx + math.cos(angle) * distance;
-        final particleY = center.dy + math.sin(angle) * distance;
-        
-        final particleSize = 4.0 + (totalEnergy * 8);  // Bigger particles (was 3.0 + totalEnergy * 5)
-        final particleOpacity = (0.6 + totalEnergy * 0.8) * (1 - rippleProgress * 0.5);  // Higher opacity
-        
-        final particlePaint = Paint()
-          ..color = color.withOpacity(particleOpacity)
-          ..style = PaintingStyle.fill
-          ..maskFilter = MaskFilter.blur(BlurStyle.normal, particleSize * 1.2);  // More blur for glow
-        
-        canvas.drawCircle(
-          Offset(particleX, particleY),
-          particleSize,
-          particlePaint,
-        );
-      }
+    // Draw particles - ALWAYS show them, not based on audio analysis
+    // Use ripple progress to create pulsing particle effect
+    final particleCount = 12;  // Fixed count for consistent display
+    final energySimulation = 0.5 + (rippleProgress * 0.5);  // Simulate energy from pulse
+    
+    for (int i = 0; i < particleCount; i++) {
+      final angle = (i / particleCount) * 2 * math.pi;
+      final distance = currentRadius * (1.15 + rippleProgress * 0.3);
+      final particleX = center.dx + math.cos(angle) * distance;
+      final particleY = center.dy + math.sin(angle) * distance;
+      
+      // Make particles much bigger and more visible
+      final particleSize = 6.0 + (energySimulation * 4);  // 6-10 pixels
+      final particleOpacity = (0.7 + energySimulation * 0.3) * (1 - rippleProgress * 0.3);
+      
+      final particlePaint = Paint()
+        ..color = color.withOpacity(particleOpacity)
+        ..style = PaintingStyle.fill
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, particleSize * 1.5);  // Strong glow
+      
+      canvas.drawCircle(
+        Offset(particleX, particleY),
+        particleSize,
+        particlePaint,
+      );
     }
   }
 

@@ -59,7 +59,7 @@ class NowPlayingView extends GetView<PlayerController> {
         children: [
           BioPulseWidget(
             bpm: controller.currentTrackBpm,
-            isHapticActive: controller.hapticIntensity.value != HapticIntensity.off,
+            isPlaying: controller.isPlaying,  // Added this critical parameter
             color: controller.currentTrackColor,
           ),
           SizedBox(height: 48.h),
@@ -98,14 +98,27 @@ class NowPlayingView extends GetView<PlayerController> {
     ));
   }
 
+
   Widget _buildTherapyControlZone() {
-    return Obx(() => TherapyControlPanel(
-      hapticIntensity: controller.hapticIntensity.value,
-      onHapticChange: controller.setHapticIntensity,
-      isWeatherActive: controller.isWeatherActive.value,
-      onWeatherToggle: controller.toggleWeather,
-    ));
+    return Obx(() {
+      // Only show haptic for modes where heart rate sync is beneficial
+      final mode = controller.homeController.currentMode.value;
+      final showHaptic = mode != null && 
+                        (mode.id == 'sleep' || mode.id == 'anxiety' || mode.id == 'senior');
+      
+      if (!showHaptic) {
+        return const SizedBox.shrink(); // Hide therapy panel for noise/energy modes
+      }
+      
+      return TherapyControlPanel(
+        hapticIntensity: controller.hapticIntensity.value,
+        onHapticChange: controller.setHapticIntensity,
+        isWeatherActive: controller.isWeatherActive.value,
+        onWeatherToggle: controller.toggleWeather,
+      );
+    });
   }
+
 
   Widget _buildRollingTipZone() {
     return const Padding(
@@ -116,7 +129,7 @@ class NowPlayingView extends GetView<PlayerController> {
 
   Widget _buildPlaybackControlZone() {
     return Container(
-      padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 16.h),
+      padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 8.h),  // Reduced from 16h to 8h
       child: Column(
         children: [
           // Progress Bar with Time Display
@@ -154,8 +167,12 @@ class NowPlayingView extends GetView<PlayerController> {
                         ),
                         child: Slider(
                           value: progress.clamp(0.0, 1.0),
-                          onChanged: (value) {
-                            // TODO: Implement seek functionality
+                          onChangeEnd: (value) {
+                            // Seek when user finishes dragging
+                            final newPosition = Duration(
+                              milliseconds: (value * duration.inMilliseconds).round(),
+                            );
+                            controller.homeController.seekTo(newPosition);
                           },
                         ),
                       );

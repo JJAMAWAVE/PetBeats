@@ -92,10 +92,11 @@ class PlayerController extends GetxController {
   }
 
   // Therapy Controls
-  final hapticIntensity = HapticIntensity.soft.obs;
+  final hapticIntensity = HapticIntensity.off.obs;  // Changed default from soft to off
   final isWeatherActive = false.obs;
 
   void togglePlay() {
+    print('🔘 [PlayerController] togglePlay() called');
     homeController.togglePlay();
   }
 
@@ -138,10 +139,9 @@ class PlayerController extends GetxController {
     
     if (intensity == HapticIntensity.off) {
       _hapticService.stop();
-    } else if (intensity == HapticIntensity.soft) {
-      _hapticService.startHeartbeat(currentTrackBpm);
-    } else if (intensity == HapticIntensity.deep) {
-      // Deep intensity - you can adjust the pattern here
+    } else {
+      // All non-off intensities trigger heartbeat at track BPM
+      // The intensity difference is handled by the haptic service itself
       _hapticService.startHeartbeat(currentTrackBpm);
     }
   }
