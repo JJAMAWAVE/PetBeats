@@ -54,7 +54,12 @@ class WebBgmService {
 
   /// BGM 일시정지
   void pause() {
+    print('[WebBgmService] pause() called');
+    print('[WebBgmService] Audio element exists: ${_audioElement != null}');
+    print('[WebBgmService] Audio element paused before: ${_audioElement?.paused}');
     _audioElement?.pause();
+    print('[WebBgmService] Audio element paused after: ${_audioElement?.paused}');
+    print('[WebBgmService] pause() completed');
   }
 
   /// BGM 재개

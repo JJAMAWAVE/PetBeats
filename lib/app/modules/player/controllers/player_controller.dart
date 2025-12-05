@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../widgets/therapy_control_panel.dart';
 import '../../home/controllers/home_controller.dart';
 import '../../../data/services/haptic_service.dart';
+import '../../../data/services/audio_service.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../../data/services/audio_analyzer_service.dart';
 import '../models/visualizer_theme.dart';
@@ -11,14 +12,30 @@ import '../widgets/first_run_guide_dialog.dart';
 class PlayerController extends GetxController {
   final HomeController homeController = Get.find<HomeController>();
   final HapticService _hapticService = Get.find<HapticService>();
+  final AudioService _audioService = Get.find<AudioService>();
   final _storage = GetStorage();
   
   final AudioAnalyzerService _audioAnalyzer = Get.put(AudioAnalyzerService());
+  
+  // Audio position and duration observables
+  final currentPosition = Duration.zero.obs;
+  final currentDuration = Duration.zero.obs;
 
   @override
   void onInit() {
     super.onInit();
     _showHapticTipIfFirstTime();
+    
+    // Subscribe to audio position and duration streams
+    _audioService.positionStream.listen((position) {
+      currentPosition.value = position;
+    });
+    
+    _audioService.durationStream.listen((duration) {
+      if (duration != null) {
+        currentDuration.value = duration;
+      }
+    });
     
     // Playback state listener for Audio Analyzer
     ever(homeController.isPlaying, (playing) {
@@ -57,11 +74,11 @@ class PlayerController extends GetxController {
   String get currentTrackArtist => "PetBeats AI";
   int get currentTrackBpm {
     final track = homeController.currentTrack.value;
-    if (track == null) return 60;
+    if (track == null || track.bpm == null) return 60;
     
-    if (track.bpm.contains('BPM')) {
+    if (track.bpm!.contains('BPM')) {
       try {
-        return int.parse(track.bpm.split(' ')[0]);
+        return int.parse(track.bpm!.split(' ')[0]);
       } catch (e) {
         return 60;
       }

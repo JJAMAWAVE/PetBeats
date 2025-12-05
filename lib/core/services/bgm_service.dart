@@ -42,7 +42,11 @@ class BgmService {
 
   /// BGM 일시정지
   Future<void> pause() async {
+    print('[BgmService] pause() called');
+    print('[BgmService] AudioPlayer state before: ${_audioPlayer.playing}');
     await _audioPlayer.pause();
+    print('[BgmService] AudioPlayer state after: ${_audioPlayer.playing}');
+    print('[BgmService] pause() completed');
   }
 
   /// BGM 재개

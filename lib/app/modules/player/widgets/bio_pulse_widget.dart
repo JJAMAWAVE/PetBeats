@@ -5,12 +5,18 @@ class BioPulseWidget extends StatefulWidget {
   final int bpm;
   final bool isHapticActive;
   final Color color;
+  final double bassIntensity;  // FFT bass (0.0 ~ 1.0)
+  final double midIntensity;   // FFT mid (0.0 ~ 1.0)
+  final String mode;           // 'sleep', 'energy', 'calm', 'senior'
 
   const BioPulseWidget({
     super.key,
     required this.bpm,
     this.isHapticActive = false,
     required this.color,
+    this.bassIntensity = 0.0,
+    this.midIntensity = 0.0,
+    this.mode = 'sleep',
   });
 
   @override
@@ -114,6 +120,9 @@ class _BioPulseWidgetState extends State<BioPulseWidget>
             color: widget.color,
             showRipple: widget.isHapticActive,
             rippleProgress: _primaryController.value,
+            bassIntensity: widget.bassIntensity,
+            midIntensity: widget.midIntensity,
+            mode: widget.mode,
           ),
           child: const SizedBox(width: 300, height: 300),
         );
@@ -127,24 +136,42 @@ class BioPulsePainter extends CustomPainter {
   final Color color;
   final bool showRipple;
   final double rippleProgress;
+  final double bassIntensity;
+  final double midIntensity;
+  final String mode;
 
   BioPulsePainter({
     required this.scale,
     required this.color,
     required this.showRipple,
     required this.rippleProgress,
+    required this.bassIntensity,
+    required this.midIntensity,
+    required this.mode,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
     final baseRadius = size.width / 2 * 0.5;
-    final currentRadius = baseRadius * scale;
+    
+    // Mode-based reactivity multiplier
+    final double reactivityMultiplier = mode == 'sleep' ? 0.3
+        : mode == 'senior' ? 0.2
+        : mode == 'energy' ? 1.0
+        : 0.5; // calm, noise
+    
+    // Dynamic scale based on bass intensity
+    final bassScale = 1.0 + (bassIntensity * 0.8 * reactivityMultiplier);
+    final currentRadius = baseRadius * scale * bassScale;
 
+    // Dynamic glow opacity based on mid intensity
+    final glowOpacity = 0.6 + (midIntensity * 0.4);
+    
     // Draw multiple glow layers for bloom effect
     for (int i = 5; i > 0; i--) {
       final glowPaint = Paint()
-        ..color = color.withOpacity(0.15 / i)
+        ..color = color.withOpacity((0.15 / i) * glowOpacity)
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, 20.0 * i);
       canvas.drawCircle(center, currentRadius * (1 + i * 0.1), glowPaint);
     }
@@ -170,9 +197,11 @@ class BioPulsePainter extends CustomPainter {
       ..strokeWidth = 3;
     canvas.drawCircle(center, currentRadius * 0.95, edgePaint);
 
-    // Draw ripple if haptic is active
+    // Draw ripple if haptic is active (with dynamic speed)
     if (showRipple) {
-      final rippleRadius = baseRadius * (1.0 + rippleProgress * 0.8);
+      // Dynamic ripple expansion based on bass
+      final rippleSpeedMultiplier = 0.8 + (bassIntensity * 0.4 * reactivityMultiplier);
+      final rippleRadius = baseRadius * (1.0 + rippleProgress * rippleSpeedMultiplier);
       final ripplePaint = Paint()
         ..color = color.withOpacity(0.4 * (1 - rippleProgress))
         ..style = PaintingStyle.stroke
@@ -180,15 +209,43 @@ class BioPulsePainter extends CustomPainter {
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 5);
       canvas.drawCircle(center, rippleRadius, ripplePaint);
       
-      // Secondary ripple
+      // Secondary ripple (also dynamic)
       if (rippleProgress > 0.3) {
-        final ripple2Radius = baseRadius * (1.0 + (rippleProgress - 0.3) * 0.6);
+        final ripple2Speed = 0.6 + (bassIntensity * 0.3 * reactivityMultiplier);
+        final ripple2Radius = baseRadius * (1.0 + (rippleProgress - 0.3) * ripple2Speed);
         final ripple2Paint = Paint()
           ..color = color.withOpacity(0.3 * (1 - rippleProgress))
           ..style = PaintingStyle.stroke
           ..strokeWidth = 2
           ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 8);
         canvas.drawCircle(center, ripple2Radius, ripple2Paint);
+      }
+    }
+    
+    // Draw particles based on bass + mid intensity
+    final totalEnergy = (bassIntensity * 0.6) + (midIntensity * 0.4);
+    if (totalEnergy > 0.05) {  // Lowered from 0.1 for even more visibility
+      // Spawn particles on energy peaks
+      final particleCount = (totalEnergy * 15).round().clamp(4, 15);  // 4-15 particles (increased)
+      for (int i = 0; i < particleCount; i++) {
+        final angle = (i / particleCount) * 2 * math.pi;
+        final distance = currentRadius * (1.1 + rippleProgress * 0.5);
+        final particleX = center.dx + math.cos(angle) * distance;
+        final particleY = center.dy + math.sin(angle) * distance;
+        
+        final particleSize = 4.0 + (totalEnergy * 8);  // Bigger particles (was 3.0 + totalEnergy * 5)
+        final particleOpacity = (0.6 + totalEnergy * 0.8) * (1 - rippleProgress * 0.5);  // Higher opacity
+        
+        final particlePaint = Paint()
+          ..color = color.withOpacity(particleOpacity)
+          ..style = PaintingStyle.fill
+          ..maskFilter = MaskFilter.blur(BlurStyle.normal, particleSize * 1.2);  // More blur for glow
+        
+        canvas.drawCircle(
+          Offset(particleX, particleY),
+          particleSize,
+          particlePaint,
+        );
       }
     }
   }
@@ -198,6 +255,8 @@ class BioPulsePainter extends CustomPainter {
     return oldDelegate.scale != scale ||
         oldDelegate.color != color ||
         oldDelegate.showRipple != showRipple ||
-        oldDelegate.rippleProgress != rippleProgress;
+        oldDelegate.rippleProgress != rippleProgress ||
+        oldDelegate.bassIntensity != bassIntensity ||
+        oldDelegate.midIntensity != midIntensity;
   }
 }

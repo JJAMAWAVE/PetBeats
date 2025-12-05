@@ -116,7 +116,7 @@ class NowPlayingView extends GetView<PlayerController> {
 
   Widget _buildPlaybackControlZone() {
     return Container(
-      padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 40.h),
+      padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 16.h),
       child: Column(
         children: [
           // Progress Bar with Time Display
@@ -124,46 +124,56 @@ class NowPlayingView extends GetView<PlayerController> {
             padding: EdgeInsets.symmetric(horizontal: 8.w),
             child: Row(
               children: [
-                Text(
-                  "1:30",
+                Obx(() => Text(
+                  _formatDuration(controller.currentPosition.value),
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.7),
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
                   ),
-                ),
+                )),
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12.w),
-                    child: SliderTheme(
-                      data: SliderThemeData(
-                        trackHeight: 3.h,
-                        thumbShape: RoundSliderThumbShape(enabledThumbRadius: 6.r),
-                        overlayShape: RoundSliderOverlayShape(overlayRadius: 12.r),
-                        activeTrackColor: AppColors.primaryBlue,
-                        inactiveTrackColor: Colors.white.withOpacity(0.2),
-                        thumbColor: Colors.white,
-                        overlayColor: AppColors.primaryBlue.withOpacity(0.2),
-                      ),
-                      child: Slider(
-                        value: 0.5,
-                        onChanged: (value) {},
-                      ),
-                    ),
+                    child: Obx(() {
+                      final position = controller.currentPosition.value;
+                      final duration = controller.currentDuration.value;
+                      final progress = duration.inMilliseconds > 0 
+                          ? position.inMilliseconds / duration.inMilliseconds 
+                          : 0.0;
+                      
+                      return SliderTheme(
+                        data: SliderThemeData(
+                          trackHeight: 3.h,
+                          thumbShape: RoundSliderThumbShape(enabledThumbRadius: 6.r),
+                          overlayShape: RoundSliderOverlayShape(overlayRadius: 12.r),
+                          activeTrackColor: AppColors.primaryBlue,
+                          inactiveTrackColor: Colors.white.withOpacity(0.2),
+                          thumbColor: Colors.white,
+                          overlayColor: AppColors.primaryBlue.withOpacity(0.2),
+                        ),
+                        child: Slider(
+                          value: progress.clamp(0.0, 1.0),
+                          onChanged: (value) {
+                            // TODO: Implement seek functionality
+                          },
+                        ),
+                      );
+                    }),
                   ),
                 ),
-                Text(
-                  "3:00",
+                Obx(() => Text(
+                  _formatDuration(controller.currentDuration.value),
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.7),
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
                   ),
-                ),
+                )),
               ],
             ),
           ),
-          SizedBox(height: 32.h),
+          SizedBox(height: 20.h),
           // Playback Controls
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -208,5 +218,11 @@ class NowPlayingView extends GetView<PlayerController> {
         ],
       ),
     );
+  }
+
+  String _formatDuration(Duration duration) {
+    final minutes = duration.inMinutes;
+    final seconds = duration.inSeconds % 60;
+    return '$minutes:${seconds.toString().padLeft(2, '0')}';
   }
 }

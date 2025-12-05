@@ -1,15 +1,22 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import '../../../data/services/audio_service.dart';
 import '../../../data/services/haptic_service.dart';
+import '../../../../core/services/bgm_service.dart';
+import '../../../../core/services/web_bgm_service.dart';
 import '../../onboarding/controllers/onboarding_controller.dart';
+import '../../premium/controllers/subscription_controller.dart';
 import '../../../data/models/mode_model.dart';
 import '../../../data/models/track_model.dart';
+import '../../../data/data_source/track_data.dart';
 
 class HomeController extends GetxController {
   final AudioService _audioService = Get.put(AudioService());
   final HapticService _hapticService = Get.put(HapticService());
+  // Use WebBgmService on web, BgmService otherwise
+  late final dynamic _bgmService = kIsWeb ? Get.find<WebBgmService>() : BgmService();
 
   // 현재 선택된 종 (0: 강아지, 1: 고양이, 2: 보호자)
   final selectedSpeciesIndex = 0.obs;
@@ -69,6 +76,19 @@ class HomeController extends GetxController {
       _initSpeciesTabs(['dog', 'cat', 'owner']); // 모든 탭 표시
       _loadSavedSettings();
     }
+    
+    // Subscribe to SubscriptionController's premium status
+    try {
+      final subscriptionController = Get.find<SubscriptionController>();
+      ever(subscriptionController.isPremium, (isPremium) {
+        isPremiumUser.value = isPremium;
+        print('✅ [HomeController] Premium status updated: $isPremium');
+      });
+      // Initial sync
+      isPremiumUser.value = subscriptionController.isPremium.value;
+    } catch (e) {
+      print('⚠️ [HomeController] SubscriptionController not found: $e');
+    }
   }
 
   void _loadSavedSettings() {
@@ -99,16 +119,7 @@ class HomeController extends GetxController {
         iconPath: 'assets/icons/icon_mode_sleep.png',
         color: const Color(0xFF5C6BC0), // Indigo
         scientificFacts: ['느린 템포는 심박수를 낮춥니다.', '반복적인 리듬은 수면을 유도합니다.'],
-        tracks: [
-          Track(id: 's1', title: '스탠다드 자장가', target: '공용', isPremium: false, description: '가장 표준적인 피아노', duration: '3:00', instrument: 'Solo Piano', bpm: '60 BPM'),
-          Track(id: 's2', title: '따뜻한 오후', target: '공용', isPremium: false, description: '먹먹하고 부드러운 소리', duration: '3:15', instrument: 'Piano & Pad', bpm: '58 BPM'),
-          Track(id: 's3', title: '깊은 밤의 꿈', target: '대형', isPremium: true, description: '깊은 울림 (고급형)', duration: '3:30', instrument: 'Cello', bpm: '55 BPM'),
-          Track(id: 's4', title: '엄마의 요람', target: '대형', isPremium: true, description: '3박자 왈츠 (차별화)', duration: '3:10', instrument: 'Harp', bpm: '60 BPM'),
-          Track(id: 's5', title: '깊은 울림', target: '중형', isPremium: true, description: '중형견용 표준', duration: '3:20', instrument: 'Piano', bpm: '60 BPM'),
-          Track(id: 's6', title: '포근한 왈츠', target: '중형', isPremium: true, description: '중형견용 왈츠', duration: '3:05', instrument: 'Guitar', bpm: '62 BPM'),
-          Track(id: 's7', title: '맑은 아침', target: '소형', isPremium: true, description: '소형견용 맑은 소리', duration: '2:55', instrument: 'Music Box', bpm: '65 BPM'),
-          Track(id: 's8', title: '사뿐한 왈츠', target: '소형', isPremium: true, description: '오르골 느낌 추가', duration: '3:00', instrument: 'Celesta', bpm: '64 BPM'),
-        ],
+        tracks: TrackData.sleepTracks,
       ),
       Mode(
         id: 'anxiety',
@@ -285,8 +296,10 @@ class HomeController extends GetxController {
     // Legacy method, might be used by HomeView play button
     // If we have a current track, play it, otherwise play first track of mode
     if (currentTrack.value != null && currentMode.value?.id == modeId) {
+       // Stop BGM when playing track
+       _bgmService.pause();
        isPlaying.value = true;
-       _audioService.play(_testAudioUrl);
+       _audioService.play(currentTrack.value!.audioUrl);
        if (isHeartbeatSyncEnabled.value) {
          _hapticService.startHeartbeat(60);
        }
@@ -300,32 +313,48 @@ class HomeController extends GetxController {
   }
 
   void playTrack(Track track) {
+    print('🎵 [DEBUG] playTrack called for: ${track.title}');
+    print('🎵 [DEBUG] Track audio URL: ${track.audioUrl}');
+    print('🎵 [DEBUG] Track isPremium: ${track.isPremium}');
+    print('🎵 [DEBUG] User isPremium: ${isPremiumUser.value}');
+    
     if (track.isPremium && !isPremiumUser.value) {
+      print('🎵 [DEBUG] Premium track, redirecting to subscription');
       Get.toNamed('/subscription');
       return;
     }
     
+    print('🎵 [DEBUG] Stopping BGM...');
+    // Stop BGM when playing track
+    _bgmService.pause();
+    print('🎵 [DEBUG] BGM stopped');
+    
     currentTrack.value = track;
     isPlaying.value = true;
     
-    // In a real app, we would play the specific track.audioUrl
-    _audioService.play(_testAudioUrl);
+    print('🎵 [DEBUG] Calling AudioService.play with URL: ${track.audioUrl}');
+    // Play the actual track audio file
+    _audioService.play(track.audioUrl);
+    print('🎵 [DEBUG] AudioService.play called');
     
     if (isHeartbeatSyncEnabled.value) {
       // Parse BPM if possible, else default to 60
       int bpm = 60;
-      if (track.bpm.contains('BPM')) {
+      if (track.bpm != null && track.bpm!.contains('BPM')) {
         try {
-          bpm = int.parse(track.bpm.split(' ')[0]);
+          bpm = int.parse(track.bpm!.split(' ')[0]);
         } catch (e) {
           bpm = 60;
         }
       }
+      print('🎵 [DEBUG] Starting haptic with BPM: $bpm');
       _hapticService.startHeartbeat(bpm);
     }
     
+    print('🎵 [DEBUG] Navigating to now-playing');
     // Navigate to Immersive Player
     Get.toNamed('/now-playing');
+    print('🎵 [DEBUG] playTrack completed');
   }
 
   // 모드 변경
@@ -333,81 +362,6 @@ class HomeController extends GetxController {
     currentMode.value = mode;
     _storage.write('lastModeId', mode.id);
     isAutoMode.value = false;
-    // 모드 변경 시 자동 재생은 하지 않음
-  }
-
-  // 상황별 추천: AI 플레이리스트 생성 및 재생
-  void playScenario(String scenario) {
-    final trackIds = scenarioPlaylists[scenario];
-    if (trackIds == null || trackIds.isEmpty) {
-      print('No playlist found for scenario: $scenario');
-      return;
-    }
-    
-    // 프리미엄 여부에 따라 필터링
-    final filteredTrackIds = isPremiumUser.value 
-        ? trackIds 
-        : trackIds.where((id) {
-            // 모든 모드에서 해당 ID 찾기
-            for (var mode in modes) {
-              final track = mode.tracks.firstWhere(
-                (t) => t.id == id,
-                orElse: () => Track(
-                  id: '',
-                  title: '',
-                  target: '',
-                  isPremium: false,
-                  description: '',
-                ),
-              );
-              if (track.id.isNotEmpty) {
-                return !track.isPremium; // 무료 곡만
-              }
-            }
-            return false;
-          }).toList();
-    
-    if (filteredTrackIds.isEmpty) {
-      // 모두 프리미엄인 경우 결제 페이지로 이동
-      Get.toNamed('/subscription');
-      return;
-    }
-    
-    // 첫 번째 곡 찾아 재생
-    for (var mode in modes) {
-      final firstTrack = mode.tracks.firstWhere(
-        (t) => t.id == filteredTrackIds.first,
-        orElse: () => Track(
-          id: '',
-          title: '',
-          target: '',
-          isPremium: false,
-          description: '',
-        ),
-      );
-      if (firstTrack.id.isNotEmpty) {
-        currentMode.value = mode;
-        playTrack(firstTrack);
-        print('Playing scenario "$scenario" with ${filteredTrackIds.length} tracks');
-        // TODO: 향후 연속 재생 기능 추가 (현재는 첫 곡만 재생)
-        break;
-      }
-    }
-  }
-  
-  // 상황별 추천
-  void recommendScenario(String scenario) {
-    print('Recommended scenario: $scenario');
-    // 시나리오에 맞는 모드 추천 로직 (임시)
-    if (scenario.contains('산책')) {
-      changeMode(modes.firstWhere((m) => m.id == 'energy'));
-    } else if (scenario.contains('낮잠') || scenario.contains('병원')) {
-      changeMode(modes.firstWhere((m) => m.id == 'sleep'));
-    } else {
-      changeMode(modes.firstWhere((m) => m.id == 'anxiety'));
-    }
-    // 상세 화면으로 이동
-    Get.toNamed('/mode_detail', arguments: currentMode.value);
   }
 
   // 재생 토글

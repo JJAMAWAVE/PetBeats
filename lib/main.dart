@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:get/get.dart';
 import 'core/theme/app_colors.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -32,8 +33,13 @@ void main() async {
   Get.put(WeatherService(), permanent: true);
   Get.put(IotService(), permanent: true);
   
-  // 웹용 BGM 사전 로딩
-  await WebBgmService().init();
+  // 웹용 BGM 사전 로딩 (웹 플랫폼만)
+  if (kIsWeb) {
+    final webBgm = WebBgmService();
+    await webBgm.init();
+    // Register globally so HomeController can access it
+    Get.put(webBgm, permanent: true);
+  }
   runApp(const MyApp());
 }
 

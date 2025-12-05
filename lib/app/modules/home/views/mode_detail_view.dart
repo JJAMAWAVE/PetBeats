@@ -288,7 +288,7 @@ class ModeDetailView extends GetView<HomeController> {
                     Row(
                       children: [
                         Text(
-                          track.target, // e.g., "대형", "공용"
+                          track.target ?? '공용', // e.g., "대형", "공용"
                           style: AppTextStyles.labelSmall.copyWith(
                             color: AppColors.primaryBlue,
                             fontWeight: FontWeight.w500,
@@ -296,9 +296,9 @@ class ModeDetailView extends GetView<HomeController> {
                         ),
                         const SizedBox(width: 8),
                         // Tags (Instrument / BPM)
-                        _buildTag(track.instrument),
+                        _buildTag(track.instrument ?? 'Piano'),
                         const SizedBox(width: 4),
-                        _buildTag(track.bpm),
+                        _buildTag(track.bpm ?? '60 BPM'),
                       ],
                     ),
                   ],

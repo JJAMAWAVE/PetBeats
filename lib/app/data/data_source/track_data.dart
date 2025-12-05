@@ -10,9 +10,10 @@ class TrackData {
       audioUrl: 'assets/sound/1_1.mp3',
       midiUrl: 'assets/sound/1_1.mid',
       coverUrl: 'assets/images/sleep_cover.jpg',
+      bpm: '60 BPM',
       technicalSpecs: {
         'Key': 'C Major',
-        'Tempo': '60 BPM',
+        'Tempo': '60 BPM',  // Verified from MIDI
         'Harmony': 'Simple Chords I',
         'Instruments': 'Grand Piano / Sub Bass'
       },
@@ -26,9 +27,10 @@ class TrackData {
       audioUrl: 'assets/sound/1_2.mp3',
       midiUrl: 'assets/sound/1_2.mid',
       coverUrl: 'assets/images/sleep_cover.jpg',
+      bpm: '60 BPM',
       technicalSpecs: {
         'Key': 'G Major',
-        'Tempo': '60 BPM',
+        'Tempo': '60 BPM',  // Verified from MIDI
         'Harmony': 'Simple Chords I',
         'Instruments': 'Grand Piano (Softest) / Warm Pad'
       },
@@ -42,9 +44,10 @@ class TrackData {
       audioUrl: 'assets/sound/1_3.mp3',
       midiUrl: 'assets/sound/1_3.mid',
       coverUrl: 'assets/images/sleep_cover.jpg',
+      bpm: '55 BPM',
       technicalSpecs: {
         'Key': 'D Major',
-        'Tempo': '55 BPM',
+        'Tempo': '55 BPM',  // Verified from MIDI
         'Harmony': 'Simple Chords IV',
         'Instruments': 'String Ensemble / Sub Bass'
       },
@@ -58,9 +61,10 @@ class TrackData {
       audioUrl: 'assets/sound/1_4.mp3',
       midiUrl: 'assets/sound/1_4.mid',
       coverUrl: 'assets/images/sleep_cover.jpg',
+      bpm: '60 BPM',
       technicalSpecs: {
         'Key': 'Eb Major',
-        'Tempo': '60 BPM',
+        'Tempo': '60 BPM',  // Verified from MIDI
         'Harmony': 'Simple Chords I',
         'Instruments': 'String Ensemble / Warm Pad'
       },
@@ -74,9 +78,10 @@ class TrackData {
       audioUrl: 'assets/sound/1_5.mp3',
       midiUrl: 'assets/sound/1_5.mid',
       coverUrl: 'assets/images/sleep_cover.jpg',
+      bpm: '65 BPM',
       technicalSpecs: {
         'Key': 'A Major',
-        'Tempo': '70 BPM',
+        'Tempo': '65 BPM',  // Corrected from MIDI (was 70)
         'Harmony': 'Simple Chords I',
         'Instruments': 'Grand Piano / String Ensemble'
       },
@@ -90,9 +95,10 @@ class TrackData {
       audioUrl: 'assets/sound/1_6.mp3',
       midiUrl: 'assets/sound/1_6.mid',
       coverUrl: 'assets/images/sleep_cover.jpg',
+      bpm: '65 BPM',
       technicalSpecs: {
         'Key': 'F Major',
-        'Tempo': '70 BPM',
+        'Tempo': '65 BPM',  // Corrected from MIDI (was 70)
         'Harmony': 'Simple Chords II',
         'Instruments': 'Grand Piano / Upright Bass'
       },
@@ -106,9 +112,10 @@ class TrackData {
       audioUrl: 'assets/sound/1_7.mp3',
       midiUrl: 'assets/sound/1_7.mid',
       coverUrl: 'assets/images/sleep_cover.jpg',
+      bpm: '80 BPM',
       technicalSpecs: {
         'Key': 'C Major',
-        'Tempo': '80 BPM',
+        'Tempo': '80 BPM',  // Verified from MIDI
         'Harmony': 'Simple Chords I',
         'Instruments': 'Harp / Woodwinds'
       },
@@ -122,9 +129,10 @@ class TrackData {
       audioUrl: 'assets/sound/1_8.mp3',
       midiUrl: 'assets/sound/1_8.mid',
       coverUrl: 'assets/images/sleep_cover.jpg',
+      bpm: '60 BPM',
       technicalSpecs: {
         'Key': 'Bb Major',
-        'Tempo': '80 BPM',
+        'Tempo': '60 BPM',  // Corrected from MIDI (was 80)
         'Harmony': 'Simple Chords III',
         'Instruments': 'Celesta / Bassoon'
       },
@@ -142,9 +150,10 @@ class TrackData {
       audioUrl: 'assets/sound/2_1.mp3',
       midiUrl: 'assets/sound/2_1.mid',
       coverUrl: 'assets/images/sep_cover.jpg',
+      bpm: '55 BPM',
       technicalSpecs: {
         'Key': 'C Minor',
-        'Tempo': '60 BPM',
+        'Tempo': '55 BPM',  // Corrected from MIDI (was 60)
         'Harmony': 'Simple Chords I',
         'Instruments': 'Cello / String Ensemble'
       },
@@ -158,9 +167,10 @@ class TrackData {
       audioUrl: 'assets/sound/2_2.mp3',
       midiUrl: 'assets/sound/2_2.mid',
       coverUrl: 'assets/images/sep_cover.jpg',
+      bpm: '55 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': 'Slow',
+        'Tempo': '55 BPM',  // Extracted from MIDI (was 'Slow')
         'Harmony': 'Simple Chords IV',
         'Instruments': 'Warm Pad / 808 Bass'
       },
@@ -174,9 +184,10 @@ class TrackData {
       audioUrl: 'assets/sound/2_3.mp3',
       midiUrl: 'assets/sound/2_3.mid',
       coverUrl: 'assets/images/sep_cover.jpg',
+      bpm: '70 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '70 BPM',
+        'Tempo': '70 BPM',  // Verified from MIDI
         'Harmony': 'Simple Chords I',
         'Instruments': 'Viola / Sub Bass'
       },
@@ -190,9 +201,10 @@ class TrackData {
       audioUrl: 'assets/sound/2_4.mp3',
       midiUrl: 'assets/sound/2_4.mid',
       coverUrl: 'assets/images/sep_cover.jpg',
+      bpm: '70 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': 'Slow',
+        'Tempo': '70 BPM',  // Extracted from MIDI (was 'Slow')
         'Harmony': 'Simple Chords I',
         'Instruments': 'Soft Pad / Drone Bass'
       },
@@ -206,9 +218,10 @@ class TrackData {
       audioUrl: 'assets/sound/2_5.mp3',
       midiUrl: 'assets/sound/2_5.mid',
       coverUrl: 'assets/images/sep_cover.jpg',
+      bpm: '80 BPM',
       technicalSpecs: {
         'Key': 'C Major',
-        'Tempo': '80 BPM',
+        'Tempo': '80 BPM',  // Verified from MIDI
         'Harmony': 'Simple Chords III',
         'Instruments': 'Harp / String Ensemble'
       },
@@ -222,9 +235,10 @@ class TrackData {
       audioUrl: 'assets/sound/2_6.mp3',
       midiUrl: 'assets/sound/2_6.mid',
       coverUrl: 'assets/images/sep_cover.jpg',
+      bpm: '75 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': 'Slow',
+        'Tempo': '75 BPM',  // Extracted from MIDI (was 'Slow')
         'Harmony': 'Intermediate Mixed Chords I',
         'Instruments': 'Bright Pad / 808 Bass'
       },
@@ -238,9 +252,10 @@ class TrackData {
       audioUrl: 'assets/sound/2_7.mp3',
       midiUrl: 'assets/sound/2_7.mid',
       coverUrl: 'assets/images/sep_cover.jpg',
+      bpm: '65 BPM',
       technicalSpecs: {
         'Key': 'G Major',
-        'Tempo': '65 BPM',
+        'Tempo': '65 BPM',  // Verified from MIDI
         'Harmony': 'Simple Chords II',
         'Instruments': 'Acoustic Guitar / Electric Bass'
       },
@@ -254,9 +269,10 @@ class TrackData {
       audioUrl: 'assets/sound/2_8.mp3',
       midiUrl: 'assets/sound/2_8.mid',
       coverUrl: 'assets/images/sep_cover.jpg',
+      bpm: '70 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '65 BPM',
+        'Tempo': '70 BPM',  // Corrected from MIDI (was 65)
         'Harmony': 'Simple Chords I',
         'Instruments': 'Grand Piano / Woodwinds'
       },
@@ -274,9 +290,10 @@ class TrackData {
       audioUrl: 'assets/sound/3_1.mp3',
       midiUrl: 'assets/sound/3_1.mid',
       coverUrl: 'assets/images/noise_cover.jpg',
+      bpm: '55 BPM',
       technicalSpecs: {
         'Key': 'N/A',
-        'Tempo': '60 BPM',
+        'Tempo': '55 BPM',  // Corrected from MIDI (was 60)
         'Harmony': 'Simple Chords IV',
         'Instruments': 'Analog Pad / 808 Bass'
       },
@@ -290,9 +307,10 @@ class TrackData {
       audioUrl: 'assets/sound/3_2.mp3',
       midiUrl: 'assets/sound/3_2.mid',
       coverUrl: 'assets/images/noise_cover.jpg',
+      bpm: '60 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '60 BPM',
+        'Tempo': '60 BPM',  // Verified from MIDI
         'Harmony': 'Intermediate Mixed Chords I',
         'Instruments': 'Dark Pad / 808 Bass'
       },
@@ -306,9 +324,10 @@ class TrackData {
       audioUrl: 'assets/sound/3_3.mp3',
       midiUrl: 'assets/sound/3_3.mid',
       coverUrl: 'assets/images/noise_cover.jpg',
+      bpm: '55 BPM',
       technicalSpecs: {
         'Key': 'N/A',
-        'Tempo': '55 BPM',
+        'Tempo': '55 BPM',  // Verified from MIDI
         'Harmony': 'Simple Chords I',
         'Instruments': 'Warm Pad / Simple Bass'
       },
@@ -322,9 +341,10 @@ class TrackData {
       audioUrl: 'assets/sound/3_4.mp3',
       midiUrl: 'assets/sound/3_4.mid',
       coverUrl: 'assets/images/noise_cover.jpg',
+      bpm: '60 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '60 BPM',
+        'Tempo': '60 BPM',  // Verified from MIDI
         'Harmony': 'Simple Chords IV',
         'Instruments': 'Low Pad / Drone Bass'
       },
@@ -338,9 +358,10 @@ class TrackData {
       audioUrl: 'assets/sound/3_5.mp3',
       midiUrl: 'assets/sound/3_5.mid',
       coverUrl: 'assets/images/noise_cover.jpg',
+      bpm: '75 BPM',
       technicalSpecs: {
         'Key': 'N/A',
-        'Tempo': '70 BPM',
+        'Tempo': '75 BPM',  // Corrected from MIDI (was 70)
         'Harmony': 'Simple Chords I',
         'Instruments': 'Atmosphere / Simple Bass'
       },
@@ -354,9 +375,10 @@ class TrackData {
       audioUrl: 'assets/sound/3_6.mp3',
       midiUrl: 'assets/sound/3_6.mid',
       coverUrl: 'assets/images/noise_cover.jpg',
+      bpm: '65 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '70 BPM',
+        'Tempo': '65 BPM',  // Corrected from MIDI (was 70)
         'Harmony': 'Simple Chords I',
         'Instruments': 'String Ensemble / Cello'
       },
@@ -370,9 +392,10 @@ class TrackData {
       audioUrl: 'assets/sound/3_7.mp3',
       midiUrl: 'assets/sound/3_7.mid',
       coverUrl: 'assets/images/noise_cover.jpg',
+      bpm: '75 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '80 BPM',
+        'Tempo': '75 BPM',  // Corrected from MIDI (was 80)
         'Harmony': 'Intermediate Mixed Chords II',
         'Instruments': 'Space Pad / Deep Bass'
       },
@@ -386,9 +409,10 @@ class TrackData {
       audioUrl: 'assets/sound/3_8.mp3',
       midiUrl: 'assets/sound/3_8.mid',
       coverUrl: 'assets/images/noise_cover.jpg',
+      bpm: '85 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '80 BPM',
+        'Tempo': '85 BPM',  // Corrected from MIDI (was 80)
         'Harmony': 'Simple Chords IV',
         'Instruments': 'Filter Pad / 808 Bass'
       },
@@ -406,9 +430,10 @@ class TrackData {
       audioUrl: 'assets/sound/4_1.mp3',
       midiUrl: 'assets/sound/4_1.mid',
       coverUrl: 'assets/images/play_cover.jpg',
+      bpm: '100 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '95 BPM',
+        'Tempo': '100 BPM',  // Corrected from MIDI (was 95)
         'Harmony': 'Advanced Jazz Chords',
         'Instruments': 'Grand Piano / Double Bass'
       },
@@ -422,9 +447,10 @@ class TrackData {
       audioUrl: 'assets/sound/4_2.mp3',
       midiUrl: 'assets/sound/4_2.mid',
       coverUrl: 'assets/images/play_cover.jpg',
+      bpm: '110 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '105 BPM',
+        'Tempo': '110 BPM',  // Corrected from MIDI (was 105)
         'Harmony': 'Power Chords',
         'Instruments': 'Electric Guitar / Electric Bass'
       },
@@ -438,9 +464,10 @@ class TrackData {
       audioUrl: 'assets/sound/4_3.mp3',
       midiUrl: 'assets/sound/4_3.mid',
       coverUrl: 'assets/images/play_cover.jpg',
+      bpm: '110 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '105 BPM',
+        'Tempo': '110 BPM',  // Corrected from MIDI (was 105)
         'Harmony': 'Simple Chords III',
         'Instruments': 'Grand Piano / Electric Bass'
       },
@@ -454,9 +481,10 @@ class TrackData {
       audioUrl: 'assets/sound/4_4.mp3',
       midiUrl: 'assets/sound/4_4.mid',
       coverUrl: 'assets/images/play_cover.jpg',
+      bpm: '115 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '115 BPM',
+        'Tempo': '115 BPM',  // Verified from MIDI
         'Harmony': '7th Chords II',
         'Instruments': 'Synth Lead / Synth Bass'
       },
@@ -470,9 +498,10 @@ class TrackData {
       audioUrl: 'assets/sound/4_5.mp3',
       midiUrl: 'assets/sound/4_5.mid',
       coverUrl: 'assets/images/play_cover.jpg',
+      bpm: '115 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '115 BPM',
+        'Tempo': '115 BPM',  // Verified from MIDI
         'Harmony': 'Simple Chords III',
         'Instruments': 'Acoustic Guitar / Acoustic Bass'
       },
@@ -486,9 +515,10 @@ class TrackData {
       audioUrl: 'assets/sound/4_6.mp3',
       midiUrl: 'assets/sound/4_6.mid',
       coverUrl: 'assets/images/play_cover.jpg',
+      bpm: '130 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '125 BPM',
+        'Tempo': '130 BPM',  // Corrected from MIDI (was 125)
         'Harmony': 'Simple Chords III',
         'Instruments': 'Glockenspiel / Electric Bass'
       },
@@ -502,9 +532,10 @@ class TrackData {
       audioUrl: 'assets/sound/4_7.mp3',
       midiUrl: 'assets/sound/4_7.mid',
       coverUrl: 'assets/images/play_cover.jpg',
+      bpm: '100 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '100 BPM',
+        'Tempo': '100 BPM',  // Verified from MIDI
         'Harmony': 'Simple Chords II',
         'Instruments': 'Acoustic Guitar / Electric Bass'
       },
@@ -518,9 +549,10 @@ class TrackData {
       audioUrl: 'assets/sound/4_8.mp3',
       midiUrl: 'assets/sound/4_8.mid',
       coverUrl: 'assets/images/play_cover.jpg',
+      bpm: '115 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '110 BPM',
+        'Tempo': '115 BPM',  // Corrected from MIDI (was 110)
         'Harmony': '7th Chords II',
         'Instruments': 'Poly Synth / Funky Bass'
       },
@@ -538,9 +570,10 @@ class TrackData {
       audioUrl: 'assets/sound/5_1.mp3',
       midiUrl: 'assets/sound/5_1.mid',
       coverUrl: 'assets/images/senior_cover.jpg',
+      bpm: '65 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '60 BPM',
+        'Tempo': '65 BPM',  // Corrected from MIDI (was 60)
         'Harmony': 'Simple Chords I',
         'Instruments': 'Warm Pad / 808 Bass'
       },
@@ -554,9 +587,10 @@ class TrackData {
       audioUrl: 'assets/sound/5_2.mp3',
       midiUrl: 'assets/sound/5_2.mid',
       coverUrl: 'assets/images/senior_cover.jpg',
+      bpm: '65 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '60 BPM',
+        'Tempo': '60 BPM',  // Verified from MIDI
         'Harmony': 'Simple Chords I',
         'Instruments': 'String Ensemble / Double Bass'
       },
@@ -570,9 +604,10 @@ class TrackData {
       audioUrl: 'assets/sound/5_3.mp3',
       midiUrl: 'assets/sound/5_3.mid',
       coverUrl: 'assets/images/senior_cover.jpg',
+      bpm: '65 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '55 BPM',
+        'Tempo': '55 BPM',  // Verified from MIDI
         'Harmony': 'Simple Chords IV',
         'Instruments': 'Warm Pad / Drone Bass'
       },
@@ -586,9 +621,10 @@ class TrackData {
       audioUrl: 'assets/sound/5_4.mp3',
       midiUrl: 'assets/sound/5_4.mid',
       coverUrl: 'assets/images/senior_cover.jpg',
+      bpm: '65 BPM',
       technicalSpecs: {
         'Key': 'G Major',
-        'Tempo': '60 BPM',
+        'Tempo': '65 BPM',  // Corrected from MIDI (was 60)
         'Harmony': 'Simple Chords I',
         'Instruments': 'Grand Piano (Softest) / Acoustic Bass'
       },
@@ -602,9 +638,10 @@ class TrackData {
       audioUrl: 'assets/sound/5_5.mp3',
       midiUrl: 'assets/sound/5_5.mid',
       coverUrl: 'assets/images/senior_cover.jpg',
+      bpm: '65 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '70 BPM',
+        'Tempo': '75 BPM',  // Corrected from MIDI (was 70)
         'Harmony': 'Simple Chords I',
         'Instruments': 'Analog Pad / 808 Bass'
       },
@@ -618,9 +655,10 @@ class TrackData {
       audioUrl: 'assets/sound/5_6.mp3',
       midiUrl: 'assets/sound/5_6.mid',
       coverUrl: 'assets/images/senior_cover.jpg',
+      bpm: '65 BPM',
       technicalSpecs: {
         'Key': 'F Major',
-        'Tempo': '70 BPM',
+        'Tempo': '75 BPM',  // Corrected from MIDI (was 70)
         'Harmony': 'Simple Chords I',
         'Instruments': 'Harp / String Ensemble'
       },
@@ -634,9 +672,10 @@ class TrackData {
       audioUrl: 'assets/sound/5_7.mp3',
       midiUrl: 'assets/sound/5_7.mid',
       coverUrl: 'assets/images/senior_cover.jpg',
+      bpm: '65 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '80 BPM',
+        'Tempo': '85 BPM',  // Corrected from MIDI (was 80)
         'Harmony': 'Simple Chords I',
         'Instruments': 'Choir / Organ'
       },
@@ -650,9 +689,10 @@ class TrackData {
       audioUrl: 'assets/sound/5_8.mp3',
       midiUrl: 'assets/sound/5_8.mid',
       coverUrl: 'assets/images/senior_cover.jpg',
+      bpm: '65 BPM',
       technicalSpecs: {
         'Key': 'Auto',
-        'Tempo': '80 BPM',
+        'Tempo': '85 BPM',  // Corrected from MIDI (was 80)
         'Harmony': 'Simple Chords IV',
         'Instruments': 'Flute / Acoustic Bass'
       },

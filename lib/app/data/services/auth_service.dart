@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:flutter/foundation.dart';
 
 class AuthService extends GetxService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  FirebaseAuth? _auth;
+  GoogleSignIn? _googleSignIn;
   
   final Rx<User?> currentUser = Rx<User?>(null);
   final RxBool isLoading = false.obs;
@@ -17,8 +17,12 @@ class AuthService extends GetxService {
     // Firebase initialization should be done in main.dart, 
     // but we listen to changes here if initialized.
     try {
-      currentUser.bindStream(_auth.authStateChanges());
-      isInitialized.value = true;
+      _auth = FirebaseAuth.instance;
+      _googleSignIn = GoogleSignIn();
+      if (_auth != null) {
+        currentUser.bindStream(_auth!.authStateChanges());
+        isInitialized.value = true;
+      }
     } catch (e) {
       debugPrint('AuthService: Firebase not initialized or error: $e');
       // Fallback for development without google-services.json
@@ -26,11 +30,17 @@ class AuthService extends GetxService {
   }
 
   Future<UserCredential?> signInWithGoogle() async {
+    if (_auth == null || _googleSignIn == null) {
+      debugPrint('AuthService: Firebase not initialized');
+      Get.snackbar('로그인 불가', 'Firebase가 초기화되지 않았습니다.');
+      return null;
+    }
+    
     try {
       isLoading.value = true;
       
       // 1. Trigger Google Sign In flow
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAccount? googleUser = await _googleSignIn!.signIn();
       if (googleUser == null) {
         isLoading.value = false;
         return null; // User canceled
@@ -46,7 +56,7 @@ class AuthService extends GetxService {
       );
 
       // 4. Sign in to Firebase
-      final UserCredential userCredential = await _auth.signInWithCredential(credential);
+      final UserCredential userCredential = await _auth!.signInWithCredential(credential);
       
       isLoading.value = false;
       return userCredential;
@@ -60,8 +70,8 @@ class AuthService extends GetxService {
 
   Future<void> signOut() async {
     try {
-      await _googleSignIn.signOut();
-      await _auth.signOut();
+      if (_googleSignIn != null) await _googleSignIn!.signOut();
+      if (_auth != null) await _auth!.signOut();
     } catch (e) {
       debugPrint('Error signing out: $e');
     }

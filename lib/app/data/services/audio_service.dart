@@ -15,10 +15,30 @@ class AudioService extends GetxService {
   // URL 재생
   Future<void> play(String url) async {
     try {
-      await _player.setUrl(url);
+      print("🎵 [AudioService] Starting playback: $url");
+      
+      // For web, use URI-based loading
+      if (url.startsWith('assets/')) {
+        // Web: Convert asset path to web URL
+        final webUrl = '/$url'; // /assets/sound/1_1.mp3
+        print("🎵 [AudioService] Web URL: $webUrl");
+        await _player.setAudioSource(AudioSource.uri(Uri.parse(webUrl)));
+      } else if (url.startsWith('http://') || url.startsWith('https://')) {
+        // External URLs
+        await _player.setAudioSource(AudioSource.uri(Uri.parse(url)));
+      } else {
+        // Fallback: assume asset without prefix
+        final webUrl = '/assets/$url';
+        print("🎵 [AudioService] Web URL (fallback): $webUrl");
+        await _player.setAudioSource(AudioSource.uri(Uri.parse(webUrl)));
+      }
+      
+      print("🎵 [AudioService] Audio source set, calling play()");
       await _player.play();
+      print("🎵 [AudioService] Play() called successfully");
     } catch (e) {
-      print("Audio play error: $e");
+      print("❌ [AudioService] Error: $e");
+      print("❌ [AudioService] Attempted URL: $url");
     }
   }
 

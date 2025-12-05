@@ -234,7 +234,26 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
               height: 48,
               child: Image.asset(
                 iconPath,
+                width: 48,
+                height: 48,
                 fit: BoxFit.contain,
+                errorBuilder: (context, error, stackTrace) {
+                  print('Failed to load image: $iconPath');
+                  print('Error: $error');
+                  return Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryBlue.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(
+                      label == '강아지' ? Icons.pets : Icons.cruelty_free,
+                      color: AppColors.primaryBlue,
+                      size: 28,
+                    ),
+                  );
+                },
               ),
             ),
             const SizedBox(width: 16),
