@@ -31,7 +31,7 @@ class NowPlayingView extends GetView<PlayerController> {
 
   Widget _buildHeader() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -122,14 +122,14 @@ class NowPlayingView extends GetView<PlayerController> {
 
   Widget _buildRollingTipZone() {
     return const Padding(
-      padding: EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.only(bottom: 8),
       child: RollingTipWidget(),
     );
   }
 
   Widget _buildPlaybackControlZone() {
     return Container(
-      padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 8.h),  // Reduced from 16h to 8h
+      padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 2.h),  // Minimized to fix overflow
       child: Column(
         children: [
           // Progress Bar with Time Display
@@ -167,6 +167,9 @@ class NowPlayingView extends GetView<PlayerController> {
                         ),
                         child: Slider(
                           value: progress.clamp(0.0, 1.0),
+                          onChanged: (value) {
+                            // Required parameter - no action during drag for smooth performance
+                          },
                           onChangeEnd: (value) {
                             // Seek when user finishes dragging
                             final newPosition = Duration(

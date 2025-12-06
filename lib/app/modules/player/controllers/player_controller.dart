@@ -20,6 +20,11 @@ class PlayerController extends GetxController {
   // Audio position and duration observables
   final currentPosition = Duration.zero.obs;
   final currentDuration = Duration.zero.obs;
+  
+  // Seek bar drag state
+  final isDraggingSeekBar = false.obs;
+  final tempSeekPosition = 0.0.obs;
+
 
   @override
   void onInit() {
