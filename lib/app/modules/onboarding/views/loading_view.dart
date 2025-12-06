@@ -45,9 +45,9 @@ class _LoadingViewState extends State<LoadingView> with TickerProviderStateMixin
   void initState() {
     super.initState();
     
-    // 메인 시퀀스 (3초)
+    // 메인 시퀀스 (7초 - 테스트용, 나중에 3초로 변경)
     _mainSequenceController = AnimationController(
-      duration: const Duration(milliseconds: 3000),
+      duration: const Duration(milliseconds: 7000),
       vsync: this,
     );
     
@@ -125,8 +125,8 @@ class _LoadingViewState extends State<LoadingView> with TickerProviderStateMixin
       _logoDrawController.forward();
     });
     
-    // 전환 예약 (3.5초 후)
-    Timer(const Duration(milliseconds: 3500), () {
+    // 전환 예약 (8초 후 - 테스트용)
+    Timer(const Duration(milliseconds: 8000), () {
       _startTransition();
     });
   }
@@ -154,7 +154,7 @@ class _LoadingViewState extends State<LoadingView> with TickerProviderStateMixin
     try { Get.find<HapticService>().mediumImpact(); } catch(_) {}
     
     Future.delayed(const Duration(milliseconds: 800), () {
-      Get.offAllNamed(Routes.HOME);
+      Get.offAllNamed(Routes.WELCOME);  // 시네마틱 스플래시 후 Welcome 화면으로
     });
   }
 

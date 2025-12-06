@@ -103,6 +103,7 @@ class _SplashWelcomeViewState extends State<SplashWelcomeView> with TickerProvid
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           // 메인 컨텐츠

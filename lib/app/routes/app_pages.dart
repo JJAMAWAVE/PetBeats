@@ -27,7 +27,7 @@ import '../modules/review/controllers/review_controller.dart';
 import 'app_routes.dart';
 
 class AppPages {
-  static const INITIAL = Routes.WELCOME;
+  static const INITIAL = Routes.LOADING;  // 시네마틱 스플래시 먼저 보여줌
 
   static final routes = [
     GetPage(
