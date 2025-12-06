@@ -56,6 +56,7 @@ dependencies:
   google_sign_in: ^6.2.1
   # geolocator: ^8.2.1
   http: ^1.1.2
+  flutter_native_splash: ^2.4.4
   # flutter_blue_plus: ^1.31.17
 
 dev_dependencies:
@@ -144,3 +145,23 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+# flutter_native_splash 설정
+flutter_native_splash:
+  color: "#FAFAFA"
+  image: assets/images/splash_logo.png
+  color_dark: "#1A1A1A"
+  image_dark: assets/images/splash_logo.png
+  
+  android: true
+  ios: true
+  web: true
+  
+  # Android 12+ 대응
+  android_12:
+    color: "#FAFAFA"
+    icon_background_color: "#FAFAFA"
+    image: assets/images/splash_logo.png
+    color_dark: "#1A1A1A"
+    icon_background_color_dark: "#1A1A1A"
+    image_dark: assets/images/splash_logo.png

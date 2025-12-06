@@ -56,7 +56,7 @@ class HomeController extends GetxController {
   // 리뷰 요청을 위한 재생 시간 추적
   Timer? _playTimeTimer;
   int _totalPlayTimeSeconds = 0;
-  static const int _reviewRequestThreshold = 300; // 5분 = 300초
+  static const int _reviewRequestThreshold = 10; // 테스트용 10초 (원래 300초 = 5분)
 
   @override
   void onInit() {
