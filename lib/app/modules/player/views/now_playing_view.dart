@@ -58,7 +58,7 @@ class NowPlayingView extends GetView<PlayerController> {
       bpm: controller.currentTrackBpm,
       isPlaying: controller.isPlaying,
       color: controller.currentTrackColor,
-      mode: controller.homeController.currentMode.value??.id ?? 'sleep',
+      mode: controller.homeController.currentMode.value?.id ?? 'sleep',
     ));
   }
 
