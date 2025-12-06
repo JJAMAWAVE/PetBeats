@@ -14,26 +14,26 @@ class VisualizerTheme {
     required this.glowColor,
   });
 
-  // 수면/시니어: 깊은 파란색과 보라 (차분하고 평화로움)
+  // 수면/시니어: 따뜻한 새벽빛 (포근하고 치유적)
   static const sleepTheme = VisualizerTheme(
     backgroundGradient: LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
       colors: [
-        Color(0xFF1A1A2E), // 딥 네이비
-        Color(0xFF16213E), // 미드나잇 블루
-        Color(0xFF0F3460), // 다크 블루
+        Color(0xFF2D1B2E), // 따뜻한 딥 퍼플
+        Color(0xFF4A2C4A), // 로즈 그레이
+        Color(0xFF6B4A6B), // 소프트 모브
       ],
     ),
     waveformGradient: LinearGradient(
       colors: [
-        Color(0xFF5E60CE), // 비비드 퍼플
-        Color(0xFF6930C3), // 딥 퍼플
-        Color(0xFF80FFDB), // 민트 아쿠아
+        Color(0xFFFFD700), // 골드
+        Color(0xFFFFA500), // 오렌지 골드
+        Color(0xFFFFF8DC), // 웜 크림
       ],
     ),
-    particleColor: Color(0xFF80FFDB), // 밝은 민트
-    glowColor: Color(0xFF5E60CE), // 비비드 퍼플
+    particleColor: Color(0xFFFFE66D), // 반딧불이 옐로우
+    glowColor: Color(0xFFFFD700), // 웜 골드
   );
 
   // 불안: 청록색과 초록 (진정되고 평온함)

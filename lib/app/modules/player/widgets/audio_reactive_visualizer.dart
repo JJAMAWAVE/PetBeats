@@ -108,13 +108,13 @@ class _AudioReactiveVisualizerState extends State<AudioReactiveVisualizer>
 
   void _generateParticles() {
     final random = math.Random();
-    // Increased particle count and size for better visibility
-    for (int i = 0; i < 300; i++) {
+    // 반딧불이 효과: 적은 개수, 느린 속도, 다양한 크기
+    for (int i = 0; i < 150; i++) {  // 300→150으로 감소
       _particles.add(Particle(
         x: random.nextDouble(),
         y: random.nextDouble(),
-        size: 4 + random.nextDouble() * 8, // Increased from 2-6 to 4-12
-        speed: 0.0005 + random.nextDouble() * 0.002, // Increased speed 5x
+        size: 3 + random.nextDouble() * 12, // 3-15px 범위로 다양성
+        speed: 0.0002 + random.nextDouble() * 0.0006, // 2.5배 느리게 (차분한 느낌)
         phase: random.nextDouble() * math.pi * 2,
       ));
     }
@@ -317,17 +317,21 @@ class ParticlePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color.withOpacity(0.7) // Increased from 0.3 to 0.7
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 8); // Increased blur
-
     for (final particle in particles) {
-      // Smoother, more visible movement
-      final offsetY = math.sin(particle.phase + time * 25) * particle.speed * size.height; // Increased multiplier
-      final offsetX = math.cos(particle.phase + time * 25) * particle.speed * size.width;
+      // 반딧불이처럼 천천히 움직이기
+      final offsetY = math.sin(particle.phase + time * 8) * particle.speed * size.height; // 느린 움직임
+      final offsetX = math.cos(particle.phase + time * 8) * particle.speed * size.width;
       
       final x = (particle.x * size.width + offsetX) % size.width;
       final y = (particle.y * size.height + offsetY) % size.height;
+
+      // 호흡하는 글로우 효과 (반딧불이 깜빡임)
+      final breathe = (math.sin(time * 3 + particle.phase) + 1) / 2; // 0.0-1.0
+      final alpha = 0.4 + (breathe * 0.5); // 0.4-0.9 범위로 깜빡임
+      
+      final paint = Paint()
+        ..color = color.withOpacity(alpha)
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, 10 + breathe * 5); // 글로우도 깜빡임
 
       canvas.drawCircle(Offset(x, y), particle.size, paint);
     }
