@@ -108,12 +108,13 @@ class _AudioReactiveVisualizerState extends State<AudioReactiveVisualizer>
 
   void _generateParticles() {
     final random = math.Random();
-    for (int i = 0; i < 200; i++) {
+    // Increased particle count and size for better visibility
+    for (int i = 0; i < 300; i++) {
       _particles.add(Particle(
         x: random.nextDouble(),
         y: random.nextDouble(),
-        size: 2 + random.nextDouble() * 4,
-        speed: 0.0001 + random.nextDouble() * 0.0003,
+        size: 4 + random.nextDouble() * 8, // Increased from 2-6 to 4-12
+        speed: 0.0005 + random.nextDouble() * 0.002, // Increased speed 5x
         phase: random.nextDouble() * math.pi * 2,
       ));
     }
@@ -246,9 +247,9 @@ class _AudioReactiveVisualizerState extends State<AudioReactiveVisualizer>
   }
 
   Widget _buildCentralOrb(VisualizerTheme theme) {
-    final scale = 0.9 + (_pulseController.value * 0.2);
+    final scale = 0.8 + (_pulseController.value * 0.4); // Increased pulse range
     final totalEnergy = (_bassIntensity + _midIntensity + _highIntensity) / 3;
-    final orbSize = 40.0 + (totalEnergy * 20);
+    final orbSize = 80.0 + (totalEnergy * 40); // Doubled base size and energy response
     
     return Center(
       child: Transform.scale(
@@ -260,16 +261,22 @@ class _AudioReactiveVisualizerState extends State<AudioReactiveVisualizer>
             shape: BoxShape.circle,
             gradient: RadialGradient(
               colors: [
-                theme.glowColor.withOpacity(0.8),
-                theme.glowColor.withOpacity(0.4),
+                theme.glowColor.withOpacity(1.0), // Full opacity at center
+                theme.glowColor.withOpacity(0.6),
                 theme.glowColor.withOpacity(0.0),
               ],
             ),
             boxShadow: [
               BoxShadow(
-                color: theme.glowColor.withOpacity(0.6),
-                blurRadius: 30,
-                spreadRadius: 10,
+                color: theme.glowColor.withOpacity(0.8), // Increased glow
+                blurRadius: 60, // Doubled blur
+                spreadRadius: 20, // Doubled spread
+              ),
+              // Additional glow layer
+              BoxShadow(
+                color: theme.glowColor.withOpacity(0.4),
+                blurRadius: 100,
+                spreadRadius: 30,
               ),
             ],
           ),
@@ -311,13 +318,13 @@ class ParticlePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = color.withOpacity(0.3)
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4);
+      ..color = color.withOpacity(0.7) // Increased from 0.3 to 0.7
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 8); // Increased blur
 
     for (final particle in particles) {
-      // 펄린 노이즈처럼 움직임
-      final offsetY = math.sin(particle.phase + time * 10) * particle.speed * size.height;
-      final offsetX = math.cos(particle.phase + time * 10) * particle.speed * size.width;
+      // Smoother, more visible movement
+      final offsetY = math.sin(particle.phase + time * 25) * particle.speed * size.height; // Increased multiplier
+      final offsetX = math.cos(particle.phase + time * 25) * particle.speed * size.width;
       
       final x = (particle.x * size.width + offsetX) % size.width;
       final y = (particle.y * size.height + offsetY) % size.height;

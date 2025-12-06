@@ -37,8 +37,8 @@ class WaveformPainter extends CustomPainter {
 
     // 글로우 효과를 위한 페인트
     final glowPaint = Paint()
-      ..color = glowColor.withOpacity(0.3)
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10)
+      ..color = glowColor.withOpacity(0.6) // Increased from 0.3
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 20) // Doubled blur
       ..style = PaintingStyle.fill;
 
     // 각 주파수 빈을 바로 그리기
@@ -56,7 +56,7 @@ class WaveformPainter extends CustomPainter {
 
       // 바 그리기
       final path = Path();
-      final barWidth = 2.0 + (energy * 2); // 에너지에 따라 두께 변화
+      final barWidth = 4.0 + (energy * 4); // Doubled thickness: was 2.0 + energy*2
       
       // 사각형 바 대신 부채꼴 형태로
       final halfWidth = barWidth / 2;
