@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import '../../../data/services/audio_service.dart';
 import '../../../data/services/haptic_service.dart';
+import '../../../data/services/review_service.dart';
 import '../../../../core/services/bgm_service.dart';
 import '../../../../core/services/web_bgm_service.dart';
 import '../../onboarding/controllers/onboarding_controller.dart';
@@ -15,6 +17,7 @@ import '../../../data/data_source/track_data.dart';
 class HomeController extends GetxController {
   final AudioService _audioService = Get.put(AudioService());
   final HapticService _hapticService = Get.put(HapticService());
+  final ReviewService _reviewService = Get.find<ReviewService>();
   // Use WebBgmService on web, BgmService otherwise
   late final dynamic _bgmService = kIsWeb ? Get.find<WebBgmService>() : BgmService();
 
@@ -49,6 +52,11 @@ class HomeController extends GetxController {
   final speciesTabs = <SpeciesTab>[].obs;
 
   final _storage = GetStorage();
+  
+  // 리뷰 요청을 위한 재생 시간 추적
+  Timer? _playTimeTimer;
+  int _totalPlayTimeSeconds = 0;
+  static const int _reviewRequestThreshold = 300; // 5분 = 300초
 
   @override
   void onInit() {
@@ -291,6 +299,7 @@ class HomeController extends GetxController {
     // currentTrack.value = null; // REMOVED
     _audioService.pause();
     _hapticService.stop();
+    _stopPlayTimeTracking(); // 재생 시간 추적 중지
   }
 
   void playSound(String modeId) {
@@ -355,6 +364,9 @@ class HomeController extends GetxController {
       _hapticService.startHeartbeat(bpm);
     }
     
+    // 재생 시간 추적 시작
+    _startPlayTimeTracking();
+    
     print('🎵 [DEBUG] Navigating to now-playing');
     // Navigate to Immersive Player
     Get.toNamed('/now-playing');
@@ -368,6 +380,7 @@ class HomeController extends GetxController {
       isPlaying.value = false;
       _audioService.pause();
       _hapticService.stop();
+      _stopPlayTimeTracking(); // 재생 시간 추적 중지
     } else {
       // Resume
       print('▶️ [DEBUG] Resuming playback');
@@ -386,6 +399,7 @@ class HomeController extends GetxController {
           }
           _hapticService.startHeartbeat(bpm);
         }
+        _startPlayTimeTracking(); // 재생 시간 추적 재개
       }
     }
   }
@@ -411,6 +425,33 @@ class HomeController extends GetxController {
         _hapticService.stop();
       }
     }
+  }
+  
+  // 재생 시간 추적 시작
+  void _startPlayTimeTracking() {
+    _playTimeTimer?.cancel(); // 기존 타이머 정리
+    _playTimeTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      _totalPlayTimeSeconds++;
+      print('⏱️ [DEBUG] Total play time: $_totalPlayTimeSeconds seconds');
+      
+      // 5분(300초) 달성 시 리뷰 요청
+      if (_totalPlayTimeSeconds >= _reviewRequestThreshold) {
+        print('⭐ [DEBUG] 5분 재생 완료! 리뷰 요청 호출');
+        _playTimeTimer?.cancel();
+        _reviewService.requestReview();
+      }
+    });
+  }
+  
+  // 재생 시간 추적 중지
+  void _stopPlayTimeTracking() {
+    _playTimeTimer?.cancel();
+  }
+  
+  @override
+  void onClose() {
+    _playTimeTimer?.cancel();
+    super.onClose();
   }
 }
 
