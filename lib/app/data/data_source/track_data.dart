@@ -701,6 +701,194 @@ class TrackData {
     ),
   ];
 
+  // 6. Cat Sleep (고양이 수면 유도)
+  static final List<Track> catSleepTracks = [
+    Track(
+      id: 'cat_sleep_01',
+      title: '편안한 리듬',
+      description: 'Piano의 따뜻한 중간 템포',
+      audioUrl: 'assets/sound/6_1_골골송 자장가/New Composition  255.mp3',
+      midiUrl: 'assets/sound/6_1_골골송 자장가/New Composition  255 - Orchestrated.mid',
+      coverUrl: 'assets/images/cat_sleep_cover.jpg',
+      bpm: '115 BPM',
+      technicalSpecs: {
+        'Key': 'Auto',
+        'Tempo': '115 BPM',
+        'Harmony': 'Simple Chords II',
+        'Instruments': 'Acoustic Grand Piano',
+      },
+      tags: ['Cat', 'Sleep', 'Piano'],
+      isPremium: false,
+    ),
+    Track(
+      id: 'cat_sleep_02',
+      title: '맑은 별빛',
+      description: 'Celesta의 청명한 소리',
+      audioUrl: 'assets/sound/6_2_꿈꾸는 젤리/New Composition  256.mp3',
+      midiUrl: 'assets/sound/6_2_꿈꾸는 젤리/New Composition  256 - Orchestrated.mid',
+      coverUrl: 'assets/images/cat_sleep_cover.jpg',
+      bpm: '55 BPM',
+      technicalSpecs: {
+        'Key': 'Auto',
+        'Tempo': '55 BPM',
+        'Harmony': 'Simple Chords I',
+        'Instruments': 'Celesta / Bassoon',
+      },
+      tags: ['Cat', 'Sleep', 'Celesta'],
+      isPremium: false,
+    ),
+    Track(
+      id: 'cat_sleep_03',
+      title: '깊은 휴식',
+      description: 'Harp와 저음의 깊은 안정',
+      audioUrl: 'assets/sound/6_3_아기냥의 낮잠/New Composition  257.mp3',
+      midiUrl: 'assets/sound/6_3_아기냥의 낮잠/New Composition  257 - Orchestrated.mid',
+      coverUrl: 'assets/images/cat_sleep_cover.jpg',
+      bpm: '45 BPM',
+      technicalSpecs: {
+        'Key': 'Auto',
+        'Tempo': '45 BPM',
+        'Harmony': 'Simple Chords I',
+        'Instruments': 'Orchestral Harp / Contrabass',
+      },
+      tags: ['Cat', 'Sleep', 'Harp'],
+      isPremium: true,
+    ),
+    Track(
+      id: 'cat_sleep_04',
+      title: '고요한 밤',
+      description: '단순한 피아노의 평온함',
+      audioUrl: 'assets/sound/6_4_엄마의 품/New Composition  258.mp3',
+      midiUrl: 'assets/sound/6_4_엄마의 품/New Composition  258 - Orchestrated.mid',
+      coverUrl: 'assets/images/cat_sleep_cover.jpg',
+      bpm: '45 BPM',
+      technicalSpecs: {
+        'Key': 'Auto',
+        'Tempo': '45 BPM',
+        'Harmony': 'Simple Chords I',
+        'Instruments': 'Acoustic Grand Piano',
+      },
+      tags: ['Cat', 'Sleep', 'Piano'],
+      isPremium: true,
+    ),
+    Track(
+      id: 'cat_sleep_05',
+      title: '은은한 달빛',
+      description: 'Piano 솔로의 부드러움',
+      audioUrl: 'assets/sound/6_5_깊은 밤의 우주/New Composition  259.mp3',
+      midiUrl: 'assets/sound/6_5_깊은 밤의 우주/New Composition  259 - Orchestrated.mid',
+      coverUrl: 'assets/images/cat_sleep_cover.jpg',
+      bpm: '55 BPM',
+      technicalSpecs: {
+        'Key': 'Auto',
+        'Tempo': '55 BPM',
+        'Harmony': 'Simple Chords I',
+        'Instruments': 'Acoustic Grand Piano',
+      },
+      tags: ['Cat', 'Sleep', 'Piano'],
+      isPremium: true,
+    ),
+    Track(
+      id: 'cat_sleep_06',
+      title: '포근한 꿈',
+      description: '느린 템포의 피아노 선율',
+      audioUrl: 'assets/sound/6_6_달빛 소나타/New Composition  260.mp3',
+      midiUrl: 'assets/sound/6_6_달빛 소나타/New Composition  260 - Orchestrated.mid',
+      coverUrl: 'assets/images/cat_sleep_cover.jpg',
+      bpm: '50 BPM',
+      technicalSpecs: {
+        'Key': 'Auto',
+        'Tempo': '50 BPM',
+        'Harmony': 'Simple Chords I',
+        'Instruments': 'Acoustic Grand Piano',
+      },
+      tags: ['Cat', 'Sleep', 'Piano'],
+      isPremium: true,
+    ),
+    Track(
+      id: 'cat_sleep_07',
+      title: '따뜻한 쉼터',
+      description: 'Piano의 포근한 울림',
+      audioUrl: 'assets/sound/6_7_따뜻한 온돌/New Composition  261.mp3',
+      midiUrl: 'assets/sound/6_7_따뜻한 온돌/New Composition  261 - Orchestrated.mid',
+      coverUrl: 'assets/images/cat_sleep_cover.jpg',
+      bpm: '50 BPM',
+      technicalSpecs: {
+        'Key': 'Auto',
+        'Tempo': '50 BPM',
+        'Harmony': 'Simple Chords I',
+        'Instruments': 'Acoustic Grand Piano',
+      },
+      tags: ['Cat', 'Sleep', 'Piano'],
+      isPremium: true,
+    ),
+    Track(
+      id: 'cat_sleep_08',
+      title: '부드러운 울림',
+      description: 'Vibraphone의 독특한 질감',
+      audioUrl: 'assets/sound/6_8_치유의 단잠/New Composition  262.mp3',
+      midiUrl: 'assets/sound/6_8_치유의 단잠/New Composition  262 - Orchestrated.mid',
+      coverUrl: 'assets/images/cat_sleep_cover.jpg',
+      bpm: '50 BPM',
+      technicalSpecs: {
+        'Key': 'Auto',
+        'Tempo': '50 BPM',
+        'Harmony': 'Simple Chords I',
+        'Instruments': 'Vibraphone / Acoustic Grand Piano',
+      },
+      tags: ['Cat', 'Sleep', 'Vibraphone'],
+      isPremium: true,
+    ),
+  ];
+
+  // 7. Cat Separation (고양이 분리불안) - 재구성된 제목
+  static final List<Track> catSeparationTracks = [
+    Track(id: 'cat_separation_01', title: '안전한 공간', description: 'Orchestral Harp의 중간 템포', audioUrl: 'assets/sound/7_1_안전 가옥/New Composition  263.mp3', midiUrl: 'assets/sound/7_1_안전 가옥/New Composition  263 - Orchestrated.mid', coverUrl: 'assets/images/cat_sep_cover.jpg', bpm: '65 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '65 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Orchestral Harp / Oboe'}, tags: ['Cat', 'Separation', 'Harp'], isPremium: false),
+    Track(id: 'cat_separation_02', title: '맑은 오후', description: 'Flute의 느린 템포', audioUrl: 'assets/sound/7_2_창가 자리/New Composition  264.mp3', midiUrl: 'assets/sound/7_2_창가 자리/New Composition  264 - Orchestrated.mid', coverUrl: 'assets/images/cat_sep_cover.jpg', bpm: '60 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '60 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Flute / Acoustic Grand Piano'}, tags: ['Cat', 'Separation', 'Flute'], isPremium: false),
+    Track(id: 'cat_separation_03', title: '평온한 안식처', description: 'Acoustic Grand Piano의 느린 템포', audioUrl: 'assets/sound/7_3_숨숨집의 평화/New Composition  265.mp3', midiUrl: 'assets/sound/7_3_숨숨집의 평화/New Composition  265 - Orchestrated.mid', coverUrl: 'assets/images/cat_sep_cover.jpg', bpm: '55 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '55 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Acoustic Grand Piano'}, tags: ['Cat', 'Separation', 'Piano'], isPremium: true),
+    Track(id: 'cat_separation_04', title: '부드러운 바람', description: 'Clarinet의 느린 템포', audioUrl: 'assets/sound/7_4_부드러운 공기/New Composition  266.mp3', midiUrl: 'assets/sound/7_4_부드러운 공기/New Composition  266 - Orchestrated.mid', coverUrl: 'assets/images/cat_sep_cover.jpg', bpm: '50 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '50 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Clarinet / Acoustic Grand Piano'}, tags: ['Cat', 'Separation', 'Clarinet'], isPremium: true),
+    Track(id: 'cat_separation_05', title: '따뜻한 동행', description: 'Cello의 중간 템포', audioUrl: 'assets/sound/7_5_친구의 목소리/New Composition  267.mp3', midiUrl: 'assets/sound/7_5_친구의 목소리/New Composition  267 - Orchestrated.mid', coverUrl: 'assets/images/cat_sep_cover.jpg', bpm: '65 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '65 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Cello'}, tags: ['Cat', 'Separation', 'Cello'], isPremium: true),
+    Track(id: 'cat_separation_06', title: '따스한 시간', description: 'Electric Guitar의 중간 템포', audioUrl: 'assets/sound/7_6_오후의 햇살/New Composition  268.mp3', midiUrl: 'assets/sound/7_6_오후의 햇살/New Composition  268 - Orchestrated.mid', coverUrl: 'assets/images/cat_sep_cover.jpg', bpm: '70 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '70 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Electric Guitar (clean) / Acoustic Grand Piano'}, tags: ['Cat', 'Separation', 'Guitar'], isPremium: true),
+    Track(id: 'cat_separation_07', title: '편안한 일상', description: 'Piano의 중간 템포', audioUrl: 'assets/sound/7_7_그루밍 타임/New Composition  269.mp3', midiUrl: 'assets/sound/7_7_그루밍 타임/New Composition  269 - Orchestrated.mid', coverUrl: 'assets/images/cat_sep_cover.jpg', bpm: '65 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '65 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Acoustic Grand Piano / Electric Bass (pick)'}, tags: ['Cat', 'Separation', 'Piano'], isPremium: true),
+    Track(id: 'cat_separation_08', title: '고요한 순간', description: 'Viola의 중간 템포', audioUrl: 'assets/sound/7_8_평온한 관찰/New Composition  270.mp3', midiUrl: 'assets/sound/7_8_평온한 관찰/New Composition  270 - Orchestrated.mid', coverUrl: 'assets/images/cat_sep_cover.jpg', bpm: '65 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '65 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Viola / Acoustic Grand Piano'}, tags: ['Cat', 'Separation', 'Viola'], isPremium: true),
+  ];
+
+  // 8. Cat Noise Masking (고양이 소음 차단) - 재구성된 제목
+  static final List<Track> catNoiseTracks = [
+    Track(id: 'cat_noise_01', title: '부드러운 차단', description: 'Piano의 느린 템포', audioUrl: 'assets/sound/8_1_빗소리 커튼/New Composition  271.mp3', midiUrl: 'assets/sound/8_1_빗소리 커튼/New Composition  271 - Orchestrated.mid', coverUrl: 'assets/images/cat_noise_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Acoustic Grand Piano'}, tags: ['Cat', 'Noise', 'Piano'], isPremium: false),
+    Track(id: 'cat_noise_02', title: '자연의 속삭임', description: 'Harp의 느린 템포', audioUrl: 'assets/sound/8_2_바람의 노래/New Composition  272.mp3', midiUrl: 'assets/sound/8_2_바람의 노래/New Composition  272 - Orchestrated.mid', coverUrl: 'assets/images/cat_noise_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Orchestral Harp / Oboe'}, tags: ['Cat', 'Noise', 'Harp'], isPremium: false),
+    Track(id: 'cat_noise_03', title: '따뜻한 보호막', description: 'Piano의 느린 템포', audioUrl: 'assets/sound/8_3_두꺼운 담요/New Composition  273.mp3', midiUrl: 'assets/sound/8_3_두꺼운 담요/New Composition  273 - Orchestrated.mid', coverUrl: 'assets/images/cat_noise_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Acoustic Grand Piano / Contrabass'}, tags: ['Cat', 'Noise', 'Piano'], isPremium: true),
+    Track(id: 'cat_noise_04', title: '깊은 평온', description: 'Piano의 느린 템포', audioUrl: 'assets/sound/8_4_심해의 고요/New Composition  274.mp3', midiUrl: 'assets/sound/8_4_심해의 고요/New Composition  274 - Orchestrated.mid', coverUrl: 'assets/images/cat_noise_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Acoustic Grand Piano / Contrabass'}, tags: ['Cat', 'Noise', 'Piano'], isPremium: true),
+    Track(id: 'cat_noise_05', title: '평화로운 정원', description: 'Bassoon의 느린 템포', audioUrl: 'assets/sound/8_5_새들의 정원/New Composition  275.mp3', midiUrl: 'assets/sound/8_5_새들의 정원/New Composition  275 - Orchestrated.mid', coverUrl: 'assets/images/cat_noise_cover.jpg', bpm: '40 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '40 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Bassoon / Acoustic Grand Piano'}, tags: ['Cat', 'Noise', 'Bassoon'], isPremium: true),
+    Track(id: 'cat_noise_06', title: '흐르는 평온', description: 'Harp의 느린 템포', audioUrl: 'assets/sound/8_6_흐르는 시내/New Composition  276.mp3', midiUrl: 'assets/sound/8_6_흐르는 시내/New Composition  276 - Orchestrated.mid', coverUrl: 'assets/images/cat_noise_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Orchestral Harp / Contrabass'}, tags: ['Cat', 'Noise', 'Harp'], isPremium: true),
+    Track(id: 'cat_noise_07', title: '고요한 방어막', description: 'Piano의 느린 템포', audioUrl: 'assets/sound/8_7_우주 방어막/New Composition  277.mp3', midiUrl: 'assets/sound/8_7_우주 방어막/New Composition  277 - Orchestrated.mid', coverUrl: 'assets/images/cat_noise_cover.jpg', bpm: '40 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '40 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Acoustic Grand Piano'}, tags: ['Cat', 'Noise', 'Piano'], isPremium: true),
+    Track(id: 'cat_noise_08', title: '부드러운 배경', description: 'Viola의 느린 템포', audioUrl: 'assets/sound/8_8_핑크 노이즈/New Composition  278.mp3', midiUrl: 'assets/sound/8_8_핑크 노이즈/New Composition  278 - Orchestrated.mid', coverUrl: 'assets/images/cat_noise_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Viola / Baritone Sax / Acoustic Grand Piano'}, tags: ['Cat', 'Noise', 'Viola'], isPremium: true),
+  ];
+
+  // 9. Cat Energy (고양이 활력 증진) - 재구성된 제목
+  static final List<Track> catEnergyTracks = [
+    Track(id: 'cat_energy_01', title: '경쾌한 질주', description: 'Xylophone의 빠른 템포', audioUrl: 'assets/sound/9_1_우다다 타임/New Composition  279.mp3', midiUrl: 'assets/sound/9_1_우다다 타임/New Composition  279 - Orchestrated.mid', coverUrl: 'assets/images/cat_play_cover.jpg', bpm: '125 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '125 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Xylophone / Electric Bass (pick)'}, tags: ['Cat', 'Energy', 'Xylophone'], isPremium: true),
+    Track(id: 'cat_energy_02', title: '신나는 추격', description: 'Contrabass의 빠른 템포', audioUrl: 'assets/sound/9_2_잡아라 쥐돌이/New Composition  280.mp3', midiUrl: 'assets/sound/9_2_잡아라 쥐돌이/New Composition  280 - Orchestrated.mid', coverUrl: 'assets/images/cat_play_cover.jpg', bpm: '130 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '130 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Contrabass / Electric Guitar (clean)'}, tags: ['Cat', 'Energy', 'Bass'], isPremium: true),
+    Track(id: 'cat_energy_03', title: '가벼운 도약', description: 'Flute의 빠른 템포', audioUrl: 'assets/sound/9_3_새 사냥/New Composition  281.mp3', midiUrl: 'assets/sound/9_3_새 사냥/New Composition  281 - Orchestrated.mid', coverUrl: 'assets/images/cat_play_cover.jpg', bpm: '115 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '115 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Flute / Viola'}, tags: ['Cat', 'Energy', 'Flute'], isPremium: true),
+    Track(id: 'cat_energy_04', title: '활기찬 움직임', description: 'Piano의 빠른 템포', audioUrl: 'assets/sound/9_4_점프 & 런/New Composition  282.mp3', midiUrl: 'assets/sound/9_4_점프 & 런/New Composition  282 - Orchestrated.mid', coverUrl: 'assets/images/cat_play_cover.jpg', bpm: '125 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '125 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Acoustic Grand Piano'}, tags: ['Cat', 'Energy', 'Piano'], isPremium: true),
+    Track(id: 'cat_energy_05', title: '모험의 시작', description: 'Marimba의 빠른 템포', audioUrl: 'assets/sound/9_5_수풀 속으로/New Composition  283.mp3', midiUrl: 'assets/sound/9_5_수풀 속으로/New Composition  283 - Orchestrated.mid', coverUrl: 'assets/images/cat_play_cover.jpg', bpm: '115 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '115 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Marimba / Acoustic Guitar (steel)'}, tags: ['Cat', 'Energy', 'Marimba'], isPremium: true),
+    Track(id: 'cat_energy_06', title: '즐거운 놀이', description: 'Piano의 빠른 템포', audioUrl: 'assets/sound/9_6_낚싯대 놀이/New Composition  284.mp3', midiUrl: 'assets/sound/9_6_낚싯대 놀이/New Composition  284 - Orchestrated.mid', coverUrl: 'assets/images/cat_play_cover.jpg', bpm: '130 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '130 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Acoustic Grand Piano'}, tags: ['Cat', 'Energy', 'Piano'], isPremium: true),
+    Track(id: 'cat_energy_07', title: '신나는 파티', description: 'Distortion Guitar의 빠른 템포', audioUrl: 'assets/sound/9_7_캣닙 파티/New Composition  285.mp3', midiUrl: 'assets/sound/9_7_캣닙 파티/New Composition  285 - Orchestrated.mid', coverUrl: 'assets/images/cat_play_cover.jpg', bpm: '110 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '110 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Distortion Guitar / Electric Bass (pick)'}, tags: ['Cat', 'Energy', 'Guitar'], isPremium: true),
+    Track(id: 'cat_energy_08', title: '리드미컬한 춤', description: 'Xylophone의 빠른 템포', audioUrl: 'assets/sound/9_8_궁디 팡팡/New Composition  286.mp3', midiUrl: 'assets/sound/9_8_궁디 팡팡/New Composition  286 - Orchestrated.mid', coverUrl: 'assets/images/cat_play_cover.jpg', bpm: '120 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '120 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Xylophone / Acoustic Grand Piano / Tuba'}, tags: ['Cat', 'Energy', 'Xylophone'], isPremium: true),
+  ];
+
+  // 10. Cat Senior Care (고양이 시니어 케어) - 재구성된 제목
+  static final List<Track> catSeniorTracks = [
+    Track(id: 'cat_senior_01', title: '치유의 선율', description: 'Piano의 느린 템포', audioUrl: 'assets/sound/10_1_치유의 골골송/New Composition  377.mp3', midiUrl: 'assets/sound/10_1_치유의 골골송/New Composition  377 - Orchestrated.mid', coverUrl: 'assets/images/cat_senior_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Acoustic Grand Piano'}, tags: ['Cat', 'Senior', 'Piano'], isPremium: true),
+    Track(id: 'cat_senior_02', title: '따뜻한 위로', description: 'Contrabass의 느린 템포', audioUrl: 'assets/sound/10_2_따뜻한 찜질/New Composition  378.mp3', midiUrl: 'assets/sound/10_2_따뜻한 찜질/New Composition  378 - Orchestrated.mid', coverUrl: 'assets/images/cat_senior_cover.jpg', bpm: '50 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '50 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Contrabass / Cello'}, tags: ['Cat', 'Senior', 'Bass'], isPremium: true),
+    Track(id: 'cat_senior_03', title: '평온한 오후', description: 'Piano의 느린 템포', audioUrl: 'assets/sound/10_3_느린 오후/New Composition  379.mp3', midiUrl: 'assets/sound/10_3_느린 오후/New Composition  379 - Orchestrated.mid', coverUrl: 'assets/images/cat_senior_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Acoustic Grand Piano / Contrabass'}, tags: ['Cat', 'Senior', 'Piano'], isPremium: true),
+    Track(id: 'cat_senior_04', title: '추억의 여운', description: 'Harp의 느린 템포', audioUrl: 'assets/sound/10_4_기억의 저편/New Composition  380.mp3', midiUrl: 'assets/sound/10_4_기억의 저편/New Composition  380 - Orchestrated.mid', coverUrl: 'assets/images/cat_senior_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Orchestral Harp / Contrabass'}, tags: ['Cat', 'Senior', 'Harp'], isPremium: true),
+    Track(id: 'cat_senior_05', title: '깊은 공명', description: 'Piano의 느린 템포', audioUrl: 'assets/sound/10_5_영혼의 공명/New Composition  381.mp3', midiUrl: 'assets/sound/10_5_영혼의 공명/New Composition  381 - Orchestrated.mid', coverUrl: 'assets/images/cat_senior_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Acoustic Grand Piano / Oboe'}, tags: ['Cat', 'Senior', 'Piano'], isPremium: true),
+    Track(id: 'cat_senior_06', title: '따스한 심박', description: 'Viola의 느린 템포', audioUrl: 'assets/sound/10_6_엄마의 심장/New Composition  382.mp3', midiUrl: 'assets/sound/10_6_엄마의 심장/New Composition  382 - Orchestrated.mid', coverUrl: 'assets/images/cat_senior_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Viola / Acoustic Grand Piano'}, tags: ['Cat', 'Senior', 'Viola'], isPremium: true),
+    Track(id: 'cat_senior_07', title: '고요한 쉼터', description: 'Harp의 느린 템포', audioUrl: 'assets/sound/10_7_고요한 쉼터/New Composition  383.mp3', midiUrl: 'assets/sound/10_7_고요한 쉼터/New Composition  383 - Orchestrated.mid', coverUrl: 'assets/images/cat_senior_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Orchestral Harp / Contrabass'}, tags: ['Cat', 'Senior', 'Harp'], isPremium: true),
+    Track(id: 'cat_senior_08', title: '편안한 호흡', description: 'Viola의 느린 템포', audioUrl: 'assets/sound/10_8_편안한 호흡/New Composition  384.mp3', midiUrl: 'assets/sound/10_8_편안한 호흡/New Composition  384 - Orchestrated.mid', coverUrl: 'assets/images/cat_senior_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Viola / Violin'}, tags: ['Cat', 'Senior', 'Viola'], isPremium: true),
+  ];
+
   static List<Track> getTracksForMode(String modeId) {
     switch (modeId) {
       case 'sleep': return sleepTracks;
@@ -708,6 +896,11 @@ class TrackData {
       case 'noise': return noiseTracks;
       case 'energy': return energyTracks;
       case 'senior': return seniorTracks;
+      case 'cat_sleep': return catSleepTracks;
+      case 'cat_separation': return catSeparationTracks;
+      case 'cat_noise': return catNoiseTracks;
+      case 'cat_energy': return catEnergyTracks;
+      case 'cat_senior': return catSeniorTracks;
       default: return [];
     }
   }
