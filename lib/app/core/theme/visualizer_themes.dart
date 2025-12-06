@@ -14,92 +14,92 @@ class VisualizerTheme {
     required this.glowColor,
   });
 
-  // 수면/시니어: 차분하고 평화로움
+  // 수면/시니어: 깊은 파란색과 보라 (차분하고 평화로움)
   static const sleepTheme = VisualizerTheme(
     backgroundGradient: LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
       colors: [
-        Color(0xFF2C3E50), // 다크 네이비
-        Color(0xFF4A90E2), // 소프트 블루
-        Color(0xFF9B6BCF), // 부드러운 퍼플
+        Color(0xFF1A1A2E), // 딥 네이비
+        Color(0xFF16213E), // 미드나잇 블루
+        Color(0xFF0F3460), // 다크 블루
       ],
     ),
     waveformGradient: LinearGradient(
       colors: [
-        Color(0xFF4A90E2), // 소프트 블루
-        Color(0xFF9B6BCF), // 부드러운 퍼플
-        Color(0xFFE8C4F0), // 라이트 라벤더
+        Color(0xFF5E60CE), // 비비드 퍼플
+        Color(0xFF6930C3), // 딥 퍼플
+        Color(0xFF80FFDB), // 민트 아쿠아
       ],
     ),
-    particleColor: Color(0xFFB8E6F5),
-    glowColor: Color(0xFF9B6BCF),
+    particleColor: Color(0xFF80FFDB), // 밝은 민트
+    glowColor: Color(0xFF5E60CE), // 비비드 퍼플
   );
 
-  // 불안: 진정되고 평온함
+  // 불안: 청록색과 초록 (진정되고 평온함)
   static const anxietyTheme = VisualizerTheme(
     backgroundGradient: LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
       colors: [
-        Color(0xFF1E3A3A), // 다크 틸
-        Color(0xFF67D5B5), // 민트 그린
-        Color(0xFF84C5F4), // 스카이 블루
+        Color(0xFF0A2F35), // 다크 틸
+        Color(0xFF0F4C5C), // 딥 시안
+        Color(0xFF1B5E63), // 오션 그린
       ],
     ),
     waveformGradient: LinearGradient(
       colors: [
-        Color(0xFF67D5B5), // 민트 그린
-        Color(0xFF84C5F4), // 스카이 블루
-        Color(0xFFB8E6F5), // 페일 시안
+        Color(0xFF2EC4B6), // 터키시 블루
+        Color(0xFF64DFDF), // 아쿠아 민트
+        Color(0xFFCBF3F0), // 라이트 시안
       ],
     ),
-    particleColor: Color(0xFFB8E6F5),
-    glowColor: Color(0xFF67D5B5),
+    particleColor: Color(0xFFCBF3F0), // 소프트 민트
+    glowColor: Color(0xFF2EC4B6), // 터키시 블루
   );
 
-  // 에너지: 생동감 있고 고양됨
+  // 에너지: 생동감 있는 주황과 빨강 (활기차고 고양됨)
   static const energyTheme = VisualizerTheme(
     backgroundGradient: LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
       colors: [
-        Color(0xFF7F4A23), // 다크 오렌지
-        Color(0xFFFFAE42), // 따뜻한 오렌지
-        Color(0xFFFFD93D), // 밝은 노란색
+        Color(0xFF641E16), // 딥 레드
+        Color(0xFF922B21), // 다크 카민
+        Color(0xFFBA4A00), // 버닝 오렌지
       ],
     ),
     waveformGradient: LinearGradient(
       colors: [
-        Color(0xFFFFAE42), // 따뜻한 오렌지
-        Color(0xFFFFD93D), // 밝은 노란색
-        Color(0xFFFFF7AE), // 라이트 크림
+        Color(0xFFFF6B6B), // 코랄 레드
+        Color(0xFFFFBE0B), // 선샤인 옐로우
+        Color(0xFFFB5607), // 파이어 오렌지
       ],
     ),
-    particleColor: Color(0xFFFFF7AE),
-    glowColor: Color(0xFFFFAE42),
+    particleColor: Color(0xFFFFBE0B), // 골든 옐로우
+    glowColor: Color(0xFFFF6B6B), // 코랄 레드
   );
 
-  // 소음: 중립적이고 차폐함
+  // 소음: 차가운 실버와 화이트 (중립적이고 차폐함)
   static const noiseTheme = VisualizerTheme(
     backgroundGradient: LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
       colors: [
-        Color(0xFF2C3E50), // 다크 그레이
-        Color(0xFF95A5A6), // 미디엄 그레이
-        Color(0xFFD0D3D4), // 라이트 그레이
+        Color(0xFF212121), // 차콜
+        Color(0xFF424242), // 다크 그레이
+        Color(0xFF616161), // 미디엄 그레이
       ],
     ),
     waveformGradient: LinearGradient(
       colors: [
-        Color(0xFF95A5A6), // 미디엄 그레이
-        Color(0xFFD0D3D4), // 라이트 그레이
-        Color(0xFFFFFFFF), // 화이트
+        Color(0xFFB0BEC5), // 실버 그레이
+        Color(0xFFCFD8DC), // 라이트 스틸
+        Color(0xFFECEFF1), // 페일 그레이
       ],
     ),
-    particleColor: Color(0xFFECF0F1),
-    glowColor: Color(0xFFBDC3C7),
+    particleColor: Color(0xFFECEFF1), // 오프 화이트
+    glowColor: Color(0xFFB0BEC5), // 실버
   );
 
   // 모드 ID로 테마 가져오기
