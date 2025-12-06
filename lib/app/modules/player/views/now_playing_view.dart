@@ -6,6 +6,7 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../controllers/player_controller.dart';
 import '../widgets/bio_pulse_widget.dart';
 import '../widgets/audio_reactive_visualizer.dart';
+import '../widgets/midi_flash_overlay.dart';
 import '../widgets/therapy_control_panel.dart';
 import '../widgets/rolling_tip_widget.dart';
 
@@ -54,11 +55,18 @@ class NowPlayingView extends GetView<PlayerController> {
   }
 
   Widget _buildVisualizerZone() {
-    return Obx(() => AudioReactiveVisualizer(
-      bpm: controller.currentTrackBpm,
-      isPlaying: controller.isPlaying,
-      color: controller.currentTrackColor,
-      mode: controller.homeController.currentMode.value?.id ?? 'sleep',
+    return Obx(() => Stack(
+      children: [
+        // 비주얼라이저
+        AudioReactiveVisualizer(
+          bpm: controller.currentTrackBpm,
+          isPlaying: controller.isPlaying,
+          color: controller.currentTrackColor,
+          mode: controller.homeController.currentMode.value?.id ?? 'sleep',
+        ),
+        // MIDI 비트 섬광 오버레이
+        const MidiFlashOverlay(),
+      ],
     ));
   }
 
