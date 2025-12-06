@@ -54,63 +54,11 @@ class NowPlayingView extends GetView<PlayerController> {
   }
 
   Widget _buildVisualizerZone() {
-    return Obx(() => Stack(
-      children: [
-        // Full-screen audio-reactive visualizer
-        Positioned.fill(
-          child: AudioReactiveVisualizer(
-            bpm: controller.currentTrackBpm,
-            isPlaying: controller.isPlaying,
-            color: controller.currentTrackColor,
-            mode: controller.homeController.currentMode.value?.id ?? 'sleep',
-          ),
-        ),
-        
-        // Track info overlay
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Title - 큰 폰트
-              Text(
-                controller.currentTrackTitle,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28.sp,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.5,
-                  shadows: [
-                    Shadow(
-                      color: Colors.black.withOpacity(0.5),
-                      blurRadius: 10,
-                    ),
-                  ],
-                ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 12.h),
-              // Subtitle - 과학적 근거 강조
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(12.r),
-                  border: Border.all(color: Colors.white.withOpacity(0.2)),
-                ),
-                child: Text(
-                  "${controller.currentTrackBpm} BPM • Audio Reactive",
-                  style: TextStyle(
-                    color: Colors.white.withOpacity(0.9),
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 0.3,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
+    return Obx(() => AudioReactiveVisualizer(
+      bpm: controller.currentTrackBpm,
+      isPlaying: controller.isPlaying,
+      color: controller.currentTrackColor,
+      mode: controller.homeController.currentMode.value??.id ?? 'sleep',
     ));
   }
 
