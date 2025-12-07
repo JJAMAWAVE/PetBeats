@@ -9,6 +9,8 @@ import '../widgets/audio_reactive_visualizer.dart';
 import '../widgets/midi_flash_overlay.dart';
 import '../widgets/therapy_control_panel.dart';
 import '../widgets/rolling_tip_widget.dart';
+import '../widgets/sleep_timer_bottom_sheet.dart';
+import '../widgets/mix_panel_bottom_sheet.dart';
 
 class NowPlayingView extends GetView<PlayerController> {
   const NowPlayingView({super.key});
@@ -35,22 +37,73 @@ class NowPlayingView extends GetView<PlayerController> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
             icon: const Icon(Icons.keyboard_arrow_down, color: Colors.white, size: 32),
             onPressed: () => Get.back(),
           ),
-          Obx(() => Text(
-            controller.currentTrackTitle,
-            style: AppTextStyles.bodyMedium.copyWith(color: Colors.white70),
-          )),
+          Expanded(
+            child: Center(
+              child: Obx(() => Text(
+                controller.currentTrackTitle,
+                style: AppTextStyles.bodyMedium.copyWith(color: Colors.white70),
+                overflow: TextOverflow.ellipsis,
+              )),
+            ),
+          ),
+          // Timer button
+          Obx(() {
+            final isActive = controller.timerService.isActive.value;
+            return GestureDetector(
+              onTap: () => _showTimerBottomSheet(),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                decoration: BoxDecoration(
+                  color: isActive 
+                      ? Colors.amber.withOpacity(0.2) 
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.circular(12.r),
+                  border: isActive 
+                      ? Border.all(color: Colors.amber.withOpacity(0.5)) 
+                      : null,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      isActive ? Icons.timer : Icons.timer_outlined,
+                      color: isActive ? Colors.amber : Colors.white70,
+                      size: 22.w,
+                    ),
+                    if (isActive) ...[
+                      SizedBox(width: 4.w),
+                      Obx(() => Text(
+                        controller.timerService.formattedTime,
+                        style: TextStyle(
+                          color: Colors.amber,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )),
+                    ],
+                  ],
+                ),
+              ),
+            );
+          }),
           IconButton(
             icon: const Icon(Icons.more_vert, color: Colors.white),
             onPressed: () {},
           ),
         ],
       ),
+    );
+  }
+  
+  void _showTimerBottomSheet() {
+    Get.bottomSheet(
+      const SleepTimerBottomSheet(),
+      isScrollControlled: true,
     );
   }
 
@@ -87,6 +140,8 @@ class NowPlayingView extends GetView<PlayerController> {
         onHapticChange: controller.setHapticIntensity,
         isWeatherActive: controller.isWeatherActive.value,
         onWeatherToggle: controller.toggleWeather,
+        hapticMode: controller.hapticMode.value,
+        onHapticModeChange: controller.setHapticMode,
       );
     });
   }
@@ -168,14 +223,15 @@ class NowPlayingView extends GetView<PlayerController> {
           SizedBox(height: 20.h),
           // Playback Controls
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              // Mix button (Premium)
+              _buildMixButton(),
               IconButton(
                 icon: const Icon(Icons.skip_previous, color: Colors.white),
                 iconSize: 32.w,
                 onPressed: () {},
               ),
-              SizedBox(width: 32.w),
               Obx(() => GestureDetector(
                 onTap: controller.togglePlay,
                 child: Container(
@@ -199,16 +255,85 @@ class NowPlayingView extends GetView<PlayerController> {
                   ),
                 ),
               )),
-              SizedBox(width: 32.w),
               IconButton(
                 icon: const Icon(Icons.skip_next, color: Colors.white),
                 iconSize: 32.w,
+                onPressed: () {},
+              ),
+              // Repeat/Shuffle placeholder
+              IconButton(
+                icon: Icon(Icons.repeat, color: Colors.white.withOpacity(0.5)),
+                iconSize: 24.w,
                 onPressed: () {},
               ),
             ],
           ),
         ],
       ),
+    );
+  }
+  
+  Widget _buildMixButton() {
+    return GestureDetector(
+      onTap: () => _showMixPanel(),
+      child: Container(
+        width: 44.w,
+        height: 44.w,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.purple.withOpacity(0.4),
+              Colors.blue.withOpacity(0.3),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(14.r),
+          border: Border.all(
+            color: Colors.purple.withOpacity(0.4),
+            width: 1.5,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.purple.withOpacity(0.2),
+              blurRadius: 8,
+              spreadRadius: 1,
+            ),
+          ],
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Icon(
+              Icons.tune,
+              color: Colors.white,
+              size: 22.w,
+            ),
+            // Premium indicator dot
+            Positioned(
+              top: 6.h,
+              right: 6.w,
+              child: Container(
+                width: 6.w,
+                height: 6.w,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.amber, Colors.orange],
+                  ),
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  
+  void _showMixPanel() {
+    Get.bottomSheet(
+      const MixPanelBottomSheet(),
+      isScrollControlled: true,
     );
   }
 

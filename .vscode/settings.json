@@ -3,5 +3,6 @@
     "java.configuration.updateBuildConfiguration": "interactive",
     "files.exclude": {
         "flutter": true
-    }
+    },
+    "cmake.sourceDirectory": "C:/PetBeats/windows"
 }

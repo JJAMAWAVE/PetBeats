@@ -6,12 +6,15 @@ import '../../../../core/theme/app_text_styles.dart';
 import 'dart:ui';
 
 enum HapticIntensity { off, light, medium, strong, deep }
+enum HapticMode { heartbeat, rampdown, purr }
 
-class TherapyControlPanel extends StatelessWidget {
+class TherapyControlPanel extends StatefulWidget {
   final HapticIntensity hapticIntensity;
   final Function(HapticIntensity) onHapticChange;
   final bool isWeatherActive;
   final VoidCallback onWeatherToggle;
+  final HapticMode? hapticMode;
+  final Function(HapticMode)? onHapticModeChange;
 
   const TherapyControlPanel({
     super.key,
@@ -19,7 +22,22 @@ class TherapyControlPanel extends StatelessWidget {
     required this.onHapticChange,
     required this.isWeatherActive,
     required this.onWeatherToggle,
+    this.hapticMode,
+    this.onHapticModeChange,
   });
+  
+  @override
+  State<TherapyControlPanel> createState() => _TherapyControlPanelState();
+}
+
+class _TherapyControlPanelState extends State<TherapyControlPanel> {
+  HapticMode _selectedMode = HapticMode.heartbeat;
+  
+  @override
+  void initState() {
+    super.initState();
+    _selectedMode = widget.hapticMode ?? HapticMode.heartbeat;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +59,14 @@ class TherapyControlPanel extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(28.r),
             border: Border.all(
-              color: hapticIntensity != HapticIntensity.off 
+              color: widget.hapticIntensity != HapticIntensity.off 
                   ? AppColors.primaryBlue.withOpacity(0.5)
                   : Colors.white.withOpacity(0.2),
               width: 2,
             ),
             boxShadow: [
               BoxShadow(
-                color: hapticIntensity != HapticIntensity.off
+                color: widget.hapticIntensity != HapticIntensity.off
                     ? AppColors.primaryBlue.withOpacity(0.3)
                     : Colors.black.withOpacity(0.15),
                 blurRadius: 24,
@@ -80,10 +98,89 @@ class TherapyControlPanel extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 16.h),
+              // Haptic Mode Selector
+              _buildModeSelector(),
+              SizedBox(height: 16.h),
               // Haptic 슬라이더
               _buildHapticSlider(),
             ],
           ),
+        ),
+      ),
+    );
+  }
+  
+  Widget _buildModeSelector() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _buildModeButton(
+          mode: HapticMode.heartbeat, 
+          icon: Icons.favorite, 
+          label: '심장박동',
+          color: Colors.pinkAccent,
+        ),
+        SizedBox(width: 12.w),
+        _buildModeButton(
+          mode: HapticMode.rampdown, 
+          icon: Icons.trending_down, 
+          label: '진정모드',
+          color: Colors.tealAccent,
+        ),
+        SizedBox(width: 12.w),
+        _buildModeButton(
+          mode: HapticMode.purr, 
+          icon: Icons.pets, 
+          label: '골골송',
+          color: Colors.amber,
+        ),
+      ],
+    );
+  }
+  
+  Widget _buildModeButton({
+    required HapticMode mode,
+    required IconData icon,
+    required String label,
+    required Color color,
+  }) {
+    final isSelected = _selectedMode == mode;
+    
+    return GestureDetector(
+      onTap: () {
+        HapticFeedback.selectionClick();
+        setState(() => _selectedMode = mode);
+        widget.onHapticModeChange?.call(mode);
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        decoration: BoxDecoration(
+          color: isSelected ? color.withOpacity(0.2) : Colors.transparent,
+          borderRadius: BorderRadius.circular(16.r),
+          border: Border.all(
+            color: isSelected ? color : Colors.white.withOpacity(0.2),
+            width: isSelected ? 2 : 1,
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              color: isSelected ? color : Colors.white.withOpacity(0.5),
+              size: 20.w,
+            ),
+            SizedBox(height: 4.h),
+            Text(
+              label,
+              style: TextStyle(
+                color: isSelected ? color : Colors.white.withOpacity(0.5),
+                fontSize: 10.sp,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -108,7 +205,7 @@ class TherapyControlPanel extends StatelessWidget {
             Text(
               'OFF',
               style: TextStyle(
-                color: hapticIntensity == HapticIntensity.off 
+                color: widget.hapticIntensity == HapticIntensity.off 
                     ? Colors.white.withOpacity(0.9)
                     : Colors.white.withOpacity(0.3),
                 fontSize: 11.sp,
@@ -127,14 +224,14 @@ class TherapyControlPanel extends StatelessWidget {
                   overlayColor: AppColors.primaryBlue.withOpacity(0.3),
                 ),
                 child: Slider(
-                  value: _getSliderValue(hapticIntensity),
+                  value: _getSliderValue(widget.hapticIntensity),
                   min: 0,
                   max: 4,
                   divisions: 4,
                   onChanged: (value) {
                     HapticIntensity newIntensity = _getIntensityFromValue(value);
                     _provideHapticFeedback(newIntensity);
-                    onHapticChange(newIntensity);
+                    widget.onHapticChange(newIntensity);
                   },
                 ),
               ),
@@ -142,7 +239,7 @@ class TherapyControlPanel extends StatelessWidget {
             Text(
               'MAX',
               style: TextStyle(
-                color: hapticIntensity == HapticIntensity.deep 
+                color: widget.hapticIntensity == HapticIntensity.deep 
                     ? Colors.amber
                     : Colors.white.withOpacity(0.3),
                 fontSize: 11.sp,
@@ -154,9 +251,9 @@ class TherapyControlPanel extends StatelessWidget {
         SizedBox(height: 8.h),
         // 현재 강도 표시
         Text(
-          _getIntensityLabel(hapticIntensity),
+          _getIntensityLabel(widget.hapticIntensity),
           style: TextStyle(
-            color: hapticIntensity == HapticIntensity.off
+            color: widget.hapticIntensity == HapticIntensity.off
                 ? Colors.white.withOpacity(0.4)
                 : AppColors.primaryBlue,
             fontSize: 13.sp,
@@ -229,24 +326,24 @@ class TherapyControlPanel extends StatelessWidget {
 
   Widget _buildWeatherToggle() {
     return GestureDetector(
-      onTap: onWeatherToggle,
+      onTap: widget.onWeatherToggle,
       child: Container(
         padding: EdgeInsets.all(12.w),
         decoration: BoxDecoration(
-          color: isWeatherActive 
+          color: widget.isWeatherActive 
               ? AppColors.primaryBlue.withOpacity(0.3) 
               : Colors.transparent,
           shape: BoxShape.circle,
           border: Border.all(
-            color: isWeatherActive 
+            color: widget.isWeatherActive 
                 ? AppColors.primaryBlue.withOpacity(0.5) 
                 : Colors.white.withOpacity(0.2),
             width: 1.5,
           ),
         ),
         child: Icon(
-          isWeatherActive ? Icons.cloud : Icons.cloud_off_outlined,
-          color: isWeatherActive ? AppColors.primaryBlue : Colors.white.withOpacity(0.5),
+          widget.isWeatherActive ? Icons.cloud : Icons.cloud_off_outlined,
+          color: widget.isWeatherActive ? AppColors.primaryBlue : Colors.white.withOpacity(0.5),
           size: 24.w,
         ),
       ),

@@ -69,6 +69,89 @@ class HapticService extends GetxService {
     });
   }
 
+  // Calming Ramp-down: 100 BPM → 60 BPM over 5 minutes
+  // 산책 후 과흥분/소음 스트레스 완화용
+  Timer? _rampdownTimer;
+  int _currentBpm = 100;
+  
+  void startCalmingRampdown() {
+    stop(); // 기존 진동 중지
+    _isVibrating = true;
+    _startSafetyTimer();
+    
+    // Initial settings
+    _currentBpm = 100;
+    _masterGain = 1.0; // Start at full gain (no soft start for rampdown)
+    
+    // Calculate: 100 → 60 BPM over 5 minutes (300 seconds)
+    // That's 40 BPM reduction over 300 seconds = ~0.133 BPM per second
+    const totalDurationSeconds = 300;
+    const startBpm = 100;
+    const endBpm = 60;
+    const bpmReduction = startBpm - endBpm; // 40
+    
+    int elapsedSeconds = 0;
+    
+    _rampdownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!_isVibrating) {
+        timer.cancel();
+        return;
+      }
+      
+      elapsedSeconds++;
+      
+      // Calculate current BPM based on linear interpolation
+      final progress = (elapsedSeconds / totalDurationSeconds).clamp(0.0, 1.0);
+      _currentBpm = (startBpm - (bpmReduction * progress)).round();
+      
+      if (elapsedSeconds >= totalDurationSeconds) {
+        // Reached target - continue at 60 BPM
+        _currentBpm = endBpm;
+        timer.cancel();
+        
+        // Show completion notification
+        Get.snackbar(
+          '🌿 진정 완료',
+          '심박수가 안정되었습니다. 편안한 상태를 유지합니다.',
+          backgroundColor: Colors.teal.withOpacity(0.9),
+          colorText: Colors.white,
+          icon: const Icon(Icons.favorite, color: Colors.white),
+          duration: const Duration(seconds: 3),
+          snackPosition: SnackPosition.TOP,
+        );
+      }
+    });
+    
+    // Start the heartbeat with dynamic BPM
+    _startDynamicHeartbeat();
+    
+    print('🌿 Calming Ramp-down started: 100 → 60 BPM over 5 minutes');
+  }
+  
+  void _startDynamicHeartbeat() {
+    // Dynamic heartbeat that respects _currentBpm
+    Future.doWhile(() async {
+      if (!_isVibrating) return false;
+      
+      final interval = Duration(milliseconds: (60000 / _currentBpm).round());
+      await Future.delayed(interval);
+      
+      if (!_isVibrating) return false;
+      
+      if (await Vibration.hasVibrator() ?? false) {
+        final amplitude = (60 * _masterGain).round().clamp(1, 255);
+        if (amplitude > 0) {
+          Vibration.vibrate(duration: 50, amplitude: amplitude);
+        }
+      }
+      
+      return _isVibrating;
+    });
+  }
+  
+  /// Get current BPM (for UI display during rampdown)
+  int get currentBpm => _currentBpm;
+
   // 골골송 진동 (지속적인 미세 진동)
   void startPurr() async {
     stop();
@@ -169,8 +252,10 @@ class HapticService extends GetxService {
     _isVibrating = false;
     _heartbeatTimer?.cancel();
     _rampUpTimer?.cancel();
+    _rampdownTimer?.cancel();
     _safetyTimer?.cancel();
     Vibration.cancel();
     _masterGain = 0.0; // Reset gain
+    _currentBpm = 60; // Reset to default
   }
 }

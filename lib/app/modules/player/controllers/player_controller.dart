@@ -4,6 +4,7 @@ import '../widgets/therapy_control_panel.dart';
 import '../../home/controllers/home_controller.dart';
 import '../../../data/services/haptic_service.dart';
 import '../../../data/services/audio_service.dart';
+import '../../../data/services/timer_service.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../../data/services/audio_analyzer_service.dart';
 import '../models/visualizer_theme.dart';
@@ -13,6 +14,7 @@ class PlayerController extends GetxController {
   final HomeController homeController = Get.find<HomeController>();
   final HapticService _hapticService = Get.find<HapticService>();
   final AudioService _audioService = Get.find<AudioService>();
+  final TimerService timerService = Get.find<TimerService>();
   final _storage = GetStorage();
   
   final AudioAnalyzerService _audioAnalyzer = Get.put(AudioAnalyzerService());
@@ -30,6 +32,11 @@ class PlayerController extends GetxController {
   void onInit() {
     super.onInit();
     _showHapticTipIfFirstTime();
+    
+    // Setup sleep timer completion callback
+    timerService.onTimerComplete = () {
+      homeController.stopSound();
+    };
     
     // Subscribe to audio position and duration streams
     _audioService.positionStream.listen((position) {
@@ -145,9 +152,36 @@ class PlayerController extends GetxController {
     if (intensity == HapticIntensity.off) {
       _hapticService.stop();
     } else {
-      // All non-off intensities trigger heartbeat at track BPM
-      // The intensity difference is handled by the haptic service itself
-      _hapticService.startHeartbeat(currentTrackBpm);
+      // Trigger haptic based on current mode
+      _activateHapticMode();
+    }
+  }
+  
+  // Haptic Mode (heartbeat, rampdown, purr)
+  final hapticMode = HapticMode.heartbeat.obs;
+  
+  void setHapticMode(HapticMode mode) {
+    hapticMode.value = mode;
+    
+    // If haptic is currently active, switch to new mode
+    if (hapticIntensity.value != HapticIntensity.off) {
+      _activateHapticMode();
+    }
+    
+    print('🎵 Haptic mode changed to: $mode');
+  }
+  
+  void _activateHapticMode() {
+    switch (hapticMode.value) {
+      case HapticMode.heartbeat:
+        _hapticService.startHeartbeat(currentTrackBpm);
+        break;
+      case HapticMode.rampdown:
+        _hapticService.startCalmingRampdown();
+        break;
+      case HapticMode.purr:
+        _hapticService.startPurr();
+        break;
     }
   }
 
