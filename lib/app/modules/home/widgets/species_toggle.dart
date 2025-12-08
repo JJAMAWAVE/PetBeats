@@ -54,7 +54,7 @@ class SpeciesToggle extends GetView<HomeController> {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 300), // Slower for smoother feel
             curve: Curves.easeOutCubic,
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
             decoration: BoxDecoration(
               color: isSelected ? Colors.white : Colors.transparent,
               borderRadius: BorderRadius.circular(36),
@@ -86,8 +86,8 @@ class SpeciesToggle extends GetView<HomeController> {
                     ) : null,
                     child: Image.asset(
                       iconPath,
-                      width: 70,
-                      height: 70,
+                      width: 45,  // 35% 축소: 70 → 45
+                      height: 45,
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -100,7 +100,7 @@ class SpeciesToggle extends GetView<HomeController> {
                     style: AppTextStyles.bodyMedium.copyWith(
                       color: isSelected ? AppColors.primaryBlue : AppColors.textGrey,
                       fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                      fontSize: 16, // Slightly larger font
+                      fontSize: 14, // 축소된 사이즈에 맞춤
                     ),
                   ),
                 ),

@@ -65,25 +65,25 @@ class _OnboardingViewState extends State<OnboardingView> with TickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    // V2 Slides Data
+    // V2 Slides Data - 한글 통일
     final List<Map<String, String>> slides = [
       {
-        "title": "A Shelter in the Noise",
+        "title": "소음 속 안식처",
         "desc": "시끄러운 세상 속, 보호자님의 사랑으로\n아이에게 평온한 쉼터를 선물하세요.",
         "image": "assets/images/onboarding/step1_shelter.png"
       },
       {
-        "title": "Bio-Acoustic Design",
+        "title": "바이오-음향 설계",
         "desc": "사람보다 예민한 아이들을 위해,\n뇌파를 안정시키는 특수 음향을 설계했습니다.",
         "image": "assets/images/onboarding/step2_brainwave_v4.png"
       },
       {
-        "title": "Therapy Beyond Sound",
+        "title": "소리를 넘어선 테라피",
         "desc": "음악 그 이상입니다.\n심장 박동을 닮은 진동이 깊은 안정을 줍니다.",
         "image": "assets/images/onboarding/step3_vibration_v3.png"
       },
       {
-        "title": "Resonate Together",
+        "title": "함께 공명하다",
         "desc": "아이를 품에 안고 느껴보세요.\n심장이 맞춰지는 순간, 진정한 치유가 완성됩니다.",
         "image": "assets/images/onboarding/step4_resonance_v3.png"
       },
@@ -179,7 +179,7 @@ class _OnboardingViewState extends State<OnboardingView> with TickerProviderStat
                     },
                   ),
                 ),
-                // Text Area (40%)
+                // Text Area (Modified to be flexible)
                 Expanded(
                   flex: 4,
                   child: Container(
@@ -198,7 +198,7 @@ class _OnboardingViewState extends State<OnboardingView> with TickerProviderStat
                             ),
                           ),
                         ),
-                        const SizedBox(height: 32),
+                        const SizedBox(height: 24), // Reduced height
                         
                         // Animated Text Switcher
                         AnimatedSwitcher(
@@ -208,7 +208,7 @@ class _OnboardingViewState extends State<OnboardingView> with TickerProviderStat
                             key: ValueKey('title_${controller.pageIndex}'),
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 16), // Reduced height
                         
                         // Description
                         AnimatedSwitcher(
@@ -219,27 +219,23 @@ class _OnboardingViewState extends State<OnboardingView> with TickerProviderStat
                             textAlign: TextAlign.center,
                             style: AppTextStyles.bodyMedium.copyWith(
                               color: AppColors.textGrey,
-                              height: 1.6,
-                              fontSize: 16,
+                              height: 1.5,
+                              fontSize: 15, // Slightly reduced font size
                             ),
-                          ),
-                        ),
-                        
-                        const SizedBox(height: 40),
-                        
-                        const SizedBox(height: 40),
-                        
-                        // Tap to Start Text (Always visible)
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 20),
-                          child: GestureDetector(
-                            onTap: _handleTap,
-                            behavior: HitTestBehavior.translucent,
-                            child: _BreathingText(),
                           ),
                         ),
                       ],
                     ),
+                  ),
+                ),
+                
+                // Tap to Start Text (Fixed at bottom)
+                Container(
+                  padding: const EdgeInsets.only(bottom: 40, top: 10),
+                  child: GestureDetector(
+                    onTap: _handleTap,
+                    behavior: HitTestBehavior.translucent,
+                    child: _BreathingText(),
                   ),
                 ),
               ],

@@ -163,8 +163,8 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
                   // Glow Effect (Behind) - Rounded Rectangle
                   if (widget.isActive)
                     Container(
-                      width: 130 * _glowAnimation.value,
-                      height: 130 * _glowAnimation.value,
+                      width: 95 * _glowAnimation.value,  // 사이즈 축소
+                      height: 95 * _glowAnimation.value,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(24),
                         color: widget.color?.withOpacity(0.3) ?? AppColors.primaryBlue.withOpacity(0.3),
@@ -180,8 +180,8 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
                   
                   // Main Button - Rounded Rectangle with 3D Effect
                   Container(
-                    width: 130,
-                    height: 130,
+                    width: 85,  // 사이즈 축소: 130 → 85
+                    height: 85,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(24),
                       color: Colors.white,
@@ -216,8 +216,8 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
                     child: Center(
                       child: widget.isPlaying
                           ? SizedBox(
-                              width: 50,
-                              height: 50,
+                              width: 40,  // 애니메이션 크기 축소
+                              height: 40,
                               child: BeatAnimation(color: activeColor),
                             )
                           : _buildAnimatedIcon(activeColor),
@@ -225,13 +225,13 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 4),  // 간격 축소
               AnimatedDefaultTextStyle(
                 duration: const Duration(milliseconds: 200),
                 style: AppTextStyles.bodyMedium.copyWith(
                   color: widget.isActive ? (widget.color ?? AppColors.primaryBlue) : AppColors.textGrey,
                   fontWeight: widget.isActive ? FontWeight.bold : FontWeight.w500,
-                  fontSize: 12,
+                  fontSize: 11,  // 폰트 사이즈 축소
                   shadows: widget.isActive ? [
                     Shadow(
                       color: (widget.color ?? AppColors.primaryBlue).withOpacity(0.3),
@@ -257,8 +257,8 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
   Widget _buildAnimatedIcon(Color activeColor) {
     Widget icon = Image.asset(
       widget.iconPath,
-      width: 80,
-      height: 80,
+      width: 65,  // 아이콘 크기 조정: 80 → 65 (버튼에 가득 차게)
+      height: 65,
       fit: BoxFit.contain,
       filterQuality: FilterQuality.high,
       colorBlendMode: BlendMode.multiply,

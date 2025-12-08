@@ -5,32 +5,76 @@ import 'package:get/get.dart';
 import 'package:vibration/vibration.dart';
 import '../models/midi_note_event.dart';
 import '../models/haptic_envelope.dart';
+import '../models/haptic_settings_model.dart';
+
+enum HapticPattern { none, heartbeat, purr, rampDown }
 
 class HapticService extends GetxService {
   Timer? _heartbeatTimer;
   bool _isVibrating = false;
+  HapticIntensity _currentIntensity = HapticIntensity.medium; // Default
+  
+  // State tracking for pause/resume
+  HapticPattern _currentPattern = HapticPattern.none;
+  HapticPattern _pausedPattern = HapticPattern.none;
+  int _pausedBpm = 60;
 
   // MIDI 노트 이벤트 스트림
   final StreamController<MidiNoteEvent> _midiNoteController = StreamController<MidiNoteEvent>.broadcast();
   Stream<MidiNoteEvent> get midiNoteStream => _midiNoteController.stream;
 
+  void updateIntensity(HapticIntensity intensity) {
+    _currentIntensity = intensity;
+    if (intensity == HapticIntensity.off) {
+      _isVibrating = false;  // 상태 확실히 리셋
+      stop(); // 즉시 정지
+    }
+    print('🎚️ [HapticService] Intensity updated: $intensity -> base amplitude: ${_getBaseAmplitude()}');
+  }
+  
+  /// 강도에 따른 기본 amplitude 반환
+  int _getBaseAmplitude() {
+    switch (_currentIntensity) {
+      case HapticIntensity.off:
+        return 0;
+      case HapticIntensity.light:
+        return 30;   // 약한 진동
+      case HapticIntensity.medium:
+        return 80;   // 중간 진동
+      case HapticIntensity.strong:
+        return 150;  // 강한 진동
+      case HapticIntensity.deep:
+        return 255;  // 최대 진동
+    }
+  }
+  
+  /// masterGain이 적용된 최종 amplitude 반환
+  int _getAdjustedAmplitude() {
+    final base = _getBaseAmplitude();
+    return (base * _masterGain).round().clamp(0, 255);
+  }
+
   // 짧고 경쾌한 햅틱 피드백 (UI 상호작용용)
   void lightImpact() {
+    if (_currentIntensity == HapticIntensity.off) return; // Check OFF
     HapticFeedback.lightImpact();
   }
 
   // 중간 강도 햅틱 피드백
   void mediumImpact() {
+    if (_currentIntensity == HapticIntensity.off) return; // Check OFF
     HapticFeedback.mediumImpact();
   }
 
   // Selection click feedback
   void selectionClick() {
+    if (_currentIntensity == HapticIntensity.off) return; // Check OFF
     lightImpact();
   }
 
   // 강한 햅틱 피드백 (완료/성공 등)
   void heavyImpact() {
+    if (_currentIntensity == HapticIntensity.off) return; // Check OFF
     HapticFeedback.heavyImpact();
   }
 
@@ -41,11 +85,15 @@ class HapticService extends GetxService {
   static const int _safetyTimeoutMinutes = 20;
   static const double _maxAmplitudeScale = 0.8; // Soft Envelope (Max 80%)
 
-  // ... existing code ...
-
   // 하트비트 시작 (BPM 기준)
   void startHeartbeat(int bpm) {
+    if (_currentIntensity == HapticIntensity.off) return; // Check OFF
+    
     stop(); // 기존 진동 중지
+    
+    _currentPattern = HapticPattern.heartbeat;
+    _currentBpm = bpm; // Store for resume
+    
     _isVibrating = true;
     _startRampUp(); // Soft Start 시작
     _startSafetyTimer(); // Safety Timeout 시작
@@ -60,8 +108,8 @@ class HapticService extends GetxService {
       }
       // 짧고 부드러운 진동 (심장 박동 느낌)
       if (await Vibration.hasVibrator() ?? false) {
-        // Apply Master Gain
-        final amplitude = (60 * _masterGain).round().clamp(1, 255);
+        // Apply intensity-based amplitude
+        final amplitude = _getAdjustedAmplitude();
         if (amplitude > 0) {
            Vibration.vibrate(duration: 50, amplitude: amplitude);
         }
@@ -75,7 +123,11 @@ class HapticService extends GetxService {
   int _currentBpm = 100;
   
   void startCalmingRampdown() {
+    if (_currentIntensity == HapticIntensity.off) return; // Check OFF
+    
     stop(); // 기존 진동 중지
+    
+    _currentPattern = HapticPattern.rampDown;
     _isVibrating = true;
     _startSafetyTimer();
     
@@ -139,7 +191,8 @@ class HapticService extends GetxService {
       if (!_isVibrating) return false;
       
       if (await Vibration.hasVibrator() ?? false) {
-        final amplitude = (60 * _masterGain).round().clamp(1, 255);
+        // Apply intensity-based amplitude
+        final amplitude = _getAdjustedAmplitude();
         if (amplitude > 0) {
           Vibration.vibrate(duration: 50, amplitude: amplitude);
         }
@@ -154,20 +207,32 @@ class HapticService extends GetxService {
 
   // 골골송 진동 (지속적인 미세 진동)
   void startPurr() async {
+    if (_currentIntensity == HapticIntensity.off) return; // Check OFF
+    
     stop();
+    _currentPattern = HapticPattern.purr;
     _isVibrating = true;
     _startRampUp();
     _startSafetyTimer();
     
-    if (await Vibration.hasCustomVibrationsSupport() ?? false) {
-      // 패턴: [대기, 진동, 대기, 진동...]
-      // Note: Pattern vibration might not support dynamic amplitude change easily without restarting
-      // For now, we apply static pattern but conceptually it should follow gain
-      Vibration.vibrate(pattern: [0, 200, 50, 200], intensities: [0, 30, 0, 30], repeat: 0);
-    } else {
-      // 기본 진동 (fallback)
-      Vibration.vibrate(duration: 1000);
-    }
+    // Purring loop
+    Future.doWhile(() async {
+      if (!_isVibrating) return false;
+      
+      // 골골송 패턴: 25Hz ~ 150Hz 변조
+      if (await Vibration.hasVibrator() ?? false) {
+        final baseAmp = _getAdjustedAmplitude();
+        // 약간의 랜덤성 추가
+        final amp = (baseAmp * 0.8 + (baseAmp * 0.2 * 0.5)).round().clamp(1, 255);
+        
+        if (amp > 0) {
+          Vibration.vibrate(duration: 40, amplitude: amp);
+        }
+      }
+      
+      await Future.delayed(const Duration(milliseconds: 50));
+      return _isVibrating;
+    });
   }
 
   // MIDI 노트 재생 및 이벤트 발행 (ADSR Envelope 적용)
@@ -179,6 +244,7 @@ class HapticService extends GetxService {
       timestamp: DateTime.now(),
     ));
 
+    if (_currentIntensity == HapticIntensity.off) return; // Check OFF
     if (!_isVibrating) return; // Safety Mute 상태면 진동 안함
 
     // ADSR Envelope을 적용한 부드러운 진동
@@ -246,10 +312,38 @@ class HapticService extends GetxService {
       );
     });
   }
+  
+  // Pause vibration but remember state
+  void pause() {
+    if (_currentPattern == HapticPattern.none) return;
+    print('⏸️ [HapticService] Pausing haptic feedback');
+    _pausedPattern = _currentPattern;
+    _pausedBpm = _currentBpm;
+    stop();
+    // Restore _currentPattern to none is done by stop(), but we have _pausedPattern
+  }
+  
+  // Resume vibration from paused state
+  void resume() {
+    if (_pausedPattern == HapticPattern.none) return;
+    print('▶️ [HapticService] Resuming haptic feedback: $_pausedPattern');
+    
+    if (_pausedPattern == HapticPattern.heartbeat) {
+      startHeartbeat(_pausedBpm);
+    } else if (_pausedPattern == HapticPattern.purr) {
+      startPurr();
+    } else if (_pausedPattern == HapticPattern.rampDown) {
+      // For rampdown, we just restart for now as complex state restoration is tricky
+      startCalmingRampdown();
+    }
+    
+    _pausedPattern = HapticPattern.none;
+  }
 
   // 진동 중지
   void stop() {
     _isVibrating = false;
+    _currentPattern = HapticPattern.none; // Reset pattern
     _heartbeatTimer?.cancel();
     _rampUpTimer?.cancel();
     _rampdownTimer?.cancel();

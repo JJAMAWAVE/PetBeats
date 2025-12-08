@@ -7,6 +7,7 @@ import '../controllers/home_controller.dart';
 import '../../../data/models/mode_model.dart';
 import '../../../data/models/track_model.dart';
 import '../../../routes/app_routes.dart';
+import '../widgets/mini_player.dart';
 
 class ModeDetailView extends GetView<HomeController> {
   const ModeDetailView({super.key});
@@ -27,109 +28,120 @@ class ModeDetailView extends GetView<HomeController> {
         title: Text(mode.title, style: AppTextStyles.subtitle),
         centerTitle: true,
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Mode Header
-            Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                children: [
-                  Container(
-                    width: 80,
-                    height: 80,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: mode.color.withOpacity(0.1),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Image.asset(
-                      mode.iconPath,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    mode.description,
-                    style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textGrey),
-                  ),
-                  const SizedBox(height: 24),
-                  // Subscription Banner (if not premium)
-                  Obx(() {
-                    if (!controller.isPremiumUser.value) {
-                      return GestureDetector(
-                        onTap: () => Get.toNamed(Routes.SUBSCRIPTION),
-                        child: Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                            ),
-                            borderRadius: BorderRadius.circular(12),
-                            boxShadow: [
-                              BoxShadow(
-                                color: const Color(0xFF2575FC).withOpacity(0.3),
-                                blurRadius: 8,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              const Icon(Icons.stars, color: Colors.white),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Unlock All Premium Tracks',
-                                      style: GoogleFonts.poppins(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                    Text(
-                                      'Get access to specialized care sounds',
-                                      style: GoogleFonts.poppins(
-                                        color: Colors.white.withOpacity(0.9),
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
-                            ],
-                          ),
+      body: Stack(
+        children: [
+          SafeArea(
+            child: Column(
+              children: [
+                // Mode Header
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 80,
+                        height: 80,
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: mode.color.withOpacity(0.1),
+                          shape: BoxShape.circle,
                         ),
-                      );
-                    }
-                    return const SizedBox.shrink();
-                  }),
-                ],
-              ),
+                        child: Image.asset(
+                          mode.iconPath,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        mode.description,
+                        style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textGrey),
+                      ),
+                      const SizedBox(height: 24),
+                      // Subscription Banner (if not premium)
+                      Obx(() {
+                        if (!controller.isPremiumUser.value) {
+                          return GestureDetector(
+                            onTap: () => Get.toNamed(Routes.SUBSCRIPTION),
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                              decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: const Color(0xFF2575FC).withOpacity(0.3),
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                children: [
+                                  const Icon(Icons.stars, color: Colors.white),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Unlock All Premium Tracks',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                        Text(
+                                          'Get access to specialized care sounds',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.white.withOpacity(0.9),
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
+                                ],
+                              ),
+                            ),
+                          );
+                        }
+                        return const SizedBox.shrink();
+                      }),
+                    ],
+                  ),
+                ),
+                
+                // Scientific Context Section
+                _buildScientificContext(mode),
+                
+                // Track List
+                Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.only(left: 24, right: 24, bottom: 100), // Extra bottom padding for MiniPlayer
+                    itemCount: mode.tracks.length,
+                    itemBuilder: (context, index) {
+                      final track = mode.tracks[index];
+                      return _buildTrackItem(track);
+                    },
+                  ),
+                ),
+              ],
             ),
-            
-            // Scientific Context Section
-            _buildScientificContext(mode),
-            
-            // Track List
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                itemCount: mode.tracks.length,
-                itemBuilder: (context, index) {
-                  final track = mode.tracks[index];
-                  return _buildTrackItem(track);
-                },
-              ),
-            ),
-          ],
-        ),
+          ),
+          // Mini Player (Floating Bottom Bar)
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: const MiniPlayer(),
+          ),
+        ],
       ),
     );
   }
@@ -285,19 +297,15 @@ class ModeDetailView extends GetView<HomeController> {
                       ),
                     ),
                     const SizedBox(height: 4),
-                    Row(
+                    // Wrap으로 오버플로우 방지
+                    Wrap(
+                      spacing: 6,
+                      runSpacing: 4,
                       children: [
-                        Text(
-                          _getSizeFromTags(track.tags) ?? track.target ?? '공용',
-                          style: AppTextStyles.labelSmall.copyWith(
-                            color: AppColors.primaryBlue,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
+                        // 대형/중형/소형/공용 색상 구분 배지
+                        _buildSizeBadge(_getSizeFromTags(track.tags) ?? track.target ?? '공용'),
                         // Tags (Instrument / BPM)
                         _buildTag(_getInstrumentFromSpecs(track)),
-                        const SizedBox(width: 4),
                         _buildTag(track.bpm ?? '60 BPM'),
                       ],
                     ),
@@ -388,6 +396,47 @@ class ModeDetailView extends GetView<HomeController> {
       if (lowerTag.contains('all') || lowerTag.contains('common')) return '공용';
     }
     return null;
+  }
+  
+  /// 대형/중형/소형/공용 색상 구분 배지
+  Widget _buildSizeBadge(String size) {
+    Color bgColor;
+    Color textColor;
+    
+    switch (size) {
+      case '대형견':
+        bgColor = const Color(0xFF9C27B0).withOpacity(0.15);  // 보라
+        textColor = const Color(0xFF7B1FA2);
+        break;
+      case '중형견':
+        bgColor = const Color(0xFF2196F3).withOpacity(0.15);  // 파랑
+        textColor = const Color(0xFF1565C0);
+        break;
+      case '소형견':
+        bgColor = const Color(0xFF4CAF50).withOpacity(0.15);  // 초록
+        textColor = const Color(0xFF2E7D32);
+        break;
+      default:  // 공용
+        bgColor = const Color(0xFF607D8B).withOpacity(0.15);  // 회색
+        textColor = const Color(0xFF455A64);
+    }
+    
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: textColor.withOpacity(0.3)),
+      ),
+      child: Text(
+        size,
+        style: GoogleFonts.notoSans(
+          fontSize: 11,
+          fontWeight: FontWeight.w600,
+          color: textColor,
+        ),
+      ),
+    );
   }
   
   /// Extract primary instrument from technicalSpecs

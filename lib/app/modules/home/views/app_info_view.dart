@@ -180,9 +180,8 @@ class _AppInfoViewState extends State<AppInfoView> with TickerProviderStateMixin
             ),
           ),
 
-          // Page Indicators (Moved up)
           Positioned(
-            bottom: 100,
+            bottom: 70,
             left: 0,
             right: 0,
             child: Row(
@@ -205,7 +204,7 @@ class _AppInfoViewState extends State<AppInfoView> with TickerProviderStateMixin
 
           // Tap to Start Text (Bottom)
           Positioned(
-            bottom: 40,
+            bottom: 24,
             left: 0,
             right: 0,
             child: AnimatedBuilder(
@@ -297,12 +296,12 @@ class _AppInfoViewState extends State<AppInfoView> with TickerProviderStateMixin
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Image Area
+          // Image Area - 4:5 비율로 조정하여 텍스트 공간 확보
           Expanded(
-            flex: 5,
+            flex: 4,
             child: Center(
               child: Container(
-                margin: const EdgeInsets.only(top: 80, bottom: 40),
+                margin: const EdgeInsets.only(top: 60, bottom: 20),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
@@ -321,156 +320,163 @@ class _AppInfoViewState extends State<AppInfoView> with TickerProviderStateMixin
             ),
           ),
 
-          // Text Area
+          // Text Area - 5:4 비율로 확대
           Expanded(
-            flex: 4,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Title Animation (Slide Up)
-                SlideTransition(
-                  position: Tween<Offset>(
-                    begin: const Offset(0, 0.2),
-                    end: Offset.zero,
-                  ).animate(CurvedAnimation(
-                    parent: _entranceController,
-                    curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
-                  )),
-                  child: FadeTransition(
-                    opacity: CurvedAnimation(
+            flex: 5,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 100), // 하단 indicator/텍스트 공간 확보
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Title Animation (Slide Up)
+                  SlideTransition(
+                    position: Tween<Offset>(
+                      begin: const Offset(0, 0.2),
+                      end: Offset.zero,
+                    ).animate(CurvedAnimation(
                       parent: _entranceController,
                       curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
-                    ),
-                    child: Text(
-                      data['title'],
-                      style: AppTextStyles.titleLarge.copyWith(
-                        color: AppColors.textDarkNavy,
-                        fontSize: 28,
-                        height: 1.3,
+                    )),
+                    child: FadeTransition(
+                      opacity: CurvedAnimation(
+                        parent: _entranceController,
+                        curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
+                      ),
+                      child: Text(
+                        data['title'],
+                        style: AppTextStyles.titleLarge.copyWith(
+                          color: AppColors.textDarkNavy,
+                          fontSize: 24,
+                          height: 1.25,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                
-                // Subtitle Animation (Slide In from Right for Page 2, else Fade Up)
-                SlideTransition(
-                  position: Tween<Offset>(
-                    begin: index == 2 ? const Offset(0.2, 0) : const Offset(0, 0.2),
-                    end: Offset.zero,
-                  ).animate(CurvedAnimation(
-                    parent: _entranceController,
-                    curve: const Interval(0.2, 0.8, curve: Curves.easeOut),
-                  )),
-                  child: FadeTransition(
-                    opacity: CurvedAnimation(
+                  const SizedBox(height: 16),
+                  
+                  // Subtitle Animation (Slide In from Right for Page 2, else Fade Up)
+                  SlideTransition(
+                    position: Tween<Offset>(
+                      begin: index == 2 ? const Offset(0.2, 0) : const Offset(0, 0.2),
+                      end: Offset.zero,
+                    ).animate(CurvedAnimation(
                       parent: _entranceController,
                       curve: const Interval(0.2, 0.8, curve: Curves.easeOut),
-                    ),
-                    child: Text(
-                      data['subtitle'],
-                      style: AppTextStyles.bodyMedium.copyWith(
-                        color: AppColors.textDarkNavy.withOpacity(0.7),
-                        fontSize: 16,
-                        height: 1.6,
+                    )),
+                    child: FadeTransition(
+                      opacity: CurvedAnimation(
+                        parent: _entranceController,
+                        curve: const Interval(0.2, 0.8, curve: Curves.easeOut),
+                      ),
+                      child: Text(
+                        data['subtitle'],
+                        style: AppTextStyles.bodyMedium.copyWith(
+                          color: AppColors.textDarkNavy.withOpacity(0.7),
+                          fontSize: 14,
+                          height: 1.5,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                
-                if (data['badges'] != null) ...[
-                  const SizedBox(height: 24),
-                  // Badges Animation (Scale/Fade)
-                  ScaleTransition(
-                    scale: CurvedAnimation(
-                      parent: _entranceController,
-                      curve: const Interval(0.4, 1.0, curve: Curves.elasticOut),
-                    ),
-                    child: Row(
-                      children: (data['badges'] as List).map<Widget>((badge) {
-                        return Container(
-                          margin: const EdgeInsets.only(right: 12),
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                          decoration: BoxDecoration(
-                            color: AppColors.primaryBlue.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: AppColors.primaryBlue.withOpacity(0.2)),
-                          ),
-                          child: Row(
-                            children: [
-                              Text(badge['icon'], style: const TextStyle(fontSize: 16)),
-                              const SizedBox(width: 8),
-                              Text(
-                                badge['text'],
-                                style: const TextStyle(
-                                  color: AppColors.primaryBlue, 
-                                  fontSize: 12, 
-                                  fontWeight: FontWeight.bold
+                  
+                  if (data['badges'] != null) ...[
+                    const SizedBox(height: 24),
+                    // Badges Animation (Scale/Fade) - Wrap으로 오버플로우 방지
+                    ScaleTransition(
+                      scale: CurvedAnimation(
+                        parent: _entranceController,
+                        curve: const Interval(0.4, 1.0, curve: Curves.elasticOut),
+                      ),
+                      child: Wrap(
+                        spacing: 8,  // 가로 간격
+                        runSpacing: 8, // 세로 간격 (줄바꿈 시)
+                        children: (data['badges'] as List).map<Widget>((badge) {
+                          return Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: AppColors.primaryBlue.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: AppColors.primaryBlue.withOpacity(0.2)),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,  // 콘텐츠 크기에 맞춤
+                              children: [
+                                Text(badge['icon'], style: const TextStyle(fontSize: 14)),
+                                const SizedBox(width: 6),
+                                Text(
+                                  badge['text'],
+                                  style: const TextStyle(
+                                    color: AppColors.primaryBlue, 
+                                    fontSize: 11,  // 폰트 크기 축소
+                                    fontWeight: FontWeight.bold
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ],
+
+                  if (data['hasAction'] == true) ...[
+                    const SizedBox(height: 24),
+                    // Login Button Animation (Pulse)
+                    AnimatedBuilder(
+                      animation: _pulseController,
+                      builder: (context, child) {
+                        return Transform.scale(
+                          scale: 1.0 + (_pulseController.value * 0.03),
+                          child: child,
                         );
-                      }).toList(),
-                    ),
-                  ),
-                ],
-
-                if (data['hasAction'] == true) ...[
-                  const Spacer(),
-                  // Login Button Animation (Pulse)
-                  AnimatedBuilder(
-                    animation: _pulseController,
-                    builder: (context, child) {
-                      return Transform.scale(
-                        scale: 1.0 + (_pulseController.value * 0.03),
-                        child: child,
-                      );
-                    },
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 56,
-                      child: ElevatedButton(
-                        onPressed: _handleLogin,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.textDarkNavy,
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
+                      },
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 56,
+                        child: ElevatedButton(
+                          onPressed: _handleLogin,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.textDarkNavy,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            elevation: 0,
                           ),
-                          elevation: 0,
-                        ),
-                        child: const Text(
-                          'Google/Apple로 계속하기',
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          child: const Text(
+                            'Google/Apple로 계속하기',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 120), // Extra space for bottom text
-                ],
+                    const SizedBox(height: 120), // Extra space for bottom text
+                  ],
 
-                if (data['footer'] != null) ...[
-                  const Spacer(),
-                  FadeTransition(
-                    opacity: CurvedAnimation(
-                      parent: _entranceController,
-                      curve: const Interval(0.6, 1.0, curve: Curves.easeIn),
-                    ),
-                    child: Text(
-                      data['footer'],
-                      style: TextStyle(
-                        color: Colors.grey[400],
-                        fontSize: 12,
+                  if (data['footer'] != null) ...[
+                    const SizedBox(height: 20),
+                    FadeTransition(
+                      opacity: CurvedAnimation(
+                        parent: _entranceController,
+                        curve: const Interval(0.6, 1.0, curve: Curves.easeIn),
+                      ),
+                      child: Text(
+                        data['footer'],
+                        style: TextStyle(
+                          color: Colors.grey[400],
+                          fontSize: 10,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 120), // Space for indicators and bottom text
-                ] else if (data['hasAction'] != true) ...[
-                   const SizedBox(height: 120),
+                    const SizedBox(height: 16),
+                  ] else if (data['hasAction'] != true) ...[
+                     const SizedBox(height: 16),
+                  ],
                 ],
-              ],
+              ),
             ),
+          ),
           ),
         ],
       ),

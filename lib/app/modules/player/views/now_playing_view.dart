@@ -95,10 +95,6 @@ class NowPlayingView extends GetView<PlayerController> {
               ),
             );
           }),
-          IconButton(
-            icon: const Icon(Icons.more_vert, color: Colors.white),
-            onPressed: () {},
-          ),
         ],
       ),
     );

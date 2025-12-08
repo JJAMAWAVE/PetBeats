@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,6 +11,7 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../routes/app_routes.dart';
 import 'onboarding_view.dart';
 import '../../../../core/services/web_bgm_service.dart';
+import '../../../../core/services/bgm_service.dart';
 import '../../../data/services/haptic_service.dart';
 
 class SplashWelcomeView extends StatefulWidget {
@@ -55,6 +57,23 @@ class _SplashWelcomeViewState extends State<SplashWelcomeView> with TickerProvid
     _opacityAnimation = Tween<double>(begin: 0.3, end: 1.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
+    
+    // APK (네이티브)에서는 자동 BGM 재생 (웹은 터치 필요)
+    if (!kIsWeb) {
+      _startBgmForNative();
+    }
+  }
+  
+  void _startBgmForNative() async {
+    // BgmService 사용 (네이티브용)
+    try {
+      final bgmService = BgmService();
+      await bgmService.init();
+      await bgmService.play();
+    } catch (e) {
+      // BgmService 실패 시 무시
+      debugPrint('BGM autoplay failed: $e');
+    }
   }
 
   @override

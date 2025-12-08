@@ -1,4 +1,5 @@
 import 'package:just_audio/just_audio.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 /// BGM 재생을 관리하는 서비스 클래스
 class BgmService {
@@ -14,13 +15,24 @@ class BgmService {
     if (_isInitialized) return;
 
     try {
-      // 웹에서는 큰 파일 로딩에 시간이 걸릴 수 있음
       print('[BgmService] Loading BGM...');
-      await _audioPlayer.setAsset('assets/sound/BGM/sheep.mp3');
+      
+      // Platform-specific loading
+      if (kIsWeb) {
+        // Web: Use URL-based loading
+        await _audioPlayer.setUrl('/assets/sound/BGM/sheep.mp3');
+      } else {
+        // Android/iOS: Use asset-based loading
+        await _audioPlayer.setAsset('assets/sound/BGM/sheep.mp3');
+      }
+      
       await _audioPlayer.setLoopMode(LoopMode.one); // 무한 반복
       await _audioPlayer.setVolume(0.3); // 볼륨 30%로 낮춤
       _isInitialized = true;
       print('[BgmService] BGM loaded successfully');
+      
+      // Auto-play BGM after initialization
+      await play();
     } catch (e) {
       print('[BgmService] Error loading BGM: $e');
       // 웹에서는 에러가 발생해도 앱은 계속 실행

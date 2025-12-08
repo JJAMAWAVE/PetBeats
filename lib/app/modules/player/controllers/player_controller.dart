@@ -4,6 +4,7 @@ import '../widgets/therapy_control_panel.dart';
 import '../../home/controllers/home_controller.dart';
 import '../../../data/services/haptic_service.dart';
 import '../../../data/services/audio_service.dart';
+import '../../../data/models/haptic_settings_model.dart';
 import 'package:just_audio/just_audio.dart';  // For ProcessingState
 import '../../../data/services/timer_service.dart';
 import 'package:get_storage/get_storage.dart';
@@ -167,22 +168,30 @@ class PlayerController extends GetxController {
   void setHapticIntensity(HapticIntensity intensity) {
     hapticIntensity.value = intensity;
     
+    // 핵심: HapticService에 강도 업데이트 전달
+    _hapticService.updateIntensity(intensity);
+    
     if (intensity == HapticIntensity.off) {
       _hapticService.stop();
     } else {
-      // Trigger haptic based on current mode
-      _activateHapticMode();
+      // 현재 재생 중이면 햅틱 모드 활성화
+      if (isPlaying) {
+        _activateHapticMode();
+      }
     }
   }
   
-  // Haptic Mode (heartbeat, rampdown, purr)
-  final hapticMode = HapticMode.heartbeat.obs;
+  // Haptic Mode (heartbeat, rampdown, purr, soundAdaptive)
+  final hapticMode = HapticMode.soundAdaptive.obs;  // 기본값: 사운드
   
   void setHapticMode(HapticMode mode) {
     hapticMode.value = mode;
     
+    // 항상 기존 패턴 중지 후 새 모드로 전환
+    _hapticService.stop();
+    
     // If haptic is currently active, switch to new mode
-    if (hapticIntensity.value != HapticIntensity.off) {
+    if (hapticIntensity.value != HapticIntensity.off && isPlaying) {
       _activateHapticMode();
     }
     
@@ -190,23 +199,27 @@ class PlayerController extends GetxController {
   }
   
   void _activateHapticMode() {
-    switch (hapticMode.value) {
-      case HapticMode.heartbeat:
-        _hapticService.startHeartbeat(currentTrackBpm);
-        break;
-      case HapticMode.rampdown:
-        _hapticService.startCalmingRampdown();
-        break;
-      case HapticMode.purr:
-        _hapticService.startPurr();
-        break;
-      case HapticMode.soundAdaptive:
-        // MIDI 기반 자연스러운 햅틱 - HapticPatternPlayer가 MIDI 분석 후 자동 처리
-        _hapticService.stop(); // 기존 패턴 중지
-        // HapticPatternPlayer가 MIDI 로드 시 자동으로 playNote 호출
-        print('🎵 Sound Adaptive mode - MIDI-based haptic enabled');
-        break;
-    }
+    // 먼저 모든 기존 패턴 중지
+    _hapticService.stop();
+    
+    // 잠시 대기 후 새 모드 시작 (중복 방지)
+    Future.delayed(const Duration(milliseconds: 50), () {
+      switch (hapticMode.value) {
+        case HapticMode.heartbeat:
+          _hapticService.startHeartbeat(currentTrackBpm);
+          break;
+        case HapticMode.rampdown:
+          _hapticService.startCalmingRampdown();
+          break;
+        case HapticMode.purr:
+          _hapticService.startPurr();
+          break;
+        case HapticMode.soundAdaptive:
+          // MIDI 기반 햅틱 - HapticPatternPlayer가 처리
+          print('🎵 Sound Adaptive mode - MIDI-based haptic enabled');
+          break;
+      }
+    });
   }
 
   void toggleWeather() {

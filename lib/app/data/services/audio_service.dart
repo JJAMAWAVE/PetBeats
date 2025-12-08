@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class AudioService extends GetxService {
   final AudioPlayer _player = AudioPlayer();
@@ -37,20 +38,31 @@ class AudioService extends GetxService {
         print("🎵 [AudioService] Loading new audio source");
         _savedPosition = Duration.zero;  // Reset saved position for new track
         
-        // For web, use URI-based loading
+        // For web, use URI-based loading; for native, use setAsset
         if (url.startsWith('assets/')) {
-          // Web: Convert asset path to web URL
-          final webUrl = '/$url'; // /assets/sound/1_1.mp3
-          print("🎵 [AudioService] Web URL: $webUrl");
-          await _player.setAudioSource(AudioSource.uri(Uri.parse(webUrl)));
+          if (kIsWeb) {
+            // Web: Convert asset path to web URL
+            final webUrl = '/$url'; // /assets/sound/1_1.mp3
+            print("🎵 [AudioService] Web URL: $webUrl");
+            await _player.setAudioSource(AudioSource.uri(Uri.parse(webUrl)));
+          } else {
+            // Android/iOS: Use setAsset for native platforms
+            print("🎵 [AudioService] Native asset: $url");
+            await _player.setAsset(url);
+          }
         } else if (url.startsWith('http://') || url.startsWith('https://')) {
           // External URLs
           await _player.setAudioSource(AudioSource.uri(Uri.parse(url)));
         } else {
           // Fallback: assume asset without prefix
-          final webUrl = '/assets/$url';
-          print("🎵 [AudioService] Web URL (fallback): $webUrl");
-          await _player.setAudioSource(AudioSource.uri(Uri.parse(webUrl)));
+          if (kIsWeb) {
+            final webUrl = '/assets/$url';
+            print("🎵 [AudioService] Web URL (fallback): $webUrl");
+            await _player.setAudioSource(AudioSource.uri(Uri.parse(webUrl)));
+          } else {
+            print("🎵 [AudioService] Native asset (fallback): assets/$url");
+            await _player.setAsset('assets/$url');
+          }
         }
         
         _currentLoadedUrl = url;

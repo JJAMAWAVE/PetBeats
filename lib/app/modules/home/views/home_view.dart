@@ -36,7 +36,7 @@ class HomeView extends GetView<HomeController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 16),
                     // Header
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -46,15 +46,7 @@ class HomeView extends GetView<HomeController> {
                           const HeartbeatText('PetBeats', fontSize: 24),
                           Row(
                             children: [
-                              HeaderIconButton(
-                                iconPath: 'assets/icons/icon_nav_notification.png',
-                                animationType: HeaderIconAnimationType.shake,
-                                onTap: () {
-                                  hapticService.lightImpact();
-                                  Get.toNamed(Routes.INVITE_FRIENDS);
-                                },
-                              ),
-                              const SizedBox(width: 8),
+                              // 알람 아이콘 제거됨 - 햅틱 패널로 이동
                               HeaderIconButton(
                                 iconPath: 'assets/icons/icon_nav_settings.png',
                                 animationType: HeaderIconAnimationType.rotate,
@@ -67,7 +59,7 @@ class HomeView extends GetView<HomeController> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 12),
                     
                     // Species Toggle
                     const Padding(
@@ -75,7 +67,7 @@ class HomeView extends GetView<HomeController> {
                       child: SpeciesToggle(),
                     ),
                     
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 16),
                     
                     // Banner Card
                     Padding(
@@ -83,14 +75,14 @@ class HomeView extends GetView<HomeController> {
                       child: _buildBannerCard(hapticService),
                     ),
                     
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 20),
                     
                     // SECTION 1: Recommended Modes (Circular)
                     Obx(() {
                       final species = ['강아지', '고양이', '보호자'][controller.selectedSpeciesIndex.value];
                       return _buildSectionTitle('$species를 위한 추천 모드');
                     }),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 12),
                     
                     // Modes List - Wrapped in Unified Layered Container
                     Obx(() {
@@ -100,19 +92,19 @@ class HomeView extends GetView<HomeController> {
                           children: [
                             // Shadow Layer (Bottom)
                             Positioned(
-                              top: 8,
+                              top: 6,
                               left: 4,
                               right: 4,
                               child: Container(
-                                height: 210,
+                                height: 130,  // 높이 축소하여 오버플로우 방지
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.black.withOpacity(0.15),
-                                      blurRadius: 20,
-                                      offset: const Offset(0, 10),
-                                      spreadRadius: 2,
+                                      blurRadius: 16,
+                                      offset: const Offset(0, 8),
+                                      spreadRadius: 1,
                                     ),
                                   ],
                                 ),
@@ -121,7 +113,7 @@ class HomeView extends GetView<HomeController> {
                             
                             // Main Container (Top Surface)
                             Container(
-                              height: 210,
+                              height: 130,  // 높이 축소
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.white,
@@ -140,7 +132,7 @@ class HomeView extends GetView<HomeController> {
                               ),
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
-                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                                 child: Row(
                                   children: [
 
@@ -158,7 +150,7 @@ class HomeView extends GetView<HomeController> {
                                       else if (mode.id == 'senior') animType = ModeAnimationType.heartbeat;
 
                                       return Padding(
-                                        padding: const EdgeInsets.only(right: 16),
+                                        padding: const EdgeInsets.only(right: 8),  // 간격 축소
                                         child: _buildCircularModeButton(
                                           title: mode.title,
                                           iconPath: mode.iconPath,
@@ -183,75 +175,107 @@ class HomeView extends GetView<HomeController> {
                       );
                     }),
 
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 20),
                     
                     // SECTION 2: AI Special Mode
                     // _buildSectionTitle('AI 스마트 케어'), // Title is inside the widget now
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 8),
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 24.0),
                       child: AISpecialModeWidget(),
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 20),
 
                     // SECTION 3: Scenario Chips
                     _buildSectionTitle('AI 맞춤 추천'),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 12),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                      child: Wrap(
-                        spacing: 12,
-                        runSpacing: 12,
+                      child: Column(
                         children: [
-                          _buildScenarioChip('산책 후', 'assets/icons/icon_scenario_walk.png'),
-                          _buildScenarioChip('낮잠 시간', 'assets/icons/icon_scenario_nap.png'),
-                          _buildScenarioChip('병원 방문', 'assets/icons/icon_scenario_vet.png'),
-                          _buildScenarioChip('미용 후', 'assets/icons/icon_scenario_grooming.png'),
-                          _buildScenarioChip('천둥/번개', 'assets/icons/icon_scenario_thunder.png'),
-                          _buildScenarioChip('분리 불안', 'assets/icons/icon_scenario_anxiety.png'),
+                          Row(
+                            children: [
+                              Expanded(child: _buildScenarioChip('산책 후', 'assets/icons/icon_scenario_walk.png')),
+                              const SizedBox(width: 12),
+                              Expanded(child: _buildScenarioChip('낮잠 시간', 'assets/icons/icon_scenario_nap.png')),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Expanded(child: _buildScenarioChip('병원 방문', 'assets/icons/icon_scenario_vet.png')),
+                              const SizedBox(width: 12),
+                              Expanded(child: _buildScenarioChip('미용 후', 'assets/icons/icon_scenario_grooming.png')),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Expanded(child: _buildScenarioChip('천둥/번개', 'assets/icons/icon_scenario_thunder.png')),
+                              const SizedBox(width: 12),
+                              Expanded(child: _buildScenarioChip('분리 불안', 'assets/icons/icon_scenario_anxiety.png')),
+                            ],
+                          ),
                         ],
                       ),
                     ),
 
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 20),
                     
-                    // SECTION 3: Exercises (Horizontal Cards)
+                    // SECTION 3: Exercises (2-row Grid Layout)
                     _buildSectionTitle('건강 & 활동'),
-                    const SizedBox(height: 16),
-                    SizedBox(
-                      height: 220,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                    const SizedBox(height: 12),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: Column(
                         children: [
-                          _buildExerciseCard(
-                            title: '휴식',
-                            subtitle: '스트레스를 낮추고\n평온함을 찾으세요',
-                            iconPath: 'assets/icons/icon_health_rest.png',
-                            color: Colors.teal,
-                            activityType: 'rest',
+                          // 상단 2개 카드
+                          Row(
+                            children: [
+                              Expanded(
+                                child: _buildExerciseCard(
+                                  title: '휴식',
+                                  subtitle: '스트레스를 낮추고\n평온함을 찾으세요',
+                                  iconPath: 'assets/icons/icon_health_rest.png',
+                                  color: Colors.teal,
+                                  activityType: 'rest',
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: _buildExerciseCard(
+                                  title: '반려 상식',
+                                  subtitle: '반려동물을 위한\n유용한 팁',
+                                  iconPath: 'assets/icons/icon_health_tips.png',
+                                  color: Colors.indigo,
+                                  activityType: 'tips',
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(width: 16),
-                          _buildExerciseCard(
-                            title: '반려 상식',
-                            subtitle: '반려동물을 위한\n유용한 팁',
-                            iconPath: 'assets/icons/icon_health_tips.png',
-                            color: Colors.indigo,
-                            activityType: 'tips',
-                          ),
-                          const SizedBox(width: 16),
-                          _buildExerciseCard(
-                            title: '에너지 충전',
-                            subtitle: '활력을 되찾아주는\n사운드',
-                            iconPath: 'assets/icons/icon_health_charge.png',
-                            color: Colors.orange,
-                            activityType: 'charge',
+                          const SizedBox(height: 12),
+                          // 하단 1개 카드 (3번째) - 왼쪽 정렬, 절반 너비
+                          Row(
+                            children: [
+                              Expanded(
+                                child: _buildExerciseCard(
+                                  title: '에너지 충전',
+                                  subtitle: '활력을 되찾아주는\n사운드',
+                                  iconPath: 'assets/icons/icon_health_charge.png',
+                                  color: Colors.orange,
+                                  activityType: 'charge',
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              // 빈 공간 (추후 카드 추가 가능)
+                              Expanded(child: Container()),
+                            ],
                           ),
                         ],
                       ),
                     ),
                     
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -290,16 +314,16 @@ class HomeView extends GetView<HomeController> {
         Get.to(() => const AppInfoView());
       },
       child: Container(
-        height: 200,
+        height: 140,
         width: double.infinity,
         decoration: BoxDecoration(
           color: const Color(0xFF6A5AE0), // Purple background
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
               color: const Color(0xFF6A5AE0).withOpacity(0.3),
-              blurRadius: 16,
-              offset: const Offset(0, 8),
+              blurRadius: 12,
+              offset: const Offset(0, 6),
             ),
           ],
         ),
@@ -527,8 +551,7 @@ class HomeView extends GetView<HomeController> {
         ));
       },
       child: Container(
-      width: 160,
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(24),
@@ -537,19 +560,20 @@ class HomeView extends GetView<HomeController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: 72,
-            height: 72,
+            width: 56,
+            height: 56,
             child: Image.asset(
               iconPath,
               fit: BoxFit.contain,
             ),
           ),
-          const Spacer(),
+          const SizedBox(height: 12),
           Text(
             title,
             style: AppTextStyles.titleMedium.copyWith(
               color: AppColors.textDarkNavy,
               fontWeight: FontWeight.bold,
+              fontSize: 16,
             ),
           ),
           const SizedBox(height: 4),
@@ -557,7 +581,8 @@ class HomeView extends GetView<HomeController> {
             subtitle,
             style: AppTextStyles.labelSmall.copyWith(
               color: AppColors.textGrey,
-              height: 1.4,
+              height: 1.3,
+              fontSize: 12,
             ),
           ),
         ],

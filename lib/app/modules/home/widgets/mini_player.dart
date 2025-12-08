@@ -6,12 +6,15 @@ import '../controllers/home_controller.dart';
 import '../../player/widgets/reactive_visualizer.dart';
 import '../../player/models/visualizer_theme.dart';
 import '../../../routes/app_routes.dart';
+import '../../../data/services/audio_service.dart';
 
 class MiniPlayer extends GetView<HomeController> {
   const MiniPlayer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final audioService = Get.find<AudioService>();
+    
     return Obx(() {
       final track = controller.currentTrack.value;
       final mode = controller.currentMode.value;
@@ -22,9 +25,20 @@ class MiniPlayer extends GetView<HomeController> {
 
       return GestureDetector(
         onTap: () => Get.toNamed(Routes.NOW_PLAYING),
+        onHorizontalDragEnd: (details) {
+          // 좌우 스와이프로 트랙 변경
+          if (details.primaryVelocity != null) {
+            if (details.primaryVelocity! < -200) {
+              // 왼쪽으로 스와이프 -> 다음 트랙
+              controller.skipNext();
+            } else if (details.primaryVelocity! > 200) {
+              // 오른쪽으로 스와이프 -> 이전 트랙
+              controller.skipPrevious();
+            }
+          }
+        },
         child: Container(
           margin: const EdgeInsets.all(16),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
@@ -36,79 +50,128 @@ class MiniPlayer extends GetView<HomeController> {
               ),
             ],
           ),
-          child: Row(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              // Icon / Art
-              Container(
-                width: 48,
-                height: 48,
-                decoration: BoxDecoration(
-                  color: mode.color.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Image.asset(
-                  mode.iconPath,
-                  fit: BoxFit.contain,
-                  colorBlendMode: BlendMode.multiply,
-                  color: Colors.white.withOpacity(0.0),
-                ),
-              ),
-              const SizedBox(width: 12),
-              
-              // Title & Type
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: Row(
                   children: [
-                    Text(
-                      track.title, // 곡 제목
-                      style: AppTextStyles.bodyMedium.copyWith(
-                        color: AppColors.textDarkNavy,
-                        fontWeight: FontWeight.bold,
+                    // Icon / Art
+                    Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: mode.color.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                      child: Image.asset(
+                        mode.iconPath,
+                        fit: BoxFit.contain,
+                        colorBlendMode: BlendMode.multiply,
+                        color: Colors.white.withOpacity(0.0),
+                      ),
                     ),
-                    Text(
-                      '${mode.title} • ${track.target}', // 곡 타입 (모드 + 타겟)
-                      style: AppTextStyles.labelSmall.copyWith(
-                        color: AppColors.textGrey,
+                    const SizedBox(width: 12),
+                    
+                    // Title & Type
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            track.title, // 곡 제목
+                            style: AppTextStyles.bodyMedium.copyWith(
+                              color: AppColors.textDarkNavy,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          // Position / Duration text
+                          StreamBuilder<Duration>(
+                            stream: audioService.positionStream,
+                            builder: (context, posSnapshot) {
+                              return StreamBuilder<Duration?>(
+                                stream: audioService.durationStream,
+                                builder: (context, durSnapshot) {
+                                  final position = posSnapshot.data ?? Duration.zero;
+                                  final duration = durSnapshot.data ?? Duration.zero;
+                                  return Text(
+                                    '${mode.title} • ${_formatDuration(position)} / ${_formatDuration(duration)}',
+                                    style: AppTextStyles.labelSmall.copyWith(
+                                      color: AppColors.textGrey,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                    ),
+                    
+                    // Visualizer
+                    SizedBox(
+                      width: 40,
+                      height: 24,
+                      child: ReactiveVisualizer(
+                        isPlaying: isPlaying,
+                        theme: VisualizerTheme(
+                          colorPalette: [AppColors.primaryBlue, AppColors.primaryBlue.withOpacity(0.5)],
+                          blurIntensity: 2,
+                          rippleSpeed: 1.0,
+                          particleType: ParticleEffect.none,
+                        ),
+                        barCount: 4,
+                      ),
+                    ),
+                    
+                    const SizedBox(width: 12),
+                    
+                    // Play/Pause Button
+                    IconButton(
+                      icon: const Icon(
+                        Icons.pause_circle_filled,
+                        color: AppColors.primaryBlue,
+                        size: 40,
+                      ),
+                      onPressed: () {
+                        controller.stopSound();
+                      },
                     ),
                   ],
                 ),
               ),
-              
-              // Visualizer
-              SizedBox(
-                width: 40,
-                height: 24,
-                child: ReactiveVisualizer(
-                  isPlaying: isPlaying,
-                  theme: VisualizerTheme(
-                    colorPalette: [AppColors.primaryBlue, AppColors.primaryBlue.withOpacity(0.5)],
-                    blurIntensity: 2,
-                    rippleSpeed: 1.0,
-                    particleType: ParticleEffect.none,
-                  ),
-                  barCount: 4,
-                ),
-              ),
-              
-              const SizedBox(width: 12),
-              
-              // Play/Pause Button
-              IconButton(
-                icon: const Icon(
-                  Icons.pause_circle_filled,
-                  color: AppColors.primaryBlue,
-                  size: 40,
-                ),
-                onPressed: () {
-                  controller.stopSound();
+              // Progress Bar
+              StreamBuilder<Duration>(
+                stream: audioService.positionStream,
+                builder: (context, posSnapshot) {
+                  return StreamBuilder<Duration?>(
+                    stream: audioService.durationStream,
+                    builder: (context, durSnapshot) {
+                      final position = posSnapshot.data ?? Duration.zero;
+                      final duration = durSnapshot.data ?? Duration.zero;
+                      final progress = duration.inMilliseconds > 0
+                          ? position.inMilliseconds / duration.inMilliseconds
+                          : 0.0;
+                      return ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(16),
+                          bottomRight: Radius.circular(16),
+                        ),
+                        child: LinearProgressIndicator(
+                          value: progress.clamp(0.0, 1.0),
+                          backgroundColor: AppColors.primaryBlue.withOpacity(0.1),
+                          valueColor: AlwaysStoppedAnimation<Color>(AppColors.primaryBlue),
+                          minHeight: 3,
+                        ),
+                      );
+                    },
+                  );
                 },
               ),
             ],
@@ -116,6 +179,12 @@ class MiniPlayer extends GetView<HomeController> {
         ),
       );
     });
+  }
+
+  String _formatDuration(Duration duration) {
+    final minutes = duration.inMinutes;
+    final seconds = duration.inSeconds % 60;
+    return '$minutes:${seconds.toString().padLeft(2, '0')}';
   }
 
   IconData _getIconData(String iconPath) {

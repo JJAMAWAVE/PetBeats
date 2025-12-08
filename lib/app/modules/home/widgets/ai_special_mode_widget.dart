@@ -11,7 +11,7 @@ class AISpecialModeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
       decoration: BoxDecoration(
         // 프리미엄 그라데이션 배경 (Smart/Tech Blue Theme)
         gradient: LinearGradient(
@@ -94,7 +94,7 @@ class AISpecialModeWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 16.h),
+          SizedBox(height: 12.h),
           Row(
             children: [
               _buildModeButton(
@@ -196,7 +196,7 @@ class _AnimatedModeButtonState extends State<_AnimatedModeButton>
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
-        height: 165.h,
+        height: 120.h,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20.r),
@@ -220,7 +220,7 @@ class _AnimatedModeButtonState extends State<_AnimatedModeButton>
                   child: Transform.rotate(
                     angle: _rotationAnimation.value,
                     child: Container(
-                      padding: EdgeInsets.all(10.w),
+                      padding: EdgeInsets.all(8.w),
                       decoration: BoxDecoration(
                         color: widget.color.withOpacity(0.05),
                         shape: BoxShape.circle,
@@ -236,7 +236,7 @@ class _AnimatedModeButtonState extends State<_AnimatedModeButton>
                 );
               },
             ),
-            SizedBox(height: 8.h),
+            SizedBox(height: 6.h),
             Text(
               widget.title,
               style: AppTextStyles.bodyMedium.copyWith(

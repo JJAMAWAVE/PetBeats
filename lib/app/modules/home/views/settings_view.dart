@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 
-class SettingsView extends StatelessWidget {
+class SettingsView extends StatefulWidget {
   const SettingsView({super.key});
+
+  @override
+  State<SettingsView> createState() => _SettingsViewState();
+}
+
+class _SettingsViewState extends State<SettingsView> {
+  final _storage = GetStorage();
+  
+  // Permission states
+  late bool _locationEnabled;
+  late bool _notificationEnabled;
+  
+  @override
+  void initState() {
+    super.initState();
+    // Load saved permission states
+    _locationEnabled = _storage.read('permission_location') ?? true;
+    _notificationEnabled = _storage.read('permission_notification') ?? true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,13 +101,37 @@ class SettingsView extends StatelessWidget {
               icon: Icons.location_on_outlined,
               title: '위치 정보',
               desc: '날씨 및 일조량 데이터 수집',
-              isEnabled: true,
+              isEnabled: _locationEnabled,
+              onChanged: (val) {
+                setState(() {
+                  _locationEnabled = val;
+                });
+                _storage.write('permission_location', val);
+                Get.snackbar(
+                  val ? '위치 정보 활성화' : '위치 정보 비활성화',
+                  val ? '날씨 기반 추천이 활성화됩니다.' : '날씨 기반 추천이 비활성화됩니다.',
+                  snackPosition: SnackPosition.BOTTOM,
+                  duration: const Duration(seconds: 2),
+                );
+              },
             ),
             _buildPermissionItem(
               icon: Icons.notifications_none,
               title: '알림',
               desc: '주간 리포트 및 추천 알림',
-              isEnabled: true,
+              isEnabled: _notificationEnabled,
+              onChanged: (val) {
+                setState(() {
+                  _notificationEnabled = val;
+                });
+                _storage.write('permission_notification', val);
+                Get.snackbar(
+                  val ? '알림 활성화' : '알림 비활성화',
+                  val ? '주간 리포트를 받습니다.' : '알림을 받지 않습니다.',
+                  snackPosition: SnackPosition.BOTTOM,
+                  duration: const Duration(seconds: 2),
+                );
+              },
             ),
             // Health Data removed as per request (Pet-focused)
 
@@ -123,6 +167,7 @@ class SettingsView extends StatelessWidget {
     required String title,
     required String desc,
     required bool isEnabled,
+    required Function(bool) onChanged,
   }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -160,7 +205,7 @@ class SettingsView extends StatelessWidget {
           ),
           Switch(
             value: isEnabled,
-            onChanged: (val) {},
+            onChanged: onChanged,
             activeColor: AppColors.primaryBlue,
           ),
         ],

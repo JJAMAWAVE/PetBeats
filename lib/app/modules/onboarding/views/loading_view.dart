@@ -47,6 +47,11 @@ class _LoadingViewState extends State<LoadingView> with TickerProviderStateMixin
   bool _isTransitioning = false;
   bool _impactTriggered = false;
   
+  // 전환 애니메이션 컨트롤러
+  late AnimationController _fadeOutController;
+  late Animation<double> _fadeOutAnimation;
+  late Animation<double> _scaleOutAnimation;
+  
   // 색상 정의 - 프리미엄 시네마틱 테마
   static const Color _nightSkyColor = Color(0xFF0a0a2a);
   static const Color _deepSpaceColor = Color(0xFF050510);
@@ -153,6 +158,20 @@ class _LoadingViewState extends State<LoadingView> with TickerProviderStateMixin
       vsync: this,
     )..repeat();
     
+    // 전환용 fade-out 컨트롤러
+    _fadeOutController = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    );
+    
+    _fadeOutAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _fadeOutController, curve: Curves.easeInOut),
+    );
+    
+    _scaleOutAnimation = Tween<double>(begin: 1.0, end: 1.05).animate(
+      CurvedAnimation(parent: _fadeOutController, curve: Curves.easeOut),
+    );
+    
     // 파티클 생성
     _initParticles();
     
@@ -200,7 +219,11 @@ class _LoadingViewState extends State<LoadingView> with TickerProviderStateMixin
     
     try { Get.find<HapticService>().mediumImpact(); } catch(_) {}
     
-    Future.delayed(const Duration(milliseconds: 800), () {
+    // fade-out 애니메이션 시작
+    _fadeOutController.forward();
+    
+    // 애니메이션 완료 후 전환
+    Future.delayed(const Duration(milliseconds: 1000), () {
       Get.offAllNamed(Routes.WELCOME);
     });
   }
@@ -210,6 +233,7 @@ class _LoadingViewState extends State<LoadingView> with TickerProviderStateMixin
     _mainSequenceController.dispose();
     _particleController.dispose();
     _impactController.dispose();
+    _fadeOutController.dispose();
     super.dispose();
   }
 
@@ -354,8 +378,9 @@ class _LoadingViewState extends State<LoadingView> with TickerProviderStateMixin
                   strokeProgress: strokeProgress,
                   fillProgress: fillProgress,
                   strokeColor: _glowBlue,
-                  fillColor: Colors.white,
+                  fillColor: const Color(0xFFE3F2FD),  // 은은한 하늘색
                   glowColor: _auroraBlue,
+                  useGradientFill: true,  // 그라데이션 효과 활성화
                 ),
               ),
             ),
@@ -418,24 +443,33 @@ class _LoadingViewState extends State<LoadingView> with TickerProviderStateMixin
     );
   }
   
-  /// 전환 오버레이
+  /// 전환 오버레이 - 부드러운 fade-out + scale 효과
   Widget _buildTransitionOverlay() {
     return Positioned.fill(
-      child: AnimatedOpacity(
-        duration: const Duration(milliseconds: 600),
-        opacity: 1.0,
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: RadialGradient(
-              center: Alignment.center,
-              radius: 1.5,
-              colors: [
-                Colors.white,
-                Colors.white.withOpacity(0.95),
-              ],
+      child: AnimatedBuilder(
+        animation: _fadeOutController,
+        builder: (context, child) {
+          return Transform.scale(
+            scale: _scaleOutAnimation.value,
+            child: Opacity(
+              opacity: _fadeOutAnimation.value,
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: RadialGradient(
+                    center: Alignment.center,
+                    radius: 0.8 + (_fadeOutAnimation.value * 0.7),
+                    colors: [
+                      Colors.white,
+                      Colors.white.withOpacity(0.98),
+                      Colors.white.withOpacity(0.95),
+                    ],
+                    stops: const [0.0, 0.5, 1.0],
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -622,6 +656,7 @@ class _PremiumLogoPainter extends CustomPainter {
   final Color strokeColor;
   final Color fillColor;
   final Color glowColor;
+  final bool useGradientFill;  // 그라데이션 채우기 여부
   
   _PremiumLogoPainter({
     required this.strokeProgress,
@@ -629,6 +664,7 @@ class _PremiumLogoPainter extends CustomPainter {
     required this.strokeColor,
     required this.fillColor,
     required this.glowColor,
+    this.useGradientFill = false,
   });
   
   @override
@@ -685,10 +721,26 @@ class _PremiumLogoPainter extends CustomPainter {
       
       canvas.drawPath(heartPath, glowPaint);
       
-      // 채우기
+      // 채우기 (그라데이션 또는 단색)
       final fillPaint = Paint()
-        ..color = fillColor.withOpacity(fillProgress.clamp(0.0, 1.0))
         ..style = PaintingStyle.fill;
+      
+      if (useGradientFill) {
+        // 하트 중심에서 밖으로 퍼지는 그라데이션
+        final heartBounds = heartPath.getBounds();
+        fillPaint.shader = RadialGradient(
+          center: Alignment.center,
+          radius: 1.0,
+          colors: [
+            const Color(0xFFE3F2FD).withOpacity(fillProgress.clamp(0.0, 1.0)),  // 중심: 밝은 하늘색
+            const Color(0xFFBBDEFB).withOpacity(fillProgress.clamp(0.0, 1.0)),  // 중간: 연한 파랑
+            const Color(0xFF90CAF9).withOpacity((fillProgress * 0.8).clamp(0.0, 1.0)),  // 외곽: 은은한 파랑
+          ],
+          stops: const [0.0, 0.5, 1.0],
+        ).createShader(heartBounds);
+      } else {
+        fillPaint.color = fillColor.withOpacity(fillProgress.clamp(0.0, 1.0));
+      }
       
       canvas.drawPath(heartPath, fillPaint);
     }
@@ -742,12 +794,25 @@ class _PremiumLogoPainter extends CustomPainter {
       // Ease Out으로 부드럽게
       final easedProgress = 1 - math.pow(1 - waveProgress, 3);
       
+      final waveOpacity = (0.7 * easedProgress).clamp(0.0, 1.0);
+      wavePaint.color = strokeColor.withOpacity(waveOpacity);
+      
+      // 오른쪽 음파
       canvas.drawArc(
         rect,
         -math.pi / 3.5,
         math.pi / 1.75 * easedProgress,
         false,
-        wavePaint..color = strokeColor.withOpacity((0.7 * easedProgress).clamp(0.0, 1.0)),
+        wavePaint,
+      );
+      
+      // 왼쪽 음파 (대칭)
+      canvas.drawArc(
+        rect,
+        math.pi - (math.pi / 3.5) + (math.pi / 1.75 * (1 - easedProgress)),
+        math.pi / 1.75 * easedProgress,
+        false,
+        wavePaint,
       );
     }
   }

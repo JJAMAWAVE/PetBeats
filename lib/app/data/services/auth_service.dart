@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get/get.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class AuthService extends GetxService {
   FirebaseAuth? _auth;
@@ -74,7 +74,16 @@ class AuthService extends GetxService {
     } catch (e) {
       isLoading.value = false;
       debugPrint('Error signing in with Google: $e');
-      Get.snackbar('로그인 실패', '구글 로그인 중 오류가 발생했습니다: $e');
+      Get.snackbar(
+        '로그인 실패', 
+        '구글 로그인을 사용할 수 없습니다. 나중에 다시 시도해주세요.',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.shade100,
+        colorText: Colors.red.shade900,
+        duration: const Duration(seconds: 3),
+        margin: const EdgeInsets.all(16),
+        borderRadius: 12,
+      );
       return null;
     }
   }

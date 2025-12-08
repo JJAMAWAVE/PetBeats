@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../data/models/haptic_settings_model.dart';
+import 'sleep_timer_bottom_sheet.dart';
 import 'dart:ui';
-
-enum HapticIntensity { off, light, medium, strong, deep }
-enum HapticMode { heartbeat, rampdown, purr, soundAdaptive }
 
 class TherapyControlPanel extends StatefulWidget {
   final HapticIntensity hapticIntensity;
@@ -31,12 +31,12 @@ class TherapyControlPanel extends StatefulWidget {
 }
 
 class _TherapyControlPanelState extends State<TherapyControlPanel> {
-  HapticMode _selectedMode = HapticMode.heartbeat;
+  HapticMode _selectedMode = HapticMode.soundAdaptive;  // 기본값: 사운드
   
   @override
   void initState() {
     super.initState();
-    _selectedMode = widget.hapticMode ?? HapticMode.heartbeat;
+    _selectedMode = widget.hapticMode ?? HapticMode.soundAdaptive;  // 기본값: 사운드
   }
 
   @override
@@ -46,8 +46,8 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-          padding: EdgeInsets.all(20.w),
+          margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
@@ -117,6 +117,12 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
       runSpacing: 8.h,
       children: [
         _buildModeButton(
+          mode: HapticMode.soundAdaptive, 
+          icon: Icons.music_note, 
+          label: '사운드',
+          color: Colors.purpleAccent,
+        ),
+        _buildModeButton(
           mode: HapticMode.heartbeat, 
           icon: Icons.favorite, 
           label: '심장박동',
@@ -133,12 +139,6 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
           icon: Icons.pets, 
           label: '골골송',
           color: Colors.amber,
-        ),
-        _buildModeButton(
-          mode: HapticMode.soundAdaptive, 
-          icon: Icons.music_note, 
-          label: '사운드',
-          color: Colors.purpleAccent,
         ),
       ],
     );
@@ -160,8 +160,8 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        width: 70.w,  // Fixed width for consistent button size
-        padding: EdgeInsets.symmetric(vertical: 10.h),
+        width: 60.w,  // Reduced size for compact appearance
+        padding: EdgeInsets.symmetric(vertical: 8.h),
         decoration: BoxDecoration(
           color: isSelected ? color.withOpacity(0.2) : Colors.transparent,
           borderRadius: BorderRadius.circular(16.r),
@@ -176,7 +176,7 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
             Icon(
               icon,
               color: isSelected ? color : Colors.white.withOpacity(0.5),
-              size: 20.w,
+              size: 18.w,  // Reduced icon size
             ),
             SizedBox(height: 4.h),
             Text(
@@ -199,33 +199,35 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.favorite, color: Colors.pinkAccent, size: 20.w),
-            SizedBox(width: 8.w),
-            Icon(Icons.vibration, color: Colors.amber, size: 20.w),
-          ],
-        ),
-        SizedBox(height: 16.h),
+        // 슬라이더 Row - 아이콘을 OFF 옆에 배치하여 공간 절약
         Row(
           children: [
+            // OFF + 아이콘들
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.favorite, color: Colors.pinkAccent, size: 14.w),
+                SizedBox(width: 4.w),
+                Icon(Icons.vibration, color: Colors.amber, size: 14.w),
+              ],
+            ),
+            SizedBox(width: 6.w),
             Text(
               'OFF',
               style: TextStyle(
                 color: widget.hapticIntensity == HapticIntensity.off 
                     ? Colors.white.withOpacity(0.9)
                     : Colors.white.withOpacity(0.3),
-                fontSize: 11.sp,
+                fontSize: 10.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),
             Expanded(
               child: SliderTheme(
                 data: SliderThemeData(
-                  trackHeight: 6.h,
-                  thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.r),
-                  overlayShape: RoundSliderOverlayShape(overlayRadius: 18.r),
+                  trackHeight: 5.h,
+                  thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8.r),
+                  overlayShape: RoundSliderOverlayShape(overlayRadius: 14.r),
                   activeTrackColor: AppColors.primaryBlue,
                   inactiveTrackColor: Colors.white.withOpacity(0.15),
                   thumbColor: Colors.white,
@@ -250,13 +252,13 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
                 color: widget.hapticIntensity == HapticIntensity.deep 
                     ? Colors.amber
                     : Colors.white.withOpacity(0.3),
-                fontSize: 11.sp,
+                fontSize: 10.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),
           ],
         ),
-        SizedBox(height: 8.h),
+        SizedBox(height: 4.h),
         // 현재 강도 표시
         Text(
           _getIntensityLabel(widget.hapticIntensity),
@@ -264,12 +266,88 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
             color: widget.hapticIntensity == HapticIntensity.off
                 ? Colors.white.withOpacity(0.4)
                 : AppColors.primaryBlue,
-            fontSize: 13.sp,
+            fontSize: 11.sp,
             fontWeight: FontWeight.w600,
             letterSpacing: 1.0,
           ),
         ),
+        SizedBox(height: 10.h),
+        // 날씨, 알람 아이콘 Row 추가
+        _buildQuickAccessRow(),
       ],
+    );
+  }
+  
+  /// 사운드 믹스, 수면 타이머 퀵 액세스 아이콘 Row
+  Widget _buildQuickAccessRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _buildQuickAccessButton(
+          icon: Icons.graphic_eq_outlined,
+          label: '사운드 믹스',
+          color: Colors.orangeAccent,
+          isActive: widget.isWeatherActive,
+          onTap: () {
+            // 사운드 믹스 기능 (자연 사운드 레이어 추가)
+            widget.onWeatherToggle();
+            HapticFeedback.selectionClick();
+          },
+        ),
+        SizedBox(width: 24.w),
+        _buildQuickAccessButton(
+          icon: Icons.timer_outlined,
+          label: '수면 타이머',
+          color: Colors.lightBlueAccent,
+          isActive: false,
+          onTap: () {
+            // 수면 타이머 바텀시트 표시
+            Get.bottomSheet(
+              const SleepTimerBottomSheet(),
+              backgroundColor: Colors.transparent,
+              isScrollControlled: true,
+            );
+            HapticFeedback.selectionClick();
+          },
+        ),
+      ],
+    );
+  }
+  
+  Widget _buildQuickAccessButton({
+    required IconData icon,
+    required String label,
+    required Color color,
+    required bool isActive,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+        decoration: BoxDecoration(
+          color: isActive ? color.withOpacity(0.2) : Colors.white.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(12.r),
+          border: Border.all(
+            color: isActive ? color : Colors.white.withOpacity(0.2),
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, color: isActive ? color : Colors.white.withOpacity(0.6), size: 16.w),
+            SizedBox(width: 4.w),
+            Text(
+              label,
+              style: TextStyle(
+                color: isActive ? color : Colors.white.withOpacity(0.6),
+                fontSize: 10.sp,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
   

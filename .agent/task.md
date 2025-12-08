@@ -52,3 +52,39 @@
     - [x] 곡 데이터 JSON 파싱 (aiva_tracks.json)
     - [x] 자동화 스크립트 작성 (aiva_automation.py)
     - [ ] 스크립트 실행 및 곡 생성 완료
+- [x] UI/Audio 피드백 수정 (2025-12-08)
+    - [x] APK 음악 재생 수정 (Android setAsset)
+    - [x] BGM 자동재생 수정
+    - [x] 햅틱 OFF 진동 수정
+    - [x] Sound 기본값 설정
+    - [x] MiniPlayer 개선 (진행바, ModeDetailView 추가)
+    - [x] 리뷰 프롬프트 5분 설정
+    - [x] Onboarding 한글화
+    - [x] Settings 토글 저장 기능
+- [x] AAB 배포 설정 (2025-12-08)
+    - [x] bundle 분리 설정 (ABI, density, language)
+    - [x] ProGuard 규칙 파일 생성
+- [ ] 앱 최적화 (추후 작업)
+    - [ ] Play Asset Delivery 구현
+        - [ ] install-time 에셋 분리 (필수 리소스)
+        - [ ] on-demand 에셋 분리 (추가 오디오)
+        - [ ] 다운로드 진행률 UI 구현
+    - [ ] Release 서명 키 설정
+        - [ ] keystore 파일 생성
+        - [ ] key.properties 설정
+        - [ ] build.gradle 서명 설정
+    - [ ] ProGuard/R8 최적화 활성화
+        - [ ] proguard-rules.pro 규칙 정교화
+        - [ ] Firebase/JustAudio keep 규칙 테스트
+    - [ ] 버전 자동 관리 (CI/CD)
+        - [ ] GitHub Actions 워크플로우 설정
+        - [ ] versionCode 자동 증가
+    - [ ] Flavor 설정 (개발/스테이징/프로덕션)
+        - [ ] 환경별 API 엔드포인트 분리
+        - [ ] 앱 아이콘/이름 분리
+    - [ ] Crashlytics 설정
+        - [ ] Firebase Crashlytics 연동
+        - [ ] 에러 리포팅 테스트
+    - [ ] 앱 성능 모니터링
+        - [ ] Firebase Performance 설정
+        - [ ] 주요 화면 로딩 시간 측정

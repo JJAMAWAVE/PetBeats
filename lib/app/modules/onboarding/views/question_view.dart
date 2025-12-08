@@ -109,7 +109,7 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
                       itemCount: options.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 16.0),
+                          padding: const EdgeInsets.only(bottom: 10.0), // Reduced from 16
                           child: Obx(() {
                             final option = options[index];
                             final value = option['value'] as String;
@@ -136,7 +136,7 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
                     ),
                   ),
                   
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 16), // Reduced from 24
                   
                   Obx(() {
                     final hasSelection = selectedItems.isNotEmpty;
@@ -210,7 +210,7 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12), // Reduced vertical padding
         decoration: BoxDecoration(
           color: isSelected ? AppColors.primaryBlue.withOpacity(0.08) : Colors.transparent,
           borderRadius: BorderRadius.circular(16),

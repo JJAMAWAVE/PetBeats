@@ -14,12 +14,14 @@ import '../../../data/models/mode_model.dart';
 import '../../../data/models/track_model.dart';
 import '../../../data/data_source/track_data.dart';
 
-class HomeController extends GetxController {
+class HomeController extends GetxController with WidgetsBindingObserver {
   final AudioService _audioService = Get.put(AudioService());
   final HapticService _hapticService = Get.put(HapticService());
   final ReviewService _reviewService = Get.find<ReviewService>();
-  // Use WebBgmService on web, BgmService otherwise
-  late final dynamic _bgmService = kIsWeb ? Get.find<WebBgmService>() : BgmService();
+  // Use WebBgmService on web, BgmService otherwise (싱글톤으로 관리)
+  late final dynamic _bgmService = kIsWeb 
+      ? Get.find<WebBgmService>() 
+      : Get.put(BgmService(), permanent: true);
 
   // 현재 선택된 종 (0: 강아지, 1: 고양이, 2: 보호자)
   final selectedSpeciesIndex = 0.obs;
@@ -56,11 +58,14 @@ class HomeController extends GetxController {
   // 리뷰 요청을 위한 재생 시간 추적
   Timer? _playTimeTimer;
   int _totalPlayTimeSeconds = 0;
-  static const int _reviewRequestThreshold = 10; // 테스트용 10초 (원래 300초 = 5분)
+  static const int _reviewRequestThreshold = 300; // 5분 = 300초
 
   @override
   void onInit() {
     super.onInit();
+    // 앱 생명주기 감지 등록
+    WidgetsBinding.instance.addObserver(this);
+    
     _initModes();
     _initScenarioPlaylists(); // 시나리오별 플레이리스트 초기화
     
@@ -274,9 +279,7 @@ class HomeController extends GetxController {
        _bgmService.pause();
        isPlaying.value = true;
        _audioService.play(currentTrack.value!.audioUrl);
-       if (isHeartbeatSyncEnabled.value) {
-         _hapticService.startHeartbeat(60);
-       }
+       // 햅틱은 PlayerController에서 관리 (기본값 OFF)
     } else {
       // Find mode and play first track
       final mode = modes.firstWhere((m) => m.id == modeId, orElse: () => modes.first);
@@ -314,19 +317,9 @@ class HomeController extends GetxController {
     _audioService.play(track.audioUrl);
     print('🎵 [DEBUG] AudioService.play called');
     
-    if (isHeartbeatSyncEnabled.value) {
-      // Parse BPM if possible, else default to 60
-      int bpm = 60;
-      if (track.bpm != null && track.bpm!.contains('BPM')) {
-        try {
-          bpm = int.parse(track.bpm!.split(' ')[0]);
-        } catch (e) {
-          bpm = 60;
-        }
-      }
-      print('🎵 [DEBUG] Starting haptic with BPM: $bpm');
-      _hapticService.startHeartbeat(bpm);
-    }
+    // 햅틱은 PlayerController에서 관리 - 기본값 OFF이므로 자동 시작하지 않음
+    // 사용자가 햅틱을 켜면 PlayerController.setHapticIntensity에서 시작됨
+    print('🎵 [DEBUG] Haptic will be controlled by PlayerController (default: OFF)');
     
     // 재생 시간 추적 시작
     _startPlayTimeTracking();
@@ -343,7 +336,8 @@ class HomeController extends GetxController {
       print('⏸️ [DEBUG] Pausing playback');
       isPlaying.value = false;
       _audioService.pause();
-      _hapticService.stop();
+      // _hapticService.stop(); // Old way
+      _hapticService.pause(); // New way: pause and remember state
       _stopPlayTimeTracking(); // 재생 시간 추적 중지
     } else {
       // Resume
@@ -352,17 +346,9 @@ class HomeController extends GetxController {
         isPlaying.value = true;
         _audioService.resume(); // Resume instead of play() to continue from current position
         
-        if (isHeartbeatSyncEnabled.value) {
-          int bpm = 60;
-          if (currentTrack.value!.bpm != null && currentTrack.value!.bpm!.contains('BPM')) {
-            try {
-              bpm = int.parse(currentTrack.value!.bpm!.split(' ')[0]);
-            } catch (e) {
-              bpm = 60;
-            }
-          }
-          _hapticService.startHeartbeat(bpm);
-        }
+        // _hapticService.startHeartbeat(bpm); // Old way
+        _hapticService.resume(); // New way: resume previous state
+        
         _startPlayTimeTracking(); // 재생 시간 추적 재개
       }
     }
@@ -491,8 +477,30 @@ class HomeController extends GetxController {
   
   @override
   void onClose() {
+    // 앱 생명주기 감지 해제
+    WidgetsBinding.instance.removeObserver(this);
     _playTimeTimer?.cancel();
     super.onClose();
+  }
+  
+  /// 앱 생명주기 변경 감지 - 백그라운드로 갈 때 BGM 중지
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print('📱 [HomeController] App lifecycle changed: $state');
+    
+    if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
+      // 앱이 백그라운드로 갈 때
+      print('📱 [HomeController] App going to background - stopping BGM');
+      _bgmService.pause();  // BGM 중지 (트랙 재생은 계속됨)
+    } else if (state == AppLifecycleState.resumed) {
+      // 앱이 포그라운드로 돌아올 때
+      print('📱 [HomeController] App resumed to foreground');
+      // 트랙이 재생 중이 아니면 BGM 재개
+      if (!isPlaying.value) {
+        print('📱 [HomeController] No track playing - resuming BGM');
+        _bgmService.resume();
+      }
+    }
   }
 }
 
