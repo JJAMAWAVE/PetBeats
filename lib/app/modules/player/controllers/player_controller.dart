@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../widgets/therapy_control_panel.dart';
 import '../../home/controllers/home_controller.dart';
 import '../../../data/services/haptic_service.dart';
+import '../../../data/services/haptic_pattern_player.dart';
 import '../../../data/services/audio_service.dart';
 import '../../../data/models/haptic_settings_model.dart';
 import 'package:just_audio/just_audio.dart';  // For ProcessingState
@@ -166,6 +167,7 @@ class PlayerController extends GetxController {
   }
 
   void setHapticIntensity(HapticIntensity intensity) {
+    final previousIntensity = hapticIntensity.value;
     hapticIntensity.value = intensity;
     
     // 핵심: HapticService에 강도 업데이트 전달
@@ -174,10 +176,28 @@ class PlayerController extends GetxController {
     if (intensity == HapticIntensity.off) {
       _hapticService.stop();
     } else {
+      // 처음 햅틱 켤 때 가이드 표시
+      if (previousIntensity == HapticIntensity.off) {
+        _showHapticGuide();
+      }
+      
       // 현재 재생 중이면 햅틱 모드 활성화
       if (isPlaying) {
         _activateHapticMode();
       }
+    }
+  }
+  
+  // 햅틱 처음 사용 시 가이드 표시
+  void _showHapticGuide() {
+    final hasSeenGuide = _storage.read('has_seen_haptic_guide') ?? false;
+    
+    if (!hasSeenGuide) {
+      Get.dialog(
+        const FirstRunGuideDialog(),
+        barrierDismissible: true,
+      );
+      _storage.write('has_seen_haptic_guide', true);
     }
   }
   
@@ -202,6 +222,14 @@ class PlayerController extends GetxController {
     // 먼저 모든 기존 패턴 중지
     _hapticService.stop();
     
+    // HapticPatternPlayer도 중지
+    try {
+      final hapticPatternPlayer = Get.find<HapticPatternPlayer>();
+      hapticPatternPlayer.stop();
+    } catch (e) {
+      // 무시
+    }
+    
     // 잠시 대기 후 새 모드 시작 (중복 방지)
     Future.delayed(const Duration(milliseconds: 50), () {
       switch (hapticMode.value) {
@@ -215,8 +243,14 @@ class PlayerController extends GetxController {
           _hapticService.startPurr();
           break;
         case HapticMode.soundAdaptive:
-          // MIDI 기반 햅틱 - HapticPatternPlayer가 처리
-          print('🎵 Sound Adaptive mode - MIDI-based haptic enabled');
+          // MIDI 기반 햅틱 - HapticPatternPlayer 시작
+          try {
+            final hapticPatternPlayer = Get.find<HapticPatternPlayer>();
+            hapticPatternPlayer.start(position: currentPosition.value);
+            print('🎵 Sound Adaptive mode - MIDI haptic started');
+          } catch (e) {
+            print('⚠️ HapticPatternPlayer not available: $e');
+          }
           break;
       }
     });

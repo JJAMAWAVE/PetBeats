@@ -10,6 +10,7 @@ import 'app/routes/app_routes.dart';
 import 'core/theme/app_text_styles.dart';
 import 'core/services/web_bgm_service.dart';
 import 'app/data/services/haptic_service.dart';
+import 'app/data/services/haptic_pattern_player.dart';
 import 'app/data/services/playback_tracking_service.dart';
 import 'app/data/services/review_service.dart';
 import 'app/data/services/auth_service.dart';
@@ -30,6 +31,7 @@ void main() async {
   
   // 전역 서비스 초기화
   Get.put(HapticService(), permanent: true);
+  Get.put(HapticPatternPlayer(), permanent: true);  // MIDI 기반 햅틱 패턴 플레이어
   Get.put(PlaybackTrackingService(), permanent: true);
   Get.put(ReviewService(), permanent: true);
   

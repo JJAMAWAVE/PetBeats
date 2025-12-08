@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import '../../../data/services/audio_service.dart';
 import '../../../data/services/haptic_service.dart';
+import '../../../data/services/haptic_pattern_player.dart';
 import '../../../data/services/review_service.dart';
 import '../../../../core/services/bgm_service.dart';
 import '../../../../core/services/web_bgm_service.dart';
@@ -316,6 +317,15 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     // Play the actual track audio file
     _audioService.play(track.audioUrl);
     print('🎵 [DEBUG] AudioService.play called');
+    
+    // MIDI 기반 햅틱 패턴 로드 (사운드 어댑티브 모드용)
+    try {
+      final hapticPatternPlayer = Get.find<HapticPatternPlayer>();
+      hapticPatternPlayer.loadPattern(track.id);
+      print('🎵 [DEBUG] Haptic pattern loading for track: ${track.id}');
+    } catch (e) {
+      print('⚠️ [DEBUG] HapticPatternPlayer not available: $e');
+    }
     
     // 햅틱은 PlayerController에서 관리 - 기본값 OFF이므로 자동 시작하지 않음
     // 사용자가 햅틱을 켜면 PlayerController.setHapticIntensity에서 시작됨
