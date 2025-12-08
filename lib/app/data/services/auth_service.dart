@@ -14,18 +14,29 @@ class AuthService extends GetxService {
   @override
   void onInit() {
     super.onInit();
-    // Firebase initialization should be done in main.dart, 
-    // but we listen to changes here if initialized.
+    _initFirebase();
+  }
+  
+  Future<void> _initFirebase() async {
+    // Delay Firebase initialization to avoid blocking app startup
+    await Future.delayed(const Duration(milliseconds: 500));
+    
     try {
       _auth = FirebaseAuth.instance;
       _googleSignIn = GoogleSignIn();
+      
       if (_auth != null) {
-        currentUser.bindStream(_auth!.authStateChanges());
+        // Safe stream binding
+        _auth!.authStateChanges().listen(
+          (user) => currentUser.value = user,
+          onError: (e) => debugPrint('AuthService: Stream error: $e'),
+        );
         isInitialized.value = true;
+        debugPrint('AuthService: Firebase initialized successfully');
       }
     } catch (e) {
       debugPrint('AuthService: Firebase not initialized or error: $e');
-      // Fallback for development without google-services.json
+      // App continues without Firebase - graceful fallback
     }
   }
 
