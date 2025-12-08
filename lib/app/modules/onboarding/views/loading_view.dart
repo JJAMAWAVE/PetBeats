@@ -332,18 +332,18 @@ class _LoadingViewState extends State<LoadingView> with TickerProviderStateMixin
                   // 블룸 폭발 플래시
                   if (flashIntensity > 0)
                     BoxShadow(
-                      color: _bloomWhite.withOpacity(flashIntensity * 0.8),
+                      color: _bloomWhite.withOpacity((flashIntensity * 0.8).clamp(0.0, 1.0)),
                       blurRadius: 80 * flashIntensity,
                       spreadRadius: 40 * flashIntensity,
                     ),
                   // 오로라 블룸 효과
                   BoxShadow(
-                    color: _auroraBlue.withOpacity(0.5 * bloomIntensity),
+                    color: _auroraBlue.withOpacity((0.5 * bloomIntensity).clamp(0.0, 1.0)),
                     blurRadius: 50 * bloomIntensity,
                     spreadRadius: 25 * bloomIntensity,
                   ),
                   BoxShadow(
-                    color: _auroraPurple.withOpacity(0.3 * bloomIntensity),
+                    color: _auroraPurple.withOpacity((0.3 * bloomIntensity).clamp(0.0, 1.0)),
                     blurRadius: 70 * bloomIntensity,
                     spreadRadius: 35 * bloomIntensity,
                   ),
@@ -377,7 +377,7 @@ class _LoadingViewState extends State<LoadingView> with TickerProviderStateMixin
       left: 0,
       right: 0,
       child: Opacity(
-        opacity: textOpacity,
+        opacity: textOpacity.clamp(0.0, 1.0),
         child: Transform.translate(
           offset: Offset(0, translateY),
           child: Column(
