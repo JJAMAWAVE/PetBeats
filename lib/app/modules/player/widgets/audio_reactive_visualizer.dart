@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:async';
 import 'dart:math' as math;
 import '../painters/waveform_painter.dart';
 import '../../../core/theme/visualizer_themes.dart';
-import '../../../data/services/audio_analyzer_service.dart';
+import '../../../data/services/haptic_pattern_player.dart';
 
 /// 전체 화면 오디오 반응형 비주얼라이저
 class AudioReactiveVisualizer extends StatefulWidget {
@@ -30,7 +31,8 @@ class _AudioReactiveVisualizerState extends State<AudioReactiveVisualizer>
   late AnimationController _pulseController;
   late AnimationController _particleController;
   
-  final AudioAnalyzerService _analyzer = Get.find<AudioAnalyzerService>();
+  // MIDI 이벤트 구독
+  StreamSubscription<MidiEventData>? _midiSubscription;
   
   // 웨이브폼 데이터 (3개 레이어)
   List<double> _outerWaveform = List.filled(64, 0.0); // 베이스
@@ -49,7 +51,7 @@ class _AudioReactiveVisualizerState extends State<AudioReactiveVisualizer>
     super.initState();
     _setupControllers();
     _generateParticles();
-    _setupAudioListener();
+    _setupMidiListener();
   }
 
   void _setupControllers() {
@@ -79,21 +81,35 @@ class _AudioReactiveVisualizerState extends State<AudioReactiveVisualizer>
     }
   }
 
-  void _setupAudioListener() {
-    _analyzer.frequencyStream.listen((data) {
-      if (!mounted || !widget.isPlaying) return;
-      
-      setState(() {
-        _bassIntensity = data.bassIntensity;
-        _midIntensity = data.midIntensity;
-        _highIntensity = data.highIntensity;
+  void _setupMidiListener() {
+    try {
+      final patternPlayer = Get.find<HapticPatternPlayer>();
+      _midiSubscription = patternPlayer.midiEventStream.listen((event) {
+        if (!mounted || !widget.isPlaying) return;
         
-        // 웨이브폼 데이터 생성 (시뮬레이션)
-        _outerWaveform = _generateWaveformData(64, _bassIntensity);
-        _middleWaveform = _generateWaveformData(80, _midIntensity);
-        _innerWaveform = _generateWaveformData(64, _highIntensity);
+        setState(() {
+          // MIDI 노트에 따른 주파수 대역 업데이트
+          final intensity = event.intensity;
+          
+          switch (event.frequencyBand) {
+            case 'bass':
+              _bassIntensity = (_bassIntensity + intensity) / 2; // 스무딩
+              _outerWaveform = _generateWaveformData(64, _bassIntensity);
+              break;
+            case 'mid':
+              _midIntensity = (_midIntensity + intensity) / 2;
+              _middleWaveform = _generateWaveformData(80, _midIntensity);
+              break;
+            case 'high':
+              _highIntensity = (_highIntensity + intensity) / 2;
+              _innerWaveform = _generateWaveformData(64, _highIntensity);
+              break;
+          }
+        });
       });
-    });
+    } catch (e) {
+      print('HapticPatternPlayer not available: $e');
+    }
   }
 
   List<double> _generateWaveformData(int count, double intensity) {
@@ -147,6 +163,7 @@ class _AudioReactiveVisualizerState extends State<AudioReactiveVisualizer>
 
   @override
   void dispose() {
+    _midiSubscription?.cancel();
     _rotationController.dispose();
     _pulseController.dispose();
     _particleController.dispose();

@@ -5,10 +5,33 @@ import 'package:get/get.dart';
 import '../models/haptic_envelope.dart';
 import './haptic_service.dart';
 
+/// MIDI 이벤트 데이터 클래스
+class MidiEventData {
+  final int note;
+  final int velocity;
+  final int timeMs;
+  
+  MidiEventData({required this.note, required this.velocity, required this.timeMs});
+  
+  /// 노트를 주파수 대역으로 분류 (bass/mid/high)
+  String get frequencyBand {
+    if (note <= 48) return 'bass';       // C3 이하
+    if (note <= 72) return 'mid';        // C3~C5
+    return 'high';                        // C5 이상
+  }
+  
+  /// velocity(0-127)를 intensity(0.0-1.0)로 변환
+  double get intensity => velocity / 127.0;
+}
+
 /// Plays pre-generated haptic patterns from JSON files
 /// synchronized with audio playback
 class HapticPatternPlayer extends GetxService {
   final HapticService _hapticService = Get.find<HapticService>();
+  
+  // MIDI 이벤트 스트림 - 비주얼라이저에서 구독
+  final StreamController<MidiEventData> _midiEventController = StreamController.broadcast();
+  Stream<MidiEventData> get midiEventStream => _midiEventController.stream;
   
   Map<String, dynamic>? _currentPattern;
   final List<Timer> _scheduledTimers = [];
@@ -86,6 +109,14 @@ class HapticPatternPlayer extends GetxService {
   void _playEvent(Map<String, dynamic> event) {
     final note = event['note'] as int;
     final velocity = event['velocity'] as int;
+    final timeMs = event['time'] as int;
+    
+    // 비주얼라이저에 MIDI 이벤트 전달
+    _midiEventController.add(MidiEventData(
+      note: note,
+      velocity: velocity,
+      timeMs: timeMs,
+    ));
     
     // Use playNote which will apply ADSR envelope
     _hapticService.playNote(note, velocity);
@@ -94,6 +125,7 @@ class HapticPatternPlayer extends GetxService {
   @override
   void onClose() {
     stop();
+    _midiEventController.close();
     super.onClose();
   }
 }
