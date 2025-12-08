@@ -17,8 +17,9 @@ class TrackData {
         'Harmony': 'Simple Chords I',
         'Instruments': 'Grand Piano / Sub Bass'
       },
-      tags: ['Large Dog', 'Sleep', 'Piano'],
+      tags: ['All Dog', 'Sleep', 'Piano'],
       isPremium: false,
+      duration: '5:17',
     ),
     Track(
       id: 'sleep_02',
@@ -34,8 +35,9 @@ class TrackData {
         'Harmony': 'Simple Chords I',
         'Instruments': 'Grand Piano (Softest) / Warm Pad'
       },
-      tags: ['Large Dog', 'Sleep', 'Felt Piano'],
+      tags: ['All Dog', 'Sleep', 'Felt Piano'],
       isPremium: false,
+      duration: '5:23',
     ),
     Track(
       id: 'sleep_03',
@@ -53,6 +55,7 @@ class TrackData {
       },
       tags: ['Large Dog', 'Sleep', 'Cinematic'],
       isPremium: true,
+      duration: '5:22',
     ),
     Track(
       id: 'sleep_04',
@@ -70,6 +73,7 @@ class TrackData {
       },
       tags: ['Large Dog', 'Sleep', 'Waltz'],
       isPremium: true,
+      duration: '5:28',
     ),
     Track(
       id: 'sleep_05',
@@ -87,6 +91,7 @@ class TrackData {
       },
       tags: ['Medium Dog', 'Sleep', 'Standard'],
       isPremium: true,
+      duration: '5:28',
     ),
     Track(
       id: 'sleep_06',
@@ -104,6 +109,7 @@ class TrackData {
       },
       tags: ['Medium Dog', 'Sleep', 'Waltz'],
       isPremium: true,
+      duration: '5:24',
     ),
     Track(
       id: 'sleep_07',
@@ -121,6 +127,7 @@ class TrackData {
       },
       tags: ['Small Dog', 'Sleep', 'Clear'],
       isPremium: true,
+      duration: '5:25',
     ),
     Track(
       id: 'sleep_08',
@@ -138,6 +145,7 @@ class TrackData {
       },
       tags: ['Small Dog', 'Sleep', 'Orgel'],
       isPremium: true,
+      duration: '5:21',
     ),
   ];
 
@@ -157,8 +165,9 @@ class TrackData {
         'Harmony': 'Simple Chords I',
         'Instruments': 'Cello / String Ensemble'
       },
-      tags: ['Large Dog', 'Separation', 'Cello'],
+      tags: ['All Dog', 'Separation', 'Cello'],
       isPremium: false,
+      duration: '5:30',
     ),
     Track(
       id: 'separation_02',
@@ -174,8 +183,9 @@ class TrackData {
         'Harmony': 'Simple Chords IV',
         'Instruments': 'Warm Pad / 808 Bass'
       },
-      tags: ['Large Dog', 'Separation', 'Ensemble'],
+      tags: ['All Dog', 'Separation', 'Ensemble'],
       isPremium: false,
+      duration: '5:21',
     ),
     Track(
       id: 'separation_03',
@@ -191,8 +201,9 @@ class TrackData {
         'Harmony': 'Simple Chords I',
         'Instruments': 'Viola / Sub Bass'
       },
-      tags: ['Medium Dog', 'Separation', 'Viola'],
+      tags: ['Large Dog', 'Separation', 'Viola'],
       isPremium: true,
+      duration: '5:22',
     ),
     Track(
       id: 'separation_04',
@@ -208,8 +219,9 @@ class TrackData {
         'Harmony': 'Simple Chords I',
         'Instruments': 'Soft Pad / Drone Bass'
       },
-      tags: ['Medium Dog', 'Separation', 'Duet'],
+      tags: ['Large Dog', 'Separation', 'Duet'],
       isPremium: true,
+      duration: '5:35',
     ),
     Track(
       id: 'separation_05',
@@ -225,8 +237,9 @@ class TrackData {
         'Harmony': 'Simple Chords III',
         'Instruments': 'Harp / String Ensemble'
       },
-      tags: ['Small Dog', 'Separation', 'Violin'],
+      tags: ['Medium Dog', 'Separation', 'Violin'],
       isPremium: true,
+      duration: '5:25',
     ),
     Track(
       id: 'separation_06',
@@ -242,8 +255,9 @@ class TrackData {
         'Harmony': 'Intermediate Mixed Chords I',
         'Instruments': 'Bright Pad / 808 Bass'
       },
-      tags: ['Small Dog', 'Separation', 'Chamber'],
+      tags: ['Medium Dog', 'Separation', 'Chamber'],
       isPremium: true,
+      duration: '5:20',
     ),
     Track(
       id: 'separation_07',
@@ -261,6 +275,7 @@ class TrackData {
       },
       tags: ['Small Dog', 'Separation', 'Chamber'],
       isPremium: true,
+      duration: '5:22',
     ),
     Track(
       id: 'separation_08',
@@ -278,6 +293,7 @@ class TrackData {
       },
       tags: ['Small Dog', 'Separation', 'Chamber'],
       isPremium: true,
+      duration: '5:21',
     ),
   ];
 
@@ -297,8 +313,9 @@ class TrackData {
         'Harmony': 'Simple Chords IV',
         'Instruments': 'Analog Pad / 808 Bass'
       },
-      tags: ['Large Dog', 'Noise', 'Brown Noise'],
+      tags: ['All Dog', 'Noise', 'Brown Noise'],
       isPremium: false,
+      duration: '5:29',
     ),
     Track(
       id: 'noise_02',
@@ -314,8 +331,9 @@ class TrackData {
         'Harmony': 'Intermediate Mixed Chords I',
         'Instruments': 'Dark Pad / 808 Bass'
       },
-      tags: ['Medium Dog', 'Noise', 'Pink Noise'],
+      tags: ['All Dog', 'Noise', 'Pink Noise'],
       isPremium: false,
+      duration: '5:18',
     ),
     Track(
       id: 'noise_03',
@@ -331,8 +349,9 @@ class TrackData {
         'Harmony': 'Simple Chords I',
         'Instruments': 'Warm Pad / Simple Bass'
       },
-      tags: ['Small Dog', 'Noise', 'White Noise'],
+      tags: ['Large Dog', 'Noise', 'White Noise'],
       isPremium: true,
+      duration: '5:13',
     ),
     Track(
       id: 'noise_04',
@@ -348,8 +367,9 @@ class TrackData {
         'Harmony': 'Simple Chords IV',
         'Instruments': 'Low Pad / Drone Bass'
       },
-      tags: ['Small Dog', 'Noise', 'White Noise'],
+      tags: ['Large Dog', 'Noise', 'White Noise'],
       isPremium: true,
+      duration: '5:18',
     ),
     Track(
       id: 'noise_05',
@@ -365,8 +385,9 @@ class TrackData {
         'Harmony': 'Simple Chords I',
         'Instruments': 'Atmosphere / Simple Bass'
       },
-      tags: ['Small Dog', 'Noise', 'White Noise'],
+      tags: ['Medium Dog', 'Noise', 'White Noise'],
       isPremium: true,
+      duration: '5:14',
     ),
     Track(
       id: 'noise_06',
@@ -382,8 +403,9 @@ class TrackData {
         'Harmony': 'Simple Chords I',
         'Instruments': 'String Ensemble / Cello'
       },
-      tags: ['Small Dog', 'Noise', 'White Noise'],
+      tags: ['Medium Dog', 'Noise', 'White Noise'],
       isPremium: true,
+      duration: '5:17',
     ),
     Track(
       id: 'noise_07',
@@ -401,6 +423,7 @@ class TrackData {
       },
       tags: ['Small Dog', 'Noise', 'White Noise'],
       isPremium: true,
+      duration: '5:20',
     ),
     Track(
       id: 'noise_08',
@@ -418,6 +441,7 @@ class TrackData {
       },
       tags: ['Small Dog', 'Noise', 'White Noise'],
       isPremium: true,
+      duration: '5:22',
     ),
   ];
 
@@ -439,6 +463,7 @@ class TrackData {
       },
       tags: ['All Dogs', 'Energy', 'Marimba'],
       isPremium: false,
+      duration: '5:16',
     ),
     Track(
       id: 'energy_02',
@@ -456,6 +481,7 @@ class TrackData {
       },
       tags: ['All Dogs', 'Energy', 'Piano'],
       isPremium: false,
+      duration: '5:18',
     ),
     Track(
       id: 'energy_03',
@@ -473,6 +499,7 @@ class TrackData {
       },
       tags: ['All Dogs', 'Energy', 'Guitar'],
       isPremium: true,
+      duration: '5:23',
     ),
     Track(
       id: 'energy_04',
@@ -490,6 +517,7 @@ class TrackData {
       },
       tags: ['All Dogs', 'Energy', 'Guitar'],
       isPremium: true,
+      duration: '5:20',
     ),
     Track(
       id: 'energy_05',
@@ -507,6 +535,7 @@ class TrackData {
       },
       tags: ['All Dogs', 'Energy', 'Guitar'],
       isPremium: true,
+      duration: '5:15',
     ),
     Track(
       id: 'energy_06',
@@ -524,6 +553,7 @@ class TrackData {
       },
       tags: ['All Dogs', 'Energy', 'Guitar'],
       isPremium: true,
+      duration: '5:17',
     ),
     Track(
       id: 'energy_07',
@@ -541,6 +571,7 @@ class TrackData {
       },
       tags: ['All Dogs', 'Energy', 'Guitar'],
       isPremium: true,
+      duration: '5:19',
     ),
     Track(
       id: 'energy_08',
@@ -558,6 +589,7 @@ class TrackData {
       },
       tags: ['All Dogs', 'Energy', 'Guitar'],
       isPremium: true,
+      duration: '5:21',
     ),
   ];
 
@@ -577,8 +609,9 @@ class TrackData {
         'Harmony': 'Simple Chords I',
         'Instruments': 'Warm Pad / 808 Bass'
       },
-      tags: ['Large Dog', 'Senior', 'Vibration'],
+      tags: ['All Dog', 'Senior', 'Vibration'],
       isPremium: false,
+      duration: '5:23',
     ),
     Track(
       id: 'senior_02',
@@ -594,8 +627,9 @@ class TrackData {
         'Harmony': 'Simple Chords I',
         'Instruments': 'String Ensemble / Double Bass'
       },
-      tags: ['Medium Dog', 'Senior', 'Vibration'],
+      tags: ['All Dog', 'Senior', 'Vibration'],
       isPremium: false,
+      duration: '5:25',
     ),
     Track(
       id: 'senior_03',
@@ -611,8 +645,9 @@ class TrackData {
         'Harmony': 'Simple Chords IV',
         'Instruments': 'Warm Pad / Drone Bass'
       },
-      tags: ['Small Dog', 'Senior', 'Vibration'],
+      tags: ['Large Dog', 'Senior', 'Vibration'],
       isPremium: true,
+      duration: '5:12',
     ),
     Track(
       id: 'senior_04',
@@ -628,8 +663,9 @@ class TrackData {
         'Harmony': 'Simple Chords I',
         'Instruments': 'Grand Piano (Softest) / Acoustic Bass'
       },
-      tags: ['All Dogs', 'Senior', 'Complex Vibration'],
+      tags: ['Large Dog', 'Senior', 'Complex Vibration'],
       isPremium: true,
+      duration: '5:24',
     ),
     Track(
       id: 'senior_05',
@@ -645,8 +681,9 @@ class TrackData {
         'Harmony': 'Simple Chords I',
         'Instruments': 'Analog Pad / 808 Bass'
       },
-      tags: ['All Dogs', 'Senior', 'Complex Vibration'],
+      tags: ['Medium Dog', 'Senior', 'Complex Vibration'],
       isPremium: true,
+      duration: '5:17',
     ),
     Track(
       id: 'senior_06',
@@ -662,8 +699,9 @@ class TrackData {
         'Harmony': 'Simple Chords I',
         'Instruments': 'Harp / String Ensemble'
       },
-      tags: ['All Dogs', 'Senior', 'Complex Vibration'],
+      tags: ['Medium Dog', 'Senior', 'Complex Vibration'],
       isPremium: true,
+      duration: '5:20',
     ),
     Track(
       id: 'senior_07',
@@ -679,8 +717,9 @@ class TrackData {
         'Harmony': 'Simple Chords I',
         'Instruments': 'Choir / Organ'
       },
-      tags: ['All Dogs', 'Senior', 'Complex Vibration'],
+      tags: ['Small Dog', 'Senior', 'Complex Vibration'],
       isPremium: true,
+      duration: '5:18',
     ),
     Track(
       id: 'senior_08',
@@ -696,8 +735,9 @@ class TrackData {
         'Harmony': 'Simple Chords IV',
         'Instruments': 'Flute / Acoustic Bass'
       },
-      tags: ['All Dogs', 'Senior', 'Complex Vibration'],
+      tags: ['Small Dog', 'Senior', 'Complex Vibration'],
       isPremium: true,
+      duration: '5:22',
     ),
   ];
 

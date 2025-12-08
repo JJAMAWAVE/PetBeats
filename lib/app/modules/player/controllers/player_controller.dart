@@ -4,11 +4,15 @@ import '../widgets/therapy_control_panel.dart';
 import '../../home/controllers/home_controller.dart';
 import '../../../data/services/haptic_service.dart';
 import '../../../data/services/audio_service.dart';
+import 'package:just_audio/just_audio.dart';  // For ProcessingState
 import '../../../data/services/timer_service.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../../data/services/audio_analyzer_service.dart';
 import '../models/visualizer_theme.dart';
 import '../widgets/first_run_guide_dialog.dart';
+
+/// Repeat Mode: Off → Single (1곡 반복) → All (전체 반복)
+enum RepeatMode { off, single, all }
 
 class PlayerController extends GetxController {
   final HomeController homeController = Get.find<HomeController>();
@@ -26,6 +30,9 @@ class PlayerController extends GetxController {
   // Seek bar drag state
   final isDraggingSeekBar = false.obs;
   final tempSeekPosition = 0.0.obs;
+  
+  // Repeat mode: off → single (1곡 반복) → all (전체 반복)
+  final repeatMode = RepeatMode.single.obs;  // 기본: 1곡 반복
 
 
   @override
@@ -46,6 +53,17 @@ class PlayerController extends GetxController {
     _audioService.durationStream.listen((duration) {
       if (duration != null) {
         currentDuration.value = duration;
+      }
+    });
+    
+    // Listen for track completion (All loop mode)
+    _audioService.playerStateStream.listen((state) {
+      if (state.processingState == ProcessingState.completed) {
+        // Check if All loop mode is active
+        if (repeatMode.value == RepeatMode.all) {
+          print('🔁 Track completed, playing next (All loop mode)');
+          homeController.skipNext();
+        }
       }
     });
     
@@ -182,6 +200,12 @@ class PlayerController extends GetxController {
       case HapticMode.purr:
         _hapticService.startPurr();
         break;
+      case HapticMode.soundAdaptive:
+        // MIDI 기반 자연스러운 햅틱 - HapticPatternPlayer가 MIDI 분석 후 자동 처리
+        _hapticService.stop(); // 기존 패턴 중지
+        // HapticPatternPlayer가 MIDI 로드 시 자동으로 playNote 호출
+        print('🎵 Sound Adaptive mode - MIDI-based haptic enabled');
+        break;
     }
   }
 
@@ -190,4 +214,40 @@ class PlayerController extends GetxController {
     // TODO: Call SoundService to toggle rain layer
     print('Weather toggled: ${isWeatherActive.value}');
   }
+  
+  /// 반복 모드 토글: Off → Single (1곡) → All (전체) → Off
+  void toggleRepeatMode() {
+    switch (repeatMode.value) {
+      case RepeatMode.off:
+        repeatMode.value = RepeatMode.single;
+        _audioService.setLoopMode(true, singleTrack: true);
+        print('🔁 Repeat mode: Single track');
+        break;
+      case RepeatMode.single:
+        repeatMode.value = RepeatMode.all;
+        _audioService.setLoopMode(true, singleTrack: false);
+        print('🔁 Repeat mode: All tracks');
+        break;
+      case RepeatMode.all:
+        repeatMode.value = RepeatMode.off;
+        _audioService.setLoopMode(false);
+        print('🔁 Repeat mode: Off');
+        break;
+    }
+  }
+  
+  /// 반복 모드에 따른 아이콘 반환
+  IconData get repeatModeIcon {
+    switch (repeatMode.value) {
+      case RepeatMode.off:
+        return Icons.repeat;
+      case RepeatMode.single:
+        return Icons.repeat_one;
+      case RepeatMode.all:
+        return Icons.repeat;
+    }
+  }
+  
+  /// 반복 모드 활성 여부
+  bool get isRepeatActive => repeatMode.value != RepeatMode.off;
 }

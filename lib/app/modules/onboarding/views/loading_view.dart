@@ -647,7 +647,7 @@ class _PremiumLogoPainter extends CustomPainter {
       
       // 글로우 효과
       final glowPaint = Paint()
-        ..color = glowColor.withOpacity(0.6 * strokeProgress)
+        ..color = glowColor.withOpacity((0.6 * strokeProgress).clamp(0.0, 1.0))
         ..style = PaintingStyle.stroke
         ..strokeWidth = 6
         ..strokeCap = StrokeCap.round
@@ -657,7 +657,7 @@ class _PremiumLogoPainter extends CustomPainter {
       
       // 메인 스트로크
       final strokePaint = Paint()
-        ..color = strokeColor.withOpacity(strokeProgress)
+        ..color = strokeColor.withOpacity(strokeProgress.clamp(0.0, 1.0))
         ..style = PaintingStyle.stroke
         ..strokeWidth = 3
         ..strokeCap = StrokeCap.round;
@@ -680,14 +680,14 @@ class _PremiumLogoPainter extends CustomPainter {
     if (fillProgress > 0) {
       // 글로우
       final glowPaint = Paint()
-        ..color = glowColor.withOpacity(0.4 * fillProgress)
+        ..color = glowColor.withOpacity((0.4 * fillProgress).clamp(0.0, 1.0))
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 15);
       
       canvas.drawPath(heartPath, glowPaint);
       
       // 채우기
       final fillPaint = Paint()
-        ..color = fillColor.withOpacity(fillProgress)
+        ..color = fillColor.withOpacity(fillProgress.clamp(0.0, 1.0))
         ..style = PaintingStyle.fill;
       
       canvas.drawPath(heartPath, fillPaint);
@@ -725,7 +725,7 @@ class _PremiumLogoPainter extends CustomPainter {
   
   void _drawSoundWaves(Canvas canvas, Offset center, double progress) {
     final wavePaint = Paint()
-      ..color = strokeColor.withOpacity(0.8 * progress)
+      ..color = strokeColor.withOpacity((0.8 * progress).clamp(0.0, 1.0))
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.5
       ..strokeCap = StrokeCap.round;
@@ -747,7 +747,7 @@ class _PremiumLogoPainter extends CustomPainter {
         -math.pi / 3.5,
         math.pi / 1.75 * easedProgress,
         false,
-        wavePaint..color = strokeColor.withOpacity(0.7 * easedProgress),
+        wavePaint..color = strokeColor.withOpacity((0.7 * easedProgress).clamp(0.0, 1.0)),
       );
     }
   }

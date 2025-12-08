@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:math' as math;
@@ -95,8 +96,18 @@ class _SplashWelcomeViewState extends State<SplashWelcomeView> with TickerProvid
 
     _transitionController.forward();
     
+    // 온보딩 완료 여부 체크
+    final storage = GetStorage();
+    final hasCompletedOnboarding = storage.read('onboarding_completed') ?? false;
+    
     Future.delayed(const Duration(milliseconds: 1800), () {
-      Get.offNamed(Routes.ONBOARDING);
+      if (hasCompletedOnboarding) {
+        // 기존 사용자: 바로 홈으로
+        Get.offAllNamed(Routes.HOME);
+      } else {
+        // 신규 사용자: 온보딩 진행
+        Get.offNamed(Routes.ONBOARDING);
+      }
     });
   }
 

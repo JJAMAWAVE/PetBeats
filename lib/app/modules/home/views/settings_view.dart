@@ -93,11 +93,10 @@ class SettingsView extends StatelessWidget {
 
             const SizedBox(height: 40),
 
-            // Integrations Section
-            _buildSectionTitle('기기 연동'),
+            // Language Section
+            _buildSectionTitle('언어 설정'),
             const SizedBox(height: 16),
-            _buildIntegrationItem('Smart Home (IoT)', Icons.home_mini),
-            _buildIntegrationItem('Pet Cam', Icons.videocam), // Added relevant example
+            _buildLanguageSelector(),
             
             const SizedBox(height: 40),
             Center(
@@ -169,29 +168,93 @@ class SettingsView extends StatelessWidget {
     );
   }
 
-  Widget _buildIntegrationItem(String title, IconData icon) {
+  Widget _buildLanguageSelector() {
+    final languages = [
+      {'flag': '🇰🇷', 'name': '한국어', 'code': 'ko'},
+      {'flag': '🇺🇸', 'name': 'English', 'code': 'en'},
+      {'flag': '🇯🇵', 'name': '日本語', 'code': 'ja'},
+      {'flag': '🇨🇳', 'name': '简体中文', 'code': 'zh_CN'},
+      {'flag': '🇹🇼', 'name': '繁體中文', 'code': 'zh_TW'},
+      {'flag': '🇪🇸', 'name': 'Español', 'code': 'es'},
+      {'flag': '🇩🇪', 'name': 'Deutsch', 'code': 'de'},
+      {'flag': '🇫🇷', 'name': 'Français', 'code': 'fr'},
+      {'flag': '🇵🇹', 'name': 'Português', 'code': 'pt'},
+      {'flag': '🇻🇳', 'name': 'Tiếng Việt', 'code': 'vi'},
+      {'flag': '🇮🇹', 'name': 'Italiano', 'code': 'it'},
+    ];
+    
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.grey.shade900,
-          foregroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.grey.shade100),
+      ),
+      child: Column(
+        children: [
+          // Current language display
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryBlue.withOpacity(0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.language, color: AppColors.primaryBlue, size: 24),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '앱 언어',
+                      style: AppTextStyles.titleMedium.copyWith(fontSize: 16),
+                    ),
+                    Text(
+                      '🇰🇷 한국어',
+                      style: AppTextStyles.labelSmall.copyWith(color: AppColors.textGrey),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.textGrey),
+            ],
           ),
-          elevation: 0,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 20),
-            const SizedBox(width: 12),
-            Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-          ],
-        ),
+          const Divider(height: 24),
+          // Language grid
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: languages.map((lang) {
+              final isSelected = lang['code'] == 'ko';
+              return GestureDetector(
+                onTap: () {
+                  // TODO: Implement language change
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: isSelected ? AppColors.primaryBlue.withOpacity(0.1) : Colors.grey.shade50,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: isSelected ? AppColors.primaryBlue : Colors.grey.shade200,
+                    ),
+                  ),
+                  child: Text(
+                    '${lang['flag']} ${lang['name']}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: isSelected ? AppColors.primaryBlue : AppColors.textDarkNavy,
+                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ],
       ),
     );
   }

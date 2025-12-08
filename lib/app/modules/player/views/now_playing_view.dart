@@ -46,7 +46,11 @@ class NowPlayingView extends GetView<PlayerController> {
             child: Center(
               child: Obx(() => Text(
                 controller.currentTrackTitle,
-                style: AppTextStyles.bodyMedium.copyWith(color: Colors.white70),
+                style: AppTextStyles.titleMedium.copyWith(
+                  color: Colors.white,
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w600,
+                ),
                 overflow: TextOverflow.ellipsis,
               )),
             ),
@@ -198,10 +202,16 @@ class NowPlayingView extends GetView<PlayerController> {
                             // Required parameter - no action during drag for smooth performance
                           },
                           onChangeEnd: (value) {
+                            // Prevent seek when duration is not yet loaded
+                            if (duration.inMilliseconds <= 0) {
+                              print('⚠️ [SeekBar] Duration not loaded yet, ignoring seek');
+                              return;
+                            }
                             // Seek when user finishes dragging
                             final newPosition = Duration(
                               milliseconds: (value * duration.inMilliseconds).round(),
                             );
+                            print('🎵 [SeekBar] Seeking to $newPosition');
                             controller.homeController.seekTo(newPosition);
                           },
                         ),
@@ -230,7 +240,7 @@ class NowPlayingView extends GetView<PlayerController> {
               IconButton(
                 icon: const Icon(Icons.skip_previous, color: Colors.white),
                 iconSize: 32.w,
-                onPressed: () {},
+                onPressed: () => controller.homeController.skipPrevious(),
               ),
               Obx(() => GestureDetector(
                 onTap: controller.togglePlay,
@@ -258,14 +268,19 @@ class NowPlayingView extends GetView<PlayerController> {
               IconButton(
                 icon: const Icon(Icons.skip_next, color: Colors.white),
                 iconSize: 32.w,
-                onPressed: () {},
+                onPressed: () => controller.homeController.skipNext(),
               ),
-              // Repeat/Shuffle placeholder
-              IconButton(
-                icon: Icon(Icons.repeat, color: Colors.white.withOpacity(0.5)),
+              // Repeat mode toggle (Off → Single → All)
+              Obx(() => IconButton(
+                icon: Icon(
+                  controller.repeatModeIcon,
+                  color: controller.isRepeatActive 
+                      ? AppColors.primaryBlue 
+                      : Colors.white.withOpacity(0.5),
+                ),
                 iconSize: 24.w,
-                onPressed: () {},
-              ),
+                onPressed: () => controller.toggleRepeatMode(),
+              )),
             ],
           ),
         ],

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../home/controllers/home_controller.dart';
 
 enum SubscriptionPlan {
   monthly,
@@ -161,7 +162,15 @@ class SubscriptionController extends GetxController {
     _storage.write('subscriptionPlan', selectedPlan.value.toString());
     _storage.write('subscriptionDate', DateTime.now().toIso8601String());
     
-    // 3. 성공 메시지
+    // 3. HomeController의 isPremiumUser도 동기화
+    try {
+      final homeController = Get.find<HomeController>();
+      homeController.upgradeToPremium();
+    } catch (e) {
+      print('HomeController not found: $e');
+    }
+    
+    // 4. 성공 메시지
     Get.back(); // 구독 페이지 닫기
     Get.snackbar(
       '✅ 구독 완료!',

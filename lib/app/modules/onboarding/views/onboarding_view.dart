@@ -672,7 +672,7 @@ class TouchRipplePainter extends CustomPainter {
     final opacity = (1.0 - progress) * 0.6;
     
     final paint = Paint()
-      ..color = color.withOpacity(opacity * 1.5)
+      ..color = color.withOpacity((opacity * 1.5).clamp(0.0, 1.0))
       ..style = PaintingStyle.fill;
     
     canvas.drawCircle(center, radius, paint);

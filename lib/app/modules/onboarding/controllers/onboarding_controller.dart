@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../../routes/app_routes.dart';
 
 class OnboardingController extends GetxController {
+  final _storage = GetStorage();
+  
   // 페이지 컨트롤러
   final pageController = PageController();
   
@@ -46,7 +49,9 @@ class OnboardingController extends GetxController {
   }
 
   void completeOnboarding() {
-    Get.offAllNamed(Routes.LOADING);
+    // 온보딩 완료 상태 저장
+    _storage.write('onboarding_completed', true);
+    Get.offAllNamed(Routes.HOME);
   }
   
   @override

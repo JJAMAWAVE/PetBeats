@@ -4,6 +4,7 @@ import 'package:just_audio/just_audio.dart';
 class AudioService extends GetxService {
   final AudioPlayer _player = AudioPlayer();
   String? _currentLoadedUrl; // Track the currently loaded URL
+  Duration _savedPosition = Duration.zero;  // Store position before pause (WEB FIX)
 
   // 초기화
   @override
@@ -19,6 +20,9 @@ class AudioService extends GetxService {
   // Duration stream (총 길이)
   Stream<Duration?> get durationStream => _player.durationStream;
   
+  // Player state stream (곡 완료 감지용)
+  Stream<PlayerState> get playerStateStream => _player.playerStateStream;
+  
   // Get current values
   Duration get position => _player.position;
   Duration? get duration => _player.duration;
@@ -31,6 +35,7 @@ class AudioService extends GetxService {
       // Only set audio source if it's a different URL
       if (_currentLoadedUrl != url) {
         print("🎵 [AudioService] Loading new audio source");
+        _savedPosition = Duration.zero;  // Reset saved position for new track
         
         // For web, use URI-based loading
         if (url.startsWith('assets/')) {
@@ -63,27 +68,35 @@ class AudioService extends GetxService {
     }
   }
 
-  // 일시정지
+  // 일시정지 - WEB FIX: 위치 저장 후 pause
   Future<void> pause() async {
     try {
-      print("🎵 [AudioService] pause() called");
+      // Save current position BEFORE pausing (WEB FIX)
+      _savedPosition = _player.position;
+      print("🎵 [AudioService] pause() - saved position: $_savedPosition");
+      
       await _player.pause();
       print("🎵 [AudioService] pause() successful");
     } catch (e) {
       print("⚠️ [AudioService] pause() error (ignored): $e");
-      // Silently ignore - web platform may throw MissingPluginException
     }
   }
 
-  // 재개 (resume)
+  // 재개 - WEB FIX: 저장된 위치로 seek 후 play
   Future<void> resume() async {
     try {
-      print("🎵 [AudioService] resume() called");
+      print("🎵 [AudioService] resume() - restoring position: $_savedPosition");
+      
+      // Restore position before playing (WEB FIX)
+      if (_savedPosition > Duration.zero) {
+        await _player.seek(_savedPosition);
+        print("🎵 [AudioService] resume() - seek completed");
+      }
+      
       await _player.play();
       print("🎵 [AudioService] resume() successful");
     } catch (e) {
       print("⚠️ [AudioService] resume() error (ignored): $e");
-      // Silently ignore - web platform may throw MissingPluginException
     }
   }
   
@@ -103,6 +116,7 @@ class AudioService extends GetxService {
   Future<void> stop() async {
     try {
       await _player.stop();
+      _currentLoadedUrl = null;  // Reset so next play() reloads audio
     } catch (e) {
       print("⚠️ [AudioService] stop() error (ignored): $e");
     }
@@ -114,6 +128,24 @@ class AudioService extends GetxService {
       await _player.setVolume(volume);
     } catch (e) {
       print("⚠️ [AudioService] setVolume() error (ignored): $e");
+    }
+  }
+  
+  // 루프 모드 설정
+  Future<void> setLoopMode(bool enabled, {bool singleTrack = true}) async {
+    try {
+      if (!enabled) {
+        await _player.setLoopMode(LoopMode.off);
+        print("🔁 [AudioService] Loop mode: Off");
+      } else if (singleTrack) {
+        await _player.setLoopMode(LoopMode.one);
+        print("🔁 [AudioService] Loop mode: Single track");
+      } else {
+        await _player.setLoopMode(LoopMode.all);
+        print("🔁 [AudioService] Loop mode: All");
+      }
+    } catch (e) {
+      print("⚠️ [AudioService] setLoopMode() error (ignored): $e");
     }
   }
   

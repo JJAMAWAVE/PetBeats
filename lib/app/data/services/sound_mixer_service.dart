@@ -93,14 +93,23 @@ class SoundMixerService extends GetxService {
   /// Number of active layers
   int get activeLayerCount => layers.where((l) => l.isActive.value).length;
   
-  /// Toggle a specific layer
+  /// Toggle a specific layer (single selection only)
   Future<void> toggleLayer(SoundLayer type) async {
     final layer = layers.firstWhere((l) => l.type == type);
     
     if (layer.isActive.value) {
+      // Turn off the selected layer
       await _stopLayer(type);
       layer.isActive.value = false;
     } else {
+      // Turn off all other layers first (single selection mode)
+      for (final otherLayer in layers) {
+        if (otherLayer.isActive.value) {
+          await _stopLayer(otherLayer.type);
+          otherLayer.isActive.value = false;
+        }
+      }
+      // Then turn on the selected layer
       await _playLayer(layer);
       layer.isActive.value = true;
     }

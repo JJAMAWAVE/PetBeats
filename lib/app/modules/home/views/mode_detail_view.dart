@@ -288,7 +288,7 @@ class ModeDetailView extends GetView<HomeController> {
                     Row(
                       children: [
                         Text(
-                          track.target ?? '공용', // e.g., "대형", "공용"
+                          _getSizeFromTags(track.tags) ?? track.target ?? '공용',
                           style: AppTextStyles.labelSmall.copyWith(
                             color: AppColors.primaryBlue,
                             fontWeight: FontWeight.w500,
@@ -296,7 +296,7 @@ class ModeDetailView extends GetView<HomeController> {
                         ),
                         const SizedBox(width: 8),
                         // Tags (Instrument / BPM)
-                        _buildTag(track.instrument ?? 'Piano'),
+                        _buildTag(_getInstrumentFromSpecs(track)),
                         const SizedBox(width: 4),
                         _buildTag(track.bpm ?? '60 BPM'),
                       ],
@@ -374,5 +374,37 @@ class ModeDetailView extends GetView<HomeController> {
         ),
       ),
     );
+  }
+  
+  /// Extract pet size from tags and convert to Korean
+  String? _getSizeFromTags(List<String>? tags) {
+    if (tags == null || tags.isEmpty) return null;
+    
+    for (final tag in tags) {
+      final lowerTag = tag.toLowerCase();
+      if (lowerTag.contains('large')) return '대형견';
+      if (lowerTag.contains('medium')) return '중형견';
+      if (lowerTag.contains('small')) return '소형견';
+      if (lowerTag.contains('all') || lowerTag.contains('common')) return '공용';
+    }
+    return null;
+  }
+  
+  /// Extract primary instrument from technicalSpecs
+  String _getInstrumentFromSpecs(Track track) {
+    final specs = track.technicalSpecs;
+    if (specs == null || specs['Instruments'] == null) {
+      return track.instrument ?? 'Piano';
+    }
+    
+    final instruments = specs['Instruments'] as String;
+    // Get first instrument before "/" separator
+    final firstInstrument = instruments.split(' / ').first;
+    
+    // Shorten long names
+    if (firstInstrument.length > 15) {
+      return firstInstrument.substring(0, 12) + '...';
+    }
+    return firstInstrument;
   }
 }

@@ -6,7 +6,7 @@ import '../../../../core/theme/app_text_styles.dart';
 import 'dart:ui';
 
 enum HapticIntensity { off, light, medium, strong, deep }
-enum HapticMode { heartbeat, rampdown, purr }
+enum HapticMode { heartbeat, rampdown, purr, soundAdaptive }
 
 class TherapyControlPanel extends StatefulWidget {
   final HapticIntensity hapticIntensity;
@@ -111,8 +111,10 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
   }
   
   Widget _buildModeSelector() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Wrap(
+      alignment: WrapAlignment.center,
+      spacing: 8.w,
+      runSpacing: 8.h,
       children: [
         _buildModeButton(
           mode: HapticMode.heartbeat, 
@@ -120,19 +122,23 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
           label: '심장박동',
           color: Colors.pinkAccent,
         ),
-        SizedBox(width: 12.w),
         _buildModeButton(
           mode: HapticMode.rampdown, 
           icon: Icons.trending_down, 
           label: '진정모드',
           color: Colors.tealAccent,
         ),
-        SizedBox(width: 12.w),
         _buildModeButton(
           mode: HapticMode.purr, 
           icon: Icons.pets, 
           label: '골골송',
           color: Colors.amber,
+        ),
+        _buildModeButton(
+          mode: HapticMode.soundAdaptive, 
+          icon: Icons.music_note, 
+          label: '사운드',
+          color: Colors.purpleAccent,
         ),
       ],
     );
@@ -154,7 +160,8 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        width: 70.w,  // Fixed width for consistent button size
+        padding: EdgeInsets.symmetric(vertical: 10.h),
         decoration: BoxDecoration(
           color: isSelected ? color.withOpacity(0.2) : Colors.transparent,
           borderRadius: BorderRadius.circular(16.r),
@@ -174,6 +181,7 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
             SizedBox(height: 4.h),
             Text(
               label,
+              textAlign: TextAlign.center,
               style: TextStyle(
                 color: isSelected ? color : Colors.white.withOpacity(0.5),
                 fontSize: 10.sp,
