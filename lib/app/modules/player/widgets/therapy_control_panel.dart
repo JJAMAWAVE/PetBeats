@@ -6,6 +6,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../data/models/haptic_settings_model.dart';
 import 'sleep_timer_bottom_sheet.dart';
+import 'mix_panel_bottom_sheet.dart';
 import 'dart:ui';
 
 class TherapyControlPanel extends StatefulWidget {
@@ -278,7 +279,7 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
     );
   }
   
-  /// 사운드 믹스, 수면 타이머 퀵 액세스 아이콘 Row
+  /// 사운드 믹스, 리듬, 수면 타이머 퀵 액세스 아이콘 Row
   Widget _buildQuickAccessRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -286,15 +287,31 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
         _buildQuickAccessButton(
           icon: Icons.graphic_eq_outlined,
           label: '사운드 믹스',
-          color: Colors.orangeAccent,
+          color: Colors.purpleAccent,
           isActive: widget.isWeatherActive,
           onTap: () {
-            // 사운드 믹스 기능 (자연 사운드 레이어 추가)
-            widget.onWeatherToggle();
+            // 사운드 믹스 바텀시트 표시
+            Get.bottomSheet(
+              const MixPanelBottomSheet(),
+              backgroundColor: Colors.transparent,
+              isScrollControlled: true,
+            );
             HapticFeedback.selectionClick();
           },
         ),
-        SizedBox(width: 24.w),
+        SizedBox(width: 12.w),
+        _buildQuickAccessButton(
+          icon: Icons.schedule_outlined,
+          label: '리듬 케어',
+          color: Colors.greenAccent,
+          isActive: false,
+          onTap: () {
+            // 리듬 케어 화면으로 이동
+            Get.toNamed('/rhythm-special');
+            HapticFeedback.selectionClick();
+          },
+        ),
+        SizedBox(width: 12.w),
         _buildQuickAccessButton(
           icon: Icons.timer_outlined,
           label: '수면 타이머',

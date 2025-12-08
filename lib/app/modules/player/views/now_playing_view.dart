@@ -231,7 +231,7 @@ class NowPlayingView extends GetView<PlayerController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              // Mix button (Premium)
+              // Mix button (Premium) - 사운드 믹스 패널 열기
               _buildMixButton(),
               IconButton(
                 icon: const Icon(Icons.skip_previous, color: Colors.white),
