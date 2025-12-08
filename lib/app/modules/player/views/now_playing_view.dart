@@ -55,46 +55,8 @@ class NowPlayingView extends GetView<PlayerController> {
               )),
             ),
           ),
-          // Timer button
-          Obx(() {
-            final isActive = controller.timerService.isActive.value;
-            return GestureDetector(
-              onTap: () => _showTimerBottomSheet(),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-                decoration: BoxDecoration(
-                  color: isActive 
-                      ? Colors.amber.withOpacity(0.2) 
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(12.r),
-                  border: isActive 
-                      ? Border.all(color: Colors.amber.withOpacity(0.5)) 
-                      : null,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      isActive ? Icons.timer : Icons.timer_outlined,
-                      color: isActive ? Colors.amber : Colors.white70,
-                      size: 22.w,
-                    ),
-                    if (isActive) ...[
-                      SizedBox(width: 4.w),
-                      Obx(() => Text(
-                        controller.timerService.formattedTime,
-                        style: TextStyle(
-                          color: Colors.amber,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )),
-                    ],
-                  ],
-                ),
-              ),
-            );
-          }),
+          // 시계 아이콘 삭제됨 - 수면 타이머는 햅틱 패널에서 접근
+          SizedBox(width: 40.w),  // 균형을 위한 공간
         ],
       ),
     );
@@ -126,14 +88,10 @@ class NowPlayingView extends GetView<PlayerController> {
 
   Widget _buildTherapyControlZone() {
     return Obx(() {
-      // Only show haptic for modes where heart rate sync is beneficial
+      // 햅틱 슬라이더는 특정 모드에서만 표시
       final mode = controller.homeController.currentMode.value;
-      final showHaptic = mode != null && 
+      final showHapticSlider = mode != null && 
                         (mode.id == 'sleep' || mode.id == 'anxiety' || mode.id == 'senior');
-      
-      if (!showHaptic) {
-        return const SizedBox.shrink(); // Hide therapy panel for noise/energy modes
-      }
       
       return TherapyControlPanel(
         hapticIntensity: controller.hapticIntensity.value,
@@ -142,6 +100,7 @@ class NowPlayingView extends GetView<PlayerController> {
         onWeatherToggle: controller.toggleWeather,
         hapticMode: controller.hapticMode.value,
         onHapticModeChange: controller.setHapticMode,
+        showHapticSlider: showHapticSlider,  // 새 파라미터
       );
     });
   }
@@ -231,8 +190,17 @@ class NowPlayingView extends GetView<PlayerController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              // Mix button (Premium) - 사운드 믹스 패널 열기
-              _buildMixButton(),
+              // 반복 모드 (왼쪽으로 이동)
+              Obx(() => IconButton(
+                icon: Icon(
+                  controller.repeatModeIcon,
+                  color: controller.isRepeatActive 
+                      ? AppColors.primaryBlue 
+                      : Colors.white.withOpacity(0.5),
+                ),
+                iconSize: 24.w,
+                onPressed: () => controller.toggleRepeatMode(),
+              )),
               IconButton(
                 icon: const Icon(Icons.skip_previous, color: Colors.white),
                 iconSize: 32.w,
@@ -266,17 +234,17 @@ class NowPlayingView extends GetView<PlayerController> {
                 iconSize: 32.w,
                 onPressed: () => controller.homeController.skipNext(),
               ),
-              // Repeat mode toggle (Off → Single → All)
-              Obx(() => IconButton(
+              // 셔플 버튼 (오른쪽)
+              IconButton(
                 icon: Icon(
-                  controller.repeatModeIcon,
-                  color: controller.isRepeatActive 
-                      ? AppColors.primaryBlue 
-                      : Colors.white.withOpacity(0.5),
+                  Icons.shuffle,
+                  color: Colors.white.withOpacity(0.5),
                 ),
                 iconSize: 24.w,
-                onPressed: () => controller.toggleRepeatMode(),
-              )),
+                onPressed: () {
+                  // TODO: 셔플 기능
+                },
+              ),
             ],
           ),
         ],

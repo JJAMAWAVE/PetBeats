@@ -1,0 +1,268 @@
+{
+  "track_id": "cat_noise_08",
+  "haptic_enabled": true,
+  "bpm": 45.0,
+  "events": [
+    {
+      "time": 0,
+      "note": 38,
+      "velocity": 40
+    },
+    {
+      "time": 5333,
+      "note": 60,
+      "velocity": 72
+    },
+    {
+      "time": 26666,
+      "note": 38,
+      "velocity": 46
+    },
+    {
+      "time": 31999,
+      "note": 38,
+      "velocity": 46
+    },
+    {
+      "time": 37333,
+      "note": 60,
+      "velocity": 72
+    },
+    {
+      "time": 42666,
+      "note": 38,
+      "velocity": 46
+    },
+    {
+      "time": 47999,
+      "note": 60,
+      "velocity": 72
+    },
+    {
+      "time": 71999,
+      "note": 38,
+      "velocity": 53
+    },
+    {
+      "time": 77333,
+      "note": 38,
+      "velocity": 53
+    },
+    {
+      "time": 79999,
+      "note": 60,
+      "velocity": 72
+    },
+    {
+      "time": 82666,
+      "note": 60,
+      "velocity": 72
+    },
+    {
+      "time": 87999,
+      "note": 38,
+      "velocity": 53
+    },
+    {
+      "time": 90666,
+      "note": 60,
+      "velocity": 72
+    },
+    {
+      "time": 93333,
+      "note": 60,
+      "velocity": 72
+    },
+    {
+      "time": 110666,
+      "note": 38,
+      "velocity": 56
+    },
+    {
+      "time": 111999,
+      "note": 41,
+      "velocity": 56
+    },
+    {
+      "time": 114666,
+      "note": 38,
+      "velocity": 56
+    },
+    {
+      "time": 115999,
+      "note": 38,
+      "velocity": 56
+    },
+    {
+      "time": 117333,
+      "note": 38,
+      "velocity": 56
+    },
+    {
+      "time": 122666,
+      "note": 60,
+      "velocity": 72
+    },
+    {
+      "time": 127999,
+      "note": 41,
+      "velocity": 56
+    },
+    {
+      "time": 130666,
+      "note": 41,
+      "velocity": 56
+    },
+    {
+      "time": 131999,
+      "note": 38,
+      "velocity": 55
+    },
+    {
+      "time": 133333,
+      "note": 60,
+      "velocity": 72
+    },
+    {
+      "time": 154666,
+      "note": 38,
+      "velocity": 51
+    },
+    {
+      "time": 159999,
+      "note": 38,
+      "velocity": 51
+    },
+    {
+      "time": 165333,
+      "note": 60,
+      "velocity": 72
+    },
+    {
+      "time": 170666,
+      "note": 38,
+      "velocity": 51
+    },
+    {
+      "time": 175999,
+      "note": 36,
+      "velocity": 53
+    },
+    {
+      "time": 177333,
+      "note": 60,
+      "velocity": 72
+    },
+    {
+      "time": 181333,
+      "note": 38,
+      "velocity": 56
+    },
+    {
+      "time": 191999,
+      "note": 38,
+      "velocity": 56
+    },
+    {
+      "time": 197333,
+      "note": 45,
+      "velocity": 56
+    },
+    {
+      "time": 202666,
+      "note": 45,
+      "velocity": 56
+    },
+    {
+      "time": 207999,
+      "note": 40,
+      "velocity": 56
+    },
+    {
+      "time": 210666,
+      "note": 60,
+      "velocity": 72
+    },
+    {
+      "time": 213333,
+      "note": 45,
+      "velocity": 56
+    },
+    {
+      "time": 218666,
+      "note": 40,
+      "velocity": 52
+    },
+    {
+      "time": 221333,
+      "note": 60,
+      "velocity": 72
+    },
+    {
+      "time": 239999,
+      "note": 38,
+      "velocity": 48
+    },
+    {
+      "time": 245333,
+      "note": 38,
+      "velocity": 48
+    },
+    {
+      "time": 250666,
+      "note": 60,
+      "velocity": 72
+    },
+    {
+      "time": 255999,
+      "note": 38,
+      "velocity": 48
+    },
+    {
+      "time": 261333,
+      "note": 36,
+      "velocity": 44
+    },
+    {
+      "time": 263999,
+      "note": 60,
+      "velocity": 72
+    },
+    {
+      "time": 282666,
+      "note": 38,
+      "velocity": 40
+    },
+    {
+      "time": 287999,
+      "note": 38,
+      "velocity": 40
+    },
+    {
+      "time": 293333,
+      "note": 60,
+      "velocity": 72
+    },
+    {
+      "time": 298666,
+      "note": 38,
+      "velocity": 40
+    },
+    {
+      "time": 303999,
+      "note": 60,
+      "velocity": 72
+    },
+    {
+      "time": 309333,
+      "note": 60,
+      "velocity": 72
+    }
+  ],
+  "stats": {
+    "total_events": 51,
+    "duration_ms": 309333,
+    "avg_velocity": 58,
+    "note_range": "36-60"
+  }
+}

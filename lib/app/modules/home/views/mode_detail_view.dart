@@ -384,15 +384,15 @@ class ModeDetailView extends GetView<HomeController> {
     );
   }
   
-  /// Extract pet size from tags and convert to Korean
+  /// Extract pet size from tags and convert to Korean (통합 라벨: 소형/중형/대형)
   String? _getSizeFromTags(List<String>? tags) {
     if (tags == null || tags.isEmpty) return null;
     
     for (final tag in tags) {
       final lowerTag = tag.toLowerCase();
-      if (lowerTag.contains('large')) return '대형견';
-      if (lowerTag.contains('medium')) return '중형견';
-      if (lowerTag.contains('small')) return '소형견';
+      if (lowerTag.contains('large')) return '대형';
+      if (lowerTag.contains('medium')) return '중형';
+      if (lowerTag.contains('small')) return '소형';
       if (lowerTag.contains('all') || lowerTag.contains('common')) return '공용';
     }
     return null;
@@ -404,15 +404,15 @@ class ModeDetailView extends GetView<HomeController> {
     Color textColor;
     
     switch (size) {
-      case '대형견':
+      case '대형':
         bgColor = const Color(0xFF9C27B0).withOpacity(0.15);  // 보라
         textColor = const Color(0xFF7B1FA2);
         break;
-      case '중형견':
+      case '중형':
         bgColor = const Color(0xFF2196F3).withOpacity(0.15);  // 파랑
         textColor = const Color(0xFF1565C0);
         break;
-      case '소형견':
+      case '소형':
         bgColor = const Color(0xFF4CAF50).withOpacity(0.15);  // 초록
         textColor = const Color(0xFF2E7D32);
         break;

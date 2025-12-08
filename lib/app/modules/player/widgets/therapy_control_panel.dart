@@ -16,6 +16,7 @@ class TherapyControlPanel extends StatefulWidget {
   final VoidCallback onWeatherToggle;
   final HapticMode? hapticMode;
   final Function(HapticMode)? onHapticModeChange;
+  final bool showHapticSlider;  // 햅틱 슬라이더 표시 여부
 
   const TherapyControlPanel({
     super.key,
@@ -25,6 +26,7 @@ class TherapyControlPanel extends StatefulWidget {
     required this.onWeatherToggle,
     this.hapticMode,
     this.onHapticModeChange,
+    this.showHapticSlider = true,  // 기본값 true
   });
   
   @override
@@ -99,11 +101,16 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
                 ],
               ),
               SizedBox(height: 16.h),
-              // Haptic Mode Selector
-              _buildModeSelector(),
-              SizedBox(height: 16.h),
-              // Haptic 슬라이더
-              _buildHapticSlider(),
+              // Haptic Mode Selector (햅틱 모드일 때만 표시)
+              if (widget.showHapticSlider) ...[
+                _buildModeSelector(),
+                SizedBox(height: 16.h),
+                // Haptic 슬라이더
+                _buildHapticSlider(),
+              ] else ...[
+                // 햅틱 없는 모드에서는 퀵 액세스만 표시
+                _buildQuickAccessRow(),
+              ],
             ],
           ),
         ),

@@ -46,7 +46,15 @@ class HomeView extends GetView<HomeController> {
                           const HeartbeatText('PetBeats', fontSize: 24),
                           Row(
                             children: [
-                              // 알람 아이콘 제거됨 - 햅틱 패널로 이동
+                              // 친구 초대 아이콘 복원
+                              HeaderIconButton(
+                                iconPath: 'assets/icons/icon_nav_notification.png',
+                                animationType: HeaderIconAnimationType.bounce,
+                                onTap: () {
+                                  Get.toNamed(Routes.INVITE_FRIENDS);
+                                },
+                              ),
+                              const SizedBox(width: 8),
                               HeaderIconButton(
                                 iconPath: 'assets/icons/icon_nav_settings.png',
                                 animationType: HeaderIconAnimationType.rotate,

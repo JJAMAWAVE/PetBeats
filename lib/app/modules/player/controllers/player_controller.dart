@@ -243,14 +243,23 @@ class PlayerController extends GetxController {
           _hapticService.startPurr();
           break;
         case HapticMode.soundAdaptive:
-          // MIDI 기반 햅틱 - HapticService 상태 활성화 + HapticPatternPlayer 시작
-          _hapticService.startSoundAdaptive();  // _isVibrating = true 설정
+          // MIDI 기반 햅틱 - 패턴 파일이 있는 경우에만 사용
           try {
             final hapticPatternPlayer = Get.find<HapticPatternPlayer>();
-            hapticPatternPlayer.start(position: currentPosition.value);
-            print('🎵 Sound Adaptive mode - MIDI haptic started');
+            if (hapticPatternPlayer.isHapticEnabled) {
+              // 패턴 파일 있음 → MIDI 기반 햅틱
+              _hapticService.startSoundAdaptive();
+              hapticPatternPlayer.start(position: currentPosition.value);
+              print('🎵 Sound Adaptive mode - MIDI haptic started');
+            } else {
+              // 패턴 파일 없음 → heartbeat로 폴백
+              _hapticService.startHeartbeat(currentTrackBpm);
+              print('🎵 Sound Adaptive mode - No pattern, fallback to heartbeat');
+            }
           } catch (e) {
-            print('⚠️ HapticPatternPlayer not available: $e');
+            // HapticPatternPlayer 없음 → heartbeat로 폴백
+            _hapticService.startHeartbeat(currentTrackBpm);
+            print('⚠️ HapticPatternPlayer not available, fallback to heartbeat');
           }
           break;
       }

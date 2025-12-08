@@ -1,0 +1,483 @@
+{
+  "track_id": "cat_sleep_02",
+  "haptic_enabled": true,
+  "bpm": 55.0,
+  "events": [
+    {
+      "time": 3272,
+      "note": 60,
+      "velocity": 1
+    },
+    {
+      "time": 4363,
+      "note": 60,
+      "velocity": 1
+    },
+    {
+      "time": 11999,
+      "note": 60,
+      "velocity": 1
+    },
+    {
+      "time": 17454,
+      "note": 60,
+      "velocity": 1
+    },
+    {
+      "time": 21818,
+      "note": 60,
+      "velocity": 1
+    },
+    {
+      "time": 26181,
+      "note": 60,
+      "velocity": 1
+    },
+    {
+      "time": 38181,
+      "note": 60,
+      "velocity": 1
+    },
+    {
+      "time": 39272,
+      "note": 60,
+      "velocity": 1
+    },
+    {
+      "time": 41454,
+      "note": 60,
+      "velocity": 1
+    },
+    {
+      "time": 46909,
+      "note": 60,
+      "velocity": 1
+    },
+    {
+      "time": 52363,
+      "note": 60,
+      "velocity": 1
+    },
+    {
+      "time": 54545,
+      "note": 60,
+      "velocity": 1
+    },
+    {
+      "time": 56727,
+      "note": 60,
+      "velocity": 1
+    },
+    {
+      "time": 58909,
+      "note": 60,
+      "velocity": 1
+    },
+    {
+      "time": 61090,
+      "note": 60,
+      "velocity": 1
+    },
+    {
+      "time": 63272,
+      "note": 60,
+      "velocity": 1
+    },
+    {
+      "time": 73090,
+      "note": 60,
+      "velocity": 9
+    },
+    {
+      "time": 74181,
+      "note": 60,
+      "velocity": 9
+    },
+    {
+      "time": 81818,
+      "note": 60,
+      "velocity": 9
+    },
+    {
+      "time": 82181,
+      "note": 36,
+      "velocity": 72
+    },
+    {
+      "time": 82545,
+      "note": 39,
+      "velocity": 72
+    },
+    {
+      "time": 87272,
+      "note": 60,
+      "velocity": 9
+    },
+    {
+      "time": 91636,
+      "note": 60,
+      "velocity": 9
+    },
+    {
+      "time": 95999,
+      "note": 60,
+      "velocity": 9
+    },
+    {
+      "time": 107999,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 109090,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 110181,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 111272,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 112363,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 116727,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 122181,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 122727,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 123272,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 123818,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 124363,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 125454,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 126545,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 127636,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 128727,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 129272,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 129818,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 130363,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 130909,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 131999,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 133090,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 134181,
+      "note": 60,
+      "velocity": 18
+    },
+    {
+      "time": 142909,
+      "note": 60,
+      "velocity": 25
+    },
+    {
+      "time": 143999,
+      "note": 60,
+      "velocity": 25
+    },
+    {
+      "time": 151636,
+      "note": 60,
+      "velocity": 25
+    },
+    {
+      "time": 151999,
+      "note": 36,
+      "velocity": 72
+    },
+    {
+      "time": 152363,
+      "note": 39,
+      "velocity": 72
+    },
+    {
+      "time": 157090,
+      "note": 60,
+      "velocity": 25
+    },
+    {
+      "time": 161454,
+      "note": 60,
+      "velocity": 25
+    },
+    {
+      "time": 165818,
+      "note": 60,
+      "velocity": 25
+    },
+    {
+      "time": 193636,
+      "note": 60,
+      "velocity": 30
+    },
+    {
+      "time": 194727,
+      "note": 60,
+      "velocity": 30
+    },
+    {
+      "time": 195818,
+      "note": 60,
+      "velocity": 30
+    },
+    {
+      "time": 196909,
+      "note": 60,
+      "velocity": 30
+    },
+    {
+      "time": 197999,
+      "note": 60,
+      "velocity": 30
+    },
+    {
+      "time": 198545,
+      "note": 60,
+      "velocity": 30
+    },
+    {
+      "time": 199090,
+      "note": 60,
+      "velocity": 30
+    },
+    {
+      "time": 200181,
+      "note": 60,
+      "velocity": 30
+    },
+    {
+      "time": 212727,
+      "note": 60,
+      "velocity": 35
+    },
+    {
+      "time": 213818,
+      "note": 60,
+      "velocity": 35
+    },
+    {
+      "time": 221454,
+      "note": 60,
+      "velocity": 35
+    },
+    {
+      "time": 221818,
+      "note": 36,
+      "velocity": 72
+    },
+    {
+      "time": 222181,
+      "note": 39,
+      "velocity": 72
+    },
+    {
+      "time": 226909,
+      "note": 60,
+      "velocity": 35
+    },
+    {
+      "time": 231272,
+      "note": 60,
+      "velocity": 35
+    },
+    {
+      "time": 235636,
+      "note": 60,
+      "velocity": 35
+    },
+    {
+      "time": 247636,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 248727,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 249818,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 250909,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 251999,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 256363,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 261818,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 262363,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 262909,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 263454,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 263999,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 265090,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 268363,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 268909,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 269454,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 269999,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 270545,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 273818,
+      "note": 60,
+      "velocity": 40
+    },
+    {
+      "time": 282545,
+      "note": 60,
+      "velocity": 16
+    },
+    {
+      "time": 283636,
+      "note": 60,
+      "velocity": 16
+    },
+    {
+      "time": 291272,
+      "note": 60,
+      "velocity": 16
+    },
+    {
+      "time": 296727,
+      "note": 60,
+      "velocity": 16
+    },
+    {
+      "time": 301090,
+      "note": 60,
+      "velocity": 16
+    },
+    {
+      "time": 305454,
+      "note": 60,
+      "velocity": 16
+    }
+  ],
+  "stats": {
+    "total_events": 94,
+    "duration_ms": 305454,
+    "avg_velocity": 25,
+    "note_range": "36-60"
+  }
+}
