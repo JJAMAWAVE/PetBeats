@@ -243,7 +243,8 @@ class PlayerController extends GetxController {
           _hapticService.startPurr();
           break;
         case HapticMode.soundAdaptive:
-          // MIDI 기반 햅틱 - HapticPatternPlayer 시작
+          // MIDI 기반 햅틱 - HapticService 상태 활성화 + HapticPatternPlayer 시작
+          _hapticService.startSoundAdaptive();  // _isVibrating = true 설정
           try {
             final hapticPatternPlayer = Get.find<HapticPatternPlayer>();
             hapticPatternPlayer.start(position: currentPosition.value);

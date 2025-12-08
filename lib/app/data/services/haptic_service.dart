@@ -205,6 +205,19 @@ class HapticService extends GetxService {
   /// Get current BPM (for UI display during rampdown)
   int get currentBpm => _currentBpm;
 
+  /// 사운드 어댑티브 모드 시작 (MIDI 기반 햅틱용)
+  /// HapticPatternPlayer에서 playNote를 호출할 수 있도록 _isVibrating 활성화
+  void startSoundAdaptive() {
+    if (_currentIntensity == HapticIntensity.off) return;
+    
+    stop();  // 기존 패턴 중지
+    _isVibrating = true;
+    _startRampUp();  // Soft start
+    _startSafetyTimer();  // Safety timeout
+    
+    print('🎵 [HapticService] Sound Adaptive mode activated');
+  }
+
   // 골골송 진동 (지속적인 미세 진동)
   void startPurr() async {
     if (_currentIntensity == HapticIntensity.off) return; // Check OFF
