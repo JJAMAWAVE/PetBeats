@@ -49,7 +49,7 @@ class HomeView extends GetView<HomeController> {
                               // 친구 초대 아이콘 복원
                               HeaderIconButton(
                                 iconPath: 'assets/icons/icon_nav_notification.png',
-                                animationType: HeaderIconAnimationType.pulse,
+                                animationType: HeaderIconAnimationType.shake,
                                 onTap: () {
                                   Get.toNamed(Routes.INVITE_FRIENDS);
                                 },
