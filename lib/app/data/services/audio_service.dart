@@ -44,7 +44,14 @@ class AudioService extends GetxService {
             // Web: Convert asset path to web URL
             final webUrl = '/$url'; // /assets/sound/1_1.mp3
             print("🎵 [AudioService] Web URL: $webUrl");
-            await _player.setAudioSource(AudioSource.uri(Uri.parse(webUrl)));
+            try {
+              await _player.setAudioSource(AudioSource.uri(Uri.parse(webUrl)));
+              print("🎵 [AudioService] setAudioSource successful");
+            } catch (e) {
+              print("❌ [AudioService] setAudioSource failed: $e");
+              print("❌ [AudioService] Error type: ${e.runtimeType}");
+              rethrow;
+            }
           } else {
             // Android/iOS: Use setAsset for native platforms
             print("🎵 [AudioService] Native asset: $url");
@@ -74,8 +81,9 @@ class AudioService extends GetxService {
       print("🎵 [AudioService] Calling play()");
       await _player.play();
       print("🎵 [AudioService] Play() called successfully");
-    } catch (e) {
+    } catch (e, stackTrace) {
       print("❌ [AudioService] Error: $e");
+      print("❌ [AudioService] Stack trace: $stackTrace");
       print("❌ [AudioService] Attempted URL: $url");
     }
   }

@@ -221,13 +221,14 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
             ),
             SizedBox(width: 6.w),
             Text(
-              'OFF',
+              _getIntensityLabel(widget.hapticIntensity),
               style: TextStyle(
                 color: widget.hapticIntensity == HapticIntensity.off 
-                    ? Colors.white.withOpacity(0.9)
-                    : Colors.white.withOpacity(0.3),
+                    ? Colors.white.withOpacity(0.5)
+                    : AppColors.primaryBlue,
                 fontSize: 10.sp,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.5,
               ),
             ),
             Expanded(
@@ -266,20 +267,7 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
             ),
           ],
         ),
-        SizedBox(height: 4.h),
-        // 현재 강도 표시
-        Text(
-          _getIntensityLabel(widget.hapticIntensity),
-          style: TextStyle(
-            color: widget.hapticIntensity == HapticIntensity.off
-                ? Colors.white.withOpacity(0.4)
-                : AppColors.primaryBlue,
-            fontSize: 11.sp,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 1.0,
-          ),
-        ),
-        SizedBox(height: 10.h),
+        SizedBox(height: 8.h),
         // 날씨, 알람 아이콘 Row 추가
         _buildQuickAccessRow(),
       ],
@@ -289,50 +277,53 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
   /// 사운드 믹스, 리듬, 수면 타이머 퀵 액세스 아이콘 Row
   Widget _buildQuickAccessRow() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _buildQuickAccessButton(
-          icon: Icons.graphic_eq_outlined,
-          label: '사운드 믹스',
-          color: Colors.purpleAccent,
-          isActive: widget.isWeatherActive,
-          onTap: () {
-            // 사운드 믹스 바텀시트 표시
-            Get.bottomSheet(
-              const MixPanelBottomSheet(),
-              backgroundColor: Colors.transparent,
-              isScrollControlled: true,
-            );
-            HapticFeedback.selectionClick();
-          },
+        Expanded(
+          child: _buildQuickAccessButton(
+            icon: Icons.graphic_eq_outlined,
+            label: '사운드',
+            color: Colors.purpleAccent,
+            isActive: widget.isWeatherActive,
+            onTap: () {
+              Get.bottomSheet(
+                const MixPanelBottomSheet(),
+                backgroundColor: Colors.transparent,
+                isScrollControlled: true,
+              );
+              HapticFeedback.selectionClick();
+            },
+          ),
         ),
-        SizedBox(width: 12.w),
-        _buildQuickAccessButton(
-          icon: Icons.schedule_outlined,
-          label: '리듬 케어',
-          color: Colors.greenAccent,
-          isActive: false,
-          onTap: () {
-            // 리듬 케어 화면으로 이동
-            Get.toNamed('/rhythm-special');
-            HapticFeedback.selectionClick();
-          },
+        SizedBox(width: 8.w),
+        Expanded(
+          child: _buildQuickAccessButton(
+            icon: Icons.schedule_outlined,
+            label: '리듬',
+            color: Colors.greenAccent,
+            isActive: false,
+            onTap: () {
+              Get.toNamed('/rhythm-special');
+              HapticFeedback.selectionClick();
+            },
+          ),
         ),
-        SizedBox(width: 12.w),
-        _buildQuickAccessButton(
-          icon: Icons.timer_outlined,
-          label: '수면 타이머',
-          color: Colors.lightBlueAccent,
-          isActive: false,
-          onTap: () {
-            // 수면 타이머 바텀시트 표시
-            Get.bottomSheet(
-              const SleepTimerBottomSheet(),
-              backgroundColor: Colors.transparent,
-              isScrollControlled: true,
-            );
-            HapticFeedback.selectionClick();
-          },
+        SizedBox(width: 8.w),
+        Expanded(
+          child: _buildQuickAccessButton(
+            icon: Icons.timer_outlined,
+            label: '타이머',
+            color: Colors.lightBlueAccent,
+            isActive: false,
+            onTap: () {
+              Get.bottomSheet(
+                const SleepTimerBottomSheet(),
+                backgroundColor: Colors.transparent,
+                isScrollControlled: true,
+              );
+              HapticFeedback.selectionClick();
+            },
+          ),
         ),
       ],
     );
@@ -348,7 +339,7 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
         decoration: BoxDecoration(
           color: isActive ? color.withOpacity(0.2) : Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12.r),
@@ -357,16 +348,20 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
           ),
         ),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: isActive ? color : Colors.white.withOpacity(0.6), size: 16.w),
-            SizedBox(width: 4.w),
-            Text(
-              label,
-              style: TextStyle(
-                color: isActive ? color : Colors.white.withOpacity(0.6),
-                fontSize: 10.sp,
-                fontWeight: FontWeight.w500,
+            Icon(icon, color: isActive ? color : Colors.white.withOpacity(0.6), size: 14.w),
+            SizedBox(width: 3.w),
+            Flexible(
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: isActive ? color : Colors.white.withOpacity(0.6),
+                  fontSize: 10.sp,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
           ],

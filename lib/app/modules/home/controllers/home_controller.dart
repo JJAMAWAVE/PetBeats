@@ -306,9 +306,13 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     
     print('✅ [DEBUG] Premium check passed or free track');
     print('🎵 [DEBUG] Stopping BGM...');
-    // Stop BGM when playing track
-    _bgmService.pause();
-    print('🎵 [DEBUG] BGM stopped');
+    // Stop BGM when playing track (force pause to ensure it stops)
+    try {
+      _bgmService.pause();
+      print('🎵 [DEBUG] BGM stopped');
+    } catch (e) {
+      print('⚠️ [DEBUG] BGM pause error: $e');
+    }
     
     currentTrack.value = track;
     isPlaying.value = true;
@@ -318,18 +322,21 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     _audioService.play(track.audioUrl);
     print('🎵 [DEBUG] AudioService.play called');
     
-    // MIDI 기반 햅틱 패턴 로드 (사운드 어댑티브 모드용)
+    // MIDI 기반 햅틱 패턴 로드 및 시작 (비주얼라이저용 - 햅틱 ON/OFF와 무관)
     try {
       final hapticPatternPlayer = Get.find<HapticPatternPlayer>();
-      hapticPatternPlayer.loadPattern(track.id);
-      print('🎵 [DEBUG] Haptic pattern loading for track: ${track.id}');
+      hapticPatternPlayer.loadPattern(track.id).then((_) {
+        // 패턴 로드 완료 후 시작 (비주얼라이저에 MIDI 이벤트 전달)
+        hapticPatternPlayer.start();
+        print('🎵 [DEBUG] Haptic pattern started for visualizer: ${track.id}');
+      });
     } catch (e) {
       print('⚠️ [DEBUG] HapticPatternPlayer not available: $e');
     }
     
-    // 햅틱은 PlayerController에서 관리 - 기본값 OFF이므로 자동 시작하지 않음
+    // 햅틱 진동은 PlayerController에서 관리 - 기본값 OFF이므로 자동 시작하지 않음
     // 사용자가 햅틱을 켜면 PlayerController.setHapticIntensity에서 시작됨
-    print('🎵 [DEBUG] Haptic will be controlled by PlayerController (default: OFF)');
+    print('🎵 [DEBUG] Haptic vibration will be controlled by PlayerController (default: OFF)');
     
     // 재생 시간 추적 시작
     _startPlayTimeTracking();
@@ -430,6 +437,14 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     print('⏭️ [DEBUG] Switching to track: ${track.title}');
     print('⏭️ [DEBUG] Track audioUrl: ${track.audioUrl}');
     
+    // 이전 햅틱 패턴 중지 (오디오/햅틱 겹침 방지)
+    try {
+      final hapticPatternPlayer = Get.find<HapticPatternPlayer>();
+      hapticPatternPlayer.stop();
+    } catch (e) {
+      print('⚠️ [DEBUG] HapticPatternPlayer stop error: $e');
+    }
+    
     // Stop current playback and reset
     await _audioService.stop();
     
@@ -442,6 +457,16 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     
     // Start new track
     await _audioService.play(track.audioUrl);
+    
+    // 새 트랙의 MIDI 패턴 로드 및 시작 (비주얼라이저용)
+    try {
+      final hapticPatternPlayer = Get.find<HapticPatternPlayer>();
+      await hapticPatternPlayer.loadPattern(track.id);
+      hapticPatternPlayer.start();
+      print('🎵 [DEBUG] Haptic pattern started for new track: ${track.id}');
+    } catch (e) {
+      print('⚠️ [DEBUG] HapticPatternPlayer start error: $e');
+    }
     
     print('⏭️ [DEBUG] Now playing: ${track.title}');
   }
@@ -498,10 +523,10 @@ class HomeController extends GetxController with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     print('📱 [HomeController] App lifecycle changed: $state');
     
-    if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
-      // 앱이 백그라운드로 갈 때
-      print('📱 [HomeController] App going to background - stopping BGM');
-      _bgmService.pause();  // BGM 중지 (트랙 재생은 계속됨)
+    if (state == AppLifecycleState.paused) {
+      // 앱이 완전히 백그라운드로 갈 때만 BGM 중지
+      print('📱 [HomeController] App paused - stopping BGM');
+      _bgmService.pause();
     } else if (state == AppLifecycleState.resumed) {
       // 앱이 포그라운드로 돌아올 때
       print('📱 [HomeController] App resumed to foreground');
@@ -509,8 +534,11 @@ class HomeController extends GetxController with WidgetsBindingObserver {
       if (!isPlaying.value) {
         print('📱 [HomeController] No track playing - resuming BGM');
         _bgmService.resume();
+      } else {
+        print('📱 [HomeController] Track is playing - skipping BGM resume');
       }
     }
+    // inactive 상태 무시 - 웹에서 다이얼로그나 화면 전환 시에도 발생
   }
 }
 

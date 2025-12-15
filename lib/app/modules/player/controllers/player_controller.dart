@@ -34,13 +34,18 @@ class PlayerController extends GetxController {
   final tempSeekPosition = 0.0.obs;
   
   // Repeat mode: off → single (1곡 반복) → all (전체 반복)
-  final repeatMode = RepeatMode.single.obs;  // 기본: 1곡 반복
+  final repeatMode = RepeatMode.all.obs;  // 기본: 전체 반복
 
 
   @override
   void onInit() {
     super.onInit();
     _showHapticTipIfFirstTime();
+    
+    // Initialize repeat mode to All (default)
+    // Use LoopMode.off so track completion triggers skipNext()
+    _audioService.setLoopMode(false);
+    print('🔁 [PlayerController] Initialized with RepeatMode.all (LoopMode.off for playlist)');
     
     // Setup sleep timer completion callback
     timerService.onTimerComplete = () {
@@ -65,7 +70,11 @@ class PlayerController extends GetxController {
         if (repeatMode.value == RepeatMode.all) {
           print('🔁 Track completed, playing next (All loop mode)');
           homeController.skipNext();
+        } else if (repeatMode.value == RepeatMode.off) {
+          print('🔁 Track completed, stopping (RepeatMode.off)');
+          // Track just stops
         }
+        // RepeatMode.single handles itself via LoopMode.one
       }
     });
     

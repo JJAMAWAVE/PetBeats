@@ -9,6 +9,7 @@ class WebBgmService {
 
   html.AudioElement? _audioElement;
   bool _isInitialized = false;
+  bool _isPlaying = false; // Track BGM state
 
   /// BGM 초기화
   Future<void> init() async {
@@ -45,8 +46,12 @@ class WebBgmService {
         await init();
       }
       
-      await _audioElement?.play();
-      print('[WebBgmService] Playing BGM');
+      // Only play if not already playing
+      if (_audioElement?.paused == true) {
+        await _audioElement?.play();
+        _isPlaying = true;
+        print('[WebBgmService] Playing BGM');
+      }
     } catch (e) {
       print('[WebBgmService] Error playing BGM: $e');
     }
@@ -54,17 +59,34 @@ class WebBgmService {
 
   /// BGM 일시정지
   void pause() {
+    if (!kIsWeb) return;
+    
     print('[WebBgmService] pause() called');
-    print('[WebBgmService] Audio element exists: ${_audioElement != null}');
-    print('[WebBgmService] Audio element paused before: ${_audioElement?.paused}');
-    _audioElement?.pause();
-    print('[WebBgmService] Audio element paused after: ${_audioElement?.paused}');
-    print('[WebBgmService] pause() completed');
+    print('[WebBgmService] _audioElement: ${_audioElement != null}');
+    print('[WebBgmService] _isPlaying: $_isPlaying');
+    
+    if (_audioElement != null) {
+      print('[WebBgmService] Before pause - paused: ${_audioElement!.paused}, currentTime: ${_audioElement!.currentTime}');
+      _audioElement!.pause();
+      _audioElement!.currentTime = 0; // Reset to beginning
+      _isPlaying = false;
+      print('[WebBgmService] After pause - paused: ${_audioElement!.paused}, currentTime: ${_audioElement!.currentTime}');
+      print('[WebBgmService] BGM stopped and reset');
+    } else {
+      print('[WebBgmService] WARNING: _audioElement is null, cannot pause');
+    }
   }
 
   /// BGM 재개
   Future<void> resume() async {
-    await _audioElement?.play();
+    if (!kIsWeb) return;
+    
+    // Only resume if we were actually playing before
+    if (!_isPlaying && _audioElement?.paused == true) {
+      await _audioElement?.play();
+      _isPlaying = true;
+      print('[WebBgmService] BGM resumed');
+    }
   }
 
   /// 볼륨 설정 (0.0 ~ 1.0)

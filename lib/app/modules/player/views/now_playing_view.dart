@@ -6,6 +6,7 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../controllers/player_controller.dart';
 import '../widgets/bio_pulse_widget.dart';
 import '../widgets/audio_reactive_visualizer.dart';
+import '../widgets/aurora_curtain_visualizer.dart';
 import '../widgets/midi_flash_overlay.dart';
 import '../widgets/therapy_control_panel.dart';
 import '../widgets/rolling_tip_widget.dart';
@@ -70,19 +71,14 @@ class NowPlayingView extends GetView<PlayerController> {
   }
 
   Widget _buildVisualizerZone() {
-    return Obx(() => Stack(
-      children: [
-        // 비주얼라이저
-        AudioReactiveVisualizer(
-          bpm: controller.currentTrackBpm,
-          isPlaying: controller.isPlaying,
-          color: controller.currentTrackColor,
-          mode: controller.homeController.currentMode.value?.id ?? 'sleep',
-        ),
-        // MIDI 비트 섬광 오버레이
-        const MidiFlashOverlay(),
-      ],
-    ));
+    return Obx(() => 
+      // 오로라 커튼 비주얼라이저
+      AuroraCurtainVisualizer(
+        bpm: controller.currentTrackBpm,
+        isPlaying: controller.isPlaying,
+        mode: controller.homeController.currentMode.value?.id ?? 'sleep',
+      ),
+    );
   }
 
 
@@ -135,7 +131,10 @@ class NowPlayingView extends GetView<PlayerController> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12.w),
                     child: Obx(() {
-                      final position = controller.currentPosition.value;
+                      // Use temp position during drag, actual position otherwise
+                      final position = controller.isDraggingSeekBar.value 
+                          ? Duration(milliseconds: (controller.tempSeekPosition.value * controller.currentDuration.value.inMilliseconds).round())
+                          : controller.currentPosition.value;
                       final duration = controller.currentDuration.value;
                       final progress = duration.inMilliseconds > 0 
                           ? position.inMilliseconds / duration.inMilliseconds 
@@ -153,20 +152,34 @@ class NowPlayingView extends GetView<PlayerController> {
                         ),
                         child: Slider(
                           value: progress.clamp(0.0, 1.0),
+                          onChangeStart: (value) {
+                            controller.isDraggingSeekBar.value = true;
+                            controller.tempSeekPosition.value = value;
+                          },
                           onChanged: (value) {
-                            // Required parameter - no action during drag for smooth performance
+                            // Update temp position during drag
+                            controller.tempSeekPosition.value = value;
                           },
                           onChangeEnd: (value) {
+                            controller.isDraggingSeekBar.value = false;
                             // Prevent seek when duration is not yet loaded
                             if (duration.inMilliseconds <= 0) {
                               print('⚠️ [SeekBar] Duration not loaded yet, ignoring seek');
                               return;
                             }
-                            // Seek when user finishes dragging
+                            
+                            // Calculate new position
                             final newPosition = Duration(
                               milliseconds: (value * duration.inMilliseconds).round(),
                             );
-                            print('🎵 [SeekBar] Seeking to $newPosition');
+                            
+                            // Prevent accidental seek to very beginning (< 1 second) unless intentional
+                            if (newPosition.inSeconds < 1 && value > 0.02) {
+                              print('⚠️ [SeekBar] Preventing accidental seek to start');
+                              return;
+                            }
+                            
+                            print('🎵 [SeekBar] Seeking to $newPosition (value: $value)');
                             controller.homeController.seekTo(newPosition);
                           },
                         ),
@@ -234,17 +247,8 @@ class NowPlayingView extends GetView<PlayerController> {
                 iconSize: 32.w,
                 onPressed: () => controller.homeController.skipNext(),
               ),
-              // 셔플 버튼 (오른쪽)
-              IconButton(
-                icon: Icon(
-                  Icons.shuffle,
-                  color: Colors.white.withOpacity(0.5),
-                ),
-                iconSize: 24.w,
-                onPressed: () {
-                  // TODO: 셔플 기능
-                },
-              ),
+              // 셔플 버튼 제거됨 - 미구현 기능
+              SizedBox(width: 24.w), // 균형 유지
             ],
           ),
         ],
