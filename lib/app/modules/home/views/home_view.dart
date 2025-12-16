@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/species_theme_transition.dart';
 import '../controllers/home_controller.dart';
 import '../widgets/premium_mode_button.dart';
 import '../widgets/species_toggle.dart';
@@ -18,6 +19,13 @@ import '../../../../app/data/services/daily_routine_service.dart';
 import '../../../routes/app_routes.dart';
 import '../widgets/ai_special_mode_widget.dart';
 import '../controllers/smart_care_controller.dart';
+// Bento Style Widgets
+import 'package:petbeats/core/widgets/bento_card.dart';
+import 'package:petbeats/core/widgets/elastic_scale_button.dart';
+import 'package:petbeats/core/widgets/mode_animator.dart';
+import 'package:petbeats/core/widgets/staggered_slide_in.dart';
+import 'package:petbeats/core/widgets/animated_gradient_border.dart';
+import '../widgets/debug_bottom_sheet.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
@@ -25,62 +33,98 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     final hapticService = Get.find<HapticService>();
-    return Scaffold(
-      backgroundColor: AppColors.backgroundWhite,
-      body: BackgroundDecoration(
-        child: SafeArea(
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                padding: const EdgeInsets.only(bottom: 100), // Space for MiniPlayer
-                child: Column(
+    return Obx(() => SpeciesThemeTransition(
+      theme: controller.currentSpeciesTheme.value,
+      child: Scaffold(
+        backgroundColor: controller.currentSpeciesTheme.value.backgroundColor,
+        body: BackgroundDecoration(
+          child: SafeArea(
+            child: Stack(
+              children: [
+                SingleChildScrollView(
+                  padding: const EdgeInsets.only(bottom: 100), // Space for MiniPlayer
+                  child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 16),
-                    // Header
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const HeartbeatText('PetBeats', fontSize: 24),
-                          Row(
-                            children: [
-                              // 친구 초대 아이콘 복원
-                              HeaderIconButton(
-                                iconPath: 'assets/icons/icon_nav_notification.png',
-                                animationType: HeaderIconAnimationType.shake,
-                                onTap: () {
-                                  Get.toNamed(Routes.INVITE_FRIENDS);
-                                },
-                              ),
-                              const SizedBox(width: 8),
-                              HeaderIconButton(
-                                iconPath: 'assets/icons/icon_nav_settings.png',
-                                animationType: HeaderIconAnimationType.rotate,
-                                onTap: () {
-                                  Get.toNamed(Routes.SETTINGS);
-                                },
-                              ),
-                            ],
-                          ),
-                        ],
+                    // Header with Staggered Animation
+                    StaggeredSlideIn(
+                      index: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const HeartbeatText('PetBeats', fontSize: 24),
+                            Row(
+                              children: [
+                                // 디버그 패널 (DEV ONLY)
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.bottomSheet(
+                                      const DebugBottomSheet(),
+                                      backgroundColor: Colors.transparent,
+                                      isScrollControlled: true,
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 36,
+                                    height: 36,
+                                    decoration: BoxDecoration(
+                                      color: Colors.orange.withOpacity(0.15),
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(color: Colors.orange.withOpacity(0.3)),
+                                    ),
+                                    child: const Icon(
+                                      Icons.bug_report,
+                                      color: Colors.orange,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                // 친구 초대 아이콘 복원
+                                HeaderIconButton(
+                                  iconPath: 'assets/icons/icon_nav_notification.png',
+                                  animationType: HeaderIconAnimationType.shake,
+                                  onTap: () {
+                                    Get.toNamed(Routes.INVITE_FRIENDS);
+                                  },
+                                ),
+                                const SizedBox(width: 8),
+                                HeaderIconButton(
+                                  iconPath: 'assets/icons/icon_nav_settings.png',
+                                  animationType: HeaderIconAnimationType.rotate,
+                                  onTap: () {
+                                    Get.toNamed(Routes.SETTINGS);
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     const SizedBox(height: 12),
                     
-                    // Species Toggle
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24.0),
-                      child: SpeciesToggle(),
+                    // Species Toggle with Staggered Animation
+                    StaggeredSlideIn(
+                      index: 1,
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 24.0),
+                        child: SpeciesToggle(),
+                      ),
                     ),
                     
                     const SizedBox(height: 16),
                     
-                    // Banner Card
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                      child: _buildBannerCard(hapticService),
+                    // Banner Card with Staggered Animation
+                    StaggeredSlideIn(
+                      index: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                        child: _buildBannerCard(hapticService),
+                      ),
                     ),
                     
                     const SizedBox(height: 20),
@@ -139,44 +183,58 @@ class HomeView extends GetView<HomeController> {
                                 ),
                               ),
                               child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                child: Row(
-                                  children: [
+                                  scrollDirection: Axis.horizontal,
+                                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                  child: Row(
+                                    children: [
 
-                                    
-                                    // Individual Modes
-                                    ...controller.modes.map((mode) {
-                                      final isSelected = controller.currentMode.value?.id == mode.id && !controller.isAutoMode.value;
-                                      final isPlaying = isSelected && controller.isPlaying.value;
                                       
-                                      ModeAnimationType animType = ModeAnimationType.none;
-                                      if (mode.id == 'sleep') animType = ModeAnimationType.sway;
-                                      else if (mode.id == 'anxiety') animType = ModeAnimationType.breathe;
-                                      else if (mode.id == 'noise') animType = ModeAnimationType.wave;
-                                      else if (mode.id == 'energy') animType = ModeAnimationType.pulse;
-                                      else if (mode.id == 'senior') animType = ModeAnimationType.heartbeat;
+                                      // Individual Modes - Filtered by species
+                                      ...controller.modes.where((mode) {
+                                        // Dog modes: IDs don't contain 'cat_'
+                                        // Cat modes: IDs contain 'cat_'
+                                        final isDogMode = !mode.id.startsWith('cat_');
+                                        final isCatMode = mode.id.startsWith('cat_');
+                                        
+                                        if (controller.selectedSpeciesIndex.value == 0) {
+                                          // Dog selected - show only dog modes
+                                          return isDogMode;
+                                        } else if (controller.selectedSpeciesIndex.value == 1) {
+                                          // Cat selected - show only cat modes
+                                          return isCatMode;
+                                        }
+                                        return true; // Show all if neither (shouldn't happen)
+                                      }).map((mode) {
+                                        final isSelected = controller.currentMode.value?.id == mode.id && !controller.isAutoMode.value;
+                                        final isPlaying = isSelected && controller.isPlaying.value;
+                                        
+                                        ModeAnimationType animType = ModeAnimationType.none;
+                                        if (mode.id == 'sleep' || mode.id == 'cat_sleep') animType = ModeAnimationType.sway;
+                                        else if (mode.id == 'anxiety' || mode.id == 'cat_anxiety') animType = ModeAnimationType.breathe;
+                                        else if (mode.id == 'noise' || mode.id == 'cat_noise') animType = ModeAnimationType.wave;
+                                        else if (mode.id == 'energy' || mode.id == 'cat_energy') animType = ModeAnimationType.pulse;
+                                        else if (mode.id == 'senior' || mode.id == 'cat_senior') animType = ModeAnimationType.heartbeat;
 
-                                      return Padding(
-                                        padding: const EdgeInsets.only(right: 8),  // 간격 축소
-                                        child: _buildCircularModeButton(
-                                          title: mode.title,
-                                          iconPath: mode.iconPath,
-                                          isActive: isSelected,
-                                          isPlaying: isPlaying,
-                                          onTap: () {
-                                            hapticService.lightImpact();
-                                            controller.changeMode(mode);
-                                            Get.to(() => const ModeDetailView(), arguments: mode);
-                                          },
-                                          color: mode.color,
-                                          animationType: animType,
-                                        ),
-                                      );
-                                    }).toList(),
-                                  ],
+                                        return Padding(
+                                          padding: const EdgeInsets.only(right: 8),  // 간격 축소
+                                          child: _buildCircularModeButton(
+                                            title: mode.title,
+                                            iconPath: mode.iconPath,
+                                            isActive: isSelected,
+                                            isPlaying: isPlaying,
+                                            onTap: () {
+                                              hapticService.lightImpact();
+                                              controller.changeMode(mode);
+                                              Get.to(() => const ModeDetailView(), arguments: mode);
+                                            },
+                                            color: mode.color,
+                                            animationType: animType,
+                                          ),
+                                        );
+                                      }).toList(),
+                                    ],
+                                  ),
                                 ),
-                              ),
                             ),
                           ],
                         ),
@@ -299,7 +357,7 @@ class HomeView extends GetView<HomeController> {
           ),
         ),
       ),
-    );
+    )));
   }
 
   Widget _buildSectionTitle(String title) {
@@ -316,64 +374,46 @@ class HomeView extends GetView<HomeController> {
   }
 
   Widget _buildBannerCard(HapticService hapticService) {
-    return GestureDetector(
+    return ElasticScaleButton(
       onTap: () {
         hapticService.lightImpact();
         Get.to(() => const AppInfoView());
       },
-      child: Container(
-        height: 140,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: const Color(0xFF6A5AE0), // Purple background
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xFF6A5AE0).withOpacity(0.3),
-              blurRadius: 12,
-              offset: const Offset(0, 6),
-            ),
-          ],
-        ),
+      child: BentoCard(
+        height: 160,
+        borderRadius: 32,
+        padding: EdgeInsets.zero,
+        enableParallax: true, // 3D Tilt Effect
+        enableShimmer: true,  // Glass Shimmer Effect
+        glowColor: const Color(0xFF6A5AE0),
         child: Stack(
           fit: StackFit.expand,
           children: [
             // Background Image
-            ClipRRect(
-              borderRadius: BorderRadius.circular(24),
-              child: Image.asset(
-                'assets/images/MainBanner/MainBanner.png',
-                fit: BoxFit.cover,
-              ),
+            Image.asset(
+              'assets/images/MainBanner/MainBanner.png',
+              fit: BoxFit.cover,
             ),
             
-            // Gradient Overlay removed for better line visibility
-            
-            // Subtle Gradient for Text Readability (Bottom Left only)
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: 80,
+            // Modern Gradient Overlay (Mesh-like)
+            Positioned.fill(
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(24),
-                    bottomRight: Radius.circular(24),
-                  ),
                   gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
                     colors: [
-                      Colors.black.withOpacity(0.4),
                       Colors.transparent,
+                      Colors.black.withOpacity(0.1),
+                      Colors.black.withOpacity(0.6),
                     ],
+                    stops: const [0.0, 0.5, 1.0],
                   ),
                 ),
               ),
             ),
 
-            // Text Overlay
+            // Text Overlay with Glass Badge
             Positioned(
               bottom: 24,
               left: 24,
@@ -381,36 +421,40 @@ class HomeView extends GetView<HomeController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'PetBeats 소개',
-                    style: AppTextStyles.titleMedium.copyWith(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      shadows: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.5),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'PetBeats',
+                        style: AppTextStyles.labelSmall.copyWith(
+                          color: Colors.white.withOpacity(0.9),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                          letterSpacing: 1.2,
                         ),
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          blurRadius: 16,
-                          offset: const Offset(0, 4),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Premium Sound Therapy',
+                        style: AppTextStyles.titleMedium.copyWith(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.2),
                       shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
                     ),
                     child: const Icon(
-                      Icons.arrow_forward_ios_rounded,
+                      Icons.arrow_forward_rounded,
                       color: Colors.white,
-                      size: 16,
+                      size: 20,
                     ),
                   ),
                 ],

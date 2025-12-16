@@ -138,18 +138,25 @@ class _SplashWelcomeViewState extends State<SplashWelcomeView> with TickerProvid
         children: [
           // 메인 컨텐츠
           GestureDetector(
-            onTapDown: (details) {
-              if (!_isTransitioning) {
-                // 웹에서는 첫 터치시 BGM 재생 시작
-                WebBgmService().play();
+          onTapDown: (details) {
+            if (!_isTransitioning) {
+              // 웹에서는 첫 터치시 BGM 재생 시작 (싱글톤 사용)
+              if (kIsWeb) {
                 try {
-                  Get.find<HapticService>().lightImpact();
+                  Get.find<WebBgmService>().play();
                 } catch (e) {
-                  // ignore
+                  // WebBgmService not found - ignore
+                  debugPrint('WebBgmService not found: $e');
                 }
-                _handleTap(details);
               }
-            },
+              try {
+                Get.find<HapticService>().lightImpact();
+              } catch (e) {
+                // ignore
+              }
+              _handleTap(details);
+            }
+          },
             behavior: HitTestBehavior.translucent,
             child: Container(
               color: Colors.transparent,

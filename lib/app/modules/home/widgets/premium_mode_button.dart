@@ -3,15 +3,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../widgets/beat_animation.dart';
 import 'dart:math' as math;
-
-enum ModeAnimationType {
-  none,
-  pulse,
-  sway,
-  breathe,
-  wave,
-  heartbeat,
-}
+import 'package:petbeats/core/widgets/mode_animator.dart';
 
 class PremiumModeButton extends StatefulWidget {
   final String title;

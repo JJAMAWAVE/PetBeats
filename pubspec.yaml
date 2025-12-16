@@ -99,11 +99,13 @@ flutter:
   assets:
     - assets/images/
     - assets/images/onboarding/
+    - assets/images/Haptic/
     - assets/images/InviteFriend/
     - assets/images/MainBanner/
     - assets/images/AppInfo/
     - assets/sound/
     - assets/sound/BGM/
+    - assets/sound/weather/
     - assets/sound/TEST.mid
     - assets/sound/TEST.mp3
     - assets/haptic_patterns/

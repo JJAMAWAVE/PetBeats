@@ -69,22 +69,22 @@ class _OnboardingViewState extends State<OnboardingView> with TickerProviderStat
     final List<Map<String, String>> slides = [
       {
         "title": "소음 속 안식처",
-        "desc": "시끄러운 세상 속, 보호자님의 사랑으로\n아이에게 평온한 쉼터를 선물하세요.",
+        "desc": "시끄러운 세상 속, 평온한 쉼터를 선물하세요.\n듣는 것만으로는 부족할 때, 느껴지는 안식이 필요합니다.",
         "image": "assets/images/onboarding/step1_shelter.png"
       },
       {
         "title": "바이오-음향 설계",
-        "desc": "사람보다 예민한 아이들을 위해,\n뇌파를 안정시키는 특수 음향을 설계했습니다.",
+        "desc": "예민한 아이들을 위해,\n뇌파를 안정시키는 특수 음향과\n심장 박동 진동을 함께 설계했습니다.",
         "image": "assets/images/onboarding/step2_brainwave_v4.png"
       },
       {
         "title": "소리를 넘어선 테라피",
-        "desc": "음악 그 이상입니다.\n심장 박동을 닮은 진동이 깊은 안정을 줍니다.",
+        "desc": "음악, 그 이상입니다.\n심장 박동을 닮은 햅틱 진동으로\n듣고 느끼는 완벽한 휴식을 선물하세요.",
         "image": "assets/images/onboarding/step3_vibration_v3.png"
       },
       {
         "title": "함께 공명하다",
-        "desc": "아이를 품에 안고 느껴보세요.\n심장이 맞춰지는 순간, 진정한 치유가 완성됩니다.",
+        "desc": "아이를 품에 안고 느껴보세요.\n심장이 맞춰지는 순간, 진정한 치유가 시작됩니다.\n심장 박동 햅틱으로 깊이 교감하세요.",
         "image": "assets/images/onboarding/step4_resonance_v3.png"
       },
     ];
@@ -179,26 +179,31 @@ class _OnboardingViewState extends State<OnboardingView> with TickerProviderStat
                     },
                   ),
                 ),
+                
+                // ✨ Fixed Page Indicator Position (between image and text)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      slides.length,
+                      (i) => _IndicatorDot(
+                        isActive: controller.pageIndex == i,
+                      ),
+                    ),
+                  ),
+                ),
+                
                 // Text Area (Modified to be flexible)
                 Expanded(
                   flex: 4,
                   child: Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    padding: const EdgeInsets.symmetric(horizontal: 8),  // ✨ Minimal margins
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,  // Changed from center
                       children: [
-                        // Page Indicator moved here (above text)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(
-                            slides.length,
-                            (i) => _IndicatorDot(
-                              isActive: controller.pageIndex == i,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 24), // Reduced height
+                        const SizedBox(height: 8),  // Small top spacing
                         
                         // Animated Text Switcher
                         AnimatedSwitcher(
