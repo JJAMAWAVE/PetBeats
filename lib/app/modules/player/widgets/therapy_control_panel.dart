@@ -5,8 +5,13 @@ import 'package:get/get.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../data/models/haptic_settings_model.dart';
+import '../../home/controllers/home_controller.dart';
+import '../../../data/services/weather_service.dart';
+import '../../../data/services/rhythm_care_service.dart';  // ✨ Rhythm Care
 import 'sleep_timer_bottom_sheet.dart';
-import 'mix_panel_bottom_sheet.dart';
+import 'weather_settings_bottom_sheet.dart';
+import 'weather_control_sheet.dart';
+import 'premium_feature_popup.dart';
 import 'dart:ui';
 
 class TherapyControlPanel extends StatefulWidget {
@@ -274,99 +279,217 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
     );
   }
   
-  /// 사운드 믹스, 리듬, 수면 타이머 퀵 액세스 아이콘 Row
+  /// 날씨 믹스, 리듬, 수면 타이머 퀵 액세스 아이콘 Row (모두 PRO 기능)
   Widget _buildQuickAccessRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Expanded(
-          child: _buildQuickAccessButton(
-            icon: Icons.graphic_eq_outlined,
-            label: '사운드',
-            color: Colors.purpleAccent,
-            isActive: widget.isWeatherActive,
-            onTap: () {
-              Get.bottomSheet(
-                const MixPanelBottomSheet(),
-                backgroundColor: Colors.transparent,
-                isScrollControlled: true,
-              );
-              HapticFeedback.selectionClick();
-            },
+    // Get premium status
+    final homeController = Get.find<HomeController>();
+    final weatherService = Get.find<WeatherService>();
+    final rhythmService = Get.isRegistered<RhythmCareService>() 
+        ? Get.find<RhythmCareService>() 
+        : null;
+    
+    return Obx(() {
+      final isPremium = homeController.isPremiumUser.value;
+      final isWeatherActive = weatherService.isEnabled.value;
+      final isRhythmActive = rhythmService?.isEnabled.value ?? false;
+      
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          // 날씨 버튼
+          Expanded(
+            child: _buildPremiumQuickAccessButton(
+              icon: Icons.wb_cloudy,
+              label: '날씨',
+              color: Colors.lightBlueAccent,
+              isActive: isWeatherActive,
+              isPremium: isPremium,
+              description: '실시간 날씨에 맞춰 사운드 레이어가 자동으로 적용됩니다.',
+              onPremiumTap: () {
+                Get.bottomSheet(
+                  const WeatherControlSheet(),
+                  backgroundColor: Colors.transparent,
+                  isScrollControlled: true,
+                );
+                HapticFeedback.selectionClick();
+              },
+            ),
           ),
-        ),
-        SizedBox(width: 8.w),
-        Expanded(
-          child: _buildQuickAccessButton(
-            icon: Icons.schedule_outlined,
-            label: '리듬',
-            color: Colors.greenAccent,
-            isActive: false,
-            onTap: () {
-              Get.toNamed('/rhythm-special');
-              HapticFeedback.selectionClick();
-            },
+          SizedBox(width: 8.w),
+          // 리듬 버튼
+          Expanded(
+            child: _buildPremiumQuickAccessButton(
+              icon: Icons.schedule_outlined,
+              label: '리듬',
+              color: Colors.greenAccent,
+              isActive: isRhythmActive,
+              isPremium: isPremium,
+              description: '반려동물의 생체 리듬에 맞춰 최적의 사운드를 제공합니다.',
+              onPremiumTap: () {
+                // ✨ Toggle Rhythm Care
+                if (rhythmService != null) {
+                  rhythmService.toggle();
+                  final status = rhythmService.isEnabled.value ? '활성화' : '비활성화';
+                  final currentMode = rhythmService.currentTimeZoneName.value;
+                  Get.snackbar(
+                    '🕐 리듬 케어 $status',
+                    isRhythmActive ? '수동 모드로 전환합니다' : '현재 시간대: $currentMode',
+                    snackPosition: SnackPosition.BOTTOM,
+                    backgroundColor: Colors.black87,
+                    colorText: Colors.white,
+                    duration: const Duration(seconds: 2),
+                  );
+                }
+                HapticFeedback.selectionClick();
+              },
+            ),
           ),
-        ),
-        SizedBox(width: 8.w),
-        Expanded(
-          child: _buildQuickAccessButton(
-            icon: Icons.timer_outlined,
-            label: '타이머',
-            color: Colors.lightBlueAccent,
-            isActive: false,
-            onTap: () {
-              Get.bottomSheet(
-                const SleepTimerBottomSheet(),
-                backgroundColor: Colors.transparent,
-                isScrollControlled: true,
-              );
-              HapticFeedback.selectionClick();
-            },
+          SizedBox(width: 8.w),
+          // 타이머 버튼
+          Expanded(
+            child: _buildPremiumQuickAccessButton(
+              icon: Icons.timer_outlined,
+              label: '타이머',
+              color: Colors.amberAccent,
+              isActive: false,
+              isPremium: isPremium,
+              description: '설정한 시간 후 자동으로 음악이 서서히 꺼집니다.',
+              onPremiumTap: () {
+                Get.bottomSheet(
+                  const SleepTimerBottomSheet(),
+                  backgroundColor: Colors.transparent,
+                  isScrollControlled: true,
+                );
+                HapticFeedback.selectionClick();
+              },
+            ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
   
-  Widget _buildQuickAccessButton({
+  /// Premium Quick Access Button with PRO badge
+  Widget _buildPremiumQuickAccessButton({
     required IconData icon,
     required String label,
     required Color color,
     required bool isActive,
-    required VoidCallback onTap,
+    required bool isPremium,
+    required String description,
+    required VoidCallback onPremiumTap,
   }) {
     return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
-        decoration: BoxDecoration(
-          color: isActive ? color.withOpacity(0.2) : Colors.white.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(12.r),
-          border: Border.all(
-            color: isActive ? color : Colors.white.withOpacity(0.2),
+      onTap: () {
+        if (isPremium) {
+          onPremiumTap();
+        } else {
+          // Show premium popup for non-premium users
+          PremiumFeaturePopup.show(
+            featureName: label,
+            description: description,
+            icon: icon,
+            iconColor: color,
+          );
+          HapticFeedback.selectionClick();
+        }
+      },
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          // Main Button
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
+            decoration: BoxDecoration(
+              color: isActive ? color.withOpacity(0.25) : Colors.white.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12.r),
+              border: Border.all(
+                color: isActive ? color : Colors.white.withOpacity(0.2),
+                width: isActive ? 2 : 1,
+              ),
+              boxShadow: isActive ? [
+                BoxShadow(
+                  color: color.withOpacity(0.4),
+                  blurRadius: 8,
+                  spreadRadius: 1,
+                ),
+              ] : null,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Animated icon for active state
+                isActive 
+                  ? _buildPulsingIcon(icon, color)
+                  : Icon(icon, color: Colors.white.withOpacity(0.6), size: 14.w),
+                SizedBox(width: 3.w),
+                Flexible(
+                  child: Text(
+                    label,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: isActive ? color : Colors.white.withOpacity(0.6),
+                      fontSize: 10.sp,
+                      fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: isActive ? color : Colors.white.withOpacity(0.6), size: 14.w),
-            SizedBox(width: 3.w),
-            Flexible(
+          
+          // PRO Badge (always visible)
+          Positioned(
+            top: -6.h,
+            right: -4.w,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
+                ),
+                borderRadius: BorderRadius.circular(4.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.amber.withOpacity(0.5),
+                    blurRadius: 4,
+                    offset: const Offset(0, 1),
+                  ),
+                ],
+              ),
               child: Text(
-                label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+                'PRO',
                 style: TextStyle(
-                  color: isActive ? color : Colors.white.withOpacity(0.6),
-                  fontSize: 10.sp,
-                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                  fontSize: 7.sp,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
+    );
+  }
+  
+  /// Pulsing icon animation for active weather button
+  Widget _buildPulsingIcon(IconData icon, Color color) {
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0.8, end: 1.0),
+      duration: const Duration(milliseconds: 800),
+      curve: Curves.easeInOut,
+      builder: (context, value, child) {
+        return Transform.scale(
+          scale: value,
+          child: Icon(icon, color: color, size: 14.w),
+        );
+      },
+      onEnd: () {
+        // Restart animation
+      },
     );
   }
   

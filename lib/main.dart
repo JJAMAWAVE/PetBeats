@@ -15,6 +15,11 @@ import 'app/data/services/playback_tracking_service.dart';
 import 'app/data/services/review_service.dart';
 import 'app/data/services/auth_service.dart';
 import 'app/data/services/weather_service.dart';
+import 'app/data/services/ip_geolocation_service.dart';
+import 'app/data/services/weather_sync_service.dart';
+import 'app/data/services/weather_sound_manager.dart';
+import 'app/data/services/sound_mixer_service.dart';  // ✨ For weather sounds
+import 'app/data/services/rhythm_care_service.dart';  // ✨ Rhythm Care (24h bio-rhythm)
 import 'app/data/services/iot_service.dart';
 import 'app/data/services/timer_service.dart';
 import 'package:get_storage/get_storage.dart';
@@ -38,6 +43,11 @@ void main() async {
   // New Feature Services
   Get.put(AuthService(), permanent: true);
   Get.put(WeatherService(), permanent: true);
+  Get.put(IpGeolocationService(), permanent: true);  // ✨ Weather services
+  Get.put(WeatherSyncService(), permanent: true);    // ✨ Weather services
+  Get.put(SoundMixerService(), permanent: true);     // ✨ For weather sounds (must be before WeatherSoundManager)
+  Get.put(WeatherSoundManager(), permanent: true);   // ✨ Weather services
+  Get.put(RhythmCareService(), permanent: true);     // ✨ Rhythm Care (24h bio-rhythm)
   Get.put(IotService(), permanent: true);
   Get.put(TimerService(), permanent: true);
   

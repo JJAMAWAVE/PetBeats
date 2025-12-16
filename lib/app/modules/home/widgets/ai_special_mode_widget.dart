@@ -102,12 +102,15 @@ class AISpecialModeWidget extends StatelessWidget {
                 '날씨',
                 'assets/icons/icon_special_weather_glass.png',
                 Colors.blue.shade400,
-                () => Get.toNamed(Routes.WEATHER_SPECIAL),
+                () {
+                  // ✨ 새로운 날씨 페이지로 이동
+                  Get.toNamed(Routes.WEATHER_SPECIAL);
+                },
               ),
               SizedBox(width: 12.w),
               _buildModeButton(
                 context,
-                '시간',
+                '리듬',  // ✨ 시간 → 리듬으로 변경 (Rhythm Care)
                 'assets/icons/icon_special_time_glass.png',
                 Colors.orange.shade400,
                 () => Get.toNamed(Routes.RHYTHM_SPECIAL),
