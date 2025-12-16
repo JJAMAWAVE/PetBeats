@@ -44,43 +44,49 @@ class SoundMixerService extends GetxService {
       type: SoundLayer.rain,
       name: '빗소리',
       iconPath: 'assets/icons/mix/icon_rain.png',
-      assetPath: 'assets/sound/ambient/rain_loop.mp3',
+      assetPath: 'assets/sound/weather/rain_ambient.mp3',  // ✨ Compressed
     ),
     MixableSound(
       type: SoundLayer.thunder,
       name: '천둥',
       iconPath: 'assets/icons/mix/icon_thunder.png',
-      assetPath: 'assets/sound/ambient/thunder_loop.mp3',
+      assetPath: 'assets/sound/weather/strong_wind.mp3',  // ✨ Compressed
     ),
     MixableSound(
       type: SoundLayer.ocean,
-      name: '파도',
+      name: '눈/바람',
       iconPath: 'assets/icons/mix/icon_ocean.png',
-      assetPath: 'assets/sound/ambient/ocean_loop.mp3',
+      assetPath: 'assets/sound/weather/snow_wind.mp3',  // ✨ Compressed
     ),
     MixableSound(
       type: SoundLayer.forest,
-      name: '숲속',
+      name: '귀뚜라미',
       iconPath: 'assets/icons/mix/icon_forest.png',
-      assetPath: 'assets/sound/ambient/forest_loop.mp3',
+      assetPath: 'assets/sound/weather/night_crickets.mp3',  // ✨ Compressed
     ),
     MixableSound(
       type: SoundLayer.fireplace,
-      name: '벽난로',
+      name: '구름',
       iconPath: 'assets/icons/mix/icon_fireplace.png',
-      assetPath: 'assets/sound/ambient/fireplace_loop.mp3',
+      assetPath: 'assets/sound/weather/cloudy_ambient.mp3',
     ),
     MixableSound(
       type: SoundLayer.wind,
       name: '바람',
       iconPath: 'assets/icons/mix/icon_wind.png',
-      assetPath: 'assets/sound/ambient/wind_loop.mp3',
+      assetPath: 'assets/sound/weather/strong_wind.mp3',  // ✨ Compressed
+    ),
+    MixableSound(
+      type: SoundLayer.birds,
+      name: '새소리',
+      iconPath: 'assets/icons/mix/icon_birds.png',
+      assetPath: 'assets/sound/weather/sunny_birds.mp3',  // ✨ Compressed
     ),
     MixableSound(
       type: SoundLayer.whitenoise,
       name: '백색소음',
       iconPath: 'assets/icons/mix/icon_whitenoise.png',
-      assetPath: 'assets/sound/ambient/whitenoise_loop.mp3',
+      assetPath: 'assets/sound/weather/cloudy_ambient.mp3',
     ),
   ].obs;
   
@@ -141,17 +147,27 @@ class SoundMixerService extends GetxService {
   
   Future<void> _playLayer(MixableSound layer) async {
     try {
+      print('🎵 [_playLayer] Starting: ${layer.name}');
+      print('🎵 [_playLayer] Asset path: ${layer.assetPath}');
+      print('🎵 [_playLayer] Volume: ${layer.volume.value}, Master: ${masterVolume.value}');
+      
       if (!_players.containsKey(layer.type)) {
         _players[layer.type] = AudioPlayer();
+        print('🎵 [_playLayer] Created new AudioPlayer for ${layer.name}');
       }
       
       final player = _players[layer.type]!;
+      print('🎵 [_playLayer] Setting asset...');
       await player.setAsset(layer.assetPath);
+      print('🎵 [_playLayer] Asset set successfully');
       await player.setLoopMode(LoopMode.one);
       await player.setVolume(layer.volume.value * masterVolume.value);
+      print('🎵 [_playLayer] Playing...');
       await player.play();
-    } catch (e) {
-      print('❌ Error playing layer ${layer.name}: $e');
+      print('🎵 [_playLayer] ✅ Playing ${layer.name} successfully');
+    } catch (e, stack) {
+      print('❌ [_playLayer] Error playing layer ${layer.name}: $e');
+      print('❌ [_playLayer] Stack trace: $stack');
     }
   }
   
@@ -189,6 +205,53 @@ class SoundMixerService extends GetxService {
       if (layer.isActive.value) {
         await entry.value.play();
       }
+    }
+  }
+  
+
+  /// Play a specific layer for Weather Service
+  /// This bypasses the toggle logic but updates the active state
+  Future<void> playWeatherLayer(SoundLayer type, double volume) async {
+    print('🌦️ [playWeatherLayer] Called with type: $type, volume: $volume');
+    
+    // Determine the asset path based on type or existing config
+    final layer = layers.firstWhere((l) => l.type == type, orElse: () => layers[0]);
+    print('🌦️ [playWeatherLayer] Found layer: ${layer.name}, asset: ${layer.assetPath}');
+    
+    // Update layer volume
+    layer.volume.value = volume;
+    
+    // Pre-load the asset first, THEN stop others
+    try {
+      // Create or reuse player
+      if (!_players.containsKey(layer.type)) {
+        _players[layer.type] = AudioPlayer();
+        print('🌦️ [playWeatherLayer] Created new AudioPlayer');
+      }
+      
+      final player = _players[layer.type]!;
+      
+      // Load asset (this can take time for large files)
+      print('🌦️ [playWeatherLayer] Loading asset...');
+      await player.setAsset(layer.assetPath);
+      await player.setLoopMode(LoopMode.one);
+      await player.setVolume(volume * masterVolume.value);
+      print('🌦️ [playWeatherLayer] Asset loaded successfully');
+      
+      // NOW stop other layers (after our asset is ready)
+      for (final otherLayer in layers) {
+        if (otherLayer.type != layer.type && otherLayer.isActive.value) {
+          await _stopLayer(otherLayer.type);
+          otherLayer.isActive.value = false;
+        }
+      }
+      
+      // Mark as active and play
+      layer.isActive.value = true;
+      await player.play();
+      print('🌦️ [playWeatherLayer] ✅ Weather Layer Activated: ${layer.name}');
+    } catch (e) {
+      print('🌦️ [playWeatherLayer] ❌ ERROR: $e');
     }
   }
   
