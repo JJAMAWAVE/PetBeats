@@ -18,6 +18,7 @@ import 'app_info_view.dart';
 import '../../../../app/data/services/daily_routine_service.dart';
 import '../../../routes/app_routes.dart';
 import '../widgets/ai_special_mode_widget.dart';
+import '../../premium/controllers/subscription_controller.dart';
 import '../controllers/smart_care_controller.dart';
 // Bento Style Widgets
 import 'package:petbeats/core/widgets/bento_card.dart';
@@ -253,7 +254,7 @@ class HomeView extends GetView<HomeController> {
                     const SizedBox(height: 20),
 
                     // SECTION 3: Scenario Chips
-                    _buildSectionTitle('AI 맞춤 추천'),
+                    _buildSectionTitleWithPro('AI 맞춤 추천'),
                     const SizedBox(height: 12),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -369,6 +370,39 @@ class HomeView extends GetView<HomeController> {
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
+      ),
+    );
+  }
+  
+  Widget _buildSectionTitleWithPro(String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: AppTextStyles.titleMedium.copyWith(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            decoration: BoxDecoration(
+              color: AppColors.primaryBlue,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Text(
+              'PRO',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 11,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -524,20 +558,8 @@ class HomeView extends GetView<HomeController> {
     
     return GestureDetector(
       onTap: () {
-        // Navigate to corresponding mode detail view instead of auto-playing
-        final modeMap = {
-          '산책 후': 'energy',
-          '낮잠 시간': 'sleep',
-          '병원 방문': 'anxiety',
-          '미용 후': 'noise',
-          '천둥/번개': 'noise',
-          '분리 불안': 'anxiety',
-        };
-        final mode = controller.modes.firstWhere(
-          (m) => m.id == modeMap[label],
-          orElse: () => controller.modes.first,
-        );
-        Get.to(() => const ModeDetailView(), arguments: mode);
+        // 시나리오 설명 + PRO 체크 다이얼로그
+        _showScenarioDialog(label, chipColor);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -580,6 +602,143 @@ class HomeView extends GetView<HomeController> {
         ),
       ),
     );
+  }
+
+  void _showScenarioDialog(String label, Color color) {
+    // 시나리오별 설명
+    final descriptions = {
+      '산책 후': '활발한 산책 후 흥분한 반려동물을 차분하게 진정시켜줍니다.\n\n🎵 진정 효과 음악 + 자연의 소리로 편안한 휴식을 도와드려요.',
+      '낮잠 시간': '낮잠을 위한 부드럽고 편안한 멜로디를 제공합니다.\n\n🎵 수면 유도 음악으로 깊은 휴식을 취할 수 있어요.',
+      '병원 방문': '병원 방문 전후의 불안함을 완화해줍니다.\n\n🎵 안정감을 주는 저주파 음악으로 스트레스를 줄여드려요.',
+      '미용 후': '미용 후의 스트레스를 해소하고 안정을 찾아줍니다.\n\n🎵 릴렉스 효과 음악으로 마음의 평화를 되찾아드려요.',
+      '천둥/번개': '천둥소리나 폭풍우에 대한 공포를 완화해줍니다.\n\n🎵 불안 완화 음악으로 두려움을 잊게 해드려요.',
+      '분리 불안': '혼자 있을 때 느끼는 불안감을 줄여줍니다.\n\n🎵 안정감 있는 음악으로 보호자 없이도 편안하게 지낼 수 있어요.',
+    };
+    
+    final description = descriptions[label] ?? '맞춤 플레이리스트를 생성합니다.';
+    
+    // PRO 상태 확인 (HomeController의 isPremiumUser 사용 - 구독 시 동기화됨)
+    bool isPremium = controller.isPremiumUser.value;
+    
+    showDialog(
+      context: Get.context!,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        child: Container(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // 아이콘
+              Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  color: color,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(Icons.auto_awesome, color: Colors.white, size: 40),
+              ),
+              const SizedBox(height: 20),
+              
+              // 제목
+              Text(
+                label,
+                style: AppTextStyles.titleLarge.copyWith(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 16),
+              
+              // 설명
+              Text(
+                description,
+                textAlign: TextAlign.center,
+                style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textGrey, height: 1.5),
+              ),
+              const SizedBox(height: 24),
+              
+              if (isPremium) ...[
+                // PRO 사용자 - 바로 플레이리스트 생성
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      // 시나리오에 맞는 AI 플레이리스트 생성
+                      Get.toNamed('/ai-playlist-result', arguments: {
+                        'scenario': _getScenarioFromLabel(label),
+                      });
+                    },
+                    icon: const Icon(Icons.play_circle_filled),
+                    label: const Text('AI 플레이리스트 생성'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: color,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    ),
+                  ),
+                ),
+              ] else ...[
+                // 무료 사용자 - PRO 결제 유도
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                      const Icon(Icons.diamond, color: AppColors.primaryBlue, size: 32),
+                      const SizedBox(height: 8),
+                      Text('PRO 전용 기능', style: AppTextStyles.titleMedium.copyWith(fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 4),
+                      Text('AI가 자동으로 맞춤 플레이리스트를 생성해드려요', 
+                           style: AppTextStyles.bodySmall.copyWith(color: AppColors.textGrey),
+                           textAlign: TextAlign.center),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Get.toNamed('/subscription');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primaryBlue,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    ),
+                    child: const Text('PRO 시작하기'),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text('나중에 할게요', style: TextStyle(color: AppColors.textGrey)),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+  
+  // 라벨에서 AIScenario 가져오기 (dynamic import 회피)
+  dynamic _getScenarioFromLabel(String label) {
+    final scenarioMap = {
+      '산책 후': 'afterWalk',
+      '낮잠 시간': 'napTime',
+      '병원 방문': 'hospital',
+      '미용 후': 'grooming',
+      '천둥/번개': 'thunder',
+      '분리 불안': 'anxiety',
+    };
+    return scenarioMap[label] ?? 'afterWalk';
   }
 
   Widget _buildExerciseCard({

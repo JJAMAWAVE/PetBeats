@@ -51,7 +51,8 @@ class OnboardingController extends GetxController {
   void completeOnboarding() {
     // 온보딩 완료 상태 저장
     _storage.write('onboarding_completed', true);
-    Get.offAllNamed(Routes.HOME);
+    // 로딩 화면 거쳐서 홈으로 이동
+    Get.offAllNamed(Routes.ONBOARDING_COMPLETE);
   }
   
   @override

@@ -107,6 +107,7 @@ flutter:
     - assets/images/AppInfo/
     - assets/images/sitter/
     - assets/images/haptic_guide/
+    - assets/images/ai_recommend/
     - assets/sound/
     - assets/sound/BGM/
     - assets/sound/weather/

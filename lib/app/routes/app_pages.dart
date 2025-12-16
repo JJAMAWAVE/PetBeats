@@ -6,6 +6,7 @@ import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
 import '../modules/onboarding/views/question_view.dart';
 import '../modules/onboarding/views/question2_view.dart';
+import '../modules/onboarding/views/onboarding_complete_view.dart';
 import '../modules/onboarding/views/loading_view.dart';
 import '../modules/onboarding/views/splash_welcome_view.dart';
 import '../modules/settings/views/settings_view.dart';
@@ -18,6 +19,8 @@ import '../modules/home/views/sitter_special_view.dart';
 import '../modules/sitter/views/sitter_setup_view.dart';
 import '../modules/sitter/views/sitter_monitoring_view.dart';
 import '../modules/sitter/views/sitter_report_view.dart';
+import '../modules/ai_recommend/views/ai_recommend_view.dart';
+import '../modules/ai_recommend/views/ai_playlist_result_view.dart';
 import '../modules/home/views/app_info_view.dart';
 import '../modules/invite/bindings/invite_binding.dart';
 import '../modules/invite/views/invite_friends_view.dart';
@@ -54,6 +57,12 @@ class AppPages {
     GetPage(
       name: Routes.QUESTION2,
       page: () => const Question2View(),
+      binding: OnboardingBinding(),
+      preventDuplicates: true,
+    ),
+    GetPage(
+      name: Routes.ONBOARDING_COMPLETE,
+      page: () => const OnboardingCompleteView(),
       binding: OnboardingBinding(),
       preventDuplicates: true,
     ),
@@ -104,6 +113,14 @@ class AppPages {
     GetPage(
       name: Routes.SITTER_REPORT,
       page: () => const SitterReportView(),
+    ),
+    GetPage(
+      name: Routes.AI_RECOMMEND,
+      page: () => const AIRecommendView(),
+    ),
+    GetPage(
+      name: Routes.AI_PLAYLIST_RESULT,
+      page: () => const AIPlaylistResultView(),
     ),
     GetPage(
       name: Routes.INVITE_FRIENDS,

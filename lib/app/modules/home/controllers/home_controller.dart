@@ -42,6 +42,9 @@ class HomeController extends GetxController with WidgetsBindingObserver {
   // 현재 재생 중인 트랙
   final currentTrack = Rx<Track?>(null);
   
+  // 현재 재생 중인 플레이리스트 (모드 트랙 또는 AI 플레이리스트)
+  final currentPlaylist = <Track>[].obs;
+  
   // 자동 모드 여부
   final isAutoMode = false.obs;
   
@@ -353,6 +356,8 @@ class HomeController extends GetxController with WidgetsBindingObserver {
       // Find mode and play first track
       final mode = modes.firstWhere((m) => m.id == modeId, orElse: () => modes.first);
       if (mode.tracks.isNotEmpty) {
+        // Set playlist for skip functionality
+        currentPlaylist.value = List<Track>.from(mode.tracks);
         playTrack(mode.tracks.first);
       }
     }
@@ -455,11 +460,20 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     _audioService.seek(position);
   }
   
-  /// Skip to previous track in current mode
+  /// Skip to previous track in current playlist
   void skipPrevious() {
-    if (currentMode.value == null || currentTrack.value == null) return;
+    if (currentTrack.value == null) return;
     
-    final tracks = currentMode.value!.tracks;
+    // Use currentPlaylist if available, otherwise fall back to currentMode.tracks
+    final tracks = currentPlaylist.isNotEmpty 
+        ? currentPlaylist.toList() 
+        : (currentMode.value?.tracks ?? []);
+    
+    if (tracks.isEmpty) {
+      print('⚠️ [skipPrevious] No tracks available');
+      return;
+    }
+    
     final currentIndex = tracks.indexWhere((t) => t.id == currentTrack.value!.id);
     
     if (currentIndex <= 0) {
@@ -470,11 +484,20 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     }
   }
   
-  /// Skip to next track in current mode
+  /// Skip to next track in current playlist
   void skipNext() {
-    if (currentMode.value == null || currentTrack.value == null) return;
+    if (currentTrack.value == null) return;
     
-    final tracks = currentMode.value!.tracks;
+    // Use currentPlaylist if available, otherwise fall back to currentMode.tracks
+    final tracks = currentPlaylist.isNotEmpty 
+        ? currentPlaylist.toList() 
+        : (currentMode.value?.tracks ?? []);
+    
+    if (tracks.isEmpty) {
+      print('⚠️ [skipNext] No tracks available');
+      return;
+    }
+    
     final currentIndex = tracks.indexWhere((t) => t.id == currentTrack.value!.id);
     
     if (currentIndex < 0 || currentIndex >= tracks.length - 1) {

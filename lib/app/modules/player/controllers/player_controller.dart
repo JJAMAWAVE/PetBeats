@@ -42,8 +42,7 @@ class PlayerController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _showHapticTipIfFirstTime();
-    _showHapticSafetyGuideIfFirstTime();  // ✨ Auto-popup safety guide
+    // Safety guide is now shown from NowPlayingView, not here
     
     // Initialize repeat mode to All (default)
     // Use LoopMode.off so track completion triggers skipNext()
@@ -179,27 +178,7 @@ class PlayerController extends GetxController {
     super.onClose();
   }
   
-  // 첫 재생 시 햅틱 사용 안내 (교감 가이드)
-  void _showHapticTipIfFirstTime() {
-    final hasSeenTip = _storage.read('has_seen_haptic_tip') ?? false;
-    
-    if (!hasSeenTip && isPlaying) {
-      Future.delayed(const Duration(seconds: 2), () {
-        Get.snackbar(
-          '💡 Haptic Therapy 사용 팁',
-          '아이의 등이나 배에 폰을 가볍게 올려주세요.\n'
-          '심장 박동 진동이 깊은 안정을 선물합니다.',
-          snackPosition: SnackPosition.BOTTOM,
-          duration: const Duration(seconds: 5),
-          backgroundColor: Colors.black87,
-          colorText: Colors.white,
-          icon: const Icon(Icons.favorite, color: Colors.pinkAccent),
-          margin: const EdgeInsets.all(16),
-        );
-        _storage.write('has_seen_haptic_tip', true);
-      });
-    }
-  }
+
 
   /// Show haptic safety guide on first playback
   void _showHapticSafetyGuideIfFirstTime() {
@@ -417,8 +396,9 @@ class PlayerController extends GetxController {
         break;
       case RepeatMode.single:
         repeatMode.value = RepeatMode.all;
-        _audioService.setLoopMode(true, singleTrack: false);
-        print('🔁 Repeat mode: All tracks');
+        // Use LoopMode.off so ProcessingState.completed fires -> then skipNext()
+        _audioService.setLoopMode(false);
+        print('🔁 Repeat mode: All tracks (LoopMode.off for auto-skip)');
         break;
       case RepeatMode.all:
         repeatMode.value = RepeatMode.off;
