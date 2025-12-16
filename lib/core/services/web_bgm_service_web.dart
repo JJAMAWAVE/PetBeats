@@ -1,54 +1,54 @@
-import 'dart:html' as html;
+import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-/// 웹 전용 BGM 서비스 (HTML5 Audio 사용)
+/// BGM 서비스 (just_audio 사용 - 웹/네이티브 통합)
 class WebBgmService {
   static final WebBgmService _instance = WebBgmService._internal();
   factory WebBgmService() => _instance;
   WebBgmService._internal();
 
-  html.AudioElement? _audioElement;
+  AudioPlayer? _player;
   bool _isInitialized = false;
-  bool _isPlaying = false; // Track BGM state
+  bool _isPlaying = false;
 
   /// BGM 초기화
   Future<void> init() async {
-    if (!kIsWeb) {
-      print('[WebBgmService] Not running on web, skipping');
-      return;
-    }
-
     if (_isInitialized) return;
 
     try {
-      print('[WebBgmService] Creating audio element...');
-      _audioElement = html.AudioElement();
-      _audioElement!.src = 'assets/sound/BGM/sheep.mp3';
-      _audioElement!.loop = true;
-      _audioElement!.volume = 0.3;
+      print('[WebBgmService] Creating AudioPlayer...');
+      _player = AudioPlayer();
       
-      // Preload the audio
-      _audioElement!.load();
+      // ❌ DISABLED: sheep.mp3는 실제 BGM이 아님 - 올바른 BGM 파일로 교체 필요
+      // Load BGM audio - using AudioSource.asset() for all platforms
+      // await _player!.setAudioSource(
+      //   AudioSource.asset('assets/sound/BGM/sheep.mp3'),
+      // );
+      
+      // Set loop mode
+      await _player!.setLoopMode(LoopMode.one);
+      
+      // Set volume
+      await _player!.setVolume(0.3);
       
       _isInitialized = true;
-      print('[WebBgmService] Audio element created successfully');
+      print('[WebBgmService] AudioPlayer initialized (BGM disabled - sheep.mp3 is not actual BGM)');
     } catch (e) {
-      print('[WebBgmService] Error creating audio element: $e');
+      print('[WebBgmService] Error initializing: $e');
     }
   }
 
   /// BGM 재생
   Future<void> play() async {
-    if (!kIsWeb) return;
-
     try {
       if (!_isInitialized) {
         await init();
       }
       
       // Only play if not already playing
-      if (_audioElement?.paused == true) {
-        await _audioElement?.play();
+      if (_player?.playing != true) {
+        await _player?.play();
         _isPlaying = true;
         print('[WebBgmService] Playing BGM');
       }
@@ -59,48 +59,52 @@ class WebBgmService {
 
   /// BGM 일시정지
   void pause() {
-    if (!kIsWeb) return;
-    
     print('[WebBgmService] pause() called');
-    print('[WebBgmService] _audioElement: ${_audioElement != null}');
-    print('[WebBgmService] _isPlaying: $_isPlaying');
     
-    if (_audioElement != null) {
-      print('[WebBgmService] Before pause - paused: ${_audioElement!.paused}, currentTime: ${_audioElement!.currentTime}');
-      _audioElement!.pause();
-      _audioElement!.currentTime = 0; // Reset to beginning
-      _isPlaying = false;
-      print('[WebBgmService] After pause - paused: ${_audioElement!.paused}, currentTime: ${_audioElement!.currentTime}');
-      print('[WebBgmService] BGM stopped and reset');
-    } else {
-      print('[WebBgmService] WARNING: _audioElement is null, cannot pause');
+    try {
+      if (_player != null) {
+        _player!.pause();
+        _player!.seek(Duration.zero); // Reset to beginning
+        _isPlaying = false;
+        print('[WebBgmService] BGM stopped and reset');
+      }
+    } catch (e) {
+      print('[WebBgmService] Error pausing: $e');
     }
   }
 
   /// BGM 재개
   Future<void> resume() async {
-    if (!kIsWeb) return;
-    
-    // Only resume if we were actually playing before
-    if (!_isPlaying && _audioElement?.paused == true) {
-      await _audioElement?.play();
-      _isPlaying = true;
-      print('[WebBgmService] BGM resumed');
+    try {
+      // Only resume if we were playing before
+      if (!_isPlaying && _player?.playing != true) {
+        await _player?.play();
+        _isPlaying = true;
+        print('[WebBgmService] BGM resumed');
+      }
+    } catch (e) {
+      print('[WebBgmService] Error resuming: $e');
     }
   }
 
   /// 볼륨 설정 (0.0 ~ 1.0)
   void setVolume(double volume) {
-    if (_audioElement != null) {
-      _audioElement!.volume = volume.clamp(0.0, 1.0);
+    try {
+      _player?.setVolume(volume.clamp(0.0, 1.0));
+    } catch (e) {
+      print('[WebBgmService] Error setting volume: $e');
     }
   }
 
   /// 리소스 해제
   void dispose() {
-    _audioElement?.pause();
-    _audioElement?.remove();
-    _audioElement = null;
-    _isInitialized = false;
+    try {
+      _player?.dispose();
+      _player = null;
+      _isInitialized = false;
+      _isPlaying = false;
+    } catch (e) {
+      print('[WebBgmService] Error disposing: $e');
+    }
   }
 }
