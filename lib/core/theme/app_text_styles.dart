@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class AppTextStyles {
-  // 기본 스타일 정의 (Noto Sans + Fallback)
-  static TextStyle get baseStyle => GoogleFonts.notoSansKr(
+  // 기본 스타일 정의 (Local Pretendard font)
+  static TextStyle get baseStyle => const TextStyle(
+    fontFamily: 'Pretendard',
     color: AppColors.textDarkNavy,
-  ).copyWith(
-    fontFamilyFallback: [
-      GoogleFonts.notoSans().fontFamily!,
-    ],
   );
 
   static TextStyle get logo => baseStyle.copyWith(

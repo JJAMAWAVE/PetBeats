@@ -12,6 +12,8 @@ import 'package:get_storage/get_storage.dart';
 import '../../../data/services/audio_analyzer_service.dart';
 import '../models/visualizer_theme.dart';
 import '../widgets/first_run_guide_dialog.dart';
+import '../widgets/haptic_safety_guide_dialog.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// Repeat Mode: Off → Single (1곡 반복) → All (전체 반복)
 enum RepeatMode { off, single, all }
@@ -41,6 +43,7 @@ class PlayerController extends GetxController {
   void onInit() {
     super.onInit();
     _showHapticTipIfFirstTime();
+    _showHapticSafetyGuideIfFirstTime();  // ✨ Auto-popup safety guide
     
     // Initialize repeat mode to All (default)
     // Use LoopMode.off so track completion triggers skipNext()
@@ -62,6 +65,21 @@ class PlayerController extends GetxController {
         currentDuration.value = duration;
       }
     });
+    
+    // ✨ WEB FIX: Listen to track changes and set expected duration immediately
+    ever(homeController.currentTrack, (track) {
+      if (track != null) {
+        _trySetExpectedDurationFromTrack(track, source: 'ever(currentTrack)');
+      }
+    });
+    
+    // ✨ WEB FIX (Critical): ever() is NOT called for the initial value.
+    // If a track is already selected/playing before PlayerController is created,
+    // we must apply the expected duration once here.
+    final initialTrack = homeController.currentTrack.value;
+    if (initialTrack != null) {
+      _trySetExpectedDurationFromTrack(initialTrack, source: 'onInit(initialTrack)');
+    }
     
     // Listen for track completion (All loop mode)
     _audioService.playerStateStream.listen((state) {
@@ -88,6 +106,73 @@ class PlayerController extends GetxController {
     });
   }
   
+  // -------------------------------------------------------------------
+  // Expected duration helper (Web-first)
+  //
+  // Why this exists:
+  // - On Web, just_audio's durationStream may be delayed or null for some sources.
+  // - GetX ever() DOES NOT fire for the current(initial) Rx value; it only fires on changes.
+  //   So if PlayerController is created after HomeController.currentTrack is already set,
+  //   we must set the expected duration once in onInit.
+  // -------------------------------------------------------------------
+  void _trySetExpectedDurationFromTrack(dynamic track, {required String source}) {
+    try {
+      final raw = (track.duration ?? '').toString().trim();
+      if (raw.isEmpty) {
+        print('⚠️ [PlayerController] [$source] Track.duration is empty for ${track.title}');
+        return;
+      }
+
+      final parts = raw.split(':').map((p) => p.trim()).toList();
+
+      int hours = 0;
+      int minutes = 0;
+      int seconds = 0;
+
+      if (parts.length == 2) {
+        // mm:ss
+        minutes = int.tryParse(parts[0]) ?? 0;
+        seconds = int.tryParse(parts[1]) ?? 0;
+      } else if (parts.length == 3) {
+        // hh:mm:ss
+        hours = int.tryParse(parts[0]) ?? 0;
+        minutes = int.tryParse(parts[1]) ?? 0;
+        seconds = int.tryParse(parts[2]) ?? 0;
+      } else {
+        print('⚠️ [PlayerController] [$source] Unsupported duration format: "$raw" for ${track.title}');
+        return;
+      }
+
+      // Basic sanity: avoid negative values
+      if (hours < 0 || minutes < 0 || seconds < 0) {
+        print('⚠️ [PlayerController] [$source] Negative duration parsed from "$raw" for ${track.title}');
+        return;
+      }
+
+      final expected = Duration(hours: hours, minutes: minutes, seconds: seconds);
+
+      // If it's zero, still set it (some tracks might be very short), but log for visibility.
+      if (expected == Duration.zero) {
+        print('⚠️ [PlayerController] [$source] Parsed expected duration is 0:00 from "$raw" for ${track.title}');
+      }
+
+      final resetPosition = source.startsWith('ever(');
+      setExpectedDuration(expected, resetPosition: resetPosition);
+      print('🕒 [PlayerController] [$source] Set expected duration: $expected for ${track.title}');
+    } catch (e) {
+      print('⚠️ [PlayerController] [$source] Failed to parse track duration: $e');
+    }
+  }
+
+  // ✨ WEB FIX: Set expected duration immediately when track changes
+  void setExpectedDuration(Duration duration, {bool resetPosition = false}) {
+    print('🕒 [PlayerController] Setting expected duration: $duration');
+    currentDuration.value = duration;
+    if (resetPosition) {
+      currentPosition.value = Duration.zero;  // Reset position when a new track is selected
+    }
+  }
+  
   @override
   void onClose() {
     _audioAnalyzer.stopAnalysis();
@@ -96,15 +181,37 @@ class PlayerController extends GetxController {
   
   // 첫 재생 시 햅틱 사용 안내 (교감 가이드)
   void _showHapticTipIfFirstTime() {
-    final hasSeenGuide = _storage.read('has_seen_haptic_guide') ?? false;
+    final hasSeenTip = _storage.read('has_seen_haptic_tip') ?? false;
+    
+    if (!hasSeenTip && isPlaying) {
+      Future.delayed(const Duration(seconds: 2), () {
+        Get.snackbar(
+          '💡 Haptic Therapy 사용 팁',
+          '아이의 등이나 배에 폰을 가볍게 올려주세요.\n'
+          '심장 박동 진동이 깊은 안정을 선물합니다.',
+          snackPosition: SnackPosition.BOTTOM,
+          duration: const Duration(seconds: 5),
+          backgroundColor: Colors.black87,
+          colorText: Colors.white,
+          icon: const Icon(Icons.favorite, color: Colors.pinkAccent),
+          margin: const EdgeInsets.all(16),
+        );
+        _storage.write('has_seen_haptic_tip', true);
+      });
+    }
+  }
+
+  /// Show haptic safety guide on first playback
+  void _showHapticSafetyGuideIfFirstTime() {
+    final hasSeenGuide = _storage.read('has_seen_haptic_safety_guide') ?? false;
     
     if (!hasSeenGuide && isPlaying) {
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(const Duration(seconds: 1), () {
         Get.dialog(
-          const FirstRunGuideDialog(),
+          const HapticSafetyGuideDialog(),
           barrierDismissible: false,
         );
-        _storage.write('has_seen_haptic_guide', true);
+        _storage.write('has_seen_haptic_safety_guide', true);
       });
     }
   }
@@ -185,13 +292,32 @@ class PlayerController extends GetxController {
     if (intensity == HapticIntensity.off) {
       _hapticService.stop();
     } else {
-      // 처음 햅틱 켤 때 가이드 표시
+      // 처음 햅틱 켜 때 가이드 표시
       if (previousIntensity == HapticIntensity.off) {
         _showHapticGuide();
       }
       
-      // 현재 재생 중이면 햅틱 모드 활성화
-      if (isPlaying) {
+      // ✨ 사운드 햅틱 모드일 때, 음악이 꺼져있으면 경고 표시
+      // (심장박동/골골송/진정모드는 음악 불필요하므로 제외)
+      if (hapticMode.value == HapticMode.soundAdaptive) {
+        if (!isPlaying) {
+          // 음악 재생 중이 아니면 토스트 표시
+          Get.snackbar(
+            '음악과 함께 사용하세요',
+            '사운드 햅틱은 음악 재생 중에 작동합니다',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.orangeAccent.withOpacity(0.9),
+            colorText: Colors.white,
+            duration: const Duration(seconds: 2),
+            margin: EdgeInsets.only(bottom: 100.h, left: 16.w, right: 16.w),
+            borderRadius: 12.r,
+          );
+        } else {
+          // 음악 재생 중이면 햅틱 모드 활성화
+          _activateHapticMode();
+        }
+      } else {
+        // 다른 모드(심장박동/골골송 등)는 음악 없이도 동작
         _activateHapticMode();
       }
     }

@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 class AudioService extends GetxService {
   final AudioPlayer _player = AudioPlayer();
@@ -38,38 +37,25 @@ class AudioService extends GetxService {
         print("🎵 [AudioService] Loading new audio source");
         _savedPosition = Duration.zero;  // Reset saved position for new track
         
-        // For web, use URI-based loading; for native, use setAsset
+        // Use AudioSource.asset() for ALL platforms (web + native)
         if (url.startsWith('assets/')) {
-          if (kIsWeb) {
-            // Web: Convert asset path to web URL
-            final webUrl = '/$url'; // /assets/sound/1_1.mp3
-            print("🎵 [AudioService] Web URL: $webUrl");
-            try {
-              await _player.setAudioSource(AudioSource.uri(Uri.parse(webUrl)));
-              print("🎵 [AudioService] setAudioSource successful");
-            } catch (e) {
-              print("❌ [AudioService] setAudioSource failed: $e");
-              print("❌ [AudioService] Error type: ${e.runtimeType}");
-              rethrow;
-            }
-          } else {
-            // Android/iOS: Use setAsset for native platforms
-            print("🎵 [AudioService] Native asset: $url");
-            await _player.setAsset(url);
+          print("🎵 [AudioService] Loading asset: $url");
+          try {
+            await _player.setAudioSource(AudioSource.asset(url));
+            print("🎵 [AudioService] Asset loaded successfully");
+          } catch (e) {
+            print("❌ [AudioService] Asset loading failed: $e");
+            rethrow;
           }
         } else if (url.startsWith('http://') || url.startsWith('https://')) {
           // External URLs
+          print("🎵 [AudioService] Loading external URL: $url");
           await _player.setAudioSource(AudioSource.uri(Uri.parse(url)));
         } else {
           // Fallback: assume asset without prefix
-          if (kIsWeb) {
-            final webUrl = '/assets/$url';
-            print("🎵 [AudioService] Web URL (fallback): $webUrl");
-            await _player.setAudioSource(AudioSource.uri(Uri.parse(webUrl)));
-          } else {
-            print("🎵 [AudioService] Native asset (fallback): assets/$url");
-            await _player.setAsset('assets/$url');
-          }
+          final assetPath = 'assets/$url';
+          print("🎵 [AudioService] Loading asset (fallback): $assetPath");
+          await _player.setAudioSource(AudioSource.asset(assetPath));
         }
         
         _currentLoadedUrl = url;

@@ -77,16 +77,16 @@ class _MidiFlashOverlayState extends State<MidiFlashOverlay>
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    Colors.white.withOpacity(opacity * 0.8), // 중앙이 가장 밝음
-                    Colors.amber.withOpacity(opacity * 0.5),
-                    Colors.orange.withOpacity(opacity * 0.2),
+                    Colors.white.withOpacity(opacity * 0.2), // 중앙이 가장 밝음
+                    Colors.cyan.withOpacity(opacity * 0.15),
+                    Colors.teal.withOpacity(opacity * 0.1),
                     Colors.transparent,
                   ],
                   stops: const [0.0, 0.3, 0.6, 1.0],
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.amber.withOpacity(opacity * 0.6),
+                    color: Colors.cyan.withOpacity(opacity * 0.15),
                     blurRadius: 80 + (_flashIntensity * 40),
                     spreadRadius: 40 + (_flashIntensity * 20),
                   ),

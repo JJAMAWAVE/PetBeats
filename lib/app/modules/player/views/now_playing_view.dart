@@ -12,6 +12,7 @@ import '../widgets/therapy_control_panel.dart';
 import '../widgets/rolling_tip_widget.dart';
 import '../widgets/sleep_timer_bottom_sheet.dart';
 import '../widgets/mix_panel_bottom_sheet.dart';
+import '../widgets/haptic_safety_guide_dialog.dart';
 
 class NowPlayingView extends GetView<PlayerController> {
   const NowPlayingView({super.key});
@@ -56,8 +57,19 @@ class NowPlayingView extends GetView<PlayerController> {
               )),
             ),
           ),
-          // 시계 아이콘 삭제됨 - 수면 타이머는 햅틱 패널에서 접근
-          SizedBox(width: 40.w),  // 균형을 위한 공간
+          // Info button for Haptic Safety Guide
+          IconButton(
+            icon: Icon(
+              Icons.info_outline,
+              color: Colors.white.withOpacity(0.8),
+              size: 24.w,
+            ),
+            onPressed: () {
+              Get.dialog(
+                const HapticSafetyGuideDialog(),
+              );
+            },
+          ),
         ],
       ),
     );

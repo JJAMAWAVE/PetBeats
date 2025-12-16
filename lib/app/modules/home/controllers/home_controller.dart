@@ -9,11 +9,14 @@ import '../../../data/services/haptic_pattern_player.dart';
 import '../../../data/services/review_service.dart';
 import '../../../../core/services/bgm_service.dart';
 import '../../../../core/services/web_bgm_service.dart';
+import '../../../../core/theme/species_theme.dart';
 import '../../onboarding/controllers/onboarding_controller.dart';
 import '../../premium/controllers/subscription_controller.dart';
+import '../../player/controllers/player_controller.dart';  // ✨ Duration fix
 import '../../../data/models/mode_model.dart';
 import '../../../data/models/track_model.dart';
 import '../../../data/data_source/track_data.dart';
+import '../../../data/services/sound_mixer_service.dart';  // ✨ Weather sounds
 
 class HomeController extends GetxController with WidgetsBindingObserver {
   final AudioService _audioService = Get.put(AudioService());
@@ -26,6 +29,9 @@ class HomeController extends GetxController with WidgetsBindingObserver {
 
   // 현재 선택된 종 (0: 강아지, 1: 고양이, 2: 보호자)
   final selectedSpeciesIndex = 0.obs;
+  
+  // 현재 종 테마
+  final currentSpeciesTheme = SpeciesTheme.dog.obs;
 
   // 현재 재생 중인지 여부
   final isPlaying = false.obs;
@@ -126,6 +132,7 @@ class HomeController extends GetxController with WidgetsBindingObserver {
 
   void _initModes() {
     modes.value = [
+      // Dog Modes
       Mode(
         id: 'sleep',
         title: '수면 유도',
@@ -170,6 +177,53 @@ class HomeController extends GetxController with WidgetsBindingObserver {
         color: const Color(0xFF8D6E63), // Brown
         scientificFacts: ['낮은 주파수는 관절 통증 완화에 도움을 줄 수 있습니다.', '안정적인 리듬은 인지 기능을 돕습니다.'],
         tracks: TrackData.seniorTracks,
+      ),
+      
+      // Cat Modes
+      Mode(
+        id: 'cat_sleep',
+        title: '수면 유도',
+        description: '고양이 수면을 위한 사운드',
+        iconPath: 'assets/icons/icon_mode_sleep.png',
+        color: const Color(0xFF5C6BC0), // Indigo
+        scientificFacts: ['느린 템포는 심박수를 낮춥니다.', '반복적인 리듬은 수면을 유도합니다.'],
+        tracks: TrackData.catSleepTracks,
+      ),
+      Mode(
+        id: 'cat_separation',
+        title: '분리불안',
+        description: '고양이 불안감 해소',
+        iconPath: 'assets/icons/icon_mode_separation.png',
+        color: const Color(0xFF26A69A), // Teal
+        scientificFacts: ['백색 소음은 외부 자극을 차단합니다.', '부드러운 멜로디는 정서적 안정을 돕습니다.'],
+        tracks: TrackData.catSeparationTracks,
+      ),
+      Mode(
+        id: 'cat_noise',
+        title: '소음 민감',
+        description: '고양이 외부 소음 차단',
+        iconPath: 'assets/icons/icon_mode_noise.png',
+        color: const Color(0xFF7E57C2), // Deep Purple
+        scientificFacts: ['일정한 소음은 갑작스러운 소리를 덮어줍니다.', '청각적 과부하를 줄여줍니다.'],
+        tracks: TrackData.catNoiseTracks,
+      ),
+      Mode(
+        id: 'cat_energy',
+        title: '에너지 조절',
+        description: '고양이 활력 증진',
+        iconPath: 'assets/icons/icon_mode_energy.png',
+        color: const Color(0xFFFFA726), // Orange
+        scientificFacts: ['빠른 템포는 활동성을 높입니다.', '다양한 주파수는 호기심을 자극합니다.'],
+        tracks: TrackData.catEnergyTracks,
+      ),
+      Mode(
+        id: 'cat_senior',
+        title: '시니어 펫 케어',
+        description: '노령 고양이 케어',
+        iconPath: 'assets/icons/icon_mode_senior.png',
+        color: const Color(0xFF8D6E63), // Brown
+        scientificFacts: ['낮은 주파수는 관절 통증 완화에 도움을 줄 수 있습니다.', '안정적인 리듬은 인지 기능을 돕습니다.'],
+        tracks: TrackData.catSeniorTracks,
       ),
     ];
   }
@@ -255,6 +309,14 @@ class HomeController extends GetxController with WidgetsBindingObserver {
   void changeSpecies(int index) {
     selectedSpeciesIndex.value = index;
     _storage.write('selectedSpeciesIndex', index);
+    
+    // 테마 변경 (애니메이션 적용)
+    if (index == 0) {
+      currentSpeciesTheme.value = SpeciesTheme.dog;
+    } else if (index == 1) {
+      currentSpeciesTheme.value = SpeciesTheme.cat;
+    }
+    
     _hapticService.selectionClick();
   }
 
@@ -269,6 +331,12 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     // currentTrack.value = null; // REMOVED
     _audioService.pause();
     _hapticService.stop();
+    
+    // ✨ Also pause weather sounds
+    if (Get.isRegistered<SoundMixerService>()) {
+      Get.find<SoundMixerService>().pauseAll();
+    }
+    
     _stopPlayTimeTracking(); // 재생 시간 추적 중지
   }
 
@@ -355,6 +423,12 @@ class HomeController extends GetxController with WidgetsBindingObserver {
       _audioService.pause();
       // _hapticService.stop(); // Old way
       _hapticService.pause(); // New way: pause and remember state
+      
+      // ✨ Also pause weather sounds
+      if (Get.isRegistered<SoundMixerService>()) {
+        Get.find<SoundMixerService>().pauseAll();
+      }
+      
       _stopPlayTimeTracking(); // 재생 시간 추적 중지
     } else {
       // Resume
@@ -365,6 +439,11 @@ class HomeController extends GetxController with WidgetsBindingObserver {
         
         // _hapticService.startHeartbeat(bpm); // Old way
         _hapticService.resume(); // New way: resume previous state
+        
+        // ✨ Also resume weather sounds (if weather mix was active)
+        if (Get.isRegistered<SoundMixerService>()) {
+          Get.find<SoundMixerService>().resumeAll();
+        }
         
         _startPlayTimeTracking(); // 재생 시간 추적 재개
       }
@@ -454,6 +533,9 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     // Update current track
     currentTrack.value = track;
     isPlaying.value = true;  // Set playing state
+    
+    // Duration is now handled by PlayerController via ever() and onInit()
+    // No need to manually set it here - PlayerController will react to currentTrack change
     
     // Start new track
     await _audioService.play(track.audioUrl);
