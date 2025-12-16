@@ -114,19 +114,24 @@ class MiniPlayer extends GetView<HomeController> {
                       ),
                     ),
                     
-                    // Visualizer
-                    SizedBox(
-                      width: 40,
-                      height: 24,
+                    // Visualizer - 더 크고 잘 보이게
+                    Container(
+                      width: 48,
+                      height: 32,
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryBlue.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                       child: ReactiveVisualizer(
                         isPlaying: isPlaying,
                         theme: VisualizerTheme(
-                          colorPalette: [AppColors.primaryBlue, AppColors.primaryBlue.withOpacity(0.5)],
+                          colorPalette: [AppColors.primaryBlue, AppColors.primaryBlue.withOpacity(0.6)],
                           blurIntensity: 2,
                           rippleSpeed: 1.0,
                           particleType: ParticleEffect.none,
                         ),
-                        barCount: 4,
+                        barCount: 5,
                       ),
                     ),
                     
