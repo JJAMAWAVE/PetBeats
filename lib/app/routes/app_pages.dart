@@ -15,6 +15,9 @@ import '../modules/premium/views/subscription_view.dart';
 import '../modules/home/views/weather_special_view.dart';
 import '../modules/home/views/rhythm_special_view.dart';
 import '../modules/home/views/sitter_special_view.dart';
+import '../modules/sitter/views/sitter_setup_view.dart';
+import '../modules/sitter/views/sitter_monitoring_view.dart';
+import '../modules/sitter/views/sitter_report_view.dart';
 import '../modules/home/views/app_info_view.dart';
 import '../modules/invite/bindings/invite_binding.dart';
 import '../modules/invite/views/invite_friends_view.dart';
@@ -89,6 +92,18 @@ class AppPages {
     GetPage(
       name: Routes.SITTER_SPECIAL,
       page: () => const SitterSpecialView(),
+    ),
+    GetPage(
+      name: Routes.SITTER_SETUP,
+      page: () => const SitterSetupView(),
+    ),
+    GetPage(
+      name: Routes.SITTER_MONITORING,
+      page: () => const SitterMonitoringView(),
+    ),
+    GetPage(
+      name: Routes.SITTER_REPORT,
+      page: () => const SitterReportView(),
     ),
     GetPage(
       name: Routes.INVITE_FRIENDS,

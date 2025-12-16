@@ -12,6 +12,9 @@ abstract class Routes {
   static const WEATHER_SPECIAL = '/weather-special';
   static const RHYTHM_SPECIAL = '/rhythm-special';
   static const SITTER_SPECIAL = '/sitter-special';
+  static const SITTER_SETUP = '/sitter-setup';
+  static const SITTER_MONITORING = '/sitter-monitoring';
+  static const SITTER_REPORT = '/sitter-report';
   static const INVITE_FRIENDS = '/invite_friends';
   static const REVIEW = '/review';
 }

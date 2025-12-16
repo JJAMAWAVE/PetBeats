@@ -25,10 +25,18 @@ import 'app/data/services/timer_service.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:petbeats/core/theme/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+// Firebase
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  
+  // Firebase 초기화
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   
   // ⚠️ 테스트용: 항상 신규 유저로 시작 (온보딩 표시)
   // TODO: 배포 전 이 줄 제거
