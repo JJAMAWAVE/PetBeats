@@ -34,7 +34,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   child: Text(
-                    '구독 복원',
+                    'premium_restore'.tr,
                     style: TextStyle(
                       color: AppColors.textGrey,
                       fontSize: 13.sp,
@@ -74,7 +74,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
                     
                     // Value Proposition
                     Text(
-                      '반려동물에게\n완벽한 평온을 선물하세요',
+                      'premium_title'.tr,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.notoSans(
                         fontSize: 24.sp,
@@ -89,20 +89,20 @@ class SubscriptionView extends GetView<SubscriptionController> {
                     // Benefits
                     _buildBenefitRow(
                       Icons.music_note,
-                      '90개',
-                      ' 전용 테라피 사운드 무제한',
+                      '90+',
+                      'premium_benefit_1'.tr,
                     ),
                     SizedBox(height: 16.h),
                     _buildBenefitRow(
                       Icons.psychology,
-                      '스마트 싱크',
-                      ' (날씨/시간/돌봄) 잠금 해제',
+                      'premium_benefit_sync'.tr,
+                      'premium_benefit_2'.tr,
                     ),
                     SizedBox(height: 16.h),
                     _buildBenefitRow(
                       Icons.vibration,
                       'Haptic',
-                      ' (진동 테라피) 무제한 사용',
+                      'premium_benefit_3'.tr,
                     ),
                     
                     SizedBox(height: 40.h),
@@ -112,39 +112,39 @@ class SubscriptionView extends GetView<SubscriptionController> {
                       children: [
                         _ShineEffect(
                           child: _buildPlanCard(
-                            title: '1년 (Yearly)',
+                            title: 'premium_plan_yearly'.tr,
                             price: '₩33,000',
-                            priceDetail: '월 2,750원',
-                            discount: '30% 할인',
+                            priceDetail: 'premium_price_yearly'.tr,
+                            discount: 'premium_discount_yearly'.tr,
                             isBest: true,
-                            socialProof: '⭐ 92%의 보호자가 선택한 플랜',
+                            socialProof: 'premium_social_proof'.tr,
                             isSelected: controller.selectedPlan.value == SubscriptionPlan.yearly,
                             onTap: () => controller.selectPlan(SubscriptionPlan.yearly),
                           ),
                         ),
                         SizedBox(height: 12.h),
                         _buildPlanCard(
-                          title: '6개월 (6 Months)',
+                          title: 'premium_plan_6months'.tr,
                           price: '₩19,900',
-                          priceDetail: '월 3,316원',
-                          discount: '15% 할인',
+                          priceDetail: 'premium_price_6months'.tr,
+                          discount: 'premium_discount_6months'.tr,
                           isSelected: controller.selectedPlan.value == SubscriptionPlan.halfYearly,
                           onTap: () => controller.selectPlan(SubscriptionPlan.halfYearly),
                         ),
                         SizedBox(height: 12.h),
                         _buildPlanCard(
-                          title: '3개월 (3 Months)',
+                          title: 'premium_plan_3months'.tr,
                           price: '₩10,900',
-                          priceDetail: '월 3,633원',
-                          discount: '7% 할인',
+                          priceDetail: 'premium_price_3months'.tr,
+                          discount: 'premium_discount_3months'.tr,
                           isSelected: controller.selectedPlan.value == SubscriptionPlan.quarterly,
                           onTap: () => controller.selectPlan(SubscriptionPlan.quarterly),
                         ),
                         SizedBox(height: 12.h),
                         _buildPlanCard(
-                          title: '1개월 (Monthly)',
+                          title: 'premium_plan_monthly'.tr,
                           price: '₩3,900',
-                          priceDetail: '월 3,900원',
+                          priceDetail: 'premium_price_monthly'.tr,
                           discount: null,
                           isSelected: controller.selectedPlan.value == SubscriptionPlan.monthly,
                           onTap: () => controller.selectPlan(SubscriptionPlan.monthly),
@@ -177,7 +177,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
                         child: Column(
                           children: [
                             Text(
-                              '💰 아직 결제가 망설여지시나요?',
+                              'premium_referral_title'.tr,
                               style: TextStyle(
                                 color: AppColors.textGrey,
                                 fontSize: 13.sp,
@@ -191,7 +191,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
                                 Icon(Icons.card_giftcard, size: 18.w, color: AppColors.primaryBlue),
                                 SizedBox(width: 6.w),
                                 Text(
-                                  '친구 초대하고 무료 이용권 받기',
+                                  'premium_referral_action'.tr,
                                   style: TextStyle(
                                     color: AppColors.primaryBlue,
                                     fontSize: 15.sp,
@@ -236,7 +236,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
                                 ),
                               )
                             : Text(
-                                '7일 무료로 시작하기',
+                                'premium_start_trial'.tr,
                                 style: TextStyle(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.bold,
@@ -249,7 +249,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
                     
                     // Micro-copy
                     Text(
-                      '7일 동안 요금이 청구되지 않습니다.\n언제든 해지 가능합니다.',
+                      'premium_trial_desc'.tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 13.sp,
@@ -424,7 +424,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
                           ),
                           SizedBox(width: 4.w),
                           Text(
-                            '/ 월',
+                            '/ ${'month'.tr}',
                             style: TextStyle(
                               fontSize: 12.sp,
                               color: isBest ? Colors.white.withOpacity(0.9) : AppColors.textGrey,
@@ -434,7 +434,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
                       ),
                       SizedBox(height: 2.h),
                       Text(
-                        '총 $price',
+                        '${'total'.tr} $price',
                         style: TextStyle(
                           fontSize: 12.sp,
                           color: isBest ? Colors.white.withOpacity(0.8) : AppColors.textGrey,

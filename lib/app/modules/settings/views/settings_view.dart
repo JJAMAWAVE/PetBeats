@@ -25,7 +25,7 @@ class SettingsView extends GetView<SettingsController> {
           onPressed: () => Get.back(),
         ),
         title: Text(
-          '설정 및 데이터',
+          'settings_title'.tr,
           style: AppTextStyles.titleLarge.copyWith(fontSize: 18.sp),
         ),
         centerTitle: true,
@@ -36,34 +36,34 @@ class SettingsView extends GetView<SettingsController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // 반려동물 프로필 섹션
-            _buildSectionTitle('🐾 반려동물 프로필'),
+            _buildSectionTitle('settings_profile'.tr),
             SizedBox(height: 12.h),
             _buildPetProfileCard(),
             SizedBox(height: 32.h),
             
             // 계정 섹션
-            _buildSectionTitle('계정'),
+            _buildSectionTitle('settings_account'.tr),
             SizedBox(height: 12.h),
             _buildAccountCard(),
             SizedBox(height: 32.h),
             
             // 볼륨 설정 섹션
-            _buildSectionTitle('🔊 볼륨 설정'),
+            _buildSectionTitle('settings_volume'.tr),
             SizedBox(height: 12.h),
             _buildVolumeControls(),
             SizedBox(height: 32.h),
             
             // 언어 설정 섹션
-            _buildSectionTitle('🌐 언어'),
+            _buildSectionTitle('settings_language'.tr),
             SizedBox(height: 12.h),
             _buildLanguageSelector(),
             SizedBox(height: 32.h),
             
             // 데이터 접근 권한
-            _buildSectionTitle('데이터 접근 권한'),
+            _buildSectionTitle('settings_data_permission'.tr),
             SizedBox(height: 8.h),
             Text(
-              'PetBeats는 다음 데이터를 사용하여 실시간으로 사운드를 최적화합니다.',
+              'settings_data_desc'.tr,
               style: AppTextStyles.bodyMedium.copyWith(
                 color: AppColors.textGrey,
                 fontSize: 12.sp,
@@ -72,16 +72,16 @@ class SettingsView extends GetView<SettingsController> {
             SizedBox(height: 16.h),
             Obx(() => _buildPermissionTile(
               icon: Icons.location_on_outlined,
-              title: '위치 정보',
-              subtitle: '날씨 및 일조량 데이터 수집',
+              title: 'settings_location'.tr,
+              subtitle: 'settings_location_desc'.tr,
               value: controller.isLocationEnabled.value,
               onChanged: controller.toggleLocation,
             )),
             SizedBox(height: 12.h),
             Obx(() => _buildPermissionTile(
               icon: Icons.notifications_none_outlined,
-              title: '알림',
-              subtitle: '주간 리포트 및 추천 알림',
+              title: 'settings_notification'.tr,
+              subtitle: 'settings_notification_desc'.tr,
               value: controller.isNotificationEnabled.value,
               onChanged: controller.toggleNotification,
             )),
@@ -154,7 +154,7 @@ class SettingsView extends GetView<SettingsController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      hasProfile ? profile.name! : '프로필 등록하기',
+                      hasProfile ? profile.name! : 'settings_register_profile'.tr,
                       style: AppTextStyles.titleLarge.copyWith(
                         fontSize: 16.sp,
                         color: AppColors.textDarkNavy,
@@ -164,7 +164,7 @@ class SettingsView extends GetView<SettingsController> {
                     Text(
                       hasProfile 
                           ? '${profile.speciesKorean} • ${profile.age}살${profile.breed != null ? ' • ${profile.breed}' : ''}'
-                          : '탭하여 반려동물 정보를 입력하세요',
+                          : 'settings_tap_to_register'.tr,
                       style: AppTextStyles.bodyMedium.copyWith(
                         color: AppColors.textGrey,
                         fontSize: 12.sp,
@@ -250,12 +250,12 @@ class SettingsView extends GetView<SettingsController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      isLoggedIn ? (user.displayName ?? 'PetBeats 회원') : '로그인 필요',
+                      isLoggedIn ? (user.displayName ?? 'settings_member'.tr) : 'settings_login_needed'.tr,
                       style: AppTextStyles.titleLarge.copyWith(fontSize: 16.sp),
                     ),
                     SizedBox(height: 4.h),
                     Text(
-                      isLoggedIn ? (user.email ?? '로그인됨') : '탭하여 구글 계정으로 로그인',
+                      isLoggedIn ? (user.email ?? 'settings_logged_in'.tr) : 'settings_tap_to_login'.tr,
                       style: AppTextStyles.bodyMedium.copyWith(
                         color: AppColors.textGrey,
                         fontSize: 12.sp,
@@ -290,7 +290,7 @@ class SettingsView extends GetView<SettingsController> {
           // 음악 볼륨
           _buildVolumeSlider(
             icon: Icons.music_note,
-            label: '음악 볼륨',
+            label: 'settings_music_volume'.tr,
             volume: musicVolume,
             onChanged: (value) {
               musicVolume.value = value;
@@ -303,7 +303,7 @@ class SettingsView extends GetView<SettingsController> {
           // 날씨 효과음 볼륨
           _buildVolumeSlider(
             icon: Icons.cloud,
-            label: '날씨 효과음',
+            label: 'settings_weather_volume'.tr,
             volume: weatherVolume,
             onChanged: (value) {
               weatherVolume.value = value;
@@ -449,7 +449,7 @@ class SettingsView extends GetView<SettingsController> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Text(
-                '언어 선택',
+                'settings_language_select'.tr,
                 style: AppTextStyles.titleLarge.copyWith(fontSize: 18.sp),
               ),
             ),
@@ -486,7 +486,7 @@ class SettingsView extends GetView<SettingsController> {
                       Get.back();
                       Get.snackbar(
                         '언어 변경',
-                        '${lang['name']}로 변경되었습니다',
+                        'settings_language_changed'.trParams({'lang': lang['name']!}),
                         backgroundColor: Colors.green.shade100,
                         colorText: Colors.green.shade800,
                       );
