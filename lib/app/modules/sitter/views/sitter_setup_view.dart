@@ -23,15 +23,15 @@ class _SitterSetupViewState extends State<SitterSetupView> {
   int _soundMode = 0; // 0: 기본 안정 사운드, 1: 스마트 싱크
   int _playDuration = 1; // 0: 5분, 1: 15분, 2: 30분, 3: 계속
 
-  final List<String> _sensitivityLabels = ['민감', '보통', '둔감'];
-  final List<String> _durationLabels = ['5분', '15분', '30분', '계속'];
+  final List<String> _sensitivityLabels = ['sitter_sensitivity_sensitive'.tr, 'sitter_sensitivity_normal'.tr, 'sitter_sensitivity_insensitive'.tr];
+  final List<String> _durationLabels = ['sitter_duration_5'.tr, 'sitter_duration_15'.tr, 'sitter_duration_30'.tr, 'sitter_duration_continue'.tr];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
-        title: const Text('AI 시터 설정'),
+        title: Text('sitter_setup_title'.tr),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -54,8 +54,8 @@ class _SitterSetupViewState extends State<SitterSetupView> {
                   SizedBox(height: 12.h),
                   _buildDetectionCard(
                     icon: Icons.mic,
-                    title: '소리 감지',
-                    subtitle: '짖음, 하울링 감지',
+                    title: 'sitter_sound_detect'.tr,
+                    subtitle: 'sitter_sound_detect_desc'.tr,
                     enabled: _soundDetectionEnabled,
                     sensitivity: _soundSensitivity,
                     onToggle: (val) => setState(() => _soundDetectionEnabled = val),
@@ -64,8 +64,8 @@ class _SitterSetupViewState extends State<SitterSetupView> {
                   SizedBox(height: 12.h),
                   _buildDetectionCard(
                     icon: Icons.videocam,
-                    title: '움직임 감지',
-                    subtitle: '카메라로 움직임 감지',
+                    title: 'sitter_motion_detect'.tr,
+                    subtitle: 'sitter_motion_detect_desc'.tr,
                     enabled: _motionDetectionEnabled,
                     sensitivity: _motionSensitivity,
                     onToggle: (val) => setState(() => _motionDetectionEnabled = val),
@@ -125,7 +125,7 @@ class _SitterSetupViewState extends State<SitterSetupView> {
           SizedBox(width: 12.w),
           Expanded(
             child: Text(
-              '아이의 주 활동 공간이 잘 보이도록\n기기를 거치하고 전원을 연결해주세요.',
+              'sitter_placement_guide'.tr,
               style: AppTextStyles.bodySmall.copyWith(
                 color: AppColors.textDarkNavy,
                 height: 1.4,
@@ -198,7 +198,7 @@ class _SitterSetupViewState extends State<SitterSetupView> {
             SizedBox(height: 12.h),
             Row(
               children: [
-                Text('감도: ', style: AppTextStyles.bodySmall.copyWith(color: AppColors.textGrey)),
+                Text('sitter_sensitivity'.tr, style: AppTextStyles.bodySmall.copyWith(color: AppColors.textGrey)),
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -246,19 +246,19 @@ class _SitterSetupViewState extends State<SitterSetupView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('감지 시 재생할 사운드?', style: AppTextStyles.bodyMedium.copyWith(fontWeight: FontWeight.bold)),
+          Text('sitter_sound_on_detect'.tr, style: AppTextStyles.bodyMedium.copyWith(fontWeight: FontWeight.bold)),
           SizedBox(height: 12.h),
           _buildRadioOption(
-            title: '기본 안정 사운드',
-            subtitle: '분리불안에 효과적인 사운드',
+            title: 'sitter_default_sound'.tr,
+            subtitle: 'sitter_default_sound_desc'.tr,
             value: 0,
             groupValue: _soundMode,
             onChanged: (val) => setState(() => _soundMode = val!),
           ),
           SizedBox(height: 8.h),
           _buildRadioOption(
-            title: '스마트 싱크 적용',
-            subtitle: '날씨/리듬에 맞는 사운드',
+            title: 'sitter_smart_sync'.tr,
+            subtitle: 'sitter_smart_sync_desc'.tr,
             value: 1,
             groupValue: _soundMode,
             onChanged: (val) => setState(() => _soundMode = val!),
@@ -310,7 +310,7 @@ class _SitterSetupViewState extends State<SitterSetupView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('재생 시간', style: AppTextStyles.bodyMedium.copyWith(fontWeight: FontWeight.bold)),
+          Text('sitter_play_duration'.tr, style: AppTextStyles.bodyMedium.copyWith(fontWeight: FontWeight.bold)),
           SizedBox(height: 12.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -356,7 +356,7 @@ class _SitterSetupViewState extends State<SitterSetupView> {
           SizedBox(width: 8.w),
           Expanded(
             child: Text(
-              '리포트는 30일 후 자동 삭제됩니다.',
+              'sitter_report_delete'.tr,
               style: AppTextStyles.bodySmall.copyWith(
                 color: Colors.orange.shade700,
               ),
@@ -400,7 +400,7 @@ class _SitterSetupViewState extends State<SitterSetupView> {
             Icon(Icons.play_arrow, size: 24.w),
             SizedBox(width: 8.w),
             Text(
-              '모니터링 시작하기',
+              'sitter_start_monitoring'.tr,
               style: AppTextStyles.bodyLarge.copyWith(
                 fontWeight: FontWeight.bold,
                 color: canStart ? Colors.white : Colors.grey,

@@ -72,8 +72,14 @@ const Map<String, String> enUS = {
   'rhythm_quote': 'Leave your day to Rhythm Care',
   
   // ===== Sitter Setup (sitter_setup_view.dart) =====
-  'sitter_sensitivity_labels': 'Sensitive,Normal,Insensitive',
-  'sitter_duration_labels': '5min,15min,30min,Continue',
+  'sitter_setup_title': 'AI Sitter Setup',
+  'sitter_sensitivity_sensitive': 'Sensitive',
+  'sitter_sensitivity_normal': 'Normal',
+  'sitter_sensitivity_insensitive': 'Insensitive',
+  'sitter_duration_5': '5min',
+  'sitter_duration_15': '15min',
+  'sitter_duration_30': '30min',
+  'sitter_duration_continue': 'Continue',
   'sitter_sound_detect': 'Sound Detection',
   'sitter_sound_detect_desc': 'Detects barking, howling',
   'sitter_motion_detect': 'Motion Detection',
@@ -93,9 +99,9 @@ const Map<String, String> enUS = {
   'sitter_report_title': 'Today\'s Care Report',
   'sitter_device_warning': 'Records may be lost when changing devices',
   'sitter_google_sync_desc': 'Link Google account to safely store care records even when changing devices.',
-  'sitter_sync_complete': 'Sync Complete',
+  'sitter_sync_complete_title': 'Sync Complete',
   'sitter_sync_complete_desc': 'Google account linked!',
-  'sitter_sync_failed': 'Sync Failed',
+  'sitter_sync_failed_title': 'Sync Failed',
   'sitter_sync_failed_desc': 'Failed to link Google account.',
   'sitter_google_connect': 'Link Google Account',
   'sitter_monitoring_complete': 'Monitoring Complete!',
@@ -103,6 +109,8 @@ const Map<String, String> enUS = {
   'sitter_stat_sound': 'Sound Detection',
   'sitter_stat_motion': 'Motion',
   'sitter_stat_care': 'Auto Care',
+  'sitter_timeline_chart': '📊 Timeline',
+  'sitter_event_log': '📋 Event Log',
   'sitter_detection_stats': 'Detection Stats',
   'sitter_chart_sound': 'Sound',
   'sitter_chart_motion': 'Motion',
@@ -115,6 +123,8 @@ const Map<String, String> enUS = {
   'sitter_go_home': 'Go Home',
   'sitter_peaceful_day': 'Your pet had a peaceful day! 🐶',
   'sitter_watched_well': 'Watched your pet well!',
+  
+  'sitter_monitoring_active': '🔴 AI Sitter Active...',
   
   // ===== Sitter Monitoring (sitter_monitoring_view.dart) =====
   'sitter_waiting': 'Waiting for detection',

@@ -30,7 +30,7 @@ class _SitterMonitoringViewState extends State<SitterMonitoringView> with Ticker
   // 밀어서 종료
   double _slideProgress = 0.0;
   late AnimationController _pulseController;
-  String _currentStatus = '감지 대기 중';
+  String _currentStatus = 'sitter_waiting'.tr;
   
   @override
   void initState() {
@@ -71,12 +71,12 @@ class _SitterMonitoringViewState extends State<SitterMonitoringView> with Ticker
     
     // 콜백 설정
     _soundService.onSoundDetected = (db) {
-      setState(() => _currentStatus = '소리 감지됨 (${db.toStringAsFixed(1)}dB)');
+      setState(() => _currentStatus = 'sitter_sound_detected'.trParams({'db': db.toStringAsFixed(1)}));
       _careService.triggerCare(reason: 'sound');
     };
     
     _motionService.onMotionDetected = (level) {
-      setState(() => _currentStatus = '움직임 감지됨 (${level.toStringAsFixed(1)}%)');
+      setState(() => _currentStatus = 'sitter_motion_detected'.trParams({'level': level.toStringAsFixed(1)}));
       _careService.triggerCare(reason: 'motion');
     };
   }
@@ -86,7 +86,7 @@ class _SitterMonitoringViewState extends State<SitterMonitoringView> with Ticker
       setState(() {
         _elapsedTime += const Duration(seconds: 1);
         if (_elapsedTime.inSeconds % 5 == 0) {
-          _currentStatus = '감지 대기 중';
+          _currentStatus = 'sitter_waiting'.tr;
         }
       });
     });
@@ -189,13 +189,13 @@ class _SitterMonitoringViewState extends State<SitterMonitoringView> with Ticker
                   SizedBox(height: 24.h),
                   
                   // AI 시터 작동 중 텍스트
-                  Text(
-                    '🔴 AI 시터 작동 중...',
-                    style: AppTextStyles.titleMedium.copyWith(
-                      color: Colors.white.withOpacity(0.9),
-                      fontWeight: FontWeight.bold,
+                    Text(
+                      'sitter_monitoring_active'.tr,
+                      style: AppTextStyles.titleMedium.copyWith(
+                        color: Colors.white.withOpacity(0.9),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
                   
                   SizedBox(height: 16.h),
                   
@@ -205,12 +205,12 @@ class _SitterMonitoringViewState extends State<SitterMonitoringView> with Ticker
                     children: [
                       Icon(Icons.timer, color: Colors.white38, size: 20.w),
                       SizedBox(width: 8.w),
-                      Text(
-                        '경과 시간: ${_formatDuration(_elapsedTime)}',
-                        style: AppTextStyles.bodyMedium.copyWith(
-                          color: Colors.white54,
+                        Text(
+                          'sitter_elapsed'.trParams({'time': _formatDuration(_elapsedTime)}),
+                          style: AppTextStyles.bodyMedium.copyWith(
+                            color: Colors.white54,
+                          ),
                         ),
-                      ),
                     ],
                   ),
                   
@@ -237,11 +237,11 @@ class _SitterMonitoringViewState extends State<SitterMonitoringView> with Ticker
                   Obx(() => Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      _buildStatItem('🔊', '소리', _soundService.detectionCount.value),
+                      _buildStatItem('🔊', 'sitter_stat_sound'.tr, _soundService.detectionCount.value),
                       SizedBox(width: 24.w),
-                      _buildStatItem('📹', '움직임', _motionService.detectionCount.value),
+                      _buildStatItem('📹', 'sitter_stat_motion'.tr, _motionService.detectionCount.value),
                       SizedBox(width: 24.w),
-                      _buildStatItem('🎵', '케어', _careService.careCount.value),
+                      _buildStatItem('🎵', 'sitter_stat_care'.tr, _careService.careCount.value),
                     ],
                   )),
                 ],
@@ -341,7 +341,7 @@ class _SitterMonitoringViewState extends State<SitterMonitoringView> with Ticker
             // 텍스트
             Center(
               child: Text(
-                _slideProgress > 0.8 ? '손을 떼면 종료' : '밀어서 종료하기 →',
+                _slideProgress > 0.8 ? 'sitter_release_to_end'.tr : 'sitter_slide_to_end'.tr,
                 style: AppTextStyles.bodyMedium.copyWith(
                   color: Colors.white54,
                   fontWeight: FontWeight.w500,

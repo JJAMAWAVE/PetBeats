@@ -32,7 +32,7 @@ class SitterReportView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
-        title: const Text('오늘의 돌봄 리포트'),
+        title: Text('sitter_report_title'.tr),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -60,14 +60,14 @@ class SitterReportView extends StatelessWidget {
                 SizedBox(height: 24.h),
                 
                 // 타임라인 섹션
-                _buildSectionTitle('📊 상세 타임라인'),
+                _buildSectionTitle('sitter_timeline_chart'.tr),
                 SizedBox(height: 12.h),
                 _buildTimelineChart(elapsedTime, soundCount, motionCount, careCount),
                 
                 SizedBox(height: 24.h),
                 
                 // 이벤트 로그
-                _buildSectionTitle('📋 이벤트 로그'),
+                _buildSectionTitle('sitter_event_log'.tr),
                 SizedBox(height: 12.h),
                 _buildEventLog(soundCount, motionCount, careCount),
                 
@@ -112,7 +112,7 @@ class SitterReportView extends StatelessWidget {
               SizedBox(width: 8.w),
               Expanded(
                 child: Text(
-                  '기기 변경 시 기록이 삭제될 수 있어요',
+                  'sitter_device_warning'.tr,
                   style: AppTextStyles.bodyMedium.copyWith(
                     color: Colors.amber.shade800,
                     fontWeight: FontWeight.bold,
@@ -123,7 +123,7 @@ class SitterReportView extends StatelessWidget {
           ),
           SizedBox(height: 8.h),
           Text(
-            '구글 계정을 연동하면 기기를 바꿔도 돌봄 기록을 안전하게 보관할 수 있어요.',
+            'sitter_google_sync_desc'.tr,
             style: AppTextStyles.bodySmall.copyWith(
               color: Colors.amber.shade700,
             ),
@@ -137,15 +137,15 @@ class SitterReportView extends StatelessWidget {
                   final authService = Get.find<AuthService>();
                   await authService.signInWithGoogle();
                   Get.snackbar(
-                    '연동 완료',
-                    '구글 계정이 연동되었습니다!',
+                    'sitter_sync_complete_title'.tr,
+                    'sitter_sync_complete_desc'.tr,
                     backgroundColor: Colors.green.shade100,
                     colorText: Colors.green.shade800,
                   );
                 } catch (e) {
                   Get.snackbar(
-                    '연동 실패',
-                    '구글 계정 연동에 실패했습니다.',
+                    'sitter_sync_failed_title'.tr,
+                    'sitter_sync_failed_desc'.tr,
                     backgroundColor: Colors.red.shade100,
                     colorText: Colors.red.shade800,
                   );
@@ -157,7 +157,7 @@ class SitterReportView extends StatelessWidget {
                 height: 20.w,
                 errorBuilder: (_, __, ___) => Icon(Icons.account_circle, size: 20.w),
               ),
-              label: const Text('구글 계정 연동하기'),
+              label: Text('sitter_google_connect'.tr),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: AppColors.textDarkNavy,
@@ -211,7 +211,7 @@ class SitterReportView extends StatelessWidget {
               Icon(Icons.check_circle, color: Colors.white, size: 24.w),
               SizedBox(width: 8.w),
               Text(
-                '모니터링 완료!',
+                'sitter_monitoring_complete'.tr,
                 style: AppTextStyles.titleMedium.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -221,7 +221,7 @@ class SitterReportView extends StatelessWidget {
           ),
           SizedBox(height: 8.h),
           Text(
-            '총 ${formatDuration(elapsedTime)} 동안 아이를 지켜봤어요',
+            'sitter_watched_for'.trParams({'duration': formatDuration(elapsedTime)}),
             style: AppTextStyles.bodyMedium.copyWith(
               color: Colors.white70,
             ),
@@ -230,11 +230,11 @@ class SitterReportView extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _buildStat(Icons.volume_up, '소리 감지', sound),
+              _buildStat(Icons.volume_up, 'sitter_stat_sound'.tr, sound),
               _buildDivider(),
-              _buildStat(Icons.videocam_outlined, '움직임', motion),
+              _buildStat(Icons.videocam_outlined, 'sitter_stat_motion'.tr, motion),
               _buildDivider(),
-              _buildStat(Icons.music_note, '자동 케어', care),
+              _buildStat(Icons.music_note, 'sitter_stat_care'.tr, care),
             ],
           ),
         ],
@@ -299,7 +299,7 @@ class SitterReportView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '감지 통계',
+            'sitter_detection_stats'.tr,
             style: AppTextStyles.bodySmall.copyWith(
               color: AppColors.textGrey,
             ),
@@ -310,9 +310,9 @@ class SitterReportView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                _buildChartBar('소리', sound, normalizedMax, Colors.orange),
-                _buildChartBar('움직임', motion, normalizedMax, Colors.green),
-                _buildChartBar('케어', care, normalizedMax, AppColors.primaryBlue),
+                _buildChartBar('sitter_chart_sound'.tr, sound, normalizedMax, Colors.orange),
+                _buildChartBar('sitter_chart_motion'.tr, motion, normalizedMax, Colors.green),
+                _buildChartBar('sitter_chart_care'.tr, care, normalizedMax, AppColors.primaryBlue),
               ],
             ),
           ),
@@ -372,7 +372,7 @@ class SitterReportView extends StatelessWidget {
             SizedBox(width: 12.w),
             Expanded(
               child: Text(
-                '오늘은 아무 이벤트가 없었어요.\n아이가 아주 편안했던 것 같아요! 🐾',
+                'sitter_no_events'.tr,
                 style: AppTextStyles.bodyMedium.copyWith(
                   color: Colors.green.shade700,
                 ),
@@ -392,11 +392,11 @@ class SitterReportView extends StatelessWidget {
       child: Column(
         children: [
           if (sound > 0)
-            _buildEventItem('🔊', '12:34', '소리 감지 - 짧은 짖음'),
+            _buildEventItem('🔊', '12:34', 'sitter_event_sound'.tr),
           if (motion > 0)
-            _buildEventItem('📹', '12:35', '움직임 감지 - 서성거림'),
+            _buildEventItem('📹', '12:35', 'sitter_event_motion'.tr),
           if (care > 0)
-            _buildEventItem('🎵', '12:35', '자동 케어 - 빗소리 재생됨'),
+            _buildEventItem('🎵', '12:35', 'sitter_event_care'.tr),
         ],
       ),
     );
@@ -442,16 +442,16 @@ class SitterReportView extends StatelessWidget {
     
     void shareReport() {
       final text = '''
-🐾 PetBeats AI 시터 리포트
-
-⏱️ 모니터링 시간: ${formatDuration(elapsedTime)}
-🔊 소리 감지: ${sound}회
-📹 움직임 감지: ${motion}회  
-🎵 자동 케어: ${care}회
-
-${sound == 0 && motion == 0 ? "오늘은 아이가 편안하게 지냈어요! 🐶" : "아이의 상태를 잘 지켜봤어요!"}
-
--PetBeats 앱에서 생성됨
+ 🐾 ${'sitter_report_title'.tr}
+ 
+ ⏱️ ${'sitter_elapsed'.trParams({'time': formatDuration(elapsedTime)})}
+ 🔊 ${'sitter_stat_sound'.tr}: ${sound}
+ 📹 ${'sitter_stat_motion'.tr}: ${motion}  
+ 🎵 ${'sitter_stat_care'.tr}: ${care}
+ 
+ ${sound == 0 && motion == 0 ? 'sitter_peaceful_day'.tr : 'sitter_watched_well'.tr}
+ 
+ -PetBeats
 ''';
       Share.share(text, subject: 'PetBeats AI 시터 리포트');
     }
@@ -462,7 +462,7 @@ ${sound == 0 && motion == 0 ? "오늘은 아이가 편안하게 지냈어요! �
           child: OutlinedButton.icon(
             onPressed: shareReport,
             icon: const Icon(Icons.share),
-            label: const Text('리포트 공유'),
+            label: Text('sitter_share_report'.tr),
             style: OutlinedButton.styleFrom(
               padding: EdgeInsets.symmetric(vertical: 14.h),
               side: BorderSide(color: AppColors.primaryBlue),
@@ -477,7 +477,7 @@ ${sound == 0 && motion == 0 ? "오늘은 아이가 편안하게 지냈어요! �
           child: ElevatedButton.icon(
             onPressed: () => Get.offAllNamed('/home'),
             icon: const Icon(Icons.home, color: Colors.white),
-            label: const Text('홈으로', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            label: Text('sitter_go_home'.tr, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primaryBlue,
               foregroundColor: Colors.white,

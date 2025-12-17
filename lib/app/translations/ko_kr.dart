@@ -72,8 +72,14 @@ const Map<String, String> koKR = {
   'rhythm_quote': '리듬 케어로 하루를 맡겨보세요',
   
   // ===== 시터 설정 (sitter_setup_view.dart) =====
-  'sitter_sensitivity_labels': '민감,보통,둔감',
-  'sitter_duration_labels': '5분,15분,30분,계속',
+  'sitter_setup_title': 'AI 시터 설정',
+  'sitter_sensitivity_sensitive': '민감',
+  'sitter_sensitivity_normal': '보통',
+  'sitter_sensitivity_insensitive': '둔감',
+  'sitter_duration_5': '5분',
+  'sitter_duration_15': '15분',
+  'sitter_duration_30': '30분',
+  'sitter_duration_continue': '계속',
   'sitter_sound_detect': '소리 감지',
   'sitter_sound_detect_desc': '짖음, 하울링 감지',
   'sitter_motion_detect': '움직임 감지',
@@ -93,9 +99,9 @@ const Map<String, String> koKR = {
   'sitter_report_title': '오늘의 돌봄 리포트',
   'sitter_device_warning': '기기 변경 시 기록이 삭제될 수 있어요',
   'sitter_google_sync_desc': '구글 계정을 연동하면 기기를 바꿔도 돌봄 기록을 안전하게 보관할 수 있어요.',
-  'sitter_sync_complete': '연동 완료',
+  'sitter_sync_complete_title': '연동 완료',
   'sitter_sync_complete_desc': '구글 계정이 연동되었습니다!',
-  'sitter_sync_failed': '연동 실패',
+  'sitter_sync_failed_title': '연동 실패',
   'sitter_sync_failed_desc': '구글 계정 연동에 실패했습니다.',
   'sitter_google_connect': '구글 계정 연동하기',
   'sitter_monitoring_complete': '모니터링 완료!',
@@ -103,6 +109,8 @@ const Map<String, String> koKR = {
   'sitter_stat_sound': '소리 감지',
   'sitter_stat_motion': '움직임',
   'sitter_stat_care': '자동 케어',
+  'sitter_timeline_chart': '📊 상세 타임라인',
+  'sitter_event_log': '📋 이벤트 로그',
   'sitter_detection_stats': '감지 통계',
   'sitter_chart_sound': '소리',
   'sitter_chart_motion': '움직임',
@@ -115,6 +123,8 @@ const Map<String, String> koKR = {
   'sitter_go_home': '홈으로',
   'sitter_peaceful_day': '오늘은 아이가 편안하게 지냈어요! 🐶',
   'sitter_watched_well': '아이의 상태를 잘 지켜봤어요!',
+  
+  'sitter_monitoring_active': '🔴 AI 시터 작동 중...',
   
   // ===== 시터 모니터링 (sitter_monitoring_view.dart) =====
   'sitter_waiting': '감지 대기 중',
