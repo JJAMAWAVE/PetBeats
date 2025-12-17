@@ -123,7 +123,7 @@ class SubscriptionController extends GetxController {
       } else {
         Get.snackbar(
           'error'.tr,
-          'premium_error_desc'.trParams({'message': e.message}),
+          'premium_error_desc'.trParams({'message': e.message ?? 'Unknown error'}),
           backgroundColor: Colors.red.shade100,
           colorText: Colors.red.shade900,
         );

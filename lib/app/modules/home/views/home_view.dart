@@ -11,7 +11,7 @@ import '../widgets/heartbeat_text.dart';
 import '../widgets/header_icon_button.dart';
 import '../../../../core/widgets/background_decoration.dart';
 import '../../../../app/data/services/haptic_service.dart';
-import 'settings_view.dart';
+import '../../settings/views/settings_view.dart';
 import 'mode_detail_view.dart';
 import 'health_activity_detail_view.dart';
 import 'app_info_view.dart';

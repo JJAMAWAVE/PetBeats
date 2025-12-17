@@ -444,7 +444,7 @@ class _AppInfoViewState extends State<AppInfoView> with TickerProviderStateMixin
                             ),
                             elevation: 0,
                           ),
-                          child: const Text(
+                          child: Text(
                             'app_info_continue_action'.tr,
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),

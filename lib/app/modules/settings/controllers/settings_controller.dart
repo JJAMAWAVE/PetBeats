@@ -79,7 +79,7 @@ class SettingsController extends GetxController {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('iot_scanning'.tr, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text('iot_scanning'.tr, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               const SizedBox(height: 20),
               const CircularProgressIndicator(),
               const SizedBox(height: 20),

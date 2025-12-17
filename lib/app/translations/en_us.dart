@@ -158,9 +158,7 @@ const Map<String, String> enUS = {
   'settings_language_changed': 'Changed to @lang',
 
   // ===== Player Dialog (first_run_guide_dialog.dart) =====
-  'first_run_title': 'Add Your Warmth',
   'first_run_desc': 'PetBeats\' vibrations become the most gentle healing waves when they pass through your hands.\n\nRather than placing the phone directly on the body,\nhold it in your hand and gently massage your pet.\nThe device\'s vibration becomes warm like a mother\'s heartbeat.',
-  'first_run_confirm': 'Yes, I understand',
   
   // ===== Weather Settings (weather_settings_bottom_sheet.dart) =====
   'weather_sheet_title': 'Listen to the Outside Weather?',
@@ -174,7 +172,6 @@ const Map<String, String> enUS = {
   'premium_upgrade_now': 'Upgrade Now',
   'weather_location_consent_title': 'Location Consent',
   'weather_location_consent_desc': 'We use IP-based approximate location to fetch weather info.\n\nWe only use city-level data, not precise GPS, and no personal info is saved.',
-  'cancel': 'Cancel',
   'agree': 'Agree',
   'weather_therapy_active': 'Weather Therapy Active',
   'weather_therapy_active_desc': 'Nature sounds matching the weather are added automatically',
@@ -235,11 +232,7 @@ const Map<String, String> enUS = {
   'premium_unlock_tracks': 'Unlock All Premium Tracks',
   'premium_special_care': 'Access special care sounds',
   
-  // Common
-  'month': 'Month',
-  'total': 'Total',
-  'confirm': 'OK',
-  'close': 'Close',
+  // Common (duplicates removed)
   'enabled': 'Enabled',
   'disabled': 'Disabled',
   'minute': 'min',
@@ -504,4 +497,51 @@ const Map<String, String> enUS = {
   'track_cat_energy_06_title': 'Joyful Play', 'track_cat_energy_06_desc': 'Fast-tempo Piano',
   'track_cat_energy_07_title': 'Exciting Party', 'track_cat_energy_07_desc': 'Fast-tempo Distortion Guitar',
   'track_cat_energy_08_title': 'Rhythmic Dance', 'track_cat_energy_08_desc': 'Fast-tempo Xylophone',
+
+  // ===== Additional Settings Keys =====
+  'settings_version': 'Version @version',
+  'settings_language_changed_title': 'Language Changed',
+
+  // ===== AI Recommend & Premium =====
+  'premium_subscribe_btn': '👑 Subscribe to Premium',
+  'ai_auto_playlist_desc': 'AI will automatically\ncreate custom playlists',
+  'ai_feature_1': '6 situation-based recommendations',
+  'ai_feature_2': 'AI auto playlist generation',
+  'ai_feature_3': 'Unlimited premium tracks',
+  'ai_page_desc': 'AI automatically creates\nplaylists for each situation',
+  'ai_generating_playlist': 'AI is generating\nyour custom playlist...',
+  'ai_no_playlist': 'Unable to generate playlist',
+  'ai_play_all': 'Play All',
+  'ai_play_started': '✅ Playback Started',
+  'ai_playlist_playing': '@title Playlist (@count tracks)',
+  'ai_play_error': 'Cannot start playback',
+  'ai_tracks': ' tracks',
+  'ai_hours': ' hours',
+  'ai_minutes': ' min',
+  'ai_seconds': ' sec',
+
+  // ===== AI Scenario Short Descriptions =====
+  'scenario_after_walk_short': 'Calm down after an active walk',
+  'scenario_nap_short': 'Sleep-inducing sounds for a sweet nap',
+  'scenario_hospital_short': 'Calming sounds to reduce vet stress',
+  'scenario_grooming_short': 'Healing sounds for grooming stress relief',
+  'scenario_thunder_short': 'Masking sounds to cover thunder',
+  'scenario_anxiety_short': 'Feel safe even when alone',
+
+  // ===== Rolling Tips =====
+  'tip_blanket': '🛋️ Place under a blanket or cushion.',
+  'tip_behind_back': '🤗 Gently place behind their back.',
+  'tip_hold_pet': '💕 Try holding your pet while using it.',
+  'tip_avoid_direct': '⚠️ Avoid direct contact.',
+  'tip_start_weak': '🌡️ Start with weak vibration.',
+  'tip_volume_low': '🔈 Start with low volume.',
+  'tip_slightly_quiet': '👂 "Slightly quiet" for human ears is best.',
+  'tip_find_preference': '🎵 Find your pet\'s preferred sound.',
+  'tip_white_noise': '🌊 White noise masks unfamiliar sounds.',
+  'tip_bedtime_routine': '🌙 Perfect for bedtime routine!',
+  'tip_rainy_thunder': '🌧️ Great during rain or thunder.',
+  'tip_when_outside': '🚗 Gift them calm when going out.',
+  'tip_new_environment': '🏠 Play in unfamiliar environments.',
+  'tip_same_time': '⏰ Playing at the same time daily is better.',
+  'tip_rhythm_care': '💤 Let Rhythm Care handle the day.',
 };

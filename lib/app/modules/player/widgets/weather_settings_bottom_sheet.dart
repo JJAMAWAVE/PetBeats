@@ -255,6 +255,7 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
+                  condition,
                   style: TextStyle(
                     fontSize: 12.sp,
                     color: Colors.grey[600],

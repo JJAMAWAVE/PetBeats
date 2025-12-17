@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import '../models/track_model.dart';
 
 class TrackData {

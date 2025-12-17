@@ -158,9 +158,7 @@ const Map<String, String> koKR = {
   'settings_language_changed': '@lang로 변경되었습니다',
   
   // ===== 플레이어 다이얼로그 (first_run_guide_dialog.dart) =====
-  'first_run_title': '당신의 온기를 더해주세요',
   'first_run_desc': 'PetBeats의 진동은 보호자님의 손을 거칠 때\n가장 부드러운 치유의 파동으로 변합니다.\n\n폰을 직접 몸에 대기보다,\n손에 쥐고 아이를 부드럽게 마사지해주세요.\n기계의 진동이 엄마의 심장박동처럼 따뜻해집니다.',
-  'first_run_confirm': '네, 이해했어요',
   
   // ===== 날씨 설정 (weather_settings_bottom_sheet.dart) =====
   'weather_sheet_title': '창밖 날씨에 귀 기울여볼까요?',
@@ -174,7 +172,6 @@ const Map<String, String> koKR = {
   'premium_upgrade_now': '지금 업그레이드',
   'weather_location_consent_title': '위치 정보 사용 동의',
   'weather_location_consent_desc': 'IP 기반으로 대략적인 위치를 파악하여 날씨 정보를 가져옵니다.\n\n정확한 GPS 위치가 아닌 도시 단위 정보만 사용하며, 개인정보는 저장되지 않습니다.',
-  'cancel': '취소',
   'agree': '동의',
   'weather_therapy_active': '날씨 테라피 활성화',
   'weather_therapy_active_desc': '날씨에 맞는 자연음이 자동으로 추가됩니다',
@@ -235,11 +232,7 @@ const Map<String, String> koKR = {
   'premium_unlock_tracks': '모든 프리미엄 트랙 잠금해제',
   'premium_special_care': '특별한 케어 사운드에 접근하세요',
   
-  // 공통
-  'month': '월',
-  'total': '총',
-  'confirm': '확인',
-  'close': '닫기',
+  // 공통 (중복 제거됨)
   'enabled': '허용',
   'disabled': '해제',
   'minute': '분',
@@ -514,4 +507,51 @@ const Map<String, String> koKR = {
   'track_cat_senior_06_title': '따스한 심박', 'track_cat_senior_06_desc': 'Viola의 느린 템포',
   'track_cat_senior_07_title': '고요한 쉼터', 'track_cat_senior_07_desc': 'Harp의 느린 템포',
   'track_cat_senior_08_title': '편안한 호흡', 'track_cat_senior_08_desc': 'Viola의 느린 템포',
+
+  // ===== Additional Settings Keys =====
+  'settings_version': '버전 @version',
+  'settings_language_changed_title': '언어 변경',
+
+  // ===== AI Recommend & Premium =====
+  'premium_subscribe_btn': '👑 프리미엄 구독하기',
+  'ai_auto_playlist_desc': 'AI가 맞춤 플레이리스트를\n자동으로 생성해드려요',
+  'ai_feature_1': '6가지 상황별 맞춤 추천',
+  'ai_feature_2': 'AI 자동 플레이리스트 생성',
+  'ai_feature_3': '모든 프리미엄 트랙 무제한',
+  'ai_page_desc': '상황에 맞는 플레이리스트를\nAI가 자동으로 구성해드려요',
+  'ai_generating_playlist': 'AI가 맞춤 플레이리스트를\n생성하고 있어요...',
+  'ai_no_playlist': '플레이리스트를 생성할 수 없습니다',
+  'ai_play_all': '전체 재생',
+  'ai_play_started': '✅ 재생 시작',
+  'ai_playlist_playing': '@title 플레이리스트 (@count곡)',
+  'ai_play_error': '재생을 시작할 수 없습니다',
+  'ai_tracks': '곡',
+  'ai_hours': '시간',
+  'ai_minutes': '분',
+  'ai_seconds': '초',
+  
+  // ===== AI Scenario Short Descriptions =====
+  'scenario_after_walk_short': '활발한 산책 후 차분하게 진정시켜주세요',
+  'scenario_nap_short': '달콤한 낮잠을 위한 수면 유도 사운드',
+  'scenario_hospital_short': '병원 스트레스를 줄여주는 안정 사운드',
+  'scenario_grooming_short': '미용 스트레스 해소를 위한 힐링 사운드',
+  'scenario_thunder_short': '천둥 소리를 덮어주는 마스킹 사운드',
+  'scenario_anxiety_short': '혼자 있을 때도 안심할 수 있도록',
+
+  // ===== Rolling Tips =====
+  'tip_blanket': '🛋️ 담요나 쿠션 아래 두세요.',
+  'tip_behind_back': '🤗 등 뒤에 살며시 놓아주세요.',
+  'tip_hold_pet': '💕 보호자님 품에 안고 써보세요.',
+  'tip_avoid_direct': '⚠️ 직접 접촉은 피해주세요.',
+  'tip_start_weak': '🌡️ 처음엔 약한 진동부터.',
+  'tip_volume_low': '🔈 볼륨은 작게 시작하세요.',
+  'tip_slightly_quiet': '👂 사람 귀에 "약간 작은 듯"이 좋아요.',
+  'tip_find_preference': '🎵 아이 취향의 소리를 찾아보세요.',
+  'tip_white_noise': '🌊 백색소음은 낯선 소리를 덮어줘요.',
+  'tip_bedtime_routine': '🌙 자기 전, 수면 루틴으로 딱!',
+  'tip_rainy_thunder': '🌧️ 비 오거나 천둥 칠 때 좋아요.',
+  'tip_when_outside': '🚗 외출할 때 안정을 선물하세요.',
+  'tip_new_environment': '🏠 낯선 환경에 갔을 때 틀어주세요.',
+  'tip_same_time': '⏰ 매일 같은 시간에 틀어주면 더 좋아요.',
+  'tip_rhythm_care': '💤 리듬 케어로 하루를 맡겨보세요.',
 };
