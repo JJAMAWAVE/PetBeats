@@ -46,7 +46,7 @@ class FirstRunGuideDialog extends StatelessWidget {
             
             // Title
             Text(
-              "당신의 온기를 더해주세요",
+              'first_run_title'.tr,
               style: AppTextStyles.titleLarge.copyWith(
                 color: AppColors.textDarkNavy,
                 fontWeight: FontWeight.bold,
@@ -57,7 +57,7 @@ class FirstRunGuideDialog extends StatelessWidget {
             
             // Content
             Text(
-              "PetBeats의 진동은 보호자님의 손을 거칠 때\n가장 부드러운 치유의 파동으로 변합니다.\n\n폰을 직접 몸에 대기보다,\n손에 쥐고 아이를 부드럽게 마사지해주세요.\n기계의 진동이 엄마의 심장박동처럼 따뜻해집니다.",
+              'first_run_desc'.tr,
               style: AppTextStyles.bodyMedium.copyWith(
                 color: AppColors.textGrey,
                 height: 1.6,
@@ -81,7 +81,7 @@ class FirstRunGuideDialog extends StatelessWidget {
                   elevation: 0,
                 ),
                 child: Text(
-                  "네, 이해했어요",
+                  'first_run_confirm'.tr,
                   style: AppTextStyles.bodyLarge.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,

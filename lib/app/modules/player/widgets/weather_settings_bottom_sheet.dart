@@ -50,7 +50,7 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
                   
                   // 타이틀
                   Text(
-                    '창밖 날씨에 귀 기울여볼까요?',
+                    'weather_sheet_title'.tr,
                     style: TextStyle(
                       fontSize: 22.sp,
                       fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
                   
                   // 감성 설명
                   Text(
-                    '비가 오면 토닥이는 빗소리를, 바람이 불면 포근한 자연의 소리를 자동으로 들려드려요.\n\n날씨에 꼭 맞는 소리로 아이에게 가장 편안한 순간을 선물하세요.',
+                    'weather_sheet_desc'.tr,
                     style: TextStyle(
                       fontSize: 14.sp,
                       height: 1.6,
@@ -172,15 +172,15 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _buildDiagramStep('☁️', '날씨 감지'),
+          _buildDiagramStep('☁️', 'weather_step_detect'.tr),
           SizedBox(width: 12.w),
           Icon(Icons.arrow_forward, color: Colors.grey[400], size: 20.sp),
           SizedBox(width: 12.w),
-          _buildDiagramStep('🎵', '자연음\n자동 믹싱'),
+          _buildDiagramStep('🎵', 'weather_step_mixing'.tr),
           SizedBox(width: 12.w),
           Icon(Icons.arrow_forward, color: Colors.grey[400], size: 20.sp),
           SizedBox(width: 12.w),
-          _buildDiagramStep('✨', '맞춤\n테라피'),
+          _buildDiagramStep('✨', 'weather_step_therapy'.tr),
         ],
       ),
     );
@@ -255,7 +255,6 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '현재 날씨',
                   style: TextStyle(
                     fontSize: 12.sp,
                     color: Colors.grey[600],
@@ -293,19 +292,19 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
 
   Widget _buildWeatherMappingTable() {
     final mappings = [
-      {'icon': '🌧️', 'weather': '비 (Rain)', 'sound': '💧 빗소리', 'desc': '창문을 두드리는 규칙적인 소리'},
-      {'icon': '⛈️', 'weather': '뇌우 (Thunderstorm)', 'sound': '☁️ 백색소음', 'desc': '불안감을 덮어주는 안정적인 소리'},
-      {'icon': '🌨️', 'weather': '눈 (Snow)', 'sound': '❄️ 포근한 앰비언트', 'desc': '눈 오는 날의 아늑한 분위기'},
-      {'icon': '💨', 'weather': '강풍 (Windy)', 'sound': '🌬️ 바람소리', 'desc': '부드럽게 스쳐가는 시원한 느낌'},
-      {'icon': '🌫️', 'weather': '안개 (Fog)', 'sound': '🌫️ 차분한 노이즈', 'desc': '몽환적이고 차분한 공기'},
-      {'icon': '☀️', 'weather': '맑음 (Clear)', 'sound': '(기본 음악)', 'desc': '가장 평온한 일상'},
+      {'icon': '🌧️', 'weather': 'weather_rain'.tr, 'sound': 'weather_sound_rain'.tr, 'desc': 'weather_desc_rain'.tr},
+      {'icon': '⛈️', 'weather': 'weather_thunder'.tr, 'sound': 'weather_sound_white_noise'.tr, 'desc': 'weather_desc_thunder'.tr},
+      {'icon': '🌨️', 'weather': 'weather_snow'.tr, 'sound': 'weather_sound_ambient'.tr, 'desc': 'weather_desc_snow'.tr},
+      {'icon': '💨', 'weather': 'weather_wind'.tr, 'sound': 'weather_sound_wind'.tr, 'desc': 'weather_desc_wind'.tr},
+      {'icon': '🌫️', 'weather': 'weather_fog'.tr, 'sound': 'weather_sound_noise'.tr, 'desc': 'weather_desc_fog'.tr},
+      {'icon': '☀️', 'weather': 'weather_clear'.tr, 'sound': 'weather_sound_default'.tr, 'desc': 'weather_desc_clear'.tr},
     ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '🌤️ 날씨별 자동 사운드',
+          'weather_mapping_title'.tr,
           style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.bold,
@@ -432,7 +431,7 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
                         ),
                         SizedBox(height: 16.h),
                         Text(
-                          '비가 오면 알아서\n빗소리를 틀어드려요',
+                          'weather_premium_title'.tr,
                           style: TextStyle(
                             fontSize: 18.sp,
                             fontWeight: FontWeight.bold,
@@ -441,7 +440,7 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
                         ),
                         SizedBox(height: 12.h),
                         Text(
-                          '지금 업그레이드하고\n원터치 자동화를 경험하세요',
+                          'weather_premium_desc'.tr,
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: Colors.grey[600],
@@ -462,7 +461,7 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
                             Get.toNamed('/premium');
                           },
                           child: Text(
-                            '지금 업그레이드',
+                            'premium_upgrade_now'.tr,
                             style: TextStyle(
                               fontSize: 15.sp,
                               fontWeight: FontWeight.bold,
@@ -498,7 +497,7 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
                         ),
                         SizedBox(height: 16.h),
                         Text(
-                          '위치 정보 사용 동의',
+                          'weather_location_consent_title'.tr,
                           style: TextStyle(
                             fontSize: 18.sp,
                             fontWeight: FontWeight.bold,
@@ -506,7 +505,7 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
                         ),
                         SizedBox(height: 12.h),
                         Text(
-                          'IP 기반으로 대략적인 위치를 파악하여 날씨 정보를 가져옵니다.\n\n정확한 GPS 위치가 아닌 도시 단위 정보만 사용하며, 개인정보는 저장되지 않습니다.',
+                          'weather_location_consent_desc'.tr,
                           style: TextStyle(
                             fontSize: 13.sp,
                             color: Colors.grey[700],
@@ -520,7 +519,7 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
                             Expanded(
                               child: TextButton(
                                 onPressed: () => Get.back(result: false),
-                                child: Text('취소'),
+                                child: Text('cancel'.tr),
                               ),
                             ),
                             SizedBox(width: 12.w),
@@ -534,7 +533,7 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
                                 ),
                                 onPressed: () => Get.back(result: true),
                                 child: Text(
-                                  '동의',
+                                  'agree'.tr,
                                   style: TextStyle(color: Colors.white),
                                 ),
                               ),
@@ -558,8 +557,8 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
               weatherManager.enableWeatherMix();
               playerController?.isWeatherActive.value = true;  // ✨ Null-safe
               Get.snackbar(
-                '날씨 테라피 활성화',
-                '날씨에 맞는 자연음이 자동으로 추가됩니다',
+                'weather_therapy_active'.tr,
+                'weather_therapy_active_desc'.tr,
                 snackPosition: SnackPosition.BOTTOM,
                 backgroundColor: const Color(0xFF5E60CE).withOpacity(0.9),
                 colorText: Colors.white,
@@ -580,8 +579,8 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
           },
           child: Text(
             isActive
-                ? '날씨 테라피 끄기'
-                : '🦋 날씨에 맞춰 자동 재생 켜기',
+                ? 'weather_turn_off'.tr
+                : 'weather_turn_on'.tr,
             style: TextStyle(
               fontSize: 16.sp,
               fontWeight: FontWeight.bold,
@@ -596,20 +595,20 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
   String _getWeatherKorean(String condition) {
     switch (condition) {
       case 'Clear':
-        return '맑음';
+        return 'weather_clear_short'.tr;
       case 'Clouds':
-        return '흐림';
+        return 'weather_cloud_short'.tr;
       case 'Rain':
-        return '비';
+        return 'weather_rain_short'.tr;
       case 'Drizzle':
-        return '이슬비';
+        return 'weather_drizzle_short'.tr;
       case 'Thunderstorm':
-        return '뇌우';
+        return 'weather_thunder_short'.tr;
       case 'Snow':
-        return '눈';
+        return 'weather_snow_short'.tr;
       case 'Mist':
       case 'Fog':
-        return '안개';
+        return 'weather_fog_short'.tr;
       default:
         return condition;
     }
