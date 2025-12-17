@@ -178,9 +178,15 @@ class SitterReportView extends StatelessWidget {
   Widget _buildSummaryCard(Duration elapsedTime, int sound, int motion, int care) {
     String formatDuration(Duration d) {
       if (d.inHours > 0) {
-        return '${d.inHours}시간 ${d.inMinutes.remainder(60)}분';
+        return 'time_format_hm'.trParams({
+          'hour': d.inHours.toString(),
+          'min': d.inMinutes.remainder(60).toString()
+        });
       }
-      return '${d.inMinutes}분 ${d.inSeconds.remainder(60)}초';
+      return 'time_format_ms'.trParams({
+        'min': d.inMinutes.toString(),
+        'sec': d.inSeconds.remainder(60).toString()
+      });
     }
     
     return Container(
@@ -248,7 +254,7 @@ class SitterReportView extends StatelessWidget {
         Icon(icon, color: Colors.white, size: 28.w),
         SizedBox(height: 4.h),
         Text(
-          '$count회',
+          '$count${'times'.tr}',
           style: AppTextStyles.titleMedium.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -328,7 +334,7 @@ class SitterReportView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Text(
-          '$value회',
+          '$value${'times'.tr}',
           style: AppTextStyles.bodySmall.copyWith(
             color: AppColors.textDarkNavy,
             fontWeight: FontWeight.bold,
@@ -435,9 +441,15 @@ class SitterReportView extends StatelessWidget {
   Widget _buildActionButtons(Duration elapsedTime, int sound, int motion, int care) {
     String formatDuration(Duration d) {
       if (d.inHours > 0) {
-        return '${d.inHours}시간 ${d.inMinutes.remainder(60)}분';
+        return 'time_format_hm'.trParams({
+          'hour': d.inHours.toString(),
+          'min': d.inMinutes.remainder(60).toString()
+        });
       }
-      return '${d.inMinutes}분 ${d.inSeconds.remainder(60)}초';
+      return 'time_format_ms'.trParams({
+        'min': d.inMinutes.toString(),
+        'sec': d.inSeconds.remainder(60).toString()
+      });
     }
     
     void shareReport() {
@@ -453,7 +465,7 @@ class SitterReportView extends StatelessWidget {
  
  -PetBeats
 ''';
-      Share.share(text, subject: 'PetBeats AI 시터 리포트');
+      Share.share(text, subject: 'sitter_report_email_subject'.tr);
     }
     
     return Row(

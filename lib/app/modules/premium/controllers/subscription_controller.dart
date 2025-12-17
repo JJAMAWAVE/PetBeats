@@ -115,23 +115,23 @@ class SubscriptionController extends GetxController {
         print('ℹ️ User cancelled purchase');
       } else if (errorCode == PurchasesErrorCode.productAlreadyPurchasedError) {
         Get.snackbar(
-          '이미 구독 중',
-          '이미 프리미엄 구독 중입니다.',
+          'premium_already_subscribed_title'.tr,
+          'premium_already_subscribed_desc'.tr,
           backgroundColor: Colors.orange.shade100,
           colorText: Colors.orange.shade900,
         );
       } else {
         Get.snackbar(
-          '오류',
-          '구독 처리 중 문제가 발생했습니다: ${e.message}',
+          'error'.tr,
+          'premium_error_desc'.trParams({'message': e.message}),
           backgroundColor: Colors.red.shade100,
           colorText: Colors.red.shade900,
         );
       }
     } catch (e) {
       Get.snackbar(
-        '오류',
-        '구독 처리 중 문제가 발생했습니다.',
+        'error'.tr,
+        'premium_error_general'.tr,
         backgroundColor: Colors.red.shade100,
         colorText: Colors.red.shade900,
       );
@@ -173,8 +173,8 @@ class SubscriptionController extends GetxController {
     // 4. 성공 메시지
     Get.back(); // 구독 페이지 닫기
     Get.snackbar(
-      '✅ 구독 완료!',
-      '7일 무료 체험이 시작되었습니다.\n모든 프리미엄 기능을 사용하실 수 있습니다.',
+      'premium_success_title'.tr,
+      'premium_success_desc'.tr,
       backgroundColor: AppColors.successMintSoft,
       colorText: AppColors.textDarkNavy,
       duration: Duration(seconds: 4),
@@ -199,15 +199,15 @@ class SubscriptionController extends GetxController {
         _storage.write('isPremium', true);
         
         Get.snackbar(
-          '복원 완료',
-          '구독이 복원되었습니다.',
+          'premium_restore_success'.tr,
+          'premium_restore_desc'.tr,
           backgroundColor: AppColors.successMintSoft,
           colorText: AppColors.textDarkNavy,
         );
       } else {
         Get.snackbar(
-          '복원 실패',
-          '복원할 구독을 찾을 수 없습니다.',
+          'premium_restore_fail'.tr,
+          'premium_restore_fail_desc'.tr,
           backgroundColor: Colors.orange.shade100,
           colorText: Colors.orange.shade900,
         );
@@ -215,8 +215,8 @@ class SubscriptionController extends GetxController {
       
     } catch (e) {
       Get.snackbar(
-        '오류',
-        '복원 중 문제가 발생했습니다: $e',
+        'error'.tr,
+        'premium_restore_error'.trParams({'error': e.toString()}),
         backgroundColor: Colors.red.shade100,
         colorText: Colors.red.shade900,
       );
@@ -241,13 +241,13 @@ class SubscriptionController extends GetxController {
   String getPlanTitle() {
     switch (selectedPlan.value) {
       case SubscriptionPlan.monthly:
-        return '1개월';
+        return '1${'month'.tr}';
       case SubscriptionPlan.quarterly:
-        return '3개월';
+        return '3${'month'.tr}';
       case SubscriptionPlan.halfYearly:
-        return '6개월';
+        return '6${'month'.tr}';
       case SubscriptionPlan.yearly:
-        return '1년';
+        return '1${'year'.tr}';
     }
   }
   

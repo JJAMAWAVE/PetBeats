@@ -267,7 +267,7 @@ class _SitterMonitoringViewState extends State<SitterMonitoringView> with Ticker
         Text(emoji, style: TextStyle(fontSize: 24.sp)),
         SizedBox(height: 4.h),
         Text(
-          '$count회',
+          '$count${'times'.tr}',
           style: AppTextStyles.bodyMedium.copyWith(
             color: Colors.white70,
             fontWeight: FontWeight.bold,

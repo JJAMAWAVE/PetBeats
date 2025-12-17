@@ -1,0 +1,1042 @@
+Analyzing PetBeats...                                           
+
+  error - Can't have modifier 'static' here - cat_tracks_generated.dart:3:3 - extraneous_modifier
+  error - The name 'Track' isn't a type, so it can't be used as a type argument - cat_tracks_generated.dart:3:21 - non_type_as_type_argument
+   info - The variable name 'cat_separationTracks' isn't a lowerCamelCase identifier - cat_tracks_generated.dart:3:28 - non_constant_identifier_names
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:4:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:21:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:38:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:55:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:72:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:89:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:106:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:123:5 - undefined_function
+  error - Can't have modifier 'static' here - cat_tracks_generated.dart:144:3 - extraneous_modifier
+  error - The name 'Track' isn't a type, so it can't be used as a type argument - cat_tracks_generated.dart:144:21 - non_type_as_type_argument
+   info - The variable name 'cat_noiseTracks' isn't a lowerCamelCase identifier - cat_tracks_generated.dart:144:28 - non_constant_identifier_names
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:145:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:162:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:179:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:196:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:213:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:230:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:247:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:264:5 - undefined_function
+  error - Can't have modifier 'static' here - cat_tracks_generated.dart:285:3 - extraneous_modifier
+  error - The name 'Track' isn't a type, so it can't be used as a type argument - cat_tracks_generated.dart:285:21 - non_type_as_type_argument
+   info - The variable name 'cat_energyTracks' isn't a lowerCamelCase identifier - cat_tracks_generated.dart:285:28 - non_constant_identifier_names
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:286:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:303:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:320:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:337:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:354:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:371:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:388:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:405:5 - undefined_function
+  error - Can't have modifier 'static' here - cat_tracks_generated.dart:426:3 - extraneous_modifier
+  error - The name 'Track' isn't a type, so it can't be used as a type argument - cat_tracks_generated.dart:426:21 - non_type_as_type_argument
+   info - The variable name 'cat_seniorTracks' isn't a lowerCamelCase identifier - cat_tracks_generated.dart:426:28 - non_constant_identifier_names
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:427:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:444:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:461:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:478:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:495:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:512:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:529:5 - undefined_function
+  error - The function 'Track' isn't defined - cat_tracks_generated.dart:546:5 - undefined_function
+  error - Target of URI doesn't exist: '../../../../core/theme/app_colors.dart' - legacy\app_info_view.dart:3:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../core/theme/app_text_styles.dart' - legacy\app_info_view.dart:4:8 - uri_does_not_exist
+  error - Undefined name 'AppColors' - legacy\app_info_view.dart:141:26 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\app_info_view.dart:198:52 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\app_info_view.dart:219:28 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\app_info_view.dart:220:30 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\app_info_view.dart:346:30 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\app_info_view.dart:347:32 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\app_info_view.dart:372:30 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\app_info_view.dart:373:32 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\app_info_view.dart:395:36 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\app_info_view.dart:397:55 - undefined_identifier
+  error - Invalid constant value - legacy\app_info_view.dart:406:42 - invalid_constant
+  error - Undefined name 'AppColors' - legacy\app_info_view.dart:406:42 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\app_info_view.dart:436:44 - undefined_identifier
+  error - Target of URI doesn't exist: '../../../data/services/audio_service.dart' - legacy\home_controller.dart:6:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../data/services/haptic_service.dart' - legacy\home_controller.dart:7:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../data/services/review_service.dart' - legacy\home_controller.dart:8:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../core/services/bgm_service.dart' - legacy\home_controller.dart:9:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../core/services/web_bgm_service.dart' - legacy\home_controller.dart:10:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../onboarding/controllers/onboarding_controller.dart' - legacy\home_controller.dart:11:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../premium/controllers/subscription_controller.dart' - legacy\home_controller.dart:12:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../data/models/mode_model.dart' - legacy\home_controller.dart:13:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../data/models/track_model.dart' - legacy\home_controller.dart:14:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../data/data_source/track_data.dart' - legacy\home_controller.dart:15:8 - uri_does_not_exist
+  error - Undefined class 'AudioService' - legacy\home_controller.dart:18:9 - undefined_class
+  error - The method 'AudioService' isn't defined for the type 'HomeController' - legacy\home_controller.dart:18:46 - undefined_method
+  error - Undefined class 'HapticService' - legacy\home_controller.dart:19:9 - undefined_class
+  error - The method 'HapticService' isn't defined for the type 'HomeController' - legacy\home_controller.dart:19:48 - undefined_method
+  error - Undefined class 'ReviewService' - legacy\home_controller.dart:20:9 - undefined_class
+  error - The name 'ReviewService' isn't a type, so it can't be used as a type argument - legacy\home_controller.dart:20:49 - non_type_as_type_argument
+  error - The name 'WebBgmService' isn't a type, so it can't be used as a type argument - legacy\home_controller.dart:22:54 - non_type_as_type_argument
+  error - The method 'BgmService' isn't defined for the type 'HomeController' - legacy\home_controller.dart:22:73 - undefined_method
+  error - The name 'Mode' isn't a type, so it can't be used as a type argument - legacy\home_controller.dart:31:26 - non_type_as_type_argument
+  error - The name 'Track' isn't a type, so it can't be used as a type argument - legacy\home_controller.dart:34:27 - non_type_as_type_argument
+  error - The name 'Mode' isn't a type, so it can't be used as a type argument - legacy\home_controller.dart:49:18 - non_type_as_type_argument
+  error - The name 'OnboardingController' isn't a type, so it can't be used as a type argument - legacy\home_controller.dart:69:45 - non_type_as_type_argument
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:83:7 - avoid_print
+  error - The name 'SubscriptionController' isn't a type, so it can't be used as a type argument - legacy\home_controller.dart:90:47 - non_type_as_type_argument
+  error - A value of type 'Object?' can't be assigned to a variable of type 'bool' - legacy\home_controller.dart:92:31 - invalid_assignment
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:93:9 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:98:7 - avoid_print
+  error - The property 'id' can't be unconditionally accessed because the receiver can be 'null' - legacy\home_controller.dart:111:52 - unchecked_use_of_nullable_value
+  error - The method 'Mode' isn't defined for the type 'HomeController' - legacy\home_controller.dart:123:7 - undefined_method
+  error - Undefined name 'TrackData' - legacy\home_controller.dart:130:17 - undefined_identifier
+  error - The method 'Mode' isn't defined for the type 'HomeController' - legacy\home_controller.dart:132:7 - undefined_method
+  error - Undefined name 'TrackData' - legacy\home_controller.dart:139:17 - undefined_identifier
+  error - The method 'Mode' isn't defined for the type 'HomeController' - legacy\home_controller.dart:141:7 - undefined_method
+  error - Undefined name 'TrackData' - legacy\home_controller.dart:148:17 - undefined_identifier
+  error - The method 'Mode' isn't defined for the type 'HomeController' - legacy\home_controller.dart:150:7 - undefined_method
+  error - Undefined name 'TrackData' - legacy\home_controller.dart:157:17 - undefined_identifier
+  error - The method 'Mode' isn't defined for the type 'HomeController' - legacy\home_controller.dart:159:7 - undefined_method
+  error - Undefined name 'TrackData' - legacy\home_controller.dart:166:17 - undefined_identifier
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:172:5 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:211:5 - avoid_print
+warning - The value of the field '_testAudioUrl' isn't used - legacy\home_controller.dart:215:16 - unused_field
+  error - The property 'id' can't be unconditionally accessed because the receiver can be 'null' - legacy\home_controller.dart:282:46 - unchecked_use_of_nullable_value
+  error - Undefined class 'Track' - legacy\home_controller.dart:289:18 - undefined_class
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:290:5 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:291:5 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:292:5 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:293:5 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:294:5 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:297:7 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:298:7 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:303:5 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:304:5 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:307:5 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:312:5 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:315:5 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:327:7 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:334:5 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:337:5 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:343:7 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:350:7 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:372:5 - avoid_print
+  error - The name 'Track' isn't a type, so it can't be used as a type argument - legacy\home_controller.dart:406:31 - non_type_as_type_argument
+  error - Undefined class 'Track' - legacy\home_controller.dart:433:23 - undefined_class
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:434:5 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:435:5 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:450:5 - avoid_print
+  error - Undefined class 'Mode' - legacy\home_controller.dart:454:19 - undefined_class
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:476:7 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\home_controller.dart:480:9 - avoid_print
+  error - Target of URI doesn't exist: '../../../../core/theme/app_colors.dart' - legacy\home_view.dart:3:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../core/theme/app_text_styles.dart' - legacy\home_view.dart:4:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../controllers/home_controller.dart' - legacy\home_view.dart:5:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../widgets/premium_mode_button.dart' - legacy\home_view.dart:6:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../widgets/species_toggle.dart' - legacy\home_view.dart:7:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../widgets/mini_player.dart' - legacy\home_view.dart:8:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../widgets/heartbeat_text.dart' - legacy\home_view.dart:9:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../widgets/header_icon_button.dart' - legacy\home_view.dart:10:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../core/widgets/background_decoration.dart' - legacy\home_view.dart:11:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../app/data/services/haptic_service.dart' - legacy\home_view.dart:12:8 - uri_does_not_exist
+warning - Unused import: 'settings_view.dart' - legacy\home_view.dart:13:8 - unused_import
+  error - Target of URI doesn't exist: 'health_activity_detail_view.dart' - legacy\home_view.dart:15:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../app/data/services/daily_routine_service.dart' - legacy\home_view.dart:17:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../routes/app_routes.dart' - legacy\home_view.dart:18:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../widgets/ai_special_mode_widget.dart' - legacy\home_view.dart:19:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../controllers/smart_care_controller.dart' - legacy\home_view.dart:20:8 - uri_does_not_exist
+  error - The name 'HomeController' isn't a type, so it can't be used as a type argument - legacy\home_view.dart:22:32 - non_type_as_type_argument
+  error - The name 'HapticService' isn't a type, so it can't be used as a type argument - legacy\home_view.dart:27:36 - non_type_as_type_argument
+  error - Undefined name 'AppColors' - legacy\home_view.dart:29:24 - undefined_identifier
+  error - The method 'BackgroundDecoration' isn't defined for the type 'HomeView' - legacy\home_view.dart:30:13 - undefined_method
+  error - The name 'HeartbeatText' isn't a class - legacy\home_view.dart:46:33 - creation_with_non_type
+  error - The method 'HeaderIconButton' isn't defined for the type 'HomeView' - legacy\home_view.dart:49:31 - undefined_method
+  error - Undefined name 'HeaderIconAnimationType' - legacy\home_view.dart:51:48 - undefined_identifier
+  error - Undefined name 'Routes' - legacy\home_view.dart:54:47 - undefined_identifier
+  error - The method 'HeaderIconButton' isn't defined for the type 'HomeView' - legacy\home_view.dart:58:31 - undefined_method
+  error - Undefined name 'HeaderIconAnimationType' - legacy\home_view.dart:60:48 - undefined_identifier
+  error - Undefined name 'Routes' - legacy\home_view.dart:62:47 - undefined_identifier
+  error - Invalid constant value - legacy\home_view.dart:75:30 - invalid_constant
+  error - The method 'SpeciesToggle' isn't defined for the type 'HomeView' - legacy\home_view.dart:75:30 - undefined_method
+   info - Use 'const' with the constructor to improve performance - legacy\home_view.dart:128:43 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - legacy\home_view.dart:131:43 - prefer_const_literals_to_create_immutables
+  error - Undefined class 'ModeAnimationType' - legacy\home_view.dart:153:39 - undefined_class
+  error - Undefined name 'ModeAnimationType' - legacy\home_view.dart:153:68 - undefined_identifier
+   info - Statements in an if should be enclosed in a block - legacy\home_view.dart:154:63 - curly_braces_in_flow_control_structures
+  error - Undefined name 'ModeAnimationType' - legacy\home_view.dart:154:74 - undefined_identifier
+   info - Statements in an if should be enclosed in a block - legacy\home_view.dart:155:70 - curly_braces_in_flow_control_structures
+  error - Undefined name 'ModeAnimationType' - legacy\home_view.dart:155:81 - undefined_identifier
+   info - Statements in an if should be enclosed in a block - legacy\home_view.dart:156:68 - curly_braces_in_flow_control_structures
+  error - Undefined name 'ModeAnimationType' - legacy\home_view.dart:156:79 - undefined_identifier
+   info - Statements in an if should be enclosed in a block - legacy\home_view.dart:157:69 - curly_braces_in_flow_control_structures
+  error - Undefined name 'ModeAnimationType' - legacy\home_view.dart:157:80 - undefined_identifier
+   info - Statements in an if should be enclosed in a block - legacy\home_view.dart:158:69 - curly_braces_in_flow_control_structures
+  error - Undefined name 'ModeAnimationType' - legacy\home_view.dart:158:80 - undefined_identifier
+  error - Invalid constant value - legacy\home_view.dart:193:30 - invalid_constant
+  error - The method 'AISpecialModeWidget' isn't defined for the type 'HomeView' - legacy\home_view.dart:193:30 - undefined_method
+  error - The name 'MiniPlayer' isn't a class - legacy\home_view.dart:264:30 - creation_with_non_type
+  error - Undefined name 'AppTextStyles' - legacy\home_view.dart:278:16 - undefined_identifier
+  error - Undefined class 'HapticService' - legacy\home_view.dart:286:27 - undefined_class
+  error - Undefined name 'AppTextStyles' - legacy\home_view.dart:354:28 - undefined_identifier
+  error - Undefined class 'ModeAnimationType' - legacy\home_view.dart:401:5 - undefined_class
+  error - Undefined name 'ModeAnimationType' - legacy\home_view.dart:401:39 - undefined_identifier
+  error - The method 'PremiumModeButton' isn't defined for the type 'HomeView' - legacy\home_view.dart:403:12 - undefined_method
+  error - Undefined name 'AppColors' - legacy\home_view.dart:424:21 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\home_view.dart:425:23 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\home_view.dart:432:15 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\home_view.dart:433:15 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\home_view.dart:440:21 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\home_view.dart:441:23 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\home_view.dart:497:22 - undefined_identifier
+  error - The name 'HapticService' isn't a type, so it can't be used as a type argument - legacy\home_view.dart:516:36 - non_type_as_type_argument
+  error - The method 'HealthActivityDetailView' isn't defined for the type 'HomeView' - legacy\home_view.dart:521:22 - undefined_method
+  error - Undefined name 'AppTextStyles' - legacy\home_view.dart:550:20 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\home_view.dart:551:22 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\home_view.dart:558:20 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\home_view.dart:559:22 - undefined_identifier
+  error - Target of URI doesn't exist: '../../../../core/theme/app_colors.dart' - legacy\mode_detail_view.dart:4:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../core/theme/app_text_styles.dart' - legacy\mode_detail_view.dart:5:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../controllers/home_controller.dart' - legacy\mode_detail_view.dart:6:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../data/models/mode_model.dart' - legacy\mode_detail_view.dart:7:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../data/models/track_model.dart' - legacy\mode_detail_view.dart:8:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../routes/app_routes.dart' - legacy\mode_detail_view.dart:9:8 - uri_does_not_exist
+  error - The name 'HomeController' isn't a type, so it can't be used as a type argument - legacy\mode_detail_view.dart:11:38 - non_type_as_type_argument
+  error - The name 'Mode' isn't a type, so it can't be used in an 'as' expression - legacy\mode_detail_view.dart:16:35 - cast_to_non_type
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:19:24 - undefined_identifier
+  error - Invalid constant value - legacy\mode_detail_view.dart:24:57 - invalid_constant
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:24:57 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\mode_detail_view.dart:27:40 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\mode_detail_view.dart:53:28 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:53:69 - undefined_identifier
+  error - Undefined name 'Routes' - legacy\mode_detail_view.dart:60:50 - undefined_identifier
+  error - Undefined class 'Mode' - legacy\mode_detail_view.dart:137:34 - undefined_class
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:162:16 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:164:35 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:171:52 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:178:26 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\mode_detail_view.dart:187:20 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:188:22 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:197:22 - undefined_identifier
+  error - Undefined class 'Track' - legacy\mode_detail_view.dart:206:26 - undefined_class
+  error - Undefined name 'Routes' - legacy\mode_detail_view.dart:215:25 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:228:32 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:231:34 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:231:75 - undefined_identifier
+   info - Use 'const' with the constructor to improve performance - legacy\mode_detail_view.dart:249:25 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - legacy\mode_detail_view.dart:250:35 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - legacy\mode_detail_view.dart:251:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - legacy\mode_detail_view.dart:252:29 - prefer_const_constructors
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:256:44 - undefined_identifier
+   info - Use 'const' with the constructor to improve performance - legacy\mode_detail_view.dart:261:36 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - legacy\mode_detail_view.dart:263:37 - prefer_const_constructors
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:270:52 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\mode_detail_view.dart:282:30 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:284:43 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:284:64 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\mode_detail_view.dart:292:34 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:293:36 - undefined_identifier
+   info - Use 'const' with the constructor to improve performance - legacy\mode_detail_view.dart:317:35 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - legacy\mode_detail_view.dart:318:35 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - legacy\mode_detail_view.dart:319:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - legacy\mode_detail_view.dart:320:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - legacy\mode_detail_view.dart:326:36 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - legacy\mode_detail_view.dart:328:37 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - legacy\mode_detail_view.dart:335:27 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - legacy\mode_detail_view.dart:335:45 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - legacy\mode_detail_view.dart:336:27 - prefer_const_constructors
+  error - Undefined name 'AppTextStyles' - legacy\mode_detail_view.dart:351:28 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:351:69 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:366:16 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\mode_detail_view.dart:373:18 - undefined_identifier
+  error - Undefined class 'Track' - legacy\mode_detail_view.dart:394:34 - undefined_class
+   info - Use interpolation to compose strings and values - legacy\mode_detail_view.dart:406:14 - prefer_interpolation_to_compose_strings
+  error - Target of URI doesn't exist: '../../../../core/theme/app_colors.dart' - legacy\onboarding_view.dart:5:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../core/theme/app_text_styles.dart' - legacy\onboarding_view.dart:6:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../core/widgets/custom_button.dart' - legacy\onboarding_view.dart:7:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../controllers/onboarding_controller.dart' - legacy\onboarding_view.dart:8:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../data/services/haptic_service.dart' - legacy\onboarding_view.dart:9:8 - uri_does_not_exist
+  error - Undefined class 'OnboardingController' - legacy\onboarding_view.dart:22:9 - undefined_class
+  error - The name 'OnboardingController' isn't a type, so it can't be used as a type argument - legacy\onboarding_view.dart:22:52 - non_type_as_type_argument
+  error - The name 'HapticService' isn't a type, so it can't be used as a type argument - legacy\onboarding_view.dart:44:16 - non_type_as_type_argument
+   info - Don't invoke 'print' in production code - legacy\onboarding_view.dart:62:5 - avoid_print
+  error - Undefined name 'AppTextStyles' - legacy\onboarding_view.dart:220:36 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\onboarding_view.dart:221:38 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\onboarding_view.dart:328:24 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\onboarding_view.dart:505:20 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\onboarding_view.dart:506:22 - undefined_identifier
+   info - Use 'const' for final variables initialized to a constant value - legacy\onboarding_view.dart:785:5 - prefer_const_declarations
+  error - Target of URI doesn't exist: '../../../../core/theme/app_colors.dart' - legacy\premium_view.dart:4:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../core/theme/app_text_styles.dart' - legacy\premium_view.dart:5:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../core/widgets/custom_button.dart' - legacy\premium_view.dart:6:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../controllers/premium_controller.dart' - legacy\premium_view.dart:7:8 - uri_does_not_exist
+  error - The name 'PremiumController' isn't a type, so it can't be used as a type argument - legacy\premium_view.dart:9:35 - non_type_as_type_argument
+  error - Undefined name 'AppColors' - legacy\premium_view.dart:15:24 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\premium_view.dart:33:24 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\premium_view.dart:38:24 - undefined_identifier
+  error - The method 'CustomButton' isn't defined for the type 'PremiumView' - legacy\premium_view.dart:48:15 - undefined_method
+  error - Undefined name 'AppTextStyles' - legacy\premium_view.dart:57:26 - undefined_identifier
+  error - Invalid constant value - legacy\premium_view.dart:76:49 - invalid_constant
+  error - Undefined name 'AppColors' - legacy\premium_view.dart:76:49 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\premium_view.dart:78:29 - undefined_identifier
+  error - Target of URI doesn't exist: '../../../../core/theme/app_colors.dart' - legacy\question2_view.dart:3:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../core/theme/app_text_styles.dart' - legacy\question2_view.dart:4:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../controllers/onboarding_controller.dart' - legacy\question2_view.dart:5:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../routes/app_routes.dart' - legacy\question2_view.dart:6:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../data/services/haptic_service.dart' - legacy\question2_view.dart:8:8 - uri_does_not_exist
+  error - The name 'OnboardingController' isn't a type, so it can't be used as a type argument - legacy\question2_view.dart:49:33 - non_type_as_type_argument
+  error - The name 'HapticService' isn't a type, so it can't be used as a type argument - legacy\question2_view.dart:50:36 - non_type_as_type_argument
+  error - Undefined name 'AppColors' - legacy\question2_view.dart:87:30 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\question2_view.dart:96:28 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\question2_view.dart:97:30 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\question2_view.dart:167:35 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\question2_view.dart:168:35 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\question2_view.dart:171:42 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\question2_view.dart:175:54 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\question2_view.dart:213:31 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\question2_view.dart:216:33 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\question2_view.dart:216:57 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\question2_view.dart:222:28 - undefined_identifier
+   info - Don't invoke 'print' in production code - legacy\question2_view.dart:241:19 - avoid_print
+   info - Don't invoke 'print' in production code - legacy\question2_view.dart:242:19 - avoid_print
+  error - Undefined name 'AppColors' - legacy\question2_view.dart:247:30 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\question2_view.dart:252:30 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\question2_view.dart:266:39 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\question2_view.dart:266:63 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\question2_view.dart:273:24 - undefined_identifier
+  error - Target of URI doesn't exist: '../../../../core/theme/app_colors.dart' - legacy\rolling_tip_widget.dart:4:8 - uri_does_not_exist
+  error - Undefined name 'AppColors' - legacy\rolling_tip_widget.dart:72:22 - undefined_identifier
+  error - Target of URI doesn't exist: '../../../../core/theme/app_colors.dart' - legacy\settings_view.dart:4:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../core/theme/app_text_styles.dart' - legacy\settings_view.dart:5:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../data/services/auth_service.dart' - legacy\settings_view.dart:6:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../controllers/settings_controller.dart' - legacy\settings_view.dart:7:8 - uri_does_not_exist
+  error - The name 'SettingsController' isn't a type, so it can't be used as a type argument - legacy\settings_view.dart:9:36 - non_type_as_type_argument
+  error - Undefined name 'AppColors' - legacy\settings_view.dart:15:24 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\settings_view.dart:17:26 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\settings_view.dart:20:55 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\settings_view.dart:25:18 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\settings_view.dart:43:22 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\settings_view.dart:44:24 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\settings_view.dart:84:24 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\settings_view.dart:85:26 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\settings_view.dart:99:14 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\settings_view.dart:101:16 - undefined_identifier
+  error - The name 'AuthService' isn't a type, so it can't be used as a type argument - legacy\settings_view.dart:107:34 - non_type_as_type_argument
+  error - Invalid constant value - legacy\settings_view.dart:134:26 - invalid_constant
+  error - Undefined name 'AppColors' - legacy\settings_view.dart:134:26 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\settings_view.dart:149:30 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\settings_view.dart:154:30 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\settings_view.dart:155:32 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\settings_view.dart:162:64 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\settings_view.dart:182:35 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\settings_view.dart:189:22 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\settings_view.dart:192:38 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\settings_view.dart:201:26 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\settings_view.dart:206:26 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\settings_view.dart:207:28 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\settings_view.dart:217:26 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\settings_view.dart:218:31 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\settings_view.dart:250:22 - undefined_identifier
+  error - Target of URI doesn't exist: '../../../../core/theme/app_colors.dart' - legacy\smart_care_widget.dart:4:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../core/theme/app_text_styles.dart' - legacy\smart_care_widget.dart:5:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../controllers/smart_care_controller.dart' - legacy\smart_care_widget.dart:6:8 - uri_does_not_exist
+  error - The name 'SmartCareController' isn't a type, so it can't be used as a type argument - legacy\smart_care_widget.dart:8:39 - non_type_as_type_argument
+  error - Undefined name 'context' - legacy\smart_care_widget.dart:58:51 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\smart_care_widget.dart:64:28 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\smart_care_widget.dart:82:20 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\smart_care_widget.dart:104:28 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\smart_care_widget.dart:125:35 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\smart_care_widget.dart:142:55 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\smart_care_widget.dart:146:28 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\smart_care_widget.dart:147:30 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\smart_care_widget.dart:161:26 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\smart_care_widget.dart:173:20 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\smart_care_widget.dart:174:22 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\smart_care_widget.dart:247:42 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\smart_care_widget.dart:247:66 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\smart_care_widget.dart:257:32 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\smart_care_widget.dart:257:73 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\smart_care_widget.dart:263:22 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\smart_care_widget.dart:264:36 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\smart_care_widget.dart:264:60 - undefined_identifier
+  error - Target of URI doesn't exist: '../../../../core/widgets/background_decoration.dart' - legacy\splash_welcome_view.dart:7:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../core/theme/app_colors.dart' - legacy\splash_welcome_view.dart:8:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../core/theme/app_text_styles.dart' - legacy\splash_welcome_view.dart:9:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../routes/app_routes.dart' - legacy\splash_welcome_view.dart:10:8 - uri_does_not_exist
+warning - Unused import: 'onboarding_view.dart' - legacy\splash_welcome_view.dart:11:8 - unused_import
+  error - Target of URI doesn't exist: '../../../../core/services/web_bgm_service.dart' - legacy\splash_welcome_view.dart:12:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../data/services/haptic_service.dart' - legacy\splash_welcome_view.dart:13:8 - uri_does_not_exist
+  error - Undefined name 'Routes' - legacy\splash_welcome_view.dart:106:25 - undefined_identifier
+  error - Undefined name 'Routes' - legacy\splash_welcome_view.dart:109:22 - undefined_identifier
+  error - The method 'WebBgmService' isn't defined for the type '_SplashWelcomeViewState' - legacy\splash_welcome_view.dart:125:17 - undefined_method
+  error - The name 'HapticService' isn't a type, so it can't be used as a type argument - legacy\splash_welcome_view.dart:127:28 - non_type_as_type_argument
+   info - Unnecessary instance of 'Container' - legacy\splash_welcome_view.dart:135:20 - avoid_unnecessary_containers
+  error - The method 'BackgroundDecoration' isn't defined for the type '_SplashWelcomeViewState' - legacy\splash_welcome_view.dart:137:22 - undefined_method
+  error - Undefined name 'AppTextStyles' - legacy\splash_welcome_view.dart:183:36 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\splash_welcome_view.dart:184:38 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\splash_welcome_view.dart:198:44 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\splash_welcome_view.dart:208:44 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\splash_welcome_view.dart:220:36 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\splash_welcome_view.dart:221:38 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\splash_welcome_view.dart:234:42 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\splash_welcome_view.dart:235:44 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\splash_welcome_view.dart:307:26 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\splash_welcome_view.dart:307:55 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\splash_welcome_view.dart:309:26 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\splash_welcome_view.dart:309:51 - undefined_identifier
+   info - A value for optional parameter 'key' isn't ever given - legacy\splash_welcome_view.dart:332:30 - unused_element
+   info - Use 'const' for final variables initialized to a constant value - legacy\splash_welcome_view.dart:434:5 - prefer_const_declarations
+  error - Target of URI doesn't exist: '../../../../core/theme/app_colors.dart' - legacy\time_special_view.dart:4:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../../core/theme/app_text_styles.dart' - legacy\time_special_view.dart:5:8 - uri_does_not_exist
+  error - Undefined name 'AppColors' - legacy\time_special_view.dart:13:24 - undefined_identifier
+  error - Invalid constant value - legacy\time_special_view.dart:20:57 - invalid_constant
+  error - Undefined name 'AppColors' - legacy\time_special_view.dart:20:57 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\time_special_view.dart:31:37 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\time_special_view.dart:53:16 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\time_special_view.dart:62:38 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\time_special_view.dart:64:53 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\time_special_view.dart:85:46 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\time_special_view.dart:85:70 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\time_special_view.dart:89:40 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\time_special_view.dart:89:64 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\time_special_view.dart:95:35 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\time_special_view.dart:95:76 - undefined_identifier
+  error - Undefined name 'AppTextStyles' - legacy\time_special_view.dart:96:37 - undefined_identifier
+  error - Undefined name 'AppColors' - legacy\time_special_view.dart:101:45 - undefined_identifier
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:8:37 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:9:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:26:37 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:27:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:44:37 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:45:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:62:37 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:63:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:80:37 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:81:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:98:37 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:99:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:116:37 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:117:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:134:37 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:135:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:156:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:157:47 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:174:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:175:47 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:192:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:193:47 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:210:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:211:47 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:228:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:229:47 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:246:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:247:47 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:264:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:265:47 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:282:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:283:47 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:304:37 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:305:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:322:37 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:323:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:340:37 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:341:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:358:37 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:359:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:376:37 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:377:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:394:37 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:395:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:412:37 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:413:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:430:37 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:431:42 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:452:38 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:453:43 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:470:38 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:471:43 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:488:38 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:489:43 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:506:38 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:507:43 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:524:38 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:525:43 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:542:38 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:543:43 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:560:38 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:561:43 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:578:38 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:579:43 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:600:38 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:601:43 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:618:38 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:619:43 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:636:38 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:637:43 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:654:38 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:655:43 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:672:38 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:673:43 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:690:38 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:691:43 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:708:38 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:709:43 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:726:38 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:727:43 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:748:41 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:749:46 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:765:41 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:766:46 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:782:41 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:783:46 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:799:41 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:800:46 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:816:41 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:817:46 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:833:41 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:834:46 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:850:41 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:851:46 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:867:41 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:868:46 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:886:75 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:886:123 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:887:75 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:887:123 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:888:75 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:888:123 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:889:75 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:889:123 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:890:75 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:890:123 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:891:75 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:891:123 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:892:75 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:892:123 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:893:75 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:893:123 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:898:65 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:898:108 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:899:65 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:899:108 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:900:65 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:900:108 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:901:65 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:901:108 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:902:65 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:902:108 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:903:65 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:903:108 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:904:65 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:904:108 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:905:65 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:905:108 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:910:67 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:910:111 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:911:67 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:911:111 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:912:67 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:912:111 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:913:67 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:913:111 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:914:67 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:914:111 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:915:67 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:915:111 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:916:67 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:916:111 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:917:67 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:917:111 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:922:67 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:922:111 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:923:67 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:923:111 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:924:67 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:924:111 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:925:67 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:925:111 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:926:67 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:926:111 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:927:67 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:927:111 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:928:67 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:928:111 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:929:67 - undefined_getter
+  error - The getter 'tr' isn't defined for the type 'String' - lib\app\data\data_source\track_data.dart:929:111 - undefined_getter
+   info - Dangling library doc comment - lib\app\data\models\sound_layer.dart:1:1 - dangling_library_doc_comments
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_analyzer_service.dart:42:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_analyzer_service.dart:53:7 - avoid_print
+   info - Use 'const' for final variables initialized to a constant value - lib\app\data\services\audio_analyzer_service.dart:86:5 - prefer_const_declarations
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_analyzer_service.dart:119:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:33:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:37:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:42:11 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:45:13 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:47:13 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:52:11 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:57:11 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:62:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:64:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:67:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:69:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:71:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:72:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:73:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:82:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:85:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:87:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:94:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:99:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:103:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:105:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:112:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:114:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:116:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:127:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:136:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:145:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:148:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:151:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:154:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:163:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\daily_routine_service.dart:29:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\daily_routine_service.dart:70:7 - avoid_print
+warning - Unused import: '../models/haptic_envelope.dart' - lib\app\data\services\haptic_pattern_player.dart:5:8 - unused_import
+   info - Don't invoke 'print' in production code - lib\app\data\services\haptic_pattern_player.dart:47:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\haptic_pattern_player.dart:51:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\haptic_pattern_player.dart:88:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\haptic_service.dart:32:5 - avoid_print
+warning - The left operand can't be null, so the right operand is never executed - lib\app\data\services\haptic_service.dart:110:44 - dead_null_aware_expression
+   info - Don't invoke 'print' in production code - lib\app\data\services\haptic_service.dart:180:5 - avoid_print
+warning - The left operand can't be null, so the right operand is never executed - lib\app\data\services\haptic_service.dart:193:44 - dead_null_aware_expression
+   info - Don't invoke 'print' in production code - lib\app\data\services\haptic_service.dart:218:5 - avoid_print
+warning - The left operand can't be null, so the right operand is never executed - lib\app\data\services\haptic_service.dart:236:44 - dead_null_aware_expression
+warning - The left operand can't be null, so the right operand is never executed - lib\app\data\services\haptic_service.dart:264:50 - dead_null_aware_expression
+   info - Use 'const' with the constructor to improve performance - lib\app\data\services\haptic_service.dart:271:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\data\services\haptic_service.dart:303:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\data\services\haptic_service.dart:316:26 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\data\services\haptic_service.dart:323:15 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\data\services\haptic_service.dart:324:19 - prefer_const_constructors
+   info - Don't invoke 'print' in production code - lib\app\data\services\haptic_service.dart:332:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\haptic_service.dart:342:5 - avoid_print
+warning - Duplicate import - lib\app\data\services\iot_service.dart:2:8 - duplicate_import
+warning - The value of the field '_scanSubscription' isn't used - lib\app\data\services\iot_service.dart:16:23 - unused_field
+warning - The value of the field '_heartRateSubscription' isn't used - lib\app\data\services\iot_service.dart:17:23 - unused_field
+   info - The variable name 'HEART_RATE_SERVICE_UUID' isn't a lowerCamelCase identifier - lib\app\data\services\iot_service.dart:20:16 - non_constant_identifier_names
+   info - The variable name 'HEART_RATE_CHARACTERISTIC_UUID' isn't a lowerCamelCase identifier - lib\app\data\services\iot_service.dart:21:16 - non_constant_identifier_names
+   info - Unnecessary override - lib\app\data\services\iot_service.dart:24:8 - unnecessary_overrides
+   info - Use 'const' with the constructor to improve performance - lib\app\data\services\iot_service.dart:36:26 - prefer_const_constructors
+   info - The declaration '_subscribeToHeartRate' isn't referenced - lib\app\data\services\iot_service.dart:97:16 - unused_element
+   info - Don't invoke 'print' in production code - lib\app\data\services\review_service.dart:11:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\review_service.dart:15:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\review_service.dart:27:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:123:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:150:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:151:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:152:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:156:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:160:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:162:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:165:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:167:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:169:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:170:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:191:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:215:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:219:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:229:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:235:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:239:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:252:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:254:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\timer_service.dart:40:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\timer_service.dart:50:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\timer_service.dart:57:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\timer_service.dart:97:5 - avoid_print
+   info - The declaration '_getSoundAssetPath' isn't referenced - lib\app\data\services\weather_sound_manager.dart:142:10 - unused_element
+   info - The declaration '_getConditionSpecificAsset' isn't referenced - lib\app\data\services\weather_sound_manager.dart:159:10 - unused_element
+warning - Unused import: '../../premium/controllers/subscription_controller.dart' - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:6:8 - unused_import
+warning - The operand can't be null, so the condition is always 'true' - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:64:28 - unnecessary_null_comparison
+warning - The '!' will have no effect because the receiver can't be null - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:65:39 - unnecessary_non_null_assertion
+   info - Unnecessary braces in a string interpolation - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:124:15 - unnecessary_brace_in_string_interps
+   info - Unnecessary braces in a string interpolation - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:124:26 - unnecessary_brace_in_string_interps
+   info - Unnecessary braces in a string interpolation - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:126:13 - unnecessary_brace_in_string_interps
+   info - Unnecessary braces in a string interpolation - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:126:25 - unnecessary_brace_in_string_interps
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:178:14 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:179:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:225:30 - prefer_const_constructors
+warning - The operand can't be null, so the condition is always 'true' - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:321:46 - unnecessary_null_comparison
+warning - The '!' will have no effect because the receiver can't be null - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:323:45 - unnecessary_non_null_assertion
+warning - The operand can't be null, so the condition is always 'true' - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:442:41 - unnecessary_null_comparison
+warning - The '!' will have no effect because the receiver can't be null - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:444:40 - unnecessary_non_null_assertion
+warning - The left operand can't be null, so the right operand is never executed - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:457:33 - dead_null_aware_expression
+warning - Unused import: '../../player/controllers/player_controller.dart' - lib\app\modules\home\controllers\home_controller.dart:15:8 - unused_import
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:98:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:108:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:113:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:235:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:274:5 - avoid_print
+warning - The value of the field '_testAudioUrl' isn't used - lib\app\modules\home\controllers\home_controller.dart:278:16 - unused_field
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:367:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:368:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:369:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:370:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:371:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:374:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:375:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:380:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:381:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:385:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:387:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:393:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:396:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:404:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:407:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:412:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:417:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:420:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:426:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:440:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:459:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:473:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:497:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:539:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:540:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:547:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:571:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:573:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:576:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:602:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:606:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:629:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:633:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:637:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:640:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:643:9 - avoid_print
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\controllers\smart_care_controller.dart:87:27 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\controllers\smart_care_controller.dart:88:33 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\controllers\smart_care_controller.dart:89:32 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\controllers\smart_care_controller.dart:90:10 - curly_braces_in_flow_control_structures
+  error - Extension methods can't be used in constant expressions - lib\app\modules\home\views\app_info_view.dart:448:29 - const_eval_extension_method
+  error - Target of URI doesn't exist: 'settings_view.dart' - lib\app\modules\home\views\home_view.dart:14:8 - uri_does_not_exist
+warning - Unused import: '../../../../app/data/services/daily_routine_service.dart' - lib\app\modules\home\views\home_view.dart:18:8 - unused_import
+warning - Unused import: '../../premium/controllers/subscription_controller.dart' - lib\app\modules\home\views\home_view.dart:21:8 - unused_import
+warning - Unused import: '../controllers/smart_care_controller.dart' - lib\app\modules\home\views\home_view.dart:22:8 - unused_import
+warning - Unused import: 'package:petbeats/core/widgets/animated_gradient_border.dart' - lib\app\modules\home\views\home_view.dart:28:8 - unused_import
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\home_view.dart:112:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\home_view.dart:173:43 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\home\views\home_view.dart:176:43 - prefer_const_literals_to_create_immutables
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\views\home_view.dart:213:91 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\views\home_view.dart:214:100 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\views\home_view.dart:215:96 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\views\home_view.dart:216:98 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\views\home_view.dart:217:98 - curly_braces_in_flow_control_structures
+   info - Unnecessary use of 'toList' in a spread - lib\app\modules\home\views\home_view.dart:235:42 - unnecessary_to_list_in_spreads
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\home_view.dart:351:15 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\home_view.dart:640:24 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\home_view.dart:721:26 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\home_view.dart:721:49 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:138:11 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:183:15 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:261:25 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\home\views\mode_detail_view.dart:262:35 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:263:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:264:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:273:36 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:275:37 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:325:35 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\home\views\mode_detail_view.dart:326:35 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:327:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:328:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:334:36 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:336:37 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:343:27 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:343:45 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:344:27 - prefer_const_constructors
+   info - Use interpolation to compose strings and values - lib\app\modules\home\views\mode_detail_view.dart:455:14 - prefer_interpolation_to_compose_strings
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:103:11 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:150:21 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\home\views\rhythm_special_view.dart:151:21 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:151:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:151:41 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:158:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:166:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:188:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:267:19 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\home\views\rhythm_special_view.dart:268:19 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:268:20 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:268:39 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:276:43 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:283:22 - prefer_const_constructors
+   info - The declaration '_onCTAPressed' isn't referenced - lib\app\modules\home\views\sitter_special_view.dart:59:8 - unused_element
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\sitter_special_view.dart:112:11 - prefer_const_constructors
+warning - The value of the local variable 'angle' isn't used - lib\app\modules\home\views\sitter_special_view.dart:584:13 - unused_local_variable
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\weather_special_view.dart:85:11 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:17:19 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\home\widgets\ai_special_mode_widget.dart:20:19 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:21:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:22:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:23:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:28:18 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:33:20 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:35:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:41:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:70:29 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\home\widgets\ai_special_mode_widget.dart:71:29 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:72:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:73:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:79:30 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:81:31 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:178:17 - prefer_const_constructors
+   info - Unnecessary braces in a string interpolation - lib\app\modules\home\widgets\debug_bottom_sheet.dart:424:45 - unnecessary_brace_in_string_interps
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\mini_player.dart:174:39 - prefer_const_constructors
+   info - The declaration '_getIconData' isn't referenced - lib\app\modules\home\widgets\mini_player.dart:195:12 - unused_element
+warning - Unused import: 'dart:math' - lib\app\modules\home\widgets\premium_mode_button.dart:5:8 - unused_import
+  error - Undefined name 'context' - lib\app\modules\home\widgets\smart_care_widget.dart:58:51 - undefined_identifier
+   info - 'Share' is deprecated and shouldn't be used. Use SharePlus instead - lib\app\modules\invite\controllers\invite_controller.dart:51:13 - deprecated_member_use
+   info - 'share' is deprecated and shouldn't be used. Use SharePlus.instance.share() instead - lib\app\modules\invite\controllers\invite_controller.dart:51:19 - deprecated_member_use
+   info - Don't invoke 'print' in production code - lib\app\modules\invite\controllers\invite_controller.dart:58:7 - avoid_print
+warning - Unused import: '../../../../core/theme/app_text_styles.dart' - lib\app\modules\invite\views\invite_friends_view.dart:5:8 - unused_import
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\invite\views\invite_friends_view.dart:124:26 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\invite\views\invite_friends_view.dart:372:23 - prefer_const_constructors
+   info - Don't invoke 'print' in production code - lib\app\modules\onboarding\controllers\onboarding_controller.dart:28:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\onboarding\controllers\onboarding_controller.dart:35:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\onboarding\controllers\onboarding_controller.dart:43:5 - avoid_print
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\onboarding\views\loading_view.dart:294:20 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\onboarding\views\loading_view.dart:398:34 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\onboarding\views\loading_view.dart:413:45 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\onboarding\views\loading_view.dart:414:27 - prefer_const_literals_to_create_immutables
+   info - Use 'const' for final variables initialized to a constant value - lib\app\modules\onboarding\views\loading_view.dart:673:5 - prefer_const_declarations
+warning - Unused import: 'dart:math' - lib\app\modules\onboarding\views\onboarding_complete_view.dart:8:8 - unused_import
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\onboarding\views\onboarding_complete_view.dart:153:32 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\onboarding\views\onboarding_complete_view.dart:155:39 - prefer_const_constructors
+warning - Unused import: '../../../../core/widgets/custom_button.dart' - lib\app\modules\onboarding\views\onboarding_view.dart:7:8 - unused_import
+   info - Don't invoke 'print' in production code - lib\app\modules\onboarding\views\onboarding_view.dart:62:5 - avoid_print
+   info - Use 'const' for final variables initialized to a constant value - lib\app\modules\onboarding\views\onboarding_view.dart:786:5 - prefer_const_declarations
+warning - Unused import: '../../../routes/app_routes.dart' - lib\app\modules\onboarding\views\question2_view.dart:6:8 - unused_import
+   info - Don't invoke 'print' in production code - lib\app\modules\onboarding\views\question2_view.dart:241:19 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\onboarding\views\question2_view.dart:242:19 - avoid_print
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\onboarding\views\question2_view.dart:271:15 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\onboarding\views\question_view.dart:256:15 - prefer_const_constructors
+warning - Unused import: 'onboarding_view.dart' - lib\app\modules\onboarding\views\splash_welcome_view.dart:12:8 - unused_import
+   info - A value for optional parameter 'key' isn't ever given - lib\app\modules\onboarding\views\splash_welcome_view.dart:358:30 - unused_element
+   info - Use 'const' for final variables initialized to a constant value - lib\app\modules\onboarding\views\splash_welcome_view.dart:460:5 - prefer_const_declarations
+warning - Unused import: '../widgets/therapy_control_panel.dart' - lib\app\modules\player\controllers\player_controller.dart:3:8 - unused_import
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:50:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:88:11 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:91:11 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:121:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:141:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:147:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:155:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:160:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:162:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:168:5 - avoid_print
+   info - The declaration '_showHapticSafetyGuideIfFirstTime' isn't referenced - lib\app\modules\player\controllers\player_controller.dart:184:8 - unused_element
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:226:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:332:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:367:15 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:371:15 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:376:13 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:386:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:395:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:401:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:406:9 - avoid_print
+warning - Unused import: '../widgets/bio_pulse_widget.dart' - lib\app\modules\player\views\now_playing_view.dart:7:8 - unused_import
+warning - Unused import: '../widgets/audio_reactive_visualizer.dart' - lib\app\modules\player\views\now_playing_view.dart:8:8 - unused_import
+warning - Unused import: '../widgets/midi_flash_overlay.dart' - lib\app\modules\player\views\now_playing_view.dart:10:8 - unused_import
+   info - The declaration '_showTimerBottomSheet' isn't referenced - lib\app\modules\player\views\now_playing_view.dart:78:8 - unused_element
+   info - Don't invoke 'print' in production code - lib\app\modules\player\views\now_playing_view.dart:179:31 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\views\now_playing_view.dart:190:31 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\views\now_playing_view.dart:194:29 - avoid_print
+   info - The declaration '_buildMixButton' isn't referenced - lib\app\modules\player\views\now_playing_view.dart:271:10 - unused_element
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\views\now_playing_view.dart:314:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\views\now_playing_view.dart:315:29 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\player\views\now_playing_view.dart:316:29 - prefer_const_literals_to_create_immutables
+   info - Don't invoke 'print' in production code - lib\app\modules\player\widgets\audio_reactive_visualizer.dart:111:7 - avoid_print
+warning - Unused import: 'dart:ui' - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:3:8 - unused_import
+warning - The value of the field '_overallEnergy' isn't used - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:39:10 - unused_field
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:140:11 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:184:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:227:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:235:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:243:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:250:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:429:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:449:24 - prefer_const_constructors
+   info - Use 'const' for final variables initialized to a constant value - lib\app\modules\player\widgets\bio_pulse_widget.dart:240:5 - prefer_const_declarations
+   info - Convert 'key' to a super parameter - lib\app\modules\player\widgets\haptic_safety_guide_dialog.dart:15:9 - use_super_parameters
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\haptic_safety_guide_dialog.dart:79:23 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\player\widgets\haptic_safety_guide_dialog.dart:82:23 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\haptic_safety_guide_dialog.dart:133:29 - prefer_const_constructors
+   info - The import of 'dart:ui' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' - lib\app\modules\player\widgets\mix_panel_bottom_sheet.dart:5:8 - unnecessary_import
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\mix_panel_bottom_sheet.dart:23:19 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\player\widgets\mix_panel_bottom_sheet.dart:26:19 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\mix_panel_bottom_sheet.dart:89:41 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\player\widgets\mix_panel_bottom_sheet.dart:90:41 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\mix_panel_bottom_sheet.dart:204:15 - prefer_const_constructors
+warning - Unused import: '../../../../core/theme/app_colors.dart' - lib\app\modules\player\widgets\premium_feature_popup.dart:5:8 - unused_import
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\premium_feature_popup.dart:32:21 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\player\widgets\premium_feature_popup.dart:35:21 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\premium_feature_popup.dart:54:27 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\player\widgets\premium_feature_popup.dart:55:27 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\premium_feature_popup.dart:78:27 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\player\widgets\premium_feature_popup.dart:79:27 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\premium_feature_popup.dart:135:31 - prefer_const_constructors
+   info - Convert 'key' to a super parameter - lib\app\modules\player\widgets\reactive_visualizer.dart:15:9 - use_super_parameters
+warning - The value of the field '_currentBass' isn't used - lib\app\modules\player\widgets\reactive_visualizer.dart:39:10 - unused_field
+warning - The value of the field '_currentMid' isn't used - lib\app\modules\player\widgets\reactive_visualizer.dart:40:10 - unused_field
+warning - Unused import: '../../../../core/theme/app_text_styles.dart' - lib\app\modules\player\widgets\therapy_control_panel.dart:6:8 - unused_import
+warning - Unused import: 'weather_settings_bottom_sheet.dart' - lib\app\modules\player\widgets\therapy_control_panel.dart:12:8 - unused_import
+   info - The declaration '_buildWeatherToggle' isn't referenced - lib\app\modules\player\widgets\therapy_control_panel.dart:555:10 - unused_element
+warning - The value of the field '_testConditions' isn't used - lib\app\modules\player\widgets\weather_control_sheet.dart:27:22 - unused_field
+warning - The value of the field '_selectedTestCondition' isn't used - lib\app\modules\player\widgets\weather_control_sheet.dart:28:11 - unused_field
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\weather_control_sheet.dart:257:43 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\player\widgets\weather_control_sheet.dart:260:44 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\weather_control_sheet.dart:261:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\weather_control_sheet.dart:391:29 - prefer_const_constructors
+   info - Convert 'key' to a super parameter - lib\app\modules\player\widgets\weather_settings_bottom_sheet.dart:13:9 - use_super_parameters
+  error - 1 positional argument expected by 'Text.new', but 0 found - lib\app\modules\player\widgets\weather_settings_bottom_sheet.dart:258:19 - not_enough_positional_arguments
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\weather_settings_bottom_sheet.dart:537:42 - prefer_const_constructors
+   info - Don't invoke 'print' in production code - lib\app\modules\premium\controllers\subscription_controller.dart:35:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\premium\controllers\subscription_controller.dart:44:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\premium\controllers\subscription_controller.dart:46:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\premium\controllers\subscription_controller.dart:65:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\premium\controllers\subscription_controller.dart:67:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\premium\controllers\subscription_controller.dart:70:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\premium\controllers\subscription_controller.dart:115:9 - avoid_print
+  error - The element type 'String?' can't be assigned to the map value type 'String' - lib\app\modules\premium\controllers\subscription_controller.dart:126:53 - map_value_type_not_assignable
+   info - Don't invoke 'print' in production code - lib\app\modules\premium\controllers\subscription_controller.dart:170:7 - avoid_print
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\premium\controllers\subscription_controller.dart:180:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\premium\controllers\subscription_controller.dart:181:15 - prefer_const_constructors
+warning - Unused import: 'package:animate_do/animate_do.dart' - lib\app\modules\premium\views\subscription_view.dart:5:8 - unused_import
+warning - Unused import: '../../../../core/theme/app_text_styles.dart' - lib\app\modules\premium\views\subscription_view.dart:7:8 - unused_import
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\premium\views\subscription_view.dart:289:26 - prefer_const_constructors
+  error - Extension methods can't be used in constant expressions - lib\app\modules\settings\controllers\settings_controller.dart:82:26 - const_eval_extension_method
+warning - Unused import: 'package:flutter/foundation.dart' - lib\app\modules\settings\views\pet_profile_view.dart:2:8 - unused_import
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\settings\views\pet_profile_view.dart:405:27 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\settings\views\settings_view.dart:476:27 - prefer_const_constructors
+   info - The declaration '_buildLanguageOption' isn't referenced - lib\app\modules\settings\views\settings_view.dart:505:10 - unused_element
+warning - Unused import: '../../../../core/theme/app_colors.dart' - lib\app\modules\sitter\views\sitter_monitoring_view.dart:6:8 - unused_import
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\sitter\views\sitter_report_view.dart:85:11 - prefer_const_constructors
+warning - The value of the local variable 'events' isn't used - lib\app\modules\sitter\views\sitter_report_view.dart:366:38 - unused_local_variable
+   info - Unnecessary braces in a string interpolation - lib\app\modules\sitter\views\sitter_report_view.dart:460:32 - unnecessary_brace_in_string_interps
+   info - Unnecessary braces in a string interpolation - lib\app\modules\sitter\views\sitter_report_view.dart:461:33 - unnecessary_brace_in_string_interps
+   info - Unnecessary braces in a string interpolation - lib\app\modules\sitter\views\sitter_report_view.dart:462:31 - unnecessary_brace_in_string_interps
+   info - 'Share' is deprecated and shouldn't be used. Use SharePlus instead - lib\app\modules\sitter\views\sitter_report_view.dart:468:7 - deprecated_member_use
+   info - 'share' is deprecated and shouldn't be used. Use SharePlus.instance.share() instead - lib\app\modules\sitter\views\sitter_report_view.dart:468:13 - deprecated_member_use
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\sitter\views\sitter_report_view.dart:480:21 - prefer_const_constructors
+warning - Unused import: '../modules/premium/bindings/premium_binding.dart' - lib\app\routes\app_pages.dart:13:8 - unused_import
+warning - Unused import: '../modules/home/views/app_info_view.dart' - lib\app\routes\app_pages.dart:24:8 - unused_import
+warning - Unused import: '../modules/premium/controllers/premium_controller.dart' - lib\app\routes\app_pages.dart:28:8 - unused_import
+   info - The constant name 'INITIAL' isn't a lowerCamelCase identifier - lib\app\routes\app_pages.dart:37:16 - constant_identifier_names
+   info - The constant name 'WELCOME' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:2:16 - constant_identifier_names
+   info - The constant name 'HOME' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:3:16 - constant_identifier_names
+   info - The constant name 'ONBOARDING' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:4:16 - constant_identifier_names
+   info - The constant name 'QUESTION' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:5:16 - constant_identifier_names
+   info - The constant name 'QUESTION2' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:6:16 - constant_identifier_names
+   info - The constant name 'ONBOARDING_COMPLETE' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:7:16 - constant_identifier_names
+   info - The constant name 'LOADING' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:8:16 - constant_identifier_names
+   info - The constant name 'MODE_DETAIL' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:9:16 - constant_identifier_names
+   info - The constant name 'SETTINGS' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:10:16 - constant_identifier_names
+   info - The constant name 'NOW_PLAYING' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:11:16 - constant_identifier_names
+   info - The constant name 'SUBSCRIPTION' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:12:16 - constant_identifier_names
+   info - The constant name 'WEATHER_SPECIAL' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:13:16 - constant_identifier_names
+   info - The constant name 'RHYTHM_SPECIAL' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:14:16 - constant_identifier_names
+   info - The constant name 'SITTER_SPECIAL' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:15:16 - constant_identifier_names
+   info - The constant name 'SITTER_SETUP' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:16:16 - constant_identifier_names
+   info - The constant name 'SITTER_MONITORING' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:17:16 - constant_identifier_names
+   info - The constant name 'SITTER_REPORT' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:18:16 - constant_identifier_names
+   info - The constant name 'AI_RECOMMEND' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:19:16 - constant_identifier_names
+   info - The constant name 'AI_PLAYLIST_RESULT' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:20:16 - constant_identifier_names
+   info - The constant name 'INVITE_FRIENDS' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:21:16 - constant_identifier_names
+   info - The constant name 'REVIEW' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:22:16 - constant_identifier_names
+   info - The constant name 'PET_PROFILE' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:23:16 - constant_identifier_names
+  error - Two keys in a constant map literal can't be equal - lib\app\translations\en_us.dart:161:3 - equal_keys_in_const_map
+  error - Two keys in a constant map literal can't be equal - lib\app\translations\en_us.dart:163:3 - equal_keys_in_const_map
+  error - Two keys in a constant map literal can't be equal - lib\app\translations\en_us.dart:177:3 - equal_keys_in_const_map
+  error - Two keys in a constant map literal can't be equal - lib\app\translations\en_us.dart:241:3 - equal_keys_in_const_map
+  error - Two keys in a constant map literal can't be equal - lib\app\translations\en_us.dart:242:3 - equal_keys_in_const_map
+  error - Two keys in a constant map literal can't be equal - lib\app\translations\ko_kr.dart:161:3 - equal_keys_in_const_map
+  error - Two keys in a constant map literal can't be equal - lib\app\translations\ko_kr.dart:163:3 - equal_keys_in_const_map
+  error - Two keys in a constant map literal can't be equal - lib\app\translations\ko_kr.dart:177:3 - equal_keys_in_const_map
+  error - Two keys in a constant map literal can't be equal - lib\app\translations\ko_kr.dart:241:3 - equal_keys_in_const_map
+  error - Two keys in a constant map literal can't be equal - lib\app\translations\ko_kr.dart:242:3 - equal_keys_in_const_map
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:18:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:32:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:37:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:49:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:51:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:57:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:58:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:60:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:61:5 - avoid_print
+   info - Don't use web-only libraries outside Flutter web plugin packages - lib\core\services\web_audio_service.dart:1:1 - avoid_web_libraries_in_flutter
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:27:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:35:11 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:47:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:51:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:53:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:66:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:73:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:77:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:79:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:90:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:92:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:105:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:107:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:117:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:119:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:132:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:134:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:145:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:155:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:157:7 - avoid_print
+warning - Unused import: 'package:get/get.dart' - lib\core\services\web_bgm_service_web.dart:1:8 - unused_import
+warning - Unused import: 'package:flutter/foundation.dart' - lib\core\services\web_bgm_service_web.dart:3:8 - unused_import
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:20:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:36:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:38:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:53:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:56:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:62:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:69:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:72:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:83:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:86:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:95:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:107:7 - avoid_print
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:23:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:24:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:25:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:26:18 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:27:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:29:21 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\core\theme\species_theme.dart:32:15 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:33:9 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:34:9 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:38:19 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\core\theme\species_theme.dart:41:15 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:42:9 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:43:9 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:50:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:51:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:52:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:53:18 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:54:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:56:21 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\core\theme\species_theme.dart:59:15 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:60:9 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:61:9 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:65:19 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\core\theme\species_theme.dart:68:15 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:69:9 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:70:9 - prefer_const_constructors
+   info - Convert 'key' to a super parameter - lib\core\widgets\ad_banner_placeholder.dart:6:9 - use_super_parameters
+warning - Duplicate import - lib\core\widgets\background_decoration.dart:7:8 - duplicate_import
+   info - Convert 'key' to a super parameter - lib\core\widgets\background_decoration.dart:12:9 - use_super_parameters
+   info - Convert 'key' to a super parameter - lib\core\widgets\custom_button.dart:10:9 - use_super_parameters
+warning - Unused import: 'dart:math' - lib\core\widgets\parallax_tilt.dart:2:8 - unused_import
+   info - Convert 'key' to a super parameter - lib\core\widgets\species_theme_transition.dart:11:9 - use_super_parameters
+warning - Unused import: 'core/theme/app_colors.dart' - lib\main.dart:5:8 - unused_import
+warning - Unused import: 'app/routes/app_routes.dart' - lib\main.dart:9:8 - unused_import
+warning - Unused import: 'core/theme/app_text_styles.dart' - lib\main.dart:10:8 - unused_import
+
