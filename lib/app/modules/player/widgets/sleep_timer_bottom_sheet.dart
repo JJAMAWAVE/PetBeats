@@ -39,7 +39,7 @@ class SleepTimerBottomSheet extends StatelessWidget {
               Icon(Icons.bedtime, color: Colors.amber, size: 28.w),
               SizedBox(width: 12.w),
               Text(
-                '수면 타이머',
+                'sleep_timer'.tr,
                 style: AppTextStyles.titleMedium.copyWith(
                   color: Colors.white,
                   fontSize: 22.sp,
@@ -51,7 +51,7 @@ class SleepTimerBottomSheet extends StatelessWidget {
           SizedBox(height: 8.h),
           
           Text(
-            '설정한 시간 후 자동으로 재생이 멈춥니다',
+            'sleep_timer_desc'.tr,
             style: AppTextStyles.bodySmall.copyWith(
               color: Colors.white.withOpacity(0.6),
             ),
@@ -83,7 +83,7 @@ class SleepTimerBottomSheet extends StatelessWidget {
                 Get.back();
               },
               child: Text(
-                '타이머 취소',
+                'sleep_timer_cancel'.tr,
                 style: TextStyle(
                   color: Colors.redAccent,
                   fontSize: 16.sp,
@@ -152,7 +152,7 @@ class SleepTimerBottomSheet extends StatelessWidget {
               ),
             ),
             Text(
-              '분',
+              'minute'.tr,
               style: TextStyle(
                 color: Colors.white.withOpacity(0.7),
                 fontSize: 14.sp,
@@ -220,11 +220,11 @@ class SleepTimerBottomSheet extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildAddTimeButton('+5분', () => timerService.addTime(5)),
+            _buildAddTimeButton('+5${'minute'.tr}', () => timerService.addTime(5)),
             SizedBox(width: 16.w),
-            _buildAddTimeButton('+10분', () => timerService.addTime(10)),
+            _buildAddTimeButton('+10${'minute'.tr}', () => timerService.addTime(10)),
             SizedBox(width: 16.w),
-            _buildAddTimeButton('+15분', () => timerService.addTime(15)),
+            _buildAddTimeButton('+15${'minute'.tr}', () => timerService.addTime(15)),
           ],
         ),
       ],

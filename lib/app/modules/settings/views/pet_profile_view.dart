@@ -72,8 +72,8 @@ class _PetProfileViewState extends State<PetProfileView> {
     } catch (e) {
       debugPrint('[PetProfileView] Error picking image: $e');
       Get.snackbar(
-        '알림', 
-        '이미지를 선택할 수 없습니다',
+        'pet_notice'.tr, 
+        'pet_image_select_fail'.tr,
         backgroundColor: Colors.orange.shade100,
         colorText: Colors.orange.shade800,
       );
@@ -97,8 +97,8 @@ class _PetProfileViewState extends State<PetProfileView> {
       await profileService.saveProfile(newProfile);
       
       Get.snackbar(
-        '저장 완료',
-        '${newProfile.name}의 프로필이 저장되었습니다!',
+        'pet_save_complete'.tr,
+        'pet_save_complete_desc'.trParams({'name': newProfile.name ?? ''}),
         backgroundColor: Colors.green.shade100,
         colorText: Colors.green.shade800,
       );
@@ -106,7 +106,7 @@ class _PetProfileViewState extends State<PetProfileView> {
       Get.back();
     } catch (e) {
       debugPrint('[PetProfileView] Error saving profile: $e');
-      Get.snackbar('오류', '프로필 저장에 실패했습니다');
+      Get.snackbar('pet_error'.tr, 'pet_save_fail'.tr);
     }
   }
   
@@ -123,7 +123,7 @@ class _PetProfileViewState extends State<PetProfileView> {
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
-        title: const Text('반려동물 프로필'),
+        title: Text('pet_profile_title'.tr),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -135,7 +135,7 @@ class _PetProfileViewState extends State<PetProfileView> {
           TextButton(
             onPressed: _saveProfile,
             child: Text(
-              '저장',
+              'pet_save'.tr,
               style: TextStyle(
                 color: AppColors.primaryBlue,
                 fontWeight: FontWeight.bold,
@@ -160,8 +160,8 @@ class _PetProfileViewState extends State<PetProfileView> {
               // 이름
               _buildTextField(
                 controller: _nameController,
-                label: '이름',
-                hint: '반려동물 이름을 입력하세요',
+                label: 'pet_name'.tr,
+                hint: 'pet_name_hint'.tr,
                 icon: Icons.pets,
                 required: true,
               ),
@@ -176,11 +176,11 @@ class _PetProfileViewState extends State<PetProfileView> {
               // 나이
               _buildTextField(
                 controller: _ageController,
-                label: '나이',
-                hint: '나이를 입력하세요',
+                label: 'pet_age'.tr,
+                hint: 'pet_age_hint'.tr,
                 icon: Icons.cake,
                 keyboardType: TextInputType.number,
-                suffix: '살',
+                suffix: 'pet_age_unit'.tr,
                 required: true,
               ),
               
@@ -189,8 +189,8 @@ class _PetProfileViewState extends State<PetProfileView> {
               // 품종 (선택)
               _buildTextField(
                 controller: _breedController,
-                label: '품종 (선택)',
-                hint: '예: 골든 리트리버, 페르시안',
+                label: 'pet_breed'.tr,
+                hint: 'pet_breed_hint'.tr,
                 icon: Icons.category,
               ),
               
@@ -280,7 +280,7 @@ class _PetProfileViewState extends State<PetProfileView> {
         Padding(
           padding: EdgeInsets.only(left: 4.w, bottom: 8.h),
           child: Text(
-            '종류',
+            'pet_species'.tr,
             style: AppTextStyles.bodyMedium.copyWith(
               color: AppColors.textDarkNavy,
               fontWeight: FontWeight.w600,
@@ -292,7 +292,7 @@ class _PetProfileViewState extends State<PetProfileView> {
             Expanded(
               child: _buildSpeciesOption(
                 species: 'dog',
-                label: '강아지',
+                label: 'pet_dog'.tr,
                 icon: 'assets/icons/icon_species_dog.png',
               ),
             ),
@@ -300,7 +300,7 @@ class _PetProfileViewState extends State<PetProfileView> {
             Expanded(
               child: _buildSpeciesOption(
                 species: 'cat',
-                label: '고양이',
+                label: 'pet_cat'.tr,
                 icon: 'assets/icons/icon_species_cat.png',
               ),
             ),
@@ -383,7 +383,7 @@ class _PetProfileViewState extends State<PetProfileView> {
           controller: controller,
           keyboardType: keyboardType,
           validator: required
-              ? (value) => value?.trim().isEmpty == true ? '필수 항목입니다' : null
+              ? (value) => value?.trim().isEmpty == true ? 'pet_required'.tr : null
               : null,
           decoration: InputDecoration(
             hintText: hint,

@@ -16,15 +16,15 @@ class SettingsController extends GetxController {
   Future<void> handleLogin() async {
     if (_authService.currentUser.value != null) {
       Get.defaultDialog(
-        title: '로그아웃',
-        middleText: '로그아웃 하시겠습니까?',
-        textConfirm: '확인',
-        textCancel: '취소',
+        title: 'logout'.tr,
+        middleText: 'logout_confirm'.tr,
+        textConfirm: 'confirm'.tr,
+        textCancel: 'cancel'.tr,
         confirmTextColor: Colors.white,
         onConfirm: () async {
           Get.back();
           await _authService.signOut();
-          Get.snackbar('로그아웃', '성공적으로 로그아웃되었습니다.');
+          Get.snackbar('logout'.tr, 'logout_success'.tr);
         },
       );
     } else {
@@ -32,7 +32,7 @@ class SettingsController extends GetxController {
       try {
         final credential = await _authService.signInWithGoogle();
         if (credential != null) {
-          Get.snackbar('로그인 성공', '${credential.user?.displayName}님 환영합니다!');
+          Get.snackbar('login_success'.tr, 'login_welcome'.trParams({'name': credential.user?.displayName ?? ''}));
         } else {
           // If real login fails or is canceled, try simulation for demo
           // await _authService.simulateLogin(); 
@@ -47,18 +47,18 @@ class SettingsController extends GetxController {
   // Toggle Permissions
   void toggleLocation(bool value) {
     isLocationEnabled.value = value;
-    _showPermissionSnackbar('위치 정보', value);
+    _showPermissionSnackbar('settings_location'.tr, value);
   }
 
   void toggleNotification(bool value) {
     isNotificationEnabled.value = value;
-    _showPermissionSnackbar('알림', value);
+    _showPermissionSnackbar('settings_notification'.tr, value);
   }
 
   void _showPermissionSnackbar(String permission, bool isEnabled) {
     Get.snackbar(
-      '권한 설정 변경',
-      '$permission 권한이 ${isEnabled ? '허용' : '해제'}되었습니다.',
+      'permission_changed'.tr,
+      'permission_status'.trParams({'permission': permission, 'status': isEnabled ? 'enabled'.tr : 'disabled'.tr}),
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: AppColors.textDarkNavy,
       colorText: Colors.white,
@@ -79,11 +79,11 @@ class SettingsController extends GetxController {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('기기 검색 중...', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              const Text('iot_scanning'.tr, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               const SizedBox(height: 20),
               const CircularProgressIndicator(),
               const SizedBox(height: 20),
-              Obx(() => Text('${_iotService.scanResults.length}개의 기기 발견')),
+              Obx(() => Text('iot_found'.trParams({'count': _iotService.scanResults.length.toString()}))),
               const SizedBox(height: 20),
               SizedBox(
                 height: 200,
@@ -91,16 +91,16 @@ class SettingsController extends GetxController {
                   itemCount: _iotService.scanResults.length,
                   itemBuilder: (context, index) {
                     final result = _iotService.scanResults[index];
-                    final name = result.device.name.isNotEmpty ? result.device.name : '알 수 없는 기기';
+                    final name = result.device.name.isNotEmpty ? result.device.name : 'iot_unknown'.tr;
                     return ListTile(
                       title: Text(name),
                       subtitle: Text(result.device.id.toString()),
                       trailing: ElevatedButton(
-                        child: const Text('연결'),
+                        child: Text('iot_connect'.tr),
                         onPressed: () {
                           Get.back(); // Close dialog
                           _iotService.connectToDevice(result.device);
-                          Get.snackbar('연결 시도', '$name에 연결을 시도합니다.');
+                          Get.snackbar('iot_connecting'.tr, 'iot_try_connect'.trParams({'name': name}));
                         },
                       ),
                     );
@@ -109,7 +109,7 @@ class SettingsController extends GetxController {
               ),
               TextButton(
                 onPressed: () => Get.back(),
-                child: const Text('닫기'),
+                child: Text('close'.tr),
               ),
             ],
           ),
@@ -122,7 +122,7 @@ class SettingsController extends GetxController {
     // If no devices found after scan (simulation fallback)
     // If no devices found after scan (simulation fallback)
     if (_iotService.scanResults.isEmpty) {
-      Get.snackbar('테스트 모드', '기기를 찾을 수 없어 가상 심박수 모드를 실행합니다.');
+      Get.snackbar('iot_test_mode'.tr, 'iot_no_device'.tr);
       _iotService.simulateHeartRate(); 
     }
   }
@@ -135,8 +135,8 @@ class SettingsController extends GetxController {
     Future.delayed(const Duration(seconds: 2), () {
       Get.back();
       Get.snackbar(
-        '펫캠',
-        '펫 캠 연결에 성공했습니다.',
+        'petcam'.tr,
+        'petcam_connected'.tr,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: AppColors.primaryBlue,
         colorText: Colors.white,

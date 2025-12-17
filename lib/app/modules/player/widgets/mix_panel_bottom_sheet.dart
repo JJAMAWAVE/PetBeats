@@ -75,7 +75,7 @@ class MixPanelBottomSheet extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            '사운드 믹스',
+                            'mix_panel_title'.tr,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20.sp,
@@ -105,7 +105,7 @@ class MixPanelBottomSheet extends StatelessWidget {
                       ),
                       SizedBox(height: 4.h),
                       Text(
-                        '자연음을 더해 더욱 풍부한 사운드를 만들어보세요',
+                        'mix_panel_desc'.tr,
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.6),
                           fontSize: 12.sp,
@@ -163,7 +163,7 @@ class MixPanelBottomSheet extends StatelessWidget {
                   Icon(Icons.graphic_eq, color: Colors.green, size: 20.w),
                   SizedBox(width: 8.w),
                   Text(
-                    '$count개의 레이어 활성화됨',
+                    'mix_layers_active'.trParams({'count': count.toString()}),
                     style: TextStyle(
                       color: Colors.green,
                       fontSize: 14.sp,
@@ -194,7 +194,7 @@ class MixPanelBottomSheet extends StatelessWidget {
               Icon(Icons.volume_up, color: Colors.white70, size: 20.w),
               SizedBox(width: 12.w),
               Text(
-                '마스터 볼륨',
+                'master_volume'.tr,
                 style: TextStyle(
                   color: Colors.white70,
                   fontSize: 14.sp,

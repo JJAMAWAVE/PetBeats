@@ -88,7 +88,7 @@ class ModeDetailView extends GetView<HomeController> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          '모든 프리미엄 트랙 잠금해제',
+                                          'premium_unlock_tracks'.tr,
                                           style: GoogleFonts.poppins(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w600,
@@ -96,7 +96,7 @@ class ModeDetailView extends GetView<HomeController> {
                                           ),
                                         ),
                                         Text(
-                                          '특별한 케어 사운드에 접근하세요',
+                                          'premium_special_care'.tr,
                                           style: GoogleFonts.poppins(
                                             color: Colors.white.withOpacity(0.9),
                                             fontSize: 12,
@@ -151,19 +151,19 @@ class ModeDetailView extends GetView<HomeController> {
     String sourceText = '';
     
     if (mode.id == 'sleep') {
-      contextText = 'Wells & Kogan의 연구에 따르면, 60 BPM의 단순한 피아노 선율은 강아지의 휴식 심박수와 동조하여 깊은 수면을 유도합니다.';
+      contextText = 'science_sleep'.tr;
       sourceText = 'Source: Journal of Veterinary Behavior, 2012';
     } else if (mode.id == 'anxiety') {
-      contextText = '백색 소음과 부드러운 멜로디의 조화는 외부 자극을 차단하고 분리 불안을 완화하는 데 효과적입니다.';
+      contextText = 'science_anxiety'.tr;
       sourceText = 'Source: Applied Animal Behaviour Science';
     } else if (mode.id == 'energy') {
-      contextText = '다양한 주파수와 빠른 템포는 반려동물의 호기심을 자극하고 활동성을 높여줍니다.';
+      contextText = 'science_energy'.tr;
       sourceText = 'Source: Animal Welfare, 2002';
     } else if (mode.id == 'senior') {
-      contextText = '낮은 주파수의 진동은 시니어 펫의 관절 통증 완화에 도움을 주며, 안정적인 리듬은 인지 기능을 돕습니다.';
+      contextText = 'science_senior'.tr;
       sourceText = 'Source: Scientific Reports, 2019';
     } else {
-      contextText = '반려동물과 보호자의 옥시토신 루프를 활성화하여 깊은 유대감을 형성합니다.';
+      contextText = 'science_default'.tr;
       sourceText = 'Source: Science, 2015';
     }
 
@@ -183,7 +183,7 @@ class ModeDetailView extends GetView<HomeController> {
               Icon(Icons.science, size: 18, color: AppColors.primaryBlue),
               const SizedBox(width: 8),
               Text(
-                '과학적 효과',
+                'science_effect'.tr,
                 style: GoogleFonts.poppins(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -390,10 +390,10 @@ class ModeDetailView extends GetView<HomeController> {
     
     for (final tag in tags) {
       final lowerTag = tag.toLowerCase();
-      if (lowerTag.contains('large')) return '대형';
-      if (lowerTag.contains('medium')) return '중형';
-      if (lowerTag.contains('small')) return '소형';
-      if (lowerTag.contains('all') || lowerTag.contains('common')) return '공용';
+      if (lowerTag.contains('large')) return 'size_large'.tr;
+      if (lowerTag.contains('medium')) return 'size_medium'.tr;
+      if (lowerTag.contains('small')) return 'size_small'.tr;
+      if (lowerTag.contains('all') || lowerTag.contains('common')) return 'size_all'.tr;
     }
     return null;
   }
