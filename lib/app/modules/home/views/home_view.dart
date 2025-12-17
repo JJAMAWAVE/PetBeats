@@ -132,8 +132,8 @@ class HomeView extends GetView<HomeController> {
                     
                     // SECTION 1: Recommended Modes (Circular)
                     Obx(() {
-                      final species = ['강아지', '고양이', '보호자'][controller.selectedSpeciesIndex.value];
-                      return _buildSectionTitle('$species를 위한 추천 모드');
+                      final species = ['species_dog'.tr, 'species_cat'.tr, 'species_guardian'.tr][controller.selectedSpeciesIndex.value];
+                      return _buildSectionTitle('home_recommended_for'.trParams({'species': species}));
                     }),
                     const SizedBox(height: 12),
                     
@@ -254,7 +254,7 @@ class HomeView extends GetView<HomeController> {
                     const SizedBox(height: 20),
 
                     // SECTION 3: Scenario Chips
-                    _buildSectionTitleWithPro('AI 맞춤 추천'),
+                    _buildSectionTitleWithPro('home_ai_recommend'.tr),
                     const SizedBox(height: 12),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -262,25 +262,25 @@ class HomeView extends GetView<HomeController> {
                         children: [
                           Row(
                             children: [
-                              Expanded(child: _buildScenarioChip('산책 후', 'assets/icons/icon_scenario_walk.png')),
+                              Expanded(child: _buildScenarioChip('scenario_after_walk'.tr, 'assets/icons/icon_scenario_walk.png')),
                               const SizedBox(width: 12),
-                              Expanded(child: _buildScenarioChip('낮잠 시간', 'assets/icons/icon_scenario_nap.png')),
+                              Expanded(child: _buildScenarioChip('scenario_nap'.tr, 'assets/icons/icon_scenario_nap.png')),
                             ],
                           ),
                           const SizedBox(height: 10),
                           Row(
                             children: [
-                              Expanded(child: _buildScenarioChip('병원 방문', 'assets/icons/icon_scenario_vet.png')),
+                              Expanded(child: _buildScenarioChip('scenario_hospital'.tr, 'assets/icons/icon_scenario_vet.png')),
                               const SizedBox(width: 12),
-                              Expanded(child: _buildScenarioChip('미용 후', 'assets/icons/icon_scenario_grooming.png')),
+                              Expanded(child: _buildScenarioChip('scenario_grooming'.tr, 'assets/icons/icon_scenario_grooming.png')),
                             ],
                           ),
                           const SizedBox(height: 10),
                           Row(
                             children: [
-                              Expanded(child: _buildScenarioChip('천둥/번개', 'assets/icons/icon_scenario_thunder.png')),
+                              Expanded(child: _buildScenarioChip('scenario_thunder'.tr, 'assets/icons/icon_scenario_thunder.png')),
                               const SizedBox(width: 12),
-                              Expanded(child: _buildScenarioChip('분리 불안', 'assets/icons/icon_scenario_anxiety.png')),
+                              Expanded(child: _buildScenarioChip('scenario_anxiety'.tr, 'assets/icons/icon_scenario_anxiety.png')),
                             ],
                           ),
                         ],
@@ -290,7 +290,7 @@ class HomeView extends GetView<HomeController> {
                     const SizedBox(height: 20),
                     
                     // SECTION 3: Exercises (2-row Grid Layout)
-                    _buildSectionTitle('건강 & 활동'),
+                    _buildSectionTitle('home_health_activity'.tr),
                     const SizedBox(height: 12),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -301,8 +301,8 @@ class HomeView extends GetView<HomeController> {
                             children: [
                               Expanded(
                                 child: _buildExerciseCard(
-                                  title: '휴식',
-                                  subtitle: '스트레스를 낮추고\n평온함을 찾으세요',
+                                  title: 'home_rest_title'.tr,
+                                  subtitle: 'home_rest_desc'.tr,
                                   iconPath: 'assets/icons/icon_health_rest.png',
                                   color: Colors.teal,
                                   activityType: 'rest',
@@ -311,8 +311,8 @@ class HomeView extends GetView<HomeController> {
                               const SizedBox(width: 12),
                               Expanded(
                                 child: _buildExerciseCard(
-                                  title: '반려 상식',
-                                  subtitle: '반려동물을 위한\n유용한 팁',
+                                  title: 'home_tips_title'.tr,
+                                  subtitle: 'home_tips_desc'.tr,
                                   iconPath: 'assets/icons/icon_health_tips.png',
                                   color: Colors.indigo,
                                   activityType: 'tips',
@@ -326,8 +326,8 @@ class HomeView extends GetView<HomeController> {
                             children: [
                               Expanded(
                                 child: _buildExerciseCard(
-                                  title: '에너지 충전',
-                                  subtitle: '활력을 되찾아주는\n사운드',
+                                  title: 'home_charge_title'.tr,
+                                  subtitle: 'home_charge_desc'.tr,
                                   iconPath: 'assets/icons/icon_health_charge.png',
                                   color: Colors.orange,
                                   activityType: 'charge',
