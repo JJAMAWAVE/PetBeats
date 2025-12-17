@@ -22,41 +22,41 @@ class _HapticSafetyGuideDialogState extends State<HapticSafetyGuideDialog> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  final List<Map<String, dynamic>> _cards = [
+  List<Map<String, dynamic>> get _cards => [
     {
       'step': '1',
       'titleIcon': Icons.warning_amber_rounded,
       'titleColor': Colors.amber,
-      'title': '잠깐! 직접 사용은 위험해요',
+      'title': 'haptic_guide_step1_title'.tr,
       'keyPoints': [
-        '딱딱한 표면 → 피부 자극',
-        '강한 진동 → 불안감 유발',
+        'haptic_guide_step1_point1'.tr,
+        'haptic_guide_step1_point2'.tr,
       ],
-      'bottomText': '반드시 매개체를 통해 은은하게 전달해주세요.',
+      'bottomText': 'haptic_guide_step1_desc'.tr,
       'image': 'assets/images/Haptic/1.png',
     },
     {
       'step': '2',
       'titleIcon': Icons.pets,
       'titleColor': AppColors.primaryBlue,
-      'title': '가장 좋아하는 자리에',
+      'title': 'haptic_guide_step2_title'.tr,
       'keyPoints': [
-        '📍 담요/방석 아래에 폰을 배치',
-        '🔊 쿠션 두께로 진동 세기 조절',
+        'haptic_guide_step2_point1'.tr,
+        'haptic_guide_step2_point2'.tr,
       ],
-      'bottomText': '아이가 스스로 편한 자리를 찾도록 해주세요.',
+      'bottomText': 'haptic_guide_step2_desc'.tr,
       'image': 'assets/images/Haptic/2.png',
     },
     {
       'step': '3',
       'titleIcon': Icons.favorite,
       'titleColor': Colors.pinkAccent,
-      'title': '심장 소리와 함께',
+      'title': 'haptic_guide_step3_title'.tr,
       'keyPoints': [
-        '💓 보호자님의 체온과 심장 박동',
-        '📱 햅틱 진동이 하나로 전달',
+        'haptic_guide_step3_point1'.tr,
+        'haptic_guide_step3_point2'.tr,
       ],
-      'bottomText': '아이를 안고 폰을 몸에 대어보세요. 최고의 안정감을 선물합니다.',
+      'bottomText': 'haptic_guide_step3_desc'.tr,
       'image': 'assets/images/Haptic/3.png',
     },
   ];
@@ -122,7 +122,7 @@ class _HapticSafetyGuideDialogState extends State<HapticSafetyGuideDialog> {
                     SizedBox(width: 8.w),
                     Expanded(
                       child: Text(
-                        '햅틱 테라피 안전 가이드',
+                        'haptic_guide_title'.tr,
                         style: AppTextStyles.titleMedium.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -191,7 +191,7 @@ class _HapticSafetyGuideDialogState extends State<HapticSafetyGuideDialog> {
                           );
                         },
                         child: Text(
-                          '이전',
+                          'previous'.tr,
                           style: AppTextStyles.bodyMedium.copyWith(
                             color: Colors.white70,
                           ),
@@ -201,7 +201,7 @@ class _HapticSafetyGuideDialogState extends State<HapticSafetyGuideDialog> {
                       TextButton(
                         onPressed: () => Get.back(),
                         child: Text(
-                          '건너뛰기',
+                          'skip'.tr,
                           style: AppTextStyles.bodyMedium.copyWith(
                             color: Colors.white54,
                           ),
@@ -232,7 +232,7 @@ class _HapticSafetyGuideDialogState extends State<HapticSafetyGuideDialog> {
                           ),
                         ),
                         child: Text(
-                          _currentPage < _cards.length - 1 ? '다음' : '확인',
+                          _currentPage < _cards.length - 1 ? 'next'.tr : 'confirm'.tr,
                           style: AppTextStyles.bodyLarge.copyWith(
                             fontWeight: FontWeight.bold,
                           ),

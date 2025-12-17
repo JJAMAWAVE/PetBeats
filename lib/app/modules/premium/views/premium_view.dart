@@ -34,26 +34,26 @@ class PremiumView extends GetView<PremiumController> {
               ),
               const SizedBox(height: 16),
               Text(
-                '모든 기능을 제한 없이\n이용해보세요',
+                'premium_limitless'.tr,
                 style: AppTextStyles.bodyMedium.copyWith(color: Colors.grey[600]),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 40),
-              _buildFeatureItem('모든 힐링 사운드 잠금 해제'),
-              _buildFeatureItem('오프라인 재생 지원'),
-              _buildFeatureItem('광고 없는 쾌적한 환경'),
-              _buildFeatureItem('백그라운드 재생'),
+              _buildFeatureItem('premium_feature_1'.tr),
+              _buildFeatureItem('premium_feature_2'.tr),
+              _buildFeatureItem('premium_feature_3'.tr),
+              _buildFeatureItem('premium_feature_4'.tr),
               
               const Spacer(),
               CustomButton(
-                text: '월 4,900원으로 시작하기',
+                text: 'premium_start_price'.tr,
                 onPressed: () {}, // 결제 로직 연결 필요
               ),
               const SizedBox(height: 16),
               TextButton(
                 onPressed: () => Get.back(),
                 child: Text(
-                  '나중에 하기',
+                  'premium_maybe_later'.tr,
                   style: AppTextStyles.bodyMedium.copyWith(
                     color: Colors.grey,
                     decoration: TextDecoration.underline,

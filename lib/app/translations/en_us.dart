@@ -344,4 +344,58 @@ const Map<String, String> enUS = {
   'size_medium': 'Medium',
   'size_small': 'Small',
   'size_all': 'All',
+
+  // ===== App Info (app_info_view.dart) =====
+  'app_info_p1_title': 'Scientifically Designed\nSound Therapy.',
+  'app_info_p1_subtitle': 'Brainwave-stabilizing frequencies and haptic vibrations help anxious pets fall into a deep sleep.',
+  'app_info_p1_badge1': 'Dog: Anxiety Relief',
+  'app_info_p1_badge2': 'Cat: Stress Reduction',
+  'app_info_p2_title': 'Your Pet\'s Noise Sensitivity is\n\'Very High\'.',
+  'app_info_p2_subtitle': 'Complex noises in urban environments are causing constant stress to your pet.\nCustomized care is needed.',
+  'app_info_p3_title': 'Silence to Us,\nNoise to Them.',
+  'app_info_p3_subtitle': 'Humans hear up to 20kHz, but dogs hear up to 45kHz and cats up to 64kHz.\nEven refrigerator motor sounds can be painful to them.',
+  'app_info_p4_title': 'Sync Heart and\nBrainwaves.',
+  'app_info_p4_subtitle': '🐶 [Dog Mode]: 60 BPM rhythm mimics a large dog\'s resting heart rate to induce instinctual calm.\n\n🐱 [Cat Mode]: 20~50Hz purring frequencies help relieve tension and heal cats.',
+  'app_info_p5_title': 'Your Pet is Not the\nOnly Sensitive One.',
+  'app_info_p5_subtitle': 'Research shows 72.5% of dogs suffer from noise anxiety, and 64% of cats show environmental stress.\nGift them peace with PetBeats.',
+  'app_info_p6_title': 'Save Your Pet\'s\nTherapy Profile.',
+  'app_info_p6_subtitle': 'Your pet\'s custom settings are saved even if you change devices.\nLink with spare devices for convenient care anytime.',
+  'app_info_continue_action': 'Continue with Google/Apple',
+  'tap_to_start': 'Tap to Start',
+  'notice': 'Notice',
+  'account_linked': 'Account Linked',
+
+  // ===== Premium View (premium_view.dart) =====
+  'premium_limitless': 'Unlock All Features\nWithout Limits',
+  'premium_feature_1': 'Unlock all healing sounds',
+  'premium_feature_2': 'Offline playback support',
+  'premium_feature_3': 'Ad-free environment',
+  'premium_feature_4': 'Background playback',
+  'premium_start_price': 'Start at \$4.99/month',
+  'premium_maybe_later': 'Maybe Later',
+
+  // ===== Review View (review_view.dart) =====
+  'review_write_title': 'Write Review',
+  'review_question': 'How was your time with\nPetBeats?',
+  'review_hint': 'Please define your opinion for better service (Optional)',
+  'submit': 'Submit',
+
+  // ===== Sitter Setup (sitter_setup_view.dart) =====
+  'sitter_section_detect': '🎛️ Detection Settings',
+  'sitter_section_response': '🎵 Response Settings',
+  
+  // ===== Haptic Guide (haptic_safety_guide_dialog.dart) =====
+  'haptic_guide_title': 'Haptic Therapy Safety Guide',
+  'haptic_guide_step1_title': 'Wait! Direct use is dangerous',
+  'haptic_guide_step1_point1': 'Hard surface → Skin irritation',
+  'haptic_guide_step1_point2': 'Strong vibration → Anxiety',
+  'haptic_guide_step1_desc': 'Please deliver gently through a medium.',
+  'haptic_guide_step2_title': 'In Their Favorite Spot',
+  'haptic_guide_step2_point1': '📍 Place phone under blanket/cushion',
+  'haptic_guide_step2_point2': '🔊 Adjust intensity with cushion thickness',
+  'haptic_guide_step2_desc': 'Let your pet find a comfortable spot on their own.',
+  'haptic_guide_step3_title': 'With Heartbeat Sound',
+  'haptic_guide_step3_point1': '💓 Guardian\'s warmth & heartbeat',
+  'haptic_guide_step3_point2': '📱 Haptic vibration delivered as one',
+  'haptic_guide_step3_desc': 'Hold your pet and place the phone against your body. Gifts the best comfort.',
 };

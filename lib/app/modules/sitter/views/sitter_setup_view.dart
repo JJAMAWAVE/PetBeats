@@ -50,7 +50,7 @@ class _SitterSetupViewState extends State<SitterSetupView> {
                 children: [
                   _buildGuideCard(),
                   SizedBox(height: 24.h),
-                  _buildSectionTitle('🎛️ 감지 설정'),
+                  _buildSectionTitle('sitter_section_detect'.tr),
                   SizedBox(height: 12.h),
                   _buildDetectionCard(
                     icon: Icons.mic,
@@ -72,7 +72,7 @@ class _SitterSetupViewState extends State<SitterSetupView> {
                     onSensitivityChanged: (val) => setState(() => _motionSensitivity = val),
                   ),
                   SizedBox(height: 24.h),
-                  _buildSectionTitle('🎵 반응 행동 설정'),
+                  _buildSectionTitle('sitter_section_response'.tr),
                   SizedBox(height: 12.h),
                   _buildSoundModeCard(),
                   SizedBox(height: 12.h),

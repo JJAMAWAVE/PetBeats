@@ -23,43 +23,43 @@ class _AppInfoViewState extends State<AppInfoView> with TickerProviderStateMixin
   late AnimationController _pulseController;
   late AnimationController _slowZoomController; // Added for Page 4
 
-  final List<Map<String, dynamic>> _pages = [
+  List<Map<String, dynamic>> get _pages => [
     {
       'image': 'assets/images/AppInfo/page_2.png',
-      'title': '과학으로 설계된\n소리 치료.',
-      'subtitle': '뇌파를 안정시키는 주파수와 햅틱 진동으로,\n불안했던 아이가 깊은 잠에 빠져듭니다.',
+      'title': 'app_info_p1_title'.tr,
+      'subtitle': 'app_info_p1_subtitle'.tr,
       'badges': [
-        {'icon': '🐶', 'text': 'Dog: Anxiety Relief'},
-        {'icon': '🐱', 'text': 'Cat: Stress Reduction'},
+        {'icon': '🐶', 'text': 'app_info_p1_badge1'.tr},
+        {'icon': '🐱', 'text': 'app_info_p1_badge2'.tr},
       ],
     },
     {
       'image': 'assets/images/AppInfo/page_3.png',
-      'title': '우리 아이의 소음 민감도는\n\'매우 높음\'입니다.',
-      'subtitle': '도시 환경의 복잡한 소리 자극이 아이에게\n지속적인 스트레스를 주고 있습니다.\n맞춤형 케어가 필요합니다.',
+      'title': 'app_info_p2_title'.tr,
+      'subtitle': 'app_info_p2_subtitle'.tr,
     },
     {
       'image': 'assets/images/AppInfo/page_4.png',
-      'title': '우리에겐 침묵이지만,\n아이에겐 소음입니다.',
-      'subtitle': '사람은 20kHz까지만 듣지만,\n강아지는 45kHz, 고양이는 64kHz의\n초고역대 소음까지 듣습니다.\n냉장고 모터 소리조차 그들에겐 고통일 수 있습니다.',
+      'title': 'app_info_p3_title'.tr,
+      'subtitle': 'app_info_p3_subtitle'.tr,
       'footer': 'Source: Louisiana State University, School of Veterinary Medicine',
     },
     {
       'image': 'assets/images/AppInfo/page_5.png',
-      'title': '심장과 뇌파를\n동기화합니다.',
-      'subtitle': '🐶 [Dog Mode]: 대형견의 휴식 심박수인 60 BPM 리듬은 본능적인 안정과 수면을 유도합니다.\n\n🐱 [Cat Mode]: 20~50Hz 대역의 골골송(Purring) 주파수는 고양이의 긴장 완화와 치유를 돕습니다.',
+      'title': 'app_info_p4_title'.tr,
+      'subtitle': 'app_info_p4_subtitle'.tr,
       'footer': 'Source: Bioacoustics Research / JASA',
     },
     {
       'image': 'assets/images/AppInfo/page_6.png',
-      'title': '당신의 아이만\n예민한 것이 아닙니다.',
-      'subtitle': '연구에 따르면 반려견의 72.5%가 소음 민감증과 불안을 겪고 있으며, 반려묘의 64% 또한 환경적 스트레스를 보입니다.\n이제 PetBeats로 평화를 선물하세요.',
+      'title': 'app_info_p5_title'.tr,
+      'subtitle': 'app_info_p5_subtitle'.tr,
       'footer': 'Source: Salonen et al., Scientific Reports (2020, 2021)',
     },
     {
       'image': 'assets/images/AppInfo/page_1.png',
-      'title': '아이를 위한\n테라피 프로필을 저장하세요.',
-      'subtitle': '기기를 변경해도 우리 아이 맞춤 설정이 그대로 유지됩니다.\n공기계와 연동하여 언제든 편하게 케어하세요.',
+      'title': 'app_info_p6_title'.tr,
+      'subtitle': 'app_info_p6_subtitle'.tr,
       'hasAction': true,
     },
   ];
@@ -135,8 +135,8 @@ class _AppInfoViewState extends State<AppInfoView> with TickerProviderStateMixin
       Get.back(); // Close loading dialog
       Get.back(); // Close AppInfoView
       Get.snackbar(
-        '알림',
-        '계정이 연동되었습니다.',
+        'notice'.tr,
+        'account_linked'.tr,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: AppColors.textDarkNavy,
         colorText: Colors.white,
@@ -213,7 +213,7 @@ class _AppInfoViewState extends State<AppInfoView> with TickerProviderStateMixin
                 return Opacity(
                   opacity: 0.2 + (_tapTextController.value * 0.8),
                   child: Text(
-                    AppLocalizations.of(context)?.tapToStart ?? '화면을 터치하여 시작',
+                    AppLocalizations.of(context)?.tapToStart ?? 'tap_to_start'.tr,
                     textAlign: TextAlign.center,
                     style: AppTextStyles.bodyMedium.copyWith(
                       color: AppColors.primaryBlue,
@@ -445,7 +445,7 @@ class _AppInfoViewState extends State<AppInfoView> with TickerProviderStateMixin
                             elevation: 0,
                           ),
                           child: const Text(
-                            'Google/Apple로 계속하기',
+                            'app_info_continue_action'.tr,
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ),

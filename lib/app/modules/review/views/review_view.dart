@@ -11,7 +11,7 @@ class ReviewView extends GetView<ReviewController> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('리뷰 작성', style: TextStyle(color: Colors.black)),
+        title: Text('review_write_title'.tr, style: const TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
@@ -22,9 +22,9 @@ class ReviewView extends GetView<ReviewController> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 20),
-            const Text(
-              'PetBeats와 함께한 시간,\n어떠셨나요?',
-              style: TextStyle(
+            Text(
+              'review_question'.tr,
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: AppColors.textDarkNavy,
@@ -49,7 +49,7 @@ class ReviewView extends GetView<ReviewController> {
             TextField(
               controller: controller.feedbackController,
               decoration: InputDecoration(
-                hintText: '더 좋은 서비스를 위해 의견을 남겨주세요 (선택사항)',
+                hintText: 'review_hint'.tr,
                 hintStyle: TextStyle(color: Colors.grey[400]),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -79,9 +79,9 @@ class ReviewView extends GetView<ReviewController> {
                 ),
                 elevation: 0,
               ),
-              child: const Text(
-                '제출하기',
-                style: TextStyle(
+              child: Text(
+                'submit'.tr,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
