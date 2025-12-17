@@ -95,7 +95,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
                     SizedBox(height: 16.h),
                     _buildBenefitRow(
                       Icons.psychology,
-                      'Smart Sync',
+                      '스마트 싱크',
                       ' (날씨/시간/돌봄) 잠금 해제',
                     ),
                     SizedBox(height: 16.h),

@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../home/widgets/mini_player.dart';
+import '../services/sitter_report_storage_service.dart';
+import '../../../../app/data/services/auth_service.dart';
 
 class SitterReportView extends StatelessWidget {
   const SitterReportView({super.key});
@@ -17,6 +19,15 @@ class SitterReportView extends StatelessWidget {
     final int soundCount = args['soundCount'] ?? 0;
     final int motionCount = args['motionCount'] ?? 0;
     final int careCount = args['careCount'] ?? 0;
+    
+    // Google 연동 상태 확인
+    bool isGoogleLinked = false;
+    try {
+      final storageService = Get.find<SitterReportStorageService>();
+      isGoogleLinked = storageService.isLinkedToGoogle;
+    } catch (e) {
+      debugPrint('[SitterReportView] SitterReportStorageService not found');
+    }
 
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
@@ -40,6 +51,9 @@ class SitterReportView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Google 연동 안내 배너 (비연동 상태일 때만 표시)
+                if (!isGoogleLinked) _buildGoogleLinkBanner(),
+                
                 // 요약 카드
                 _buildSummaryCard(elapsedTime, soundCount, motionCount, careCount),
                 
@@ -73,6 +87,88 @@ class SitterReportView extends StatelessWidget {
             left: 0,
             right: 0,
             child: const MiniPlayer(),
+          ),
+        ],
+      ),
+    );
+  }
+  
+  /// Google 계정 연동 안내 배너
+  Widget _buildGoogleLinkBanner() {
+    return Container(
+      margin: EdgeInsets.only(bottom: 16.h),
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: Colors.amber.shade50,
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(color: Colors.amber.shade200),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.info_outline, color: Colors.amber.shade700, size: 20.w),
+              SizedBox(width: 8.w),
+              Expanded(
+                child: Text(
+                  '기기 변경 시 기록이 삭제될 수 있어요',
+                  style: AppTextStyles.bodyMedium.copyWith(
+                    color: Colors.amber.shade800,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8.h),
+          Text(
+            '구글 계정을 연동하면 기기를 바꿔도 돌봄 기록을 안전하게 보관할 수 있어요.',
+            style: AppTextStyles.bodySmall.copyWith(
+              color: Colors.amber.shade700,
+            ),
+          ),
+          SizedBox(height: 12.h),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: () async {
+                try {
+                  final authService = Get.find<AuthService>();
+                  await authService.signInWithGoogle();
+                  Get.snackbar(
+                    '연동 완료',
+                    '구글 계정이 연동되었습니다!',
+                    backgroundColor: Colors.green.shade100,
+                    colorText: Colors.green.shade800,
+                  );
+                } catch (e) {
+                  Get.snackbar(
+                    '연동 실패',
+                    '구글 계정 연동에 실패했습니다.',
+                    backgroundColor: Colors.red.shade100,
+                    colorText: Colors.red.shade800,
+                  );
+                }
+              },
+              icon: Image.asset(
+                'assets/icons/icon_google.png',
+                width: 20.w,
+                height: 20.w,
+                errorBuilder: (_, __, ___) => Icon(Icons.account_circle, size: 20.w),
+              ),
+              label: const Text('구글 계정 연동하기'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                foregroundColor: AppColors.textDarkNavy,
+                padding: EdgeInsets.symmetric(vertical: 12.h),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                  side: BorderSide(color: Colors.grey.shade300),
+                ),
+                elevation: 0,
+              ),
+            ),
           ),
         ],
       ),

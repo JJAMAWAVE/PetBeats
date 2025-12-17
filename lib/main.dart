@@ -22,6 +22,7 @@ import 'app/data/services/sound_mixer_service.dart';  // ✨ For weather sounds
 import 'app/data/services/rhythm_care_service.dart';  // ✨ Rhythm Care (24h bio-rhythm)
 import 'app/data/services/iot_service.dart';
 import 'app/data/services/timer_service.dart';
+import 'app/data/services/pet_profile_service.dart'; // 🐾 Pet Profile
 import 'package:get_storage/get_storage.dart';
 import 'package:petbeats/core/theme/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -58,6 +59,7 @@ void main() async {
   Get.put(RhythmCareService(), permanent: true);     // ✨ Rhythm Care (24h bio-rhythm)
   Get.put(IotService(), permanent: true);
   Get.put(TimerService(), permanent: true);
+  Get.put(PetProfileService(), permanent: true);     // 🐾 Pet Profile
   
   // 웹용 BGM 사전 로딩 (웹 플랫폼만)
   if (kIsWeb) {

@@ -1,10 +1,14 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../data/services/auth_service.dart';
+import '../../../data/services/pet_profile_service.dart';
 import '../controllers/settings_controller.dart';
+import '../../../routes/app_routes.dart';
 
 class SettingsView extends GetView<SettingsController> {
   const SettingsView({super.key});
@@ -31,11 +35,31 @@ class SettingsView extends GetView<SettingsController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // 반려동물 프로필 섹션
+            _buildSectionTitle('🐾 반려동물 프로필'),
+            SizedBox(height: 12.h),
+            _buildPetProfileCard(),
+            SizedBox(height: 32.h),
+            
+            // 계정 섹션
             _buildSectionTitle('계정'),
             SizedBox(height: 12.h),
             _buildAccountCard(),
             SizedBox(height: 32.h),
             
+            // 볼륨 설정 섹션
+            _buildSectionTitle('🔊 볼륨 설정'),
+            SizedBox(height: 12.h),
+            _buildVolumeControls(),
+            SizedBox(height: 32.h),
+            
+            // 언어 설정 섹션
+            _buildSectionTitle('🌐 언어'),
+            SizedBox(height: 12.h),
+            _buildLanguageSelector(),
+            SizedBox(height: 32.h),
+            
+            // 데이터 접근 권한
             _buildSectionTitle('데이터 접근 권한'),
             SizedBox(height: 8.h),
             Text(
@@ -61,21 +85,6 @@ class SettingsView extends GetView<SettingsController> {
               value: controller.isNotificationEnabled.value,
               onChanged: controller.toggleNotification,
             )),
-            SizedBox(height: 32.h),
-
-            _buildSectionTitle('기기 연동'),
-            SizedBox(height: 16.h),
-            _buildDeviceButton(
-              icon: Icons.cloud_circle_outlined, // Replace with appropriate icon
-              label: 'Smart Home (IoT)',
-              onPressed: controller.connectIoT,
-            ),
-            SizedBox(height: 12.h),
-            _buildDeviceButton(
-              icon: Icons.videocam_outlined,
-              label: 'Pet Cam',
-              onPressed: controller.connectPetCam,
-            ),
             
             SizedBox(height: 48.h),
             Center(
@@ -99,6 +108,102 @@ class SettingsView extends GetView<SettingsController> {
       style: AppTextStyles.titleLarge.copyWith(
         fontSize: 16.sp,
         color: AppColors.textDarkNavy,
+      ),
+    );
+  }
+
+  /// 반려동물 프로필 카드
+  Widget _buildPetProfileCard() {
+    return GestureDetector(
+      onTap: () => Get.toNamed(Routes.PET_PROFILE),
+      child: Container(
+        padding: EdgeInsets.all(20.w),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              AppColors.primaryBlue.withOpacity(0.1),
+              AppColors.primaryBlue.withOpacity(0.05),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(20.r),
+          border: Border.all(color: AppColors.primaryBlue.withOpacity(0.2)),
+        ),
+        child: Obx(() {
+          final profile = Get.find<PetProfileService>().profile.value;
+          final hasProfile = profile.hasProfile;
+          
+          return Row(
+            children: [
+              // 프로필 사진
+              Container(
+                width: 60.w,
+                height: 60.w,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: AppColors.primaryBlue.withOpacity(0.3), width: 2),
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: _buildPetPhoto(profile),
+              ),
+              SizedBox(width: 16.w),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      hasProfile ? profile.name! : '프로필 등록하기',
+                      style: AppTextStyles.titleLarge.copyWith(
+                        fontSize: 16.sp,
+                        color: AppColors.textDarkNavy,
+                      ),
+                    ),
+                    SizedBox(height: 4.h),
+                    Text(
+                      hasProfile 
+                          ? '${profile.speciesKorean} • ${profile.age}살${profile.breed != null ? ' • ${profile.breed}' : ''}'
+                          : '탭하여 반려동물 정보를 입력하세요',
+                      style: AppTextStyles.bodyMedium.copyWith(
+                        color: AppColors.textGrey,
+                        fontSize: 12.sp,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(Icons.edit, size: 20.w, color: AppColors.primaryBlue),
+            ],
+          );
+        }),
+      ),
+    );
+  }
+  
+  Widget _buildPetPhoto(PetProfile profile) {
+    if (profile.photoPath != null && profile.photoPath!.startsWith('data:')) {
+      // Base64 이미지
+      final base64Data = profile.photoPath!.split(',').last;
+      return Image.memory(
+        base64Decode(base64Data),
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) => _buildDefaultPetIcon(profile.species),
+      );
+    }
+    return _buildDefaultPetIcon(profile.species);
+  }
+  
+  Widget _buildDefaultPetIcon(String? species) {
+    return Image.asset(
+      species == 'cat' 
+          ? 'assets/icons/icon_species_cat.png' 
+          : 'assets/icons/icon_species_dog.png',
+      fit: BoxFit.cover,
+      errorBuilder: (_, __, ___) => Icon(
+        Icons.pets,
+        size: 30.w,
+        color: AppColors.primaryBlue,
       ),
     );
   }
@@ -167,6 +272,276 @@ class SettingsView extends GetView<SettingsController> {
     );
   }
 
+  /// 볼륨 조절 위젯
+  Widget _buildVolumeControls() {
+    final storage = GetStorage();
+    final musicVolume = (storage.read<double>('musicVolume') ?? 0.7).obs;
+    final weatherVolume = (storage.read<double>('weatherVolume') ?? 0.5).obs;
+    
+    return Container(
+      padding: EdgeInsets.all(20.w),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20.r),
+        border: Border.all(color: Colors.grey.shade200),
+      ),
+      child: Column(
+        children: [
+          // 음악 볼륨
+          _buildVolumeSlider(
+            icon: Icons.music_note,
+            label: '음악 볼륨',
+            volume: musicVolume,
+            onChanged: (value) {
+              musicVolume.value = value;
+              storage.write('musicVolume', value);
+            },
+          ),
+          SizedBox(height: 16.h),
+          Divider(color: Colors.grey.shade200),
+          SizedBox(height: 16.h),
+          // 날씨 효과음 볼륨
+          _buildVolumeSlider(
+            icon: Icons.cloud,
+            label: '날씨 효과음',
+            volume: weatherVolume,
+            onChanged: (value) {
+              weatherVolume.value = value;
+              storage.write('weatherVolume', value);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+  
+  Widget _buildVolumeSlider({
+    required IconData icon,
+    required String label,
+    required RxDouble volume,
+    required ValueChanged<double> onChanged,
+  }) {
+    return Obx(() => Row(
+      children: [
+        Icon(icon, color: AppColors.primaryBlue, size: 24.w),
+        SizedBox(width: 12.w),
+        Expanded(
+          flex: 2,
+          child: Text(
+            label,
+            style: AppTextStyles.bodyMedium.copyWith(
+              color: AppColors.textDarkNavy,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: Slider(
+            value: volume.value,
+            onChanged: onChanged,
+            activeColor: AppColors.primaryBlue,
+            inactiveColor: AppColors.primaryBlue.withOpacity(0.2),
+          ),
+        ),
+        SizedBox(
+          width: 40.w,
+          child: Text(
+            '${(volume.value * 100).toInt()}%',
+            style: AppTextStyles.bodySmall.copyWith(
+              color: AppColors.textGrey,
+            ),
+          ),
+        ),
+      ],
+    ));
+  }
+
+  /// 지원 언어 목록 (ARPU 높은 시장 기준 10개)
+  static const List<Map<String, String>> _supportedLanguages = [
+    {'code': 'ko', 'flag': '🇰🇷', 'name': '한국어'},
+    {'code': 'en', 'flag': '🇺🇸', 'name': 'English'},
+    {'code': 'ja', 'flag': '🇯🇵', 'name': '日本語'},
+    {'code': 'zh', 'flag': '🇨🇳', 'name': '中文 (简体)'},
+    {'code': 'zh_TW', 'flag': '🇹🇼', 'name': '中文 (繁體)'},
+    {'code': 'es', 'flag': '🇪🇸', 'name': 'Español'},
+    {'code': 'fr', 'flag': '🇫🇷', 'name': 'Français'},
+    {'code': 'de', 'flag': '🇩🇪', 'name': 'Deutsch'},
+    {'code': 'pt', 'flag': '🇧🇷', 'name': 'Português'},
+    {'code': 'it', 'flag': '🇮🇹', 'name': 'Italiano'},
+  ];
+
+  /// 언어 선택 위젯 (15개 언어)
+  Widget _buildLanguageSelector() {
+    final storage = GetStorage();
+    final currentLocale = (storage.read<String>('locale') ?? 'ko').obs;
+    
+    return Container(
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20.r),
+        border: Border.all(color: Colors.grey.shade200),
+      ),
+      child: Obx(() {
+        final current = _supportedLanguages.firstWhere(
+          (l) => l['code'] == currentLocale.value,
+          orElse: () => _supportedLanguages[0],
+        );
+        
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 현재 선택된 언어
+            GestureDetector(
+              onTap: () => _showLanguageBottomSheet(currentLocale, storage),
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryBlue.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12.r),
+                  border: Border.all(color: AppColors.primaryBlue.withOpacity(0.3)),
+                ),
+                child: Row(
+                  children: [
+                    Text(current['flag']!, style: TextStyle(fontSize: 24.sp)),
+                    SizedBox(width: 12.w),
+                    Expanded(
+                      child: Text(
+                        current['name']!,
+                        style: AppTextStyles.bodyMedium.copyWith(
+                          color: AppColors.textDarkNavy,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Icon(Icons.arrow_drop_down, color: AppColors.primaryBlue, size: 28.w),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
+      }),
+    );
+  }
+  
+  void _showLanguageBottomSheet(RxString currentLocale, GetStorage storage) {
+    Get.bottomSheet(
+      Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // 핸들바
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 12.h),
+              width: 40.w,
+              height: 4.h,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade300,
+                borderRadius: BorderRadius.circular(2.r),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Text(
+                '언어 선택',
+                style: AppTextStyles.titleLarge.copyWith(fontSize: 18.sp),
+              ),
+            ),
+            SizedBox(height: 16.h),
+            // 언어 목록
+            Flexible(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: _supportedLanguages.length,
+                itemBuilder: (context, index) {
+                  final lang = _supportedLanguages[index];
+                  final isSelected = currentLocale.value == lang['code'];
+                  
+                  return ListTile(
+                    leading: Text(lang['flag']!, style: TextStyle(fontSize: 28.sp)),
+                    title: Text(
+                      lang['name']!,
+                      style: AppTextStyles.bodyMedium.copyWith(
+                        color: isSelected ? AppColors.primaryBlue : AppColors.textDarkNavy,
+                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                      ),
+                    ),
+                    trailing: isSelected 
+                        ? Icon(Icons.check_circle, color: AppColors.primaryBlue)
+                        : null,
+                    onTap: () {
+                      currentLocale.value = lang['code']!;
+                      storage.write('locale', lang['code']);
+                      
+                      // Locale 업데이트
+                      final parts = lang['code']!.split('_');
+                      Get.updateLocale(Locale(parts[0], parts.length > 1 ? parts[1] : ''));
+                      
+                      Get.back();
+                      Get.snackbar(
+                        '언어 변경',
+                        '${lang['name']}로 변경되었습니다',
+                        backgroundColor: Colors.green.shade100,
+                        colorText: Colors.green.shade800,
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 20.h),
+          ],
+        ),
+      ),
+    );
+  }
+  
+  Widget _buildLanguageOption({
+    required String code,
+    required String label,
+    required String flag,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: EdgeInsets.symmetric(vertical: 12.h),
+          decoration: BoxDecoration(
+            color: isSelected ? AppColors.primaryBlue.withOpacity(0.1) : Colors.grey.shade50,
+            borderRadius: BorderRadius.circular(12.r),
+            border: Border.all(
+              color: isSelected ? AppColors.primaryBlue : Colors.transparent,
+              width: 2,
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(flag, style: TextStyle(fontSize: 20.sp)),
+              SizedBox(width: 8.w),
+              Text(
+                label,
+                style: AppTextStyles.bodyMedium.copyWith(
+                  color: isSelected ? AppColors.primaryBlue : AppColors.textGrey,
+                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildPermissionTile({
     required IconData icon,
     required String title,
@@ -218,42 +593,6 @@ class SettingsView extends GetView<SettingsController> {
             activeTrackColor: AppColors.primaryBlue.withOpacity(0.3),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildDeviceButton({
-    required IconData icon,
-    required String label,
-    required VoidCallback onPressed,
-  }) {
-    return SizedBox(
-      width: double.infinity,
-      height: 56.h,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF222222), // Dark button color
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.r),
-          ),
-          elevation: 0,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 20.w),
-            SizedBox(width: 8.w),
-            Text(
-              label,
-              style: AppTextStyles.titleLarge.copyWith(
-                color: Colors.white,
-                fontSize: 14.sp,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

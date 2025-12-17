@@ -45,18 +45,10 @@ class _BackgroundDecorationState extends State<BackgroundDecoration>
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // 1. 배경 그라데이션 (Deep Blue Gradient)
+        // 1. 배경은 SpeciesThemeTransition에서 처리 (ripple 애니메이션 지원)
+        // 투명 배경으로 ripple이 보이도록 함
         Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                AppColors.backgroundGradientStart,
-                AppColors.backgroundGradientEnd,
-              ],
-            ),
-          ),
+          color: Colors.transparent,
         ),
         
         // 2. 은은한 빛 번짐 효과 (Glow)

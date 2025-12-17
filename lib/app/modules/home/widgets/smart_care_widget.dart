@@ -142,7 +142,7 @@ class SmartCareWidget extends GetView<SmartCareController> {
                   Icon(Icons.videocam_rounded, color: AppColors.primaryBlue, size: 24.w),
                   SizedBox(width: 8.w),
                   Text(
-                    'Pet Cam',
+                    '펫캠',
                     style: AppTextStyles.labelSmall.copyWith(
                       color: AppColors.textDarkNavy,
                       fontWeight: FontWeight.w600,
@@ -179,7 +179,7 @@ class SmartCareWidget extends GetView<SmartCareController> {
           SizedBox(height: 8.h),
           Row(
             children: [
-              _buildIoTActionButton('Live View', Icons.remove_red_eye_rounded),
+              _buildIoTActionButton('실시간 보기', Icons.remove_red_eye_rounded),
               SizedBox(width: 8.w),
               _buildIoTActionButton('진정 사운드', Icons.music_note_rounded, isPrimary: true),
             ],

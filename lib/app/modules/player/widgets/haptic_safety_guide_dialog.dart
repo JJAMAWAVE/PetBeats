@@ -122,7 +122,7 @@ class _HapticSafetyGuideDialogState extends State<HapticSafetyGuideDialog> {
                     SizedBox(width: 8.w),
                     Expanded(
                       child: Text(
-                        'Haptic Therapy 안전 가이드',
+                        '햅틱 테라피 안전 가이드',
                         style: AppTextStyles.titleMedium.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

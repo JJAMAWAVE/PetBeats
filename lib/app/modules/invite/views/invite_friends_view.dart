@@ -212,7 +212,7 @@ class InviteFriendsView extends GetView<InviteController> {
             ),
             const SizedBox(height: 8),
             Text(
-              'FRIENDS JOINED',
+              '가입한 친구',
               style: GoogleFonts.notoSans(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
@@ -233,14 +233,14 @@ class InviteFriendsView extends GetView<InviteController> {
         children: [
           _buildRewardCard(
             friends: 1,
-            title: '1 FRIEND',
+            title: '친구 1명',
             reward: '프리미엄 1주일 무료 체험',
             isReached: controller.tier1Reached,
           ),
           const SizedBox(height: 16),
           _buildRewardCard(
             friends: 3,
-            title: '3 FRIENDS',
+            title: '친구 3명',
             reward: '프리미엄 1개월 무료 구독',
             isReached: controller.tier2Reached,
           ),
@@ -334,7 +334,7 @@ class InviteFriendsView extends GetView<InviteController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'HOW IT WORKS',
+            '참여 방법',
             style: GoogleFonts.notoSans(
               fontSize: 13,
               fontWeight: FontWeight.w700,
@@ -415,7 +415,7 @@ class InviteFriendsView extends GetView<InviteController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Please note:',
+            '유의사항:',
             style: GoogleFonts.notoSans(
               fontSize: 13,
               fontWeight: FontWeight.w700,

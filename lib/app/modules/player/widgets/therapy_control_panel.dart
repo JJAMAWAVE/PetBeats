@@ -95,7 +95,7 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
                     style: TextStyle(fontSize: 16.sp),
                   ),
                   Text(
-                    'Premium Haptic Therapy',
+                    '프리미엄 햅틱 테라피',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15.sp,

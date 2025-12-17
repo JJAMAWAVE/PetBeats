@@ -37,7 +37,7 @@ class HomeView extends GetView<HomeController> {
     return Obx(() => SpeciesThemeTransition(
       theme: controller.currentSpeciesTheme.value,
       child: Scaffold(
-        backgroundColor: controller.currentSpeciesTheme.value.backgroundColor,
+        backgroundColor: Colors.transparent, // Ripple 애니메이션이 보이도록 투명 처리
         body: BackgroundDecoration(
           child: SafeArea(
             child: Stack(
@@ -469,7 +469,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Premium Sound Therapy',
+                        '프리미엄 사운드 테라피',
                         style: AppTextStyles.titleMedium.copyWith(
                           color: Colors.white,
                           fontSize: 20,

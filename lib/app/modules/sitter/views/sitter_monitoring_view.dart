@@ -110,7 +110,6 @@ class _SitterMonitoringViewState extends State<SitterMonitoringView> with Ticker
       }
       final storageService = Get.find<SitterReportStorageService>();
       await storageService.saveReport(
-        userId: 'anonymous', // TODO: 실제 사용자 ID로 교체
         elapsedTime: _elapsedTime,
         soundCount: _soundService.detectionCount.value,
         motionCount: _motionService.detectionCount.value,

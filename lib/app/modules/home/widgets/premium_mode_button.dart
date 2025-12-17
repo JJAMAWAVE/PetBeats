@@ -70,6 +70,9 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
       duration: const Duration(milliseconds: 2000),
     );
 
+    // 먼저 기본값으로 초기화 (LateInitializationError 방지)
+    _effectAnimation = ConstantTween(1.0).animate(_effectController);
+    
     if (widget.animationType != ModeAnimationType.none) {
       _startEffectAnimation();
     }

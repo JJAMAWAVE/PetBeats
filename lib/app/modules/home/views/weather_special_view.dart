@@ -29,7 +29,7 @@ class WeatherSpecialView extends GetView<HomeController> {
           onPressed: () => Get.back(),
         ),
         title: Text(
-          'Smart Weather Sync',
+          '스마트 날씨 싱크',
           style: AppTextStyles.subtitle,
         ),
         centerTitle: true,
@@ -152,7 +152,7 @@ class WeatherSpecialView extends GetView<HomeController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Unlock Smart Weather Sync',
+                    '스마트 날씨 싱크 잠금해제',
                     style: GoogleFonts.poppins(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
@@ -161,7 +161,7 @@ class WeatherSpecialView extends GetView<HomeController> {
                   ),
                   SizedBox(height: 4.h),
                   Text(
-                    'Real-time weather-adaptive sounds',
+                    '실시간 날씨 기반 사운드 적응',
                     style: GoogleFonts.poppins(
                       color: Colors.white.withOpacity(0.9),
                       fontSize: 13.sp,
@@ -283,7 +283,7 @@ class WeatherSpecialView extends GetView<HomeController> {
               Icon(Icons.science, size: 20.w, color: AppColors.primaryBlue),
               SizedBox(width: 8.w),
               Text(
-                'Scientific Insight',
+                '과학적 효과',
                 style: GoogleFonts.poppins(
                   fontSize: 15.sp,
                   fontWeight: FontWeight.bold,

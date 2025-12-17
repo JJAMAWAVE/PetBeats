@@ -88,7 +88,7 @@ class ModeDetailView extends GetView<HomeController> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'Unlock All Premium Tracks',
+                                          '모든 프리미엄 트랙 잠금해제',
                                           style: GoogleFonts.poppins(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w600,
@@ -96,7 +96,7 @@ class ModeDetailView extends GetView<HomeController> {
                                           ),
                                         ),
                                         Text(
-                                          'Get access to specialized care sounds',
+                                          '특별한 케어 사운드에 접근하세요',
                                           style: GoogleFonts.poppins(
                                             color: Colors.white.withOpacity(0.9),
                                             fontSize: 12,
@@ -183,7 +183,7 @@ class ModeDetailView extends GetView<HomeController> {
               Icon(Icons.science, size: 18, color: AppColors.primaryBlue),
               const SizedBox(width: 8),
               Text(
-                'Scientific Insight',
+                '과학적 효과',
                 style: GoogleFonts.poppins(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,

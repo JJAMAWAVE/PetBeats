@@ -30,6 +30,7 @@ import '../modules/player/views/now_playing_view.dart';
 import '../modules/player/bindings/player_binding.dart';
 import '../modules/review/views/review_view.dart';
 import '../modules/review/controllers/review_controller.dart';
+import '../modules/settings/views/pet_profile_view.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -148,6 +149,10 @@ class AppPages {
       binding: BindingsBuilder(() {
         Get.put(ReviewController());
       }),
+    ),
+    GetPage(
+      name: Routes.PET_PROFILE,
+      page: () => const PetProfileView(),
     ),
   ];
 }

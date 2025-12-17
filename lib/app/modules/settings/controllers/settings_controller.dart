@@ -91,7 +91,7 @@ class SettingsController extends GetxController {
                   itemCount: _iotService.scanResults.length,
                   itemBuilder: (context, index) {
                     final result = _iotService.scanResults[index];
-                    final name = result.device.name.isNotEmpty ? result.device.name : 'Unknown Device';
+                    final name = result.device.name.isNotEmpty ? result.device.name : '알 수 없는 기기';
                     return ListTile(
                       title: Text(name),
                       subtitle: Text(result.device.id.toString()),
@@ -135,7 +135,7 @@ class SettingsController extends GetxController {
     Future.delayed(const Duration(seconds: 2), () {
       Get.back();
       Get.snackbar(
-        'Pet Cam',
+        '펫캠',
         '펫 캠 연결에 성공했습니다.',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: AppColors.primaryBlue,
