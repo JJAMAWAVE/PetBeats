@@ -29,6 +29,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 // Firebase
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'app/translations/app_translations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -89,6 +90,7 @@ class MyApp extends StatelessWidget {
           scrollBehavior: AppScrollBehavior(),
           initialRoute: AppPages.INITIAL,
           getPages: AppPages.routes,
+          translations: AppTranslations(),
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
@@ -96,11 +98,11 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [
-            Locale('ko', ''), // Korean
-            Locale('en', ''), // English
+            Locale('ko', 'KR'), // Korean
+            Locale('en', 'US'), // English
           ],
-          locale: const Locale('ko', ''), // Default to Korean
-          fallbackLocale: const Locale('en', ''),
+          locale: const Locale('ko', 'KR'), // Default to Korean
+          fallbackLocale: const Locale('en', 'US'),
           builder: (context, widget) {
             // ScreenUtil 적용을 위한 builder
             return MediaQuery(
