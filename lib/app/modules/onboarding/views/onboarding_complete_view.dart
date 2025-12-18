@@ -126,7 +126,7 @@ class _OnboardingCompleteViewState extends State<OnboardingCompleteView>
                       
                       // 메시지
                       Text(
-                        '맞춤 케어를 준비하고 있어요',
+                        'onboarding_complete_title'.tr,
                         style: AppTextStyles.titleLarge.copyWith(
                           color: AppColors.textDarkNavy,
                           fontWeight: FontWeight.bold,
@@ -136,7 +136,7 @@ class _OnboardingCompleteViewState extends State<OnboardingCompleteView>
                       SizedBox(height: 12.h),
                       
                       Text(
-                        '반려동물에게 최적화된 사운드를\n준비중입니다...',
+                        'onboarding_complete_desc'.tr,
                         textAlign: TextAlign.center,
                         style: AppTextStyles.bodyMedium.copyWith(
                           color: AppColors.textGrey,

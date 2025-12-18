@@ -32,6 +32,8 @@ const Map<String, String> enUS = {
   'onboarding_question_1_limit': 'You can select up to 3',
   'onboarding_question_2_title': 'Who is this care for?',
   'onboarding_question_2_limit': 'You can select up to 2',
+  'onboarding_complete_title': 'Preparing Personalized Care',
+  'onboarding_complete_desc': 'Preparing optimized sounds\nfor your pet...',
   
   // ===== Home Screen (home_view.dart) =====
   'home_premium_therapy': 'Premium Sound Therapy',

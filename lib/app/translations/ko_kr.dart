@@ -32,6 +32,8 @@ const Map<String, String> koKR = {
   'onboarding_question_1_limit': '최대 3개까지 선택 가능합니다',
   'onboarding_question_2_title': '누구를 위한\n케어인가요?',
   'onboarding_question_2_limit': '최대 2개까지 선택 가능합니다',
+  'onboarding_complete_title': '맞춤 케어를 준비하고 있어요',
+  'onboarding_complete_desc': '반려동물에게 최적화된 사운드를\n준비중입니다...',
   
   // ===== 홈 화면 (home_view.dart) =====
   'home_premium_therapy': '프리미엄 사운드 테라피',
