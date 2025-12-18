@@ -140,8 +140,7 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
 
   @override
   Widget build(BuildContext context) {
-    final activeColor = widget.color ?? AppColors.primaryBlue;
-    
+    // Reference Style: White Container (Glassy), Rounded Square, Inner Gradient Circle with Icon
     return GestureDetector(
       onTapDown: _handleTapDown,
       onTapUp: _handleTapUp,
@@ -152,94 +151,67 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
           scale: _scaleAnimation.value,
           child: Column(
             children: [
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  // Glow Effect (Behind) - Rounded Rectangle
-                  if (widget.isActive)
-                    Container(
-                      width: 95 * _glowAnimation.value,  // 사이즈 축소
-                      height: 95 * _glowAnimation.value,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
-                        color: widget.color?.withOpacity(0.3) ?? AppColors.primaryBlue.withOpacity(0.3),
-                        boxShadow: [
-                          BoxShadow(
-                            color: widget.color?.withOpacity(0.4) ?? AppColors.primaryBlue.withOpacity(0.4),
-                            blurRadius: 24,
-                            spreadRadius: 4,
-                          ),
-                        ],
-                      ),
-                    ),
-                  
-                  // Main Button - Rounded Rectangle with 3D Effect
-                  Container(
-                    width: 85,  // 사이즈 축소: 130 → 85
-                    height: 85,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24),
-                      color: Colors.white,
-                      border: Border.all(
-                        color: AppColors.primaryBlue,
-                        width: 2.5,
-                      ),
-                      boxShadow: [
-                        // Deep outer shadow
-                        BoxShadow(
-                          color: AppColors.primaryBlue.withOpacity(0.2),
-                          blurRadius: 16,
-                          offset: const Offset(0, 8),
-                          spreadRadius: 0,
-                        ),
-                        // Mid shadow for depth
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 8,
-                          offset: const Offset(0, 4),
-                          spreadRadius: 0,
-                        ),
-                        // Inner highlight (simulated with lighter shadow on top)
-                        BoxShadow(
-                          color: Colors.white.withOpacity(0.8),
-                          blurRadius: 4,
-                          offset: const Offset(0, -1),
-                          spreadRadius: 0,
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: widget.isPlaying
-                          ? SizedBox(
-                              width: 40,  // 애니메이션 크기 축소
-                              height: 40,
-                              child: BeatAnimation(color: activeColor),
-                            )
-                          : _buildAnimatedIcon(activeColor),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 4),  // 간격 축소
-              AnimatedDefaultTextStyle(
-                duration: const Duration(milliseconds: 200),
-                style: AppTextStyles.bodyMedium.copyWith(
-                  color: widget.isActive ? (widget.color ?? AppColors.primaryBlue) : AppColors.textGrey,
-                  fontWeight: widget.isActive ? FontWeight.bold : FontWeight.w500,
-                  fontSize: 11,  // 폰트 사이즈 축소
-                  shadows: widget.isActive ? [
-                    Shadow(
-                      color: (widget.color ?? AppColors.primaryBlue).withOpacity(0.3),
+              Container(
+                width: 110, // Large enough for ~3.8 items visible
+                height: 110,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: widget.color?.withOpacity(0.12) ?? AppColors.primaryBlue.withOpacity(0.12),
                       blurRadius: 8,
-                      offset: const Offset(0, 2),
+                      offset: const Offset(0, 4),
                     ),
-                  ] : [],
+                  ],
+                  border: Border.all(
+                    color: widget.isActive 
+                        ? (widget.color ?? AppColors.primaryBlue)
+                        : Colors.grey.shade200,
+                    width: widget.isActive ? 2 : 1,
+                  ),
                 ),
-                child: Text(
-                  widget.title,
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                child: Column(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   children: [
+                      // Inner Icon Circle
+                      Container(
+                        width: 56,
+                        height: 56,
+                        padding: const EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              (widget.color ?? AppColors.primaryBlue).withOpacity(0.1),
+                              (widget.color ?? AppColors.primaryBlue).withOpacity(0.25),
+                            ],
+                          ),
+                        ),
+                        child: widget.isPlaying
+                              ? BeatAnimation(color: widget.color ?? AppColors.primaryBlue)
+                              : _buildAnimatedIcon(widget.color ?? AppColors.primaryBlue),
+                      ),
+                      const SizedBox(height: 4),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: Text(
+                          widget.title,
+                           style: AppTextStyles.bodyMedium.copyWith(
+                              color: widget.isActive 
+                                 ? (widget.color ?? AppColors.primaryBlue)
+                                 : AppColors.textDarkNavy,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 13,
+                           ),
+                           textAlign: TextAlign.center,
+                           maxLines: 1,
+                           overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                   ],
                 ),
               ),
             ],
@@ -252,12 +224,10 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
   Widget _buildAnimatedIcon(Color activeColor) {
     Widget icon = Image.asset(
       widget.iconPath,
-      width: 65,  // 아이콘 크기 조정: 80 → 65 (버튼에 가득 차게)
-      height: 65,
+      width: 42,  // Larger icon for 110px button
+      height: 42,
       fit: BoxFit.contain,
-      filterQuality: FilterQuality.high,
-      colorBlendMode: BlendMode.multiply,
-      color: Colors.white,
+      color: activeColor, // Tint icon to match mode color
     );
 
     if (widget.animationType == ModeAnimationType.sway || widget.animationType == ModeAnimationType.wave) {

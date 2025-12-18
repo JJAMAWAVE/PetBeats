@@ -122,8 +122,9 @@ class MyApp extends StatelessWidget {
             Locale('ko', 'KR'), // Korean
             Locale('en', 'US'), // English
           ],
-          locale: const Locale('en', 'US'), // Default to English as requested
-          fallbackLocale: const Locale('en', 'US'),
+          // 시스템 언어 자동 감지 (감지 실패 시 영어 강제)
+          locale: Get.deviceLocale ?? const Locale('en', 'US'), 
+          fallbackLocale: const Locale('en', 'US'), // 글로벌 스탠다드 (영어)
           builder: (context, widget) {
             // ScreenUtil 적용을 위한 builder
             return MediaQuery(

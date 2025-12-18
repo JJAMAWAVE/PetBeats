@@ -8,6 +8,7 @@ import '../../../data/models/mode_model.dart';
 import '../../../data/models/track_model.dart';
 import '../../../routes/app_routes.dart';
 import '../widgets/mini_player.dart';
+import '../../../../core/widgets/background_decoration.dart';
 
 class ModeDetailView extends GetView<HomeController> {
   const ModeDetailView({super.key});
@@ -16,8 +17,10 @@ class ModeDetailView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     final mode = Get.arguments as Mode;
 
-    return Scaffold(
-      backgroundColor: AppColors.backgroundWhite,
+    return BackgroundDecoration(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -39,12 +42,23 @@ class ModeDetailView extends GetView<HomeController> {
                   child: Column(
                     children: [
                       Container(
-                        width: 80,
-                        height: 80,
-                        padding: const EdgeInsets.all(16),
+                        width: 140, // 80 -> 140 (확대)
+                        height: 140,
+                        padding: const EdgeInsets.all(24),
                         decoration: BoxDecoration(
-                          color: mode.color.withOpacity(0.1),
+                          color: Colors.white.withOpacity(0.3), // Glass effect
                           shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.5),
+                            width: 2,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: mode.color.withOpacity(0.2),
+                              blurRadius: 30,
+                              offset: const Offset(0, 10),
+                            ),
+                          ],
                         ),
                         child: Image.asset(
                           mode.iconPath,
@@ -143,7 +157,8 @@ class ModeDetailView extends GetView<HomeController> {
           ),
         ],
       ),
-    );
+    ),
+  );
   }
 
   Widget _buildScientificContext(Mode mode) {
@@ -237,8 +252,10 @@ class ModeDetailView extends GetView<HomeController> {
           margin: const EdgeInsets.only(bottom: 12),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isPlaying ? AppColors.primaryBlue.withOpacity(0.05) : Colors.white,
-            borderRadius: BorderRadius.circular(16),
+            color: isPlaying 
+                ? AppColors.primaryBlue.withOpacity(0.1) 
+                : Colors.white.withOpacity(0.6), // Glassmorphism
+            borderRadius: BorderRadius.circular(20), // 16 -> 20
             border: Border.all(
               color: isPlaying ? AppColors.primaryBlue.withOpacity(0.3) : AppColors.lineLightBlue
             ),

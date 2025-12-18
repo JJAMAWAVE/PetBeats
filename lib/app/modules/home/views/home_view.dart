@@ -44,9 +44,9 @@ class HomeView extends GetView<HomeController> {
           child: SafeArea(
             child: Stack(
               children: [
-                SingleChildScrollView(
-                  padding: const EdgeInsets.only(bottom: 100), // Space for MiniPlayer
-                  child: Column(
+                // Fixed Layout Container
+                Column(
+
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 16),
@@ -58,10 +58,10 @@ class HomeView extends GetView<HomeController> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const HeartbeatText('PetBeats', fontSize: 24),
+                            const HeartbeatText('PetBeats', fontSize: 28), // 폰트 사이즈 키움
                             Row(
                               children: [
-                                // 디버그 패널 (DEV ONLY)
+                                // 디버그 패널 (DEV ONLY) - 스타일 통일
                                 GestureDetector(
                                   onTap: () {
                                     Get.bottomSheet(
@@ -71,22 +71,29 @@ class HomeView extends GetView<HomeController> {
                                     );
                                   },
                                   child: Container(
-                                    width: 36,
-                                    height: 36,
+                                    width: 40, // 36 -> 40 (터치 영역 확대)
+                                    height: 40,
                                     decoration: BoxDecoration(
-                                      color: Colors.orange.withOpacity(0.15),
+                                      color: Colors.white,
                                       borderRadius: BorderRadius.circular(12),
                                       border: Border.all(color: Colors.orange.withOpacity(0.3)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.orange.withOpacity(0.1),
+                                          blurRadius: 8,
+                                          offset: const Offset(0, 4),
+                                        ),
+                                      ],
                                     ),
                                     child: const Icon(
-                                      Icons.bug_report,
+                                      Icons.bug_report_rounded, // Rounded 아이콘
                                       color: Colors.orange,
-                                      size: 20,
+                                      size: 22,
                                     ),
                                   ),
                                 ),
-                                const SizedBox(width: 8),
-                                // 친구 초대 아이콘 복원
+                                const SizedBox(width: 12), // 간격 8 -> 12
+                                // 친구 초대 아이콘
                                 HeaderIconButton(
                                   iconPath: 'assets/icons/icon_nav_notification.png',
                                   animationType: HeaderIconAnimationType.shake,
@@ -94,7 +101,7 @@ class HomeView extends GetView<HomeController> {
                                     Get.toNamed(Routes.INVITE_FRIENDS);
                                   },
                                 ),
-                                const SizedBox(width: 8),
+                                const SizedBox(width: 12), // 간격 8 -> 12
                                 HeaderIconButton(
                                   iconPath: 'assets/icons/icon_nav_settings.png',
                                   animationType: HeaderIconAnimationType.rotate,
@@ -108,7 +115,16 @@ class HomeView extends GetView<HomeController> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 12), // Header bottom spacing
+                    
+                    // Scrollable Content
+                    Expanded(
+                      child: SingleChildScrollView(
+                        padding: const EdgeInsets.only(bottom: 100),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 12),
                     
                     // Pet Profile Mini Bar
                     StaggeredSlideIn(
@@ -121,152 +137,111 @@ class HomeView extends GetView<HomeController> {
                     
                     const SizedBox(height: 12),
                     
-                    // Species Toggle with Staggered Animation
+                    // Species Toggle
                     StaggeredSlideIn(
-                      index: 2,
+                      index: 1,
                       child: const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 24.0),
                         child: SpeciesToggle(),
                       ),
                     ),
-                    
-                    const SizedBox(height: 16),
-                    
-                    // Banner Card with Staggered Animation
-                    StaggeredSlideIn(
-                      index: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                        child: _buildBannerCard(hapticService),
-                      ),
-                    ),
-                    
                     const SizedBox(height: 20),
-                    
-                    // SECTION 1: Recommended Modes (Circular)
+
+                    // SECTION: Recommended Songs (Circular) - NOW FIRST
                     Obx(() {
                       final species = ['species_dog'.tr, 'species_cat'.tr, 'species_guardian'.tr][controller.selectedSpeciesIndex.value];
                       return _buildSectionTitle('home_recommended_for'.trParams({'species': species}));
                     }),
                     const SizedBox(height: 12),
                     
-                    // Modes List - Wrapped in Unified Layered Container
+                    // Modes List - Enhanced UI with Scroll Indicator
                     Obx(() {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: Stack(
-                          children: [
-                            // Shadow Layer (Bottom)
-                            Positioned(
-                              top: 6,
-                              left: 4,
-                              right: 4,
-                              child: Container(
-                                height: 130,  // 높이 축소하여 오버플로우 방지
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.15),
-                                      blurRadius: 16,
-                                      offset: const Offset(0, 8),
-                                      spreadRadius: 1,
-                                    ),
-                                  ],
-                                ),
+                      return StaggeredSlideIn(
+                        index: 2,
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 24),
+                          height: 140, // Compact height
+                          decoration: BoxDecoration(
+                            // Solid light blue-white background for visibility
+                            color: Colors.white.withOpacity(0.85),
+                            borderRadius: BorderRadius.circular(24),
+                            // Blue-tinted border for definition
+                            border: Border.all(
+                              color: AppColors.primaryBlue.withOpacity(0.15),
+                              width: 1.5,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.primaryBlue.withOpacity(0.08),
+                                blurRadius: 12,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(24),
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              physics: const BouncingScrollPhysics(),
+                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                              child: Row(
+                                children: [
+                                  ...controller.modes.where((mode) {
+                                    final isDogMode = !mode.id.startsWith('cat_');
+                                    final isCatMode = mode.id.startsWith('cat_');
+                                    
+                                    if (controller.selectedSpeciesIndex.value == 0) {
+                                      return isDogMode;
+                                    } else if (controller.selectedSpeciesIndex.value == 1) {
+                                      return isCatMode;
+                                    }
+                                    return true;
+                                  }).map((mode) {
+                                    final isSelected = controller.currentMode.value?.id == mode.id && !controller.isAutoMode.value;
+                                    final isPlaying = isSelected && controller.isPlaying.value;
+                                    
+                                    ModeAnimationType animType = ModeAnimationType.none;
+                                    if (mode.id == 'sleep' || mode.id == 'cat_sleep') animType = ModeAnimationType.sway;
+                                    else if (mode.id == 'anxiety' || mode.id == 'cat_anxiety') animType = ModeAnimationType.breathe;
+                                    else if (mode.id == 'noise' || mode.id == 'cat_noise') animType = ModeAnimationType.wave;
+                                    else if (mode.id == 'energy' || mode.id == 'cat_energy') animType = ModeAnimationType.pulse;
+                                    else if (mode.id == 'senior' || mode.id == 'cat_senior') animType = ModeAnimationType.heartbeat;
+
+                                    return Padding(
+                                      padding: const EdgeInsets.only(right: 12),
+                                      child: _buildCircularModeButton(
+                                        title: mode.title,
+                                        iconPath: mode.iconPath,
+                                        isActive: isSelected,
+                                        isPlaying: isPlaying,
+                                        onTap: () {
+                                          hapticService.lightImpact();
+                                          controller.changeMode(mode);
+                                          Get.to(() => const ModeDetailView(), arguments: mode);
+                                        },
+                                        color: mode.color,
+                                        animationType: animType,
+                                      ),
+                                    );
+                                  }).toList(),
+                                ],
                               ),
                             ),
-                            
-                            // Main Container (Top Surface)
-                            Container(
-                              height: 130,  // 높이 축소
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.white,
-                                gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    Colors.white,
-                                    const Color(0xFFF8F9FB),
-                                  ],
-                                ),
-                                border: Border.all(
-                                  color: Colors.white,
-                                  width: 2,
-                                ),
-                              ),
-                              child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                  child: Row(
-                                    children: [
-
-                                      
-                                      // Individual Modes - Filtered by species
-                                      ...controller.modes.where((mode) {
-                                        // Dog modes: IDs don't contain 'cat_'
-                                        // Cat modes: IDs contain 'cat_'
-                                        final isDogMode = !mode.id.startsWith('cat_');
-                                        final isCatMode = mode.id.startsWith('cat_');
-                                        
-                                        if (controller.selectedSpeciesIndex.value == 0) {
-                                          // Dog selected - show only dog modes
-                                          return isDogMode;
-                                        } else if (controller.selectedSpeciesIndex.value == 1) {
-                                          // Cat selected - show only cat modes
-                                          return isCatMode;
-                                        }
-                                        return true; // Show all if neither (shouldn't happen)
-                                      }).map((mode) {
-                                        final isSelected = controller.currentMode.value?.id == mode.id && !controller.isAutoMode.value;
-                                        final isPlaying = isSelected && controller.isPlaying.value;
-                                        
-                                        ModeAnimationType animType = ModeAnimationType.none;
-                                        if (mode.id == 'sleep' || mode.id == 'cat_sleep') animType = ModeAnimationType.sway;
-                                        else if (mode.id == 'anxiety' || mode.id == 'cat_anxiety') animType = ModeAnimationType.breathe;
-                                        else if (mode.id == 'noise' || mode.id == 'cat_noise') animType = ModeAnimationType.wave;
-                                        else if (mode.id == 'energy' || mode.id == 'cat_energy') animType = ModeAnimationType.pulse;
-                                        else if (mode.id == 'senior' || mode.id == 'cat_senior') animType = ModeAnimationType.heartbeat;
-
-                                        return Padding(
-                                          padding: const EdgeInsets.only(right: 8),  // 간격 축소
-                                          child: _buildCircularModeButton(
-                                            title: mode.title,
-                                            iconPath: mode.iconPath,
-                                            isActive: isSelected,
-                                            isPlaying: isPlaying,
-                                            onTap: () {
-                                              hapticService.lightImpact();
-                                              controller.changeMode(mode);
-                                              Get.to(() => const ModeDetailView(), arguments: mode);
-                                            },
-                                            color: mode.color,
-                                            animationType: animType,
-                                          ),
-                                        );
-                                      }).toList(),
-                                    ],
-                                  ),
-                                ),
-                            ),
-                          ],
+                          ),
                         ),
                       );
                     }),
+                    const SizedBox(height: 24),
 
-                    const SizedBox(height: 20),
-                    
-                    // SECTION 2: AI Special Mode
-                    // _buildSectionTitle('AI 스마트 케어'), // Title is inside the widget now
-                    const SizedBox(height: 8),
+                    // SECTION: AI Special Mode (Smart Sync) - NOW SECOND
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 24.0),
                       child: AISpecialModeWidget(),
                     ),
-                    const SizedBox(height: 20),
 
-                    // SECTION 3: Scenario Chips
+                    const SizedBox(height: 24),
+
+                    // SECTION: AI Custom Recommendation (Scenario Chips)
                     _buildSectionTitleWithPro('home_ai_recommend'.tr),
                     const SizedBox(height: 12),
                     Padding(
@@ -275,25 +250,21 @@ class HomeView extends GetView<HomeController> {
                         children: [
                           Row(
                             children: [
-                              Expanded(child: _buildScenarioChip('scenario_after_walk'.tr, 'scenario_after_walk', 'assets/icons/icon_scenario_walk.png')),
+                              Expanded(child: _buildScenarioChip('scenario_after_walk'.tr, 'scenario_after_walk', 'assets/icons/icon_scenario_walk.png', color: const Color(0xFF4CAF50))),
                               const SizedBox(width: 12),
-                              Expanded(child: _buildScenarioChip('scenario_nap'.tr, 'scenario_nap', 'assets/icons/icon_scenario_nap.png')),
+                              Expanded(child: _buildScenarioChip('scenario_nap'.tr, 'scenario_nap', 'assets/icons/icon_scenario_nap.png', color: const Color(0xFF673AB7))),
+                              const SizedBox(width: 12),
+                              Expanded(child: _buildScenarioChip('scenario_hospital'.tr, 'scenario_hospital', 'assets/icons/icon_scenario_vet.png', color: const Color(0xFFFF9800))),
                             ],
                           ),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 12),
                           Row(
                             children: [
-                              Expanded(child: _buildScenarioChip('scenario_hospital'.tr, 'scenario_hospital', 'assets/icons/icon_scenario_vet.png')),
+                              Expanded(child: _buildScenarioChip('scenario_grooming'.tr, 'scenario_grooming', 'assets/icons/icon_scenario_grooming.png', color: const Color(0xFFFF7043))), // Deep Orange
                               const SizedBox(width: 12),
-                              Expanded(child: _buildScenarioChip('scenario_grooming'.tr, 'scenario_grooming', 'assets/icons/icon_scenario_grooming.png')),
-                            ],
-                          ),
-                          const SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Expanded(child: _buildScenarioChip('scenario_thunder'.tr, 'scenario_thunder', 'assets/icons/icon_scenario_thunder.png')),
+                              Expanded(child: _buildScenarioChip('scenario_thunder'.tr, 'scenario_thunder', 'assets/icons/icon_scenario_thunder.png', color: const Color(0xFFFFA726))), // Orange Amber
                               const SizedBox(width: 12),
-                              Expanded(child: _buildScenarioChip('scenario_anxiety'.tr, 'scenario_anxiety', 'assets/icons/icon_scenario_anxiety.png')),
+                              Expanded(child: _buildScenarioChip('scenario_anxiety'.tr, 'scenario_anxiety', 'assets/icons/icon_scenario_anxiety.png', color: const Color(0xFF9575CD))), // Soft Purple
                             ],
                           ),
                         ],
@@ -302,15 +273,13 @@ class HomeView extends GetView<HomeController> {
 
                     const SizedBox(height: 20),
                     
-                    // SECTION 3: Exercises (2-row Grid Layout)
+                    // SECTION: Exercises (2-row Grid Layout)
                     _buildSectionTitle('home_health_activity'.tr),
                     const SizedBox(height: 12),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Column(
-                        children: [
-                          // 상단 2개 카드
-                          Row(
+                          // 3-Column Row for Health & Activity
+                          child: Row(
                             children: [
                               Expanded(
                                 child: _buildExerciseCard(
@@ -331,12 +300,7 @@ class HomeView extends GetView<HomeController> {
                                   activityType: 'tips',
                                 ),
                               ),
-                            ],
-                          ),
-                          const SizedBox(height: 12),
-                          // 하단 1개 카드 (3번째) - 왼쪽 정렬, 절반 너비
-                          Row(
-                            children: [
+                              const SizedBox(width: 12),
                               Expanded(
                                 child: _buildExerciseCard(
                                   title: 'home_charge_title'.tr,
@@ -346,19 +310,17 @@ class HomeView extends GetView<HomeController> {
                                   activityType: 'charge',
                                 ),
                               ),
-                              const SizedBox(width: 12),
-                              // 빈 공간 (추후 카드 추가 가능)
-                              Expanded(child: Container()),
                             ],
                           ),
-                        ],
-                      ),
+
                     ),
                     
-                    const SizedBox(height: 20),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-              ),
               
               // Mini Player (Floating Bottom Bar)
               Positioned(
@@ -387,38 +349,7 @@ class HomeView extends GetView<HomeController> {
     );
   }
   
-  Widget _buildSectionTitleWithPro(String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-      child: Row(
-        children: [
-          Text(
-            title,
-            style: AppTextStyles.titleMedium.copyWith(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(width: 8),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-            decoration: BoxDecoration(
-              color: AppColors.primaryBlue,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: const Text(
-              'PRO',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 11,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+
 
   Widget _buildBannerCard(HapticService hapticService) {
     return ElasticScaleButton(
@@ -535,87 +466,7 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget _buildScenarioChip(String label, String key, String iconPath) {
-    // 시나리오별 컬러 코딩
-    Color chipColor;
-    Color shadowColor;
-    
-    switch (key) {
-      case 'scenario_nap':
-      case 'scenario_anxiety':
-        // 안정/수면 - Deep Indigo / Soft Purple
-        chipColor = AppColors.scenarioCalm;
-        shadowColor = AppColors.scenarioCalmLight;
-        break;
-        
-      case 'scenario_after_walk':
-      case 'scenario_grooming':
-        // 활력/케어 - Sage Green / Warm Orange
-        chipColor = key == 'scenario_after_walk' 
-            ? AppColors.scenarioVital 
-            : AppColors.scenarioVitalWarm;
-        shadowColor = chipColor;
-        break;
-        
-      case 'scenario_hospital':
-      case 'scenario_thunder':
-        // 긴급/주의 - Muted Coral / Warm Gray
-        chipColor = AppColors.scenarioAlert;
-        shadowColor = AppColors.scenarioAlertSoft;
-        break;
-        
-      default:
-        chipColor = const Color(0xFF5B67F2);
-        shadowColor = chipColor;
-    }
-    
-    return GestureDetector(
-      onTap: () {
-        // 시나리오 설명 + PRO 체크 다이얼로그
-        _showScenarioDialog(label, key, chipColor);
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          color: chipColor,
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(
-            color: Colors.white.withOpacity(0.2),
-            width: 1.5,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: shadowColor.withOpacity(0.4),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              width: 48,
-              height: 48,
-              child: Image.asset(
-                iconPath,
-                fit: BoxFit.contain,
-              ),
-            ),
-            const SizedBox(width: 8),
-            Text(
-              label,
-              style: AppTextStyles.labelSmall.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-                fontSize: 16,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+
 
   void _showScenarioDialog(String label, String key, Color color) {
     // 시나리오별 설명 (Localized using key)
@@ -754,7 +605,7 @@ class HomeView extends GetView<HomeController> {
   }) {
     final hapticService = Get.find<HapticService>();
     
-    return GestureDetector(
+    return ElasticScaleButton( // 터치 인터랙션
       onTap: () {
         hapticService.lightImpact();
         Get.to(() => HealthActivityDetailView(
@@ -765,44 +616,82 @@ class HomeView extends GetView<HomeController> {
           activityType: activityType,
         ));
       },
-      child: Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(24),
+      child: Container( // BentoCard 스타일 (White Glass with Gradient)
+        padding: const EdgeInsets.all(20),
+        height: 160,
+        decoration: BoxDecoration(
+          // Internal Gradient for soft 3D effect
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.white,
+              Colors.grey.shade50,
+            ],
+          ),
+          borderRadius: BorderRadius.circular(24),
+          // White Outer Border for depth
+          border: Border.all(
+            color: Colors.white.withOpacity(0.8),
+            width: 2,
+          ),
+          boxShadow: [
+             BoxShadow(
+                color: AppColors.primaryBlue.withOpacity(0.08), // Blue Soft Shadow
+                blurRadius: 16,
+                offset: const Offset(0, 8),
+                spreadRadius: 0,
+             ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween, // 위아래 정렬
+          children: [
+            // 아이콘 (좌측 상단)
+            Container(
+              width: 48,
+              height: 48,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Image.asset(
+                iconPath,
+                fit: BoxFit.contain,
+                color: color, // 아이콘 틴트
+              ),
+            ),
+            
+            // 텍스트 (좌측 하단)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: AppTextStyles.titleMedium.copyWith(
+                    color: AppColors.textDarkNavy,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  subtitle,
+                  style: AppTextStyles.labelSmall.copyWith(
+                    color: AppColors.textGrey,
+                    height: 1.4,
+                    fontSize: 12,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 56,
-            height: 56,
-            child: Image.asset(
-              iconPath,
-              fit: BoxFit.contain,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            title,
-            style: AppTextStyles.titleMedium.copyWith(
-              color: AppColors.textDarkNavy,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            subtitle,
-            style: AppTextStyles.labelSmall.copyWith(
-              color: AppColors.textGrey,
-              height: 1.3,
-              fontSize: 12,
-            ),
-          ),
-        ],
-      ),
-    ),
     );
   }
 
@@ -820,26 +709,39 @@ class HomeView extends GetView<HomeController> {
           return GestureDetector(
             onTap: () => Get.toNamed(Routes.PET_PROFILE),
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16), // 크기 확대
               decoration: BoxDecoration(
-                color: AppColors.primaryBlue.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: AppColors.primaryBlue.withOpacity(0.3)),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.primaryBlue.withOpacity(0.08),
+                    blurRadius: 16,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
               ),
               child: Row(
                 children: [
-                  Icon(Icons.pets, color: AppColors.primaryBlue, size: 24),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryBlue.withOpacity(0.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.pets, color: AppColors.primaryBlue, size: 20),
+                  ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
                       'home_add_pet_profile'.tr,
                       style: AppTextStyles.bodyMedium.copyWith(
-                        color: AppColors.primaryBlue,
+                        color: AppColors.textDarkNavy,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
-                  Icon(Icons.add_circle_outline, color: AppColors.primaryBlue, size: 20),
+                  Icon(Icons.arrow_forward_ios_rounded, color: AppColors.textGrey.withOpacity(0.5), size: 16),
                 ],
               ),
             ),
@@ -850,15 +752,15 @@ class HomeView extends GetView<HomeController> {
         return GestureDetector(
           onTap: () => Get.toNamed(Routes.PET_PROFILE),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12), // 패딩 조정
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(24), // 20 -> 24
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.06),
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
+                  color: AppColors.primaryBlue.withOpacity(0.08), // Blue Shadow
+                  blurRadius: 16,
+                  offset: const Offset(0, 8),
                 ),
               ],
             ),
@@ -943,6 +845,95 @@ class HomeView extends GetView<HomeController> {
           width: 32,
           height: 32,
           fit: BoxFit.contain,
+        ),
+      ),
+    );
+  }
+  Widget _buildSectionTitleWithPro(String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: AppTextStyles.titleMedium.copyWith(
+              color: AppColors.textDarkNavy,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [Color(0xFF5C6BC0), Color(0xFF29B6F6)],
+              ),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: const Text(
+              'PRO',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildScenarioChip(String title, String id, String iconPath, {Color color = AppColors.primaryBlue}) {
+    return GestureDetector(
+      onTap: () {
+        // 시나리오 클릭 시 기능 (추후 구현)
+        // controller.onScenarioSelected(id); 
+      },
+      child: Container(
+        height: 56,
+        decoration: BoxDecoration(
+          // Internal Gradient (Dark to Light for depth)
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              color.withOpacity(0.95),
+              color.withOpacity(0.75),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(16),
+          // White Outer Border for 3D effect
+          border: Border.all(
+            color: Colors.white.withOpacity(0.5),
+            width: 1.5,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: color.withOpacity(0.35),
+              blurRadius: 10,
+              offset: const Offset(0, 5),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Icon with white tint
+            if (iconPath.isNotEmpty) ...[
+               Image.asset(iconPath, width: 24, height: 24, color: Colors.white.withOpacity(0.9), errorBuilder: (_,__,___) => const Icon(Icons.star, color: Colors.white, size: 24)),
+               const SizedBox(width: 8),
+            ],
+            Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 13,
+              ),
+            ),
+          ],
         ),
       ),
     );

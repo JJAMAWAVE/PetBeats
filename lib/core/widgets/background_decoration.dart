@@ -46,16 +46,49 @@ class _BackgroundDecorationState extends State<BackgroundDecoration>
     return Stack(
       children: [
         // 1. 배경은 SpeciesThemeTransition에서 처리 (ripple 애니메이션 지원)
-        // 투명 배경으로 ripple이 보이도록 함
+        // 1. Mesh Gradient Background (Rich Blue & White)
         Container(
-          color: Colors.transparent,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                const Color(0xFFDCEAF7), // 진한 하늘색 (Top Left)
+                Colors.white,            // 중앙 화이트
+                const Color(0xFFE1EBF5), // 쿨 그레이 블루 (Bottom Right)
+              ],
+              stops: const [0.0, 0.4, 1.0],
+            ),
+          ),
         ),
         
-        // 2. 은은한 빛 번짐 효과 (Glow)
+        // 1.5. Dynamic Orbs (움직이는 빛망울 - 더 진하고 크게)
         Positioned(
           top: -100,
-          left: 0,
-          right: 0,
+          right: -50,
+          child: Container(
+            width: 350,
+            height: 350,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: RadialGradient(
+                colors: [
+                  const Color(0xFF9FA8DA).withOpacity(0.25), // Indigo (보라빛)
+                  Colors.transparent,
+                ],
+              ),
+            ),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 60, sigmaY: 60),
+              child: Container(color: Colors.transparent),
+            ),
+          ),
+        ),
+
+        // 2. 은은한 빛 번짐 효과 (기존 유지, 위치 조정)
+        Positioned(
+          top: 100, // 위치 살짝 내림
+          left: -40,
           child: Center(
             child: Container(
               width: 400,

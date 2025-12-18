@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:ui'; // Add for Glassmorphism
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
@@ -10,38 +11,28 @@ class AISpecialModeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-      decoration: BoxDecoration(
-        // 프리미엄 그라데이션 배경 (Smart/Tech Blue Theme)
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xFFE8EAF6), // Soft Indigo
-            Color(0xFFE3F2FD), // Light Blue
-            Color(0xFFF3E5F5), // Soft Purple
-          ],
-        ),
+    return ClipRRect(
         borderRadius: BorderRadius.circular(24.r),
-        border: Border.all(
-          color: Color(0xFF5C6BC0).withOpacity(0.3), // Indigo Border
-          width: 1.5,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0xFF3949AB).withOpacity(0.15), // Indigo Shadow
-            blurRadius: 20,
-            offset: Offset(0, 8),
-            spreadRadius: 2,
-          ),
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: Offset(0, 4),
-          ),
-        ],
-      ),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.85), // More visible background
+              borderRadius: BorderRadius.circular(24.r),
+              // Blue-tinted border for definition (same as Recommended Songs)
+              border: Border.all(
+                color: AppColors.primaryBlue.withOpacity(0.15),
+                width: 1.5,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.primaryBlue.withOpacity(0.08),
+                  blurRadius: 12,
+                  offset: Offset(0, 4),
+                ),
+              ],
+            ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -127,6 +118,8 @@ class AISpecialModeWidget extends StatelessWidget {
           ),
         ],
       ),
+    ),
+      ),
     );
   }
 
@@ -201,16 +194,27 @@ class _AnimatedModeButtonState extends State<_AnimatedModeButton>
       child: Container(
         height: 120.h,
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20.r),
+          // Outer Glass Container
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.white.withOpacity(0.8),
+              Colors.white.withOpacity(0.4),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(24.r), // Rounded Square
+          border: Border.all(
+            color: Colors.white.withOpacity(0.6),
+            width: 1.5,
+          ),
           boxShadow: [
             BoxShadow(
               color: widget.color.withOpacity(0.15),
-              blurRadius: 12,
-              offset: const Offset(0, 6),
+              blurRadius: 15,
+              offset: const Offset(0, 8),
             ),
           ],
-          border: Border.all(color: widget.color.withOpacity(0.1)),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -219,27 +223,43 @@ class _AnimatedModeButtonState extends State<_AnimatedModeButton>
               animation: _controller,
               builder: (context, child) {
                 return Transform.scale(
-                  scale: _scaleAnimation.value,
-                  child: Transform.rotate(
-                    angle: _rotationAnimation.value,
-                    child: Container(
-                      padding: EdgeInsets.all(8.w),
-                      decoration: BoxDecoration(
-                        color: widget.color.withOpacity(0.05),
-                        shape: BoxShape.circle,
+                  scale: _scaleAnimation.value, // Breathing Animation
+                  child: Container(
+                    width: 56.w, // Inner Circle Size
+                    height: 56.w,
+                    padding: EdgeInsets.all(12.w),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          widget.color.withOpacity(0.1), // Soft Gradient Background
+                          widget.color.withOpacity(0.3),
+                        ],
                       ),
-                      child: Image.asset(
-                        widget.imagePath,
-                        width: 48.w,
-                        height: 48.w,
-                        fit: BoxFit.contain,
-                      ),
+                      boxShadow: [
+                         BoxShadow(
+                            color: Colors.white,
+                            blurRadius: 5,
+                            offset: Offset(-3, -3),
+                         ),
+                         BoxShadow(
+                            color: widget.color.withOpacity(0.2),
+                            blurRadius: 8,
+                            offset: Offset(3, 3),
+                         ),
+                      ],
+                    ),
+                    child: Image.asset(
+                      widget.imagePath,
+                      fit: BoxFit.contain,
                     ),
                   ),
                 );
               },
             ),
-            SizedBox(height: 6.h),
+            SizedBox(height: 12.h),
             Text(
               widget.title,
               style: AppTextStyles.bodyMedium.copyWith(
@@ -247,6 +267,8 @@ class _AnimatedModeButtonState extends State<_AnimatedModeButton>
                 color: AppColors.textDarkNavy,
                 fontSize: 14.sp,
               ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
