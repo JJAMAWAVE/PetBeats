@@ -696,4 +696,22 @@ const Map<String, String> koKR = {
   'rolling_tip_13': '🏠 낯선 환경에 갔을 때 틀어주세요.',
   'rolling_tip_14': '⏰ 매일 같은 시간에 틀어주면 더 좋아요.',
   'rolling_tip_15': '💤 리듬 케어로 하루를 맡겨보세요.',
+  
+  // ===== Weather Control Sheet =====
+  'weather_sound_title': '날씨 사운드',
+  'weather_clear': '맑음',
+  'weather_rain': '비',
+  'weather_snow': '눈',
+  'weather_clouds': '흐림',
+  'weather_thunder': '천둥',
+  'weather_playing': '재생중',
+  'weather_sync_on': '날씨 동기화 켜짐',
+  'weather_sync_off': '날씨 동기화 꺼짐',
+  'weather_sync_on_desc': '현재 날씨에 맞는 사운드 재생 중',
+  'weather_sync_off_desc': '탭하여 활성화',
+  'volume_mute': '음소거',
+  'volume_low': '작게',
+  'volume_medium': '보통',
+  'volume_high': '크게',
+  'common_close': '닫기',
 };

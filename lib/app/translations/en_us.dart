@@ -686,4 +686,22 @@ const Map<String, String> enUS = {
   'rolling_tip_13': '🏠 Use it in new environments.',
   'rolling_tip_14': '⏰ Consistency is key.',
   'rolling_tip_15': '💤 Trust Rhythm Care for the day.',
+  
+  // ===== Weather Control Sheet =====
+  'weather_sound_title': 'Weather Sound',
+  'weather_clear': 'Clear',
+  'weather_rain': 'Rain',
+  'weather_snow': 'Snow',
+  'weather_clouds': 'Cloudy',
+  'weather_thunder': 'Thunder',
+  'weather_playing': 'Playing',
+  'weather_sync_on': 'Weather Sync ON',
+  'weather_sync_off': 'Weather Sync OFF',
+  'weather_sync_on_desc': 'Playing sounds matching current weather',
+  'weather_sync_off_desc': 'Tap to enable',
+  'volume_mute': 'Mute',
+  'volume_low': 'Low',
+  'volume_medium': 'Medium',
+  'volume_high': 'High',
+  'common_close': 'Close',
 };

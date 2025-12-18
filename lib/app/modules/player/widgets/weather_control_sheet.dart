@@ -89,7 +89,7 @@ class _WeatherControlSheetState extends State<WeatherControlSheet> {
                   Icon(Icons.wb_cloudy, color: Colors.lightBlueAccent, size: 24.w),
                   SizedBox(width: 8.w),
                   Text(
-                    '날씨 사운드',
+                    'weather_sound_title'.tr,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18.sp,
@@ -109,24 +109,24 @@ class _WeatherControlSheetState extends State<WeatherControlSheet> {
                 
                 IconData weatherIcon = Icons.wb_sunny;
                 Color weatherColor = Colors.orange;
-                String weatherLabel = '맑음';
+                String weatherLabel = 'weather_clear'.tr;
                 
                 if (condition.contains('Rain') || condition.contains('Drizzle')) {
                   weatherIcon = Icons.water_drop;
                   weatherColor = Colors.blue;
-                  weatherLabel = '비';
+                  weatherLabel = 'weather_rain'.tr;
                 } else if (condition.contains('Snow')) {
                   weatherIcon = Icons.ac_unit;
                   weatherColor = Colors.lightBlue;
-                  weatherLabel = '눈';
+                  weatherLabel = 'weather_snow'.tr;
                 } else if (condition.contains('Cloud')) {
                   weatherIcon = Icons.cloud;
                   weatherColor = Colors.blueGrey;
-                  weatherLabel = '흐림';
+                  weatherLabel = 'weather_clouds'.tr;
                 } else if (condition.contains('Thunder')) {
                   weatherIcon = Icons.flash_on;
                   weatherColor = Colors.amber;
-                  weatherLabel = '천둥';
+                  weatherLabel = 'weather_thunder'.tr;
                 }
                 
                 return Container(
@@ -184,7 +184,7 @@ class _WeatherControlSheetState extends State<WeatherControlSheet> {
                                     Icon(Icons.graphic_eq, color: Colors.greenAccent, size: 14.w),
                                     SizedBox(width: 4.w),
                                     Text(
-                                      '재생중',
+                                      'weather_playing'.tr,
                                       style: TextStyle(
                                         color: Colors.greenAccent,
                                         fontSize: 10.sp,
@@ -273,7 +273,7 @@ class _WeatherControlSheetState extends State<WeatherControlSheet> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                isEnabled ? '날씨 동기화 켜짐' : '날씨 동기화 꺼짐',
+                                isEnabled ? 'weather_sync_on'.tr : 'weather_sync_off'.tr,
                                 style: TextStyle(
                                   color: isEnabled ? Colors.white : Colors.white70,
                                   fontSize: 16.sp,
@@ -282,8 +282,8 @@ class _WeatherControlSheetState extends State<WeatherControlSheet> {
                               ),
                               Text(
                                 isEnabled 
-                                    ? '현재 날씨에 맞는 사운드 재생 중'
-                                    : '탭하여 활성화',
+                                    ? 'weather_sync_on_desc'.tr
+                                    : 'weather_sync_off_desc'.tr,
                                 style: TextStyle(
                                   color: Colors.white54,
                                   fontSize: 12.sp,
@@ -368,7 +368,7 @@ class _WeatherControlSheetState extends State<WeatherControlSheet> {
                       ],
                     ),
                     Text(
-                      _volume == 0 ? '음소거' : _volume < 0.3 ? '작게' : _volume < 0.7 ? '보통' : '크게',
+                      _volume == 0 ? 'volume_mute'.tr : _volume < 0.3 ? 'volume_low'.tr : _volume < 0.7 ? 'volume_medium'.tr : 'volume_high'.tr,
                       style: TextStyle(
                         color: Colors.white54,
                         fontSize: 12.sp,
@@ -392,7 +392,7 @@ class _WeatherControlSheetState extends State<WeatherControlSheet> {
                     ),
                   ),
                   child: Text(
-                    '닫기',
+                    'common_close'.tr,
                     style: TextStyle(
                       color: Colors.white70,
                       fontSize: 14.sp,
