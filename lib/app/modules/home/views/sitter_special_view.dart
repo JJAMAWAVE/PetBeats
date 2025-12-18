@@ -21,23 +21,23 @@ class _SitterSpecialViewState extends State<SitterSpecialView> {
   final List<Map<String, String>> _introSlides = [
     {
       'image': 'assets/images/sitter/intro_empathy.png',
-      'title': '혼자 남겨질 아이 걱정에\n문을 나서기가 힘드셨나요?',
-      'subtitle': '짖지는 않을지, 심심해 하지는 않을지...\n보호자님의 걱정되는 마음을 PetBeats가 대신할게요.',
+      'title': 'sitter_slide1_title'.tr,
+      'subtitle': 'sitter_slide1_desc'.tr,
     },
     {
       'image': 'assets/images/sitter/intro_solution.png',
-      'title': '보호자님을 대신해 스마트폰이\n눈과 귀가 되어 지켜줍니다.',
-      'subtitle': '복잡한 장비는 필요 없어요.\n집에 두시는 공기계나 태블릿을 켜두시면,\n카메라와 마이크로 아이의 상태를 실시간으로 감지합니다.',
+      'title': 'sitter_slide2_title'.tr,
+      'subtitle': 'sitter_slide2_desc'.tr,
     },
     {
       'image': 'assets/images/sitter/intro_active_care.png',
-      'title': '큰 소리나 움직임이 감지되면,\n테라피 사운드가 자동으로 재생됩니다.',
-      'subtitle': '아이가 짖거나 불안해 서성일 때,\n가장 좋아하는 음악이나 빗소리를 들려주어\n스스로 진정할 수 있도록 도와줍니다.',
+      'title': 'sitter_slide3_title'.tr,
+      'subtitle': 'sitter_slide3_desc'.tr,
     },
     {
       'image': 'assets/images/sitter/intro_reassurance.png',
-      'title': '이제 무거운 마음은 내려놓고,\n편안하게 다녀오세요.',
-      'subtitle': '얼마나 움직였는지, 언제 불안해했는지,\n하루의 기록을 리포트로 제공해 드립니다.\n떨어져 있어도 연결되어 있어요.',
+      'title': 'sitter_slide4_title'.tr,
+      'subtitle': 'sitter_slide4_desc'.tr,
     },
   ];
 
@@ -69,7 +69,7 @@ class _SitterSpecialViewState extends State<SitterSpecialView> {
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
-        title: const Text('AI 시터'),
+        title: Text('sitter_title'.tr),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -254,7 +254,7 @@ class _SitterSpecialViewState extends State<SitterSpecialView> {
                   Icon(isPremium ? Icons.shield_outlined : Icons.lock, size: 22.w),
                   SizedBox(width: 8.w),
                   Text(
-                    isPremium ? '안심 케어 시작하기' : 'PRO 구독하고 시작하기',
+                    isPremium ? 'sitter_start_btn'.tr : 'sitter_pro_btn'.tr,
                     style: AppTextStyles.bodyLarge.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,

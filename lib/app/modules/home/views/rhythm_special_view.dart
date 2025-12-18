@@ -31,7 +31,7 @@ class RhythmSpecialView extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
         title: Text(
-          '리듬 케어',
+          'rhythm_title'.tr,
           style: AppTextStyles.subtitle,
         ),
         centerTitle: true,
@@ -51,7 +51,7 @@ class RhythmSpecialView extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          '당신의 아이, 하루 리듬에 맞춘 케어',
+                          'rhythm_subtitle'.tr,
                           style: AppTextStyles.titleMedium.copyWith(
                             fontWeight: FontWeight.bold,
                             color: AppColors.textDarkNavy,
@@ -60,7 +60,7 @@ class RhythmSpecialView extends StatelessWidget {
                         ),
                         SizedBox(height: 12.h),
                         Text(
-                          '반려동물의 24시간 바이오 리듬에 맞춰,\n시간대별 최적의 사운드를 자동으로 제공합니다.',
+                          'rhythm_desc'.tr,
                           style: AppTextStyles.bodyMedium.copyWith(
                             color: AppColors.textGrey,
                             height: 1.5,
@@ -170,14 +170,14 @@ class RhythmSpecialView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '리듬 케어 활성화',
+                    'rhythm_premium_title'.tr,
                     style: AppTextStyles.bodyLarge.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    'PRO 구독으로 24시간 자동 케어를 경험하세요',
+                    'rhythm_premium_desc'.tr,
                     style: AppTextStyles.bodySmall.copyWith(
                       color: Colors.white.withOpacity(0.9),
                     ),
@@ -231,7 +231,7 @@ class RhythmSpecialView extends StatelessWidget {
             SizedBox(width: 12.w),
             Expanded(
               child: Text(
-                isEnabled ? '리듬 케어 활성화됨' : '리듬 케어 비활성화',
+                isEnabled ? 'rhythm_active'.tr : 'rhythm_inactive'.tr,
                 style: AppTextStyles.bodyMedium.copyWith(
                   fontWeight: FontWeight.w600,
                   color: AppColors.textDarkNavy,
@@ -276,7 +276,7 @@ class RhythmSpecialView extends StatelessWidget {
           Icon(Icons.auto_awesome, color: Color(0xFF6A11CB), size: 40.w),
           SizedBox(height: 12.h),
           Text(
-            '"리듬 케어로 하루를 맡겨보세요"',
+            'rhythm_core_quote'.tr,
             style: AppTextStyles.bodyLarge.copyWith(
               fontWeight: FontWeight.bold,
               fontStyle: FontStyle.italic,
@@ -286,7 +286,7 @@ class RhythmSpecialView extends StatelessWidget {
           ),
           SizedBox(height: 8.h),
           Text(
-            '복잡한 시간 설정 없이,\n버튼 하나로 아이의 하루를 케어하세요.',
+            'rhythm_core_desc'.tr,
             style: AppTextStyles.bodyMedium.copyWith(
               color: AppColors.textGrey,
               height: 1.5,

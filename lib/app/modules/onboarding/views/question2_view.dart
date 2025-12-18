@@ -50,8 +50,8 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
     final hapticService = Get.find<HapticService>();
     
     final options = [
-      {'value': 'dog', 'label': '강아지', 'icon': 'assets/icons/icon_species_dog.png'},
-      {'value': 'cat', 'label': '고양이', 'icon': 'assets/icons/icon_species_cat.png'},
+      {'value': 'dog', 'label': 'species_dog'.tr, 'icon': 'assets/icons/icon_species_dog.png'},
+      {'value': 'cat', 'label': 'species_cat'.tr, 'icon': 'assets/icons/icon_species_cat.png'},
       // {'value': 'owner', 'label': '보호자', 'icon': 'assets/icons/icon_species_owner.png'}, // Removed
     ];
 

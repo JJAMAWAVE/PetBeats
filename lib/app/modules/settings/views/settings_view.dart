@@ -163,7 +163,7 @@ class SettingsView extends GetView<SettingsController> {
                     SizedBox(height: 4.h),
                     Text(
                       hasProfile 
-                          ? '${profile.speciesKorean} • ${profile.age}살${profile.breed != null ? ' • ${profile.breed}' : ''}'
+                          ? '${profile.speciesKorean} • ${'pet_age_years'.trParams({'age': profile.age.toString()})}${profile.breed != null ? ' • ${profile.breed}' : ''}'
                           : 'settings_tap_to_register'.tr,
                       style: AppTextStyles.bodyMedium.copyWith(
                         color: AppColors.textGrey,
@@ -485,7 +485,7 @@ class SettingsView extends GetView<SettingsController> {
                       
                       Get.back();
                       Get.snackbar(
-                        '언어 변경',
+                        'settings_language_changed_title'.tr,
                         'settings_language_changed'.trParams({'lang': lang['name']!}),
                         backgroundColor: Colors.green.shade100,
                         colorText: Colors.green.shade800,

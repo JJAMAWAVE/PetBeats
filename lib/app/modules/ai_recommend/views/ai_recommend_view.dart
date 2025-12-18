@@ -60,23 +60,23 @@ class AIRecommendView extends StatelessWidget {
               ),
               SizedBox(height: 16.h),
               Text(
-                'PRO 전용 기능',
+                'pro_exclusive'.tr,
                 style: AppTextStyles.titleLarge.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(height: 12.h),
               Text(
-                'AI가 맞춤 플레이리스트를\n자동으로 생성해드려요',
+                'ai_auto_playlist_desc'.tr,
                 textAlign: TextAlign.center,
                 style: AppTextStyles.bodyMedium.copyWith(
                   color: AppColors.textGrey,
                 ),
               ),
               SizedBox(height: 16.h),
-              _buildFeatureRow('6가지 상황별 맞춤 추천'),
-              _buildFeatureRow('AI 자동 플레이리스트 생성'),
-              _buildFeatureRow('모든 프리미엄 트랙 무제한'),
+              _buildFeatureRow('ai_feature_1'.tr),
+              _buildFeatureRow('ai_feature_2'.tr),
+              _buildFeatureRow('ai_feature_3'.tr),
               SizedBox(height: 24.h),
               SizedBox(
                 width: double.infinity,
@@ -93,8 +93,8 @@ class AIRecommendView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                   ),
-                  child: const Text(
-                    'PRO 시작하기',
+                  child: Text(
+                    'pro_start'.tr,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -103,7 +103,7 @@ class AIRecommendView extends StatelessWidget {
               TextButton(
                 onPressed: () => Navigator.pop(context),
                 child: Text(
-                  '나중에 할게요',
+                  'later'.tr,
                   style: AppTextStyles.bodyMedium.copyWith(
                     color: AppColors.textGrey,
                   ),
@@ -139,7 +139,7 @@ class AIRecommendView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('AI 맞춤 추천'),
+        title: Text('home_ai_recommend'.tr),
         backgroundColor: Colors.white,
         foregroundColor: AppColors.textDarkNavy,
         elevation: 0,
@@ -154,7 +154,7 @@ class AIRecommendView extends StatelessWidget {
                 children: [
                   // 헤더 설명
                   Text(
-                    '상황에 맞는 플레이리스트를\nAI가 자동으로 구성해드려요',
+                    'ai_page_desc'.tr,
                     style: AppTextStyles.titleMedium.copyWith(
                       color: AppColors.textDarkNavy,
                       height: 1.4,
@@ -170,7 +170,7 @@ class AIRecommendView extends StatelessWidget {
                       ),
                       SizedBox(width: 4.w),
                       Text(
-                        'PRO 전용 기능',
+                        'pro_exclusive'.tr,
                         style: AppTextStyles.bodySmall.copyWith(
                           color: AppColors.primaryBlue,
                           fontWeight: FontWeight.w600,

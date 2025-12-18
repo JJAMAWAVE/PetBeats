@@ -39,8 +39,8 @@ class PetProfile {
   // 프로필이 설정되어 있는지 확인
   bool get hasProfile => name != null && name!.isNotEmpty;
   
-  // 종류 한글 표시
-  String get speciesKorean => species == 'cat' ? '고양이' : '강아지';
+  // 종류 한글 표시 - localized
+  String get speciesKorean => species == 'cat' ? 'species_cat'.tr : 'species_dog'.tr;
   
   // 아이콘 경로
   String get iconPath => species == 'cat' 

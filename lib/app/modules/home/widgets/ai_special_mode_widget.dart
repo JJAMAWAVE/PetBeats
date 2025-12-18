@@ -57,7 +57,7 @@ class AISpecialModeWidget extends StatelessWidget {
               ),
               SizedBox(width: 8.w),
               Text(
-                '스마트 싱크',
+                'special_smart_sync'.tr,
                 style: AppTextStyles.titleLarge.copyWith(
                   color: AppColors.textDarkNavy,
                   fontWeight: FontWeight.bold,
@@ -99,7 +99,7 @@ class AISpecialModeWidget extends StatelessWidget {
             children: [
               _buildModeButton(
                 context,
-                '날씨',
+                'special_weather'.tr,
                 'assets/icons/icon_special_weather_glass.png',
                 Colors.blue.shade400,
                 () {
@@ -110,7 +110,7 @@ class AISpecialModeWidget extends StatelessWidget {
               SizedBox(width: 12.w),
               _buildModeButton(
                 context,
-                '리듬',  // ✨ 시간 → 리듬으로 변경 (Rhythm Care)
+                'special_rhythm'.tr,  // ✨ 시간 → 리듬으로 변경 (Rhythm Care)
                 'assets/icons/icon_special_time_glass.png',
                 Colors.orange.shade400,
                 () => Get.toNamed(Routes.RHYTHM_SPECIAL),
@@ -118,7 +118,7 @@ class AISpecialModeWidget extends StatelessWidget {
               SizedBox(width: 12.w),
               _buildModeButton(
                 context,
-                '돌봄',
+                'special_sitter'.tr,
                 'assets/icons/icon_special_reaction_glass.png',
                 Colors.purple.shade400,
                 () => Get.toNamed(Routes.SITTER_SPECIAL),

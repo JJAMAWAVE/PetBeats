@@ -138,94 +138,94 @@ class HomeController extends GetxController with WidgetsBindingObserver {
       // Dog Modes
       Mode(
         id: 'sleep',
-        title: '수면 유도',
-        description: '편안한 수면을 위한 사운드',
+        title: 'mode_sleep_title'.tr,
+        description: 'mode_sleep_desc'.tr,
         iconPath: 'assets/icons/icon_mode_sleep.png',
         color: const Color(0xFF5C6BC0), // Indigo
-        scientificFacts: ['느린 템포는 심박수를 낮춥니다.', '반복적인 리듬은 수면을 유도합니다.'],
+        scientificFacts: ['fact_sleep_1'.tr, 'fact_sleep_2'.tr],
         tracks: TrackData.sleepTracks,
       ),
       Mode(
         id: 'anxiety',
-        title: '분리불안',
-        description: '불안감 해소',
+        title: 'mode_anxiety_title'.tr,
+        description: 'mode_anxiety_desc'.tr,
         iconPath: 'assets/icons/icon_mode_separation.png',
         color: const Color(0xFF26A69A), // Teal
-        scientificFacts: ['백색 소음은 외부 자극을 차단합니다.', '부드러운 멜로디는 정서적 안정을 돕습니다.'],
+        scientificFacts: ['fact_anxiety_1'.tr, 'fact_anxiety_2'.tr],
         tracks: TrackData.separationTracks,
       ),
       Mode(
         id: 'noise',
-        title: '소음 민감',
-        description: '외부 소음 차단',
+        title: 'mode_noise_title'.tr,
+        description: 'mode_noise_desc'.tr,
         iconPath: 'assets/icons/icon_mode_noise.png',
         color: const Color(0xFF7E57C2), // Deep Purple
-        scientificFacts: ['일정한 소음은 갑작스러운 소리를 덮어줍니다.', '청각적 과부하를 줄여줍니다.'],
+        scientificFacts: ['fact_noise_1'.tr, 'fact_noise_2'.tr],
         tracks: TrackData.noiseTracks,
       ),
       Mode(
         id: 'energy',
-        title: '에너지 조절',
-        description: '활력 증진',
+        title: 'mode_energy_title'.tr,
+        description: 'mode_energy_desc'.tr,
         iconPath: 'assets/icons/icon_mode_energy.png',
         color: const Color(0xFFFFA726), // Orange
-        scientificFacts: ['빠른 템포는 활동성을 높입니다.', '다양한 주파수는 호기심을 자극합니다.'],
+        scientificFacts: ['fact_energy_1'.tr, 'fact_energy_2'.tr],
         tracks: TrackData.energyTracks,
       ),
       Mode(
         id: 'senior',
-        title: '시니어 펫 케어',
-        description: '노령 반려동물 케어',
+        title: 'mode_senior_title'.tr,
+        description: 'mode_senior_desc'.tr,
         iconPath: 'assets/icons/icon_mode_senior.png',
         color: const Color(0xFF8D6E63), // Brown
-        scientificFacts: ['낮은 주파수는 관절 통증 완화에 도움을 줄 수 있습니다.', '안정적인 리듬은 인지 기능을 돕습니다.'],
+        scientificFacts: ['fact_senior_1'.tr, 'fact_senior_2'.tr],
         tracks: TrackData.seniorTracks,
       ),
       
       // Cat Modes
       Mode(
         id: 'cat_sleep',
-        title: '수면 유도',
-        description: '고양이 수면을 위한 사운드',
+        title: 'mode_sleep_title'.tr,
+        description: 'mode_cat_sleep_desc'.tr,
         iconPath: 'assets/icons/icon_mode_sleep.png',
         color: const Color(0xFF5C6BC0), // Indigo
-        scientificFacts: ['느린 템포는 심박수를 낮춥니다.', '반복적인 리듬은 수면을 유도합니다.'],
+        scientificFacts: ['fact_sleep_1'.tr, 'fact_sleep_2'.tr],
         tracks: TrackData.catSleepTracks,
       ),
       Mode(
         id: 'cat_separation',
-        title: '분리불안',
-        description: '고양이 불안감 해소',
+        title: 'mode_anxiety_title'.tr,
+        description: 'mode_cat_anxiety_desc'.tr,
         iconPath: 'assets/icons/icon_mode_separation.png',
         color: const Color(0xFF26A69A), // Teal
-        scientificFacts: ['백색 소음은 외부 자극을 차단합니다.', '부드러운 멜로디는 정서적 안정을 돕습니다.'],
+        scientificFacts: ['fact_anxiety_1'.tr, 'fact_anxiety_2'.tr],
         tracks: TrackData.catSeparationTracks,
       ),
       Mode(
         id: 'cat_noise',
-        title: '소음 민감',
-        description: '고양이 외부 소음 차단',
+        title: 'mode_noise_title'.tr,
+        description: 'mode_cat_noise_desc'.tr,
         iconPath: 'assets/icons/icon_mode_noise.png',
         color: const Color(0xFF7E57C2), // Deep Purple
-        scientificFacts: ['일정한 소음은 갑작스러운 소리를 덮어줍니다.', '청각적 과부하를 줄여줍니다.'],
+        scientificFacts: ['fact_noise_1'.tr, 'fact_noise_2'.tr],
         tracks: TrackData.catNoiseTracks,
       ),
       Mode(
         id: 'cat_energy',
-        title: '에너지 조절',
-        description: '고양이 활력 증진',
+        title: 'mode_energy_title'.tr,
+        description: 'mode_cat_energy_desc'.tr,
         iconPath: 'assets/icons/icon_mode_energy.png',
         color: const Color(0xFFFFA726), // Orange
-        scientificFacts: ['빠른 템포는 활동성을 높입니다.', '다양한 주파수는 호기심을 자극합니다.'],
+        scientificFacts: ['fact_energy_1'.tr, 'fact_energy_2'.tr],
         tracks: TrackData.catEnergyTracks,
       ),
       Mode(
         id: 'cat_senior',
-        title: '시니어 펫 케어',
-        description: '노령 고양이 케어',
+        title: 'mode_senior_title'.tr,
+        description: 'mode_cat_senior_desc'.tr,
         iconPath: 'assets/icons/icon_mode_senior.png',
         color: const Color(0xFF8D6E63), // Brown
-        scientificFacts: ['낮은 주파수는 관절 통증 완화에 도움을 줄 수 있습니다.', '안정적인 리듬은 인지 기능을 돕습니다.'],
+        scientificFacts: ['fact_senior_1'.tr, 'fact_senior_2'.tr],
         tracks: TrackData.catSeniorTracks,
       ),
     ];
@@ -235,8 +235,8 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     print('DEBUG: Initializing species tabs with: $selected');
     
     final allTabs = [
-      SpeciesTab(id: 'dog', label: '강아지', iconPath: 'assets/icons/icon_species_dog.png'),
-      SpeciesTab(id: 'cat', label: '고양이', iconPath: 'assets/icons/icon_species_cat.png'),
+      SpeciesTab(id: 'dog', label: 'species_dog'.tr, iconPath: 'assets/icons/icon_species_dog.png'),
+      SpeciesTab(id: 'cat', label: 'species_cat'.tr, iconPath: 'assets/icons/icon_species_cat.png'),
       // SpeciesTab(id: 'owner', label: '보호자', iconPath: 'assets/icons/icon_species_owner.png'), // Removed
     ];
 

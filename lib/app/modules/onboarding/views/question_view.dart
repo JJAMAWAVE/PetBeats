@@ -52,11 +52,11 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
     final selectedItems = <String>[].obs;
     
     final options = [
-      {'value': 'sleep', 'label': '수면 유도', 'icon': 'assets/icons/icon_mode_sleep.png'},
-      {'value': 'anxiety', 'label': '분리불안', 'icon': 'assets/icons/icon_mode_separation.png'},
-      {'value': 'noise', 'label': '소음 민감', 'icon': 'assets/icons/icon_mode_noise.png'},
-      {'value': 'energy', 'label': '에너지 조절', 'icon': 'assets/icons/icon_mode_energy.png'},
-      {'value': 'senior', 'label': '시니어 펫 케어', 'icon': 'assets/icons/icon_mode_senior.png'},
+      {'value': 'sleep', 'label': 'mode_sleep_title'.tr, 'icon': 'assets/icons/icon_mode_sleep.png'},
+      {'value': 'anxiety', 'label': 'mode_anxiety_title'.tr, 'icon': 'assets/icons/icon_mode_separation.png'},
+      {'value': 'noise', 'label': 'mode_noise_title'.tr, 'icon': 'assets/icons/icon_mode_noise.png'},
+      {'value': 'energy', 'label': 'mode_energy_title'.tr, 'icon': 'assets/icons/icon_mode_energy.png'},
+      {'value': 'senior', 'label': 'mode_senior_title'.tr, 'icon': 'assets/icons/icon_mode_senior.png'},
     ];
 
     return Scaffold(

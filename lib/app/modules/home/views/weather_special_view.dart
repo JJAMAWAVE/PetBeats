@@ -29,7 +29,7 @@ class WeatherSpecialView extends GetView<HomeController> {
           onPressed: () => Get.back(),
         ),
         title: Text(
-          '스마트 날씨 싱크',
+          'weather_title'.tr,
           style: AppTextStyles.subtitle,
         ),
         centerTitle: true,
@@ -49,7 +49,7 @@ class WeatherSpecialView extends GetView<HomeController> {
                     child: Column(
                       children: [
                         Text(
-                          '반려동물과 당신의 하루를 날씨와 함께',
+                          'weather_preview_desc'.tr,
                           style: AppTextStyles.bodyMedium.copyWith(
                             color: AppColors.textGrey,
                             height: 1.5,
@@ -152,7 +152,7 @@ class WeatherSpecialView extends GetView<HomeController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '스마트 날씨 싱크 잠금해제',
+                    'weather_premium_title'.tr,
                     style: GoogleFonts.poppins(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
@@ -161,7 +161,7 @@ class WeatherSpecialView extends GetView<HomeController> {
                   ),
                   SizedBox(height: 4.h),
                   Text(
-                    '실시간 날씨 기반 사운드 적응',
+                    'weather_premium_desc'.tr,
                     style: GoogleFonts.poppins(
                       color: Colors.white.withOpacity(0.9),
                       fontSize: 13.sp,
@@ -212,7 +212,7 @@ class WeatherSpecialView extends GetView<HomeController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        isEnabled ? '날씨 동기화 활성화됨' : '날씨 동기화 비활성화',
+                        isEnabled ? 'weather_active'.tr : 'weather_inactive'.tr,
                         style: AppTextStyles.bodyLarge.copyWith(
                           fontWeight: FontWeight.bold,
                           color: isEnabled ? AppColors.primaryBlue : Colors.grey,
@@ -221,8 +221,8 @@ class WeatherSpecialView extends GetView<HomeController> {
                       SizedBox(height: 4.h),
                       Text(
                         isEnabled
-                            ? '플레이어에서 날씨 아이콘을 확인하세요'
-                            : '버튼을 눌러 날씨 동기화를 시작하세요',
+                            ? 'weather_check_icon'.tr
+                            : 'weather_start_btn'.tr,
                         style: AppTextStyles.bodySmall.copyWith(
                           color: AppColors.textGrey,
                         ),
@@ -252,7 +252,7 @@ class WeatherSpecialView extends GetView<HomeController> {
                 elevation: isEnabled ? 0 : 4,
               ),
               child: Text(
-                isEnabled ? '날씨 동기화 비활성화' : '날씨 동기화 활성화',
+                isEnabled ? 'weather_deactivate_btn'.tr : 'weather_activate_btn'.tr,
                 style: GoogleFonts.poppins(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
@@ -283,7 +283,7 @@ class WeatherSpecialView extends GetView<HomeController> {
               Icon(Icons.science, size: 20.w, color: AppColors.primaryBlue),
               SizedBox(width: 8.w),
               Text(
-                '과학적 효과',
+                'weather_science_title'.tr,
                 style: GoogleFonts.poppins(
                   fontSize: 15.sp,
                   fontWeight: FontWeight.bold,
@@ -295,9 +295,7 @@ class WeatherSpecialView extends GetView<HomeController> {
           ),
           SizedBox(height: 12.h),
           Text(
-            '환경 적응 사운드는 반려동물의 생체 리듬을 자연스럽게 조율합니다. '
-            '빗소리는 심박수를 안정시키고, 맑은 날씨는 활동성을 높이며, '
-            '야간 모드는 멜라토닌 분비를 촉진합니다.',
+            'weather_science_desc'.tr,
             style: AppTextStyles.labelSmall.copyWith(
               color: AppColors.textDarkNavy,
               height: 1.6,

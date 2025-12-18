@@ -149,7 +149,7 @@ class InviteFriendsView extends GetView<InviteController> {
       child: Column(
         children: [
           Text(
-            '친구에게 평온을 선물하고,\n무료 이용권을 받으세요.',
+            'invite_headline'.tr,
             textAlign: TextAlign.center,
             style: GoogleFonts.notoSans(
               fontSize: 24,
@@ -160,7 +160,7 @@ class InviteFriendsView extends GetView<InviteController> {
           ),
           const SizedBox(height: 12),
           Text(
-            '친구를 초대할 때마다 PetBeats 프리미엄 기간이 늘어납니다.',
+            'invite_headline_desc'.tr,
             textAlign: TextAlign.center,
             style: GoogleFonts.notoSans(
               fontSize: 15,
@@ -212,7 +212,7 @@ class InviteFriendsView extends GetView<InviteController> {
             ),
             const SizedBox(height: 8),
             Text(
-              '가입한 친구',
+              'invite_friends_joined'.tr,
               style: GoogleFonts.notoSans(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
@@ -233,15 +233,15 @@ class InviteFriendsView extends GetView<InviteController> {
         children: [
           _buildRewardCard(
             friends: 1,
-            title: '친구 1명',
-            reward: '프리미엄 1주일 무료 체험',
+            title: 'invite_tier1_title'.tr,
+            reward: 'invite_tier1_reward'.tr,
             isReached: controller.tier1Reached,
           ),
           const SizedBox(height: 16),
           _buildRewardCard(
             friends: 3,
-            title: '친구 3명',
-            reward: '프리미엄 1개월 무료 구독',
+            title: 'invite_tier2_title'.tr,
+            reward: 'invite_tier2_reward'.tr,
             isReached: controller.tier2Reached,
           ),
         ],
@@ -334,7 +334,7 @@ class InviteFriendsView extends GetView<InviteController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '참여 방법',
+            'invite_how_title'.tr,
             style: GoogleFonts.notoSans(
               fontSize: 13,
               fontWeight: FontWeight.w700,
@@ -345,17 +345,17 @@ class InviteFriendsView extends GetView<InviteController> {
           const SizedBox(height: 24),
           _buildStep(
             number: 1,
-            text: '아래 버튼을 눌러 친구에게 초대 링크를 보내세요.',
+            text: 'invite_step1'.tr,
           ),
           const SizedBox(height: 20),
           _buildStep(
             number: 2,
-            text: '친구가 링크를 통해 가입하고 앱을 실행하면 카운트됩니다.',
+            text: 'invite_step2'.tr,
           ),
           const SizedBox(height: 20),
           _buildStep(
             number: 3,
-            text: '목표를 달성하면 알림을 보내드리고, 무료 기간이 자동으로 추가됩니다.',
+            text: 'invite_step3'.tr,
           ),
         ],
       ),
@@ -415,7 +415,7 @@ class InviteFriendsView extends GetView<InviteController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '유의사항:',
+            'invite_notice_title'.tr,
             style: GoogleFonts.notoSans(
               fontSize: 13,
               fontWeight: FontWeight.w700,
@@ -424,7 +424,7 @@ class InviteFriendsView extends GetView<InviteController> {
           ),
           const SizedBox(height: 8),
           Text(
-            '신규 가입하는 친구만 카운트됩니다. 무료 기간은 현재 구독 기간이 끝난 뒤 자동으로 적용됩니다.',
+            'invite_notice_desc'.tr,
             style: GoogleFonts.notoSans(
               fontSize: 13,
               fontWeight: FontWeight.w400,
@@ -467,7 +467,7 @@ class InviteFriendsView extends GetView<InviteController> {
             ),
           ),
           child: Text(
-            '친구 초대하기',
+            'invite_cta'.tr,
             style: GoogleFonts.notoSans(
               fontSize: 18,
               fontWeight: FontWeight.w700,

@@ -100,8 +100,8 @@ class _AIPlaylistResultViewState extends State<AIPlaylistResultView> {
       setState(() {});
       
       Get.snackbar(
-        '✅ 재생 시작',
-        '${scenario.title} 플레이리스트 (${_tracks!.length}곡)',
+        'ai_play_started'.tr,
+        'ai_playlist_playing'.trParams({'title': scenario.title, 'count': _tracks!.length.toString()}),
         backgroundColor: scenario.color,
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
@@ -111,7 +111,7 @@ class _AIPlaylistResultViewState extends State<AIPlaylistResultView> {
       
       // 홈으로 이동하지 않고 현재 페이지 유지
     } catch (e) {
-      Get.snackbar('오류', '재생을 시작할 수 없습니다');
+      Get.snackbar('error'.tr, 'ai_play_error'.tr);
     }
   }
 
@@ -121,9 +121,9 @@ class _AIPlaylistResultViewState extends State<AIPlaylistResultView> {
     final seconds = d.inSeconds.remainder(60);
     
     if (hours > 0) {
-      return '${hours}시간 ${minutes}분';
+      return '${hours}${'ai_hours'.tr} ${minutes}${'ai_minutes'.tr}';
     }
-    return '${minutes}분 ${seconds}초';
+    return '${minutes}${'ai_minutes'.tr} ${seconds}${'ai_seconds'.tr}';
   }
 
   @override
@@ -162,7 +162,7 @@ class _AIPlaylistResultViewState extends State<AIPlaylistResultView> {
           CircularProgressIndicator(color: scenario.color),
           SizedBox(height: 16.h),
           Text(
-            'AI가 맞춤 플레이리스트를\n생성하고 있어요...',
+            'ai_generating_playlist'.tr,
             textAlign: TextAlign.center,
             style: AppTextStyles.bodyMedium.copyWith(
               color: AppColors.textGrey,
@@ -176,7 +176,7 @@ class _AIPlaylistResultViewState extends State<AIPlaylistResultView> {
   Widget _buildResultView() {
     if (_tracks == null || _tracks!.isEmpty) {
       return Center(
-        child: Text('플레이리스트를 생성할 수 없습니다'),
+        child: Text('ai_no_playlist'.tr),
       );
     }
 
@@ -273,7 +273,7 @@ class _AIPlaylistResultViewState extends State<AIPlaylistResultView> {
           child: ElevatedButton.icon(
             onPressed: _playAll,
             icon: const Icon(Icons.play_circle_filled),
-            label: const Text('전체 재생'),
+            label: Text('ai_play_all'.tr),
             style: ElevatedButton.styleFrom(
               backgroundColor: scenario.color,
               foregroundColor: Colors.white,

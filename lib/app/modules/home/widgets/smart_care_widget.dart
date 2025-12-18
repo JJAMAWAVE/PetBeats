@@ -55,7 +55,7 @@ class SmartCareWidget extends GetView<SmartCareController> {
               Row(
                 children: [
                   GestureDetector(
-                    onTap: () => _showDebugDialog(context),
+                    onTap: () => _showDebugDialog(Get.context!),
                     child: Icon(Icons.wb_sunny_rounded, color: Colors.white, size: 24.w),
                   ), // Placeholder icon
                   SizedBox(width: 8.w),
