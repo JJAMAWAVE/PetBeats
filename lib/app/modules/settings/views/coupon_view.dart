@@ -376,6 +376,51 @@ class _CouponViewState extends State<CouponView> {
                         fontSize: 14.sp,
                       ),
                     ),
+                    SizedBox(height: 20.h),
+                    // 오픈 기념 7일 무료 시작하기 CTA
+                    if (!couponService.isPro)
+                      Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(16.w),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFF6366F1), Color(0xFF8B5CF6)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              '🎉 오픈 기념 특별 혜택',
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.9),
+                                fontSize: 12.sp,
+                              ),
+                            ),
+                            SizedBox(height: 8.h),
+                            ElevatedButton(
+                              onPressed: () => Get.toNamed('/subscription'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                foregroundColor: const Color(0xFF6366F1),
+                                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                              ),
+                              child: Text(
+                                '7일 무료로 시작하기',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                   ],
                 ),
               ),
