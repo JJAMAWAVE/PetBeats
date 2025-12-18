@@ -795,6 +795,7 @@ const Map<String, String> koKR = {
   'coupon_expires_on': '@date까지 이용 가능',
   'coupon_days_remaining': '@days일 남음',
   'coupon_upgrade_prompt': 'PRO로 업그레이드하고 모든 기능을 이용하세요',
+  'coupon_input_title': '쿠폰 코드 입력',
   'coupon_input_placeholder': '쿠폰 코드를 입력하세요',
   'coupon_input_hint': '이벤트 당첨, 친구 초대 보상 등으로 받은 코드를 입력하세요.',
   'coupon_register_btn': '등록',

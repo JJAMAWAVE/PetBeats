@@ -6,6 +6,7 @@ import '../../../data/services/weather_service.dart';
 import '../../../data/services/weather_sound_manager.dart';
 import '../../../data/services/sound_mixer_service.dart';  // ✨ For volume control
 import '../../../data/services/rhythm_care_service.dart';  // ✨ For time simulation
+import '../../invite/controllers/invite_controller.dart';  // ✨ For invite simulation
 import '../controllers/home_controller.dart';
 import 'dart:ui';
 
@@ -384,6 +385,10 @@ class _DebugBottomSheetState extends State<DebugBottomSheet> {
                   ],
                 ),
               ),
+              SizedBox(height: 16.h),
+              
+              // ✨ Friend Invite Simulation
+              _buildInviteSimulator(),
               SizedBox(height: 24.h),
               
               // Close Button
@@ -452,6 +457,158 @@ class _DebugBottomSheetState extends State<DebugBottomSheet> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  /// 친구 초대 시뮬레이터 위젯
+  Widget _buildInviteSimulator() {
+    return Container(
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(color: Colors.white10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '친구 초대 시뮬레이션',
+                style: TextStyle(color: Colors.white70, fontSize: 14.sp),
+              ),
+              TextButton(
+                onPressed: () {
+                  if (Get.isRegistered<InviteController>()) {
+                    Get.find<InviteController>().resetProgress();
+                    setState(() {});
+                    Get.snackbar('🔄', '초대 진행 상황 초기화됨', 
+                      snackPosition: SnackPosition.BOTTOM, 
+                      backgroundColor: Colors.blue,
+                      duration: const Duration(seconds: 1),
+                    );
+                  }
+                },
+                child: Text('리셋', style: TextStyle(color: Colors.blue, fontSize: 12.sp)),
+              ),
+            ],
+          ),
+          SizedBox(height: 12.h),
+          // Current Status
+          Builder(
+            builder: (context) {
+              if (!Get.isRegistered<InviteController>()) {
+                return Text(
+                  'InviteController 미등록',
+                  style: TextStyle(color: Colors.red, fontSize: 12.sp),
+                );
+              }
+              
+              final controller = Get.find<InviteController>();
+              
+              return Obx(() => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                        decoration: BoxDecoration(
+                          color: Colors.green.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                        child: Text(
+                          '👥 ${controller.friendsJoined.value}명 가입',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 8.w),
+                      // Tier badges
+                      if (controller.tier1Rewarded.value)
+                        _buildTierBadge('1', Colors.blue),
+                      if (controller.tier2Rewarded.value)
+                        _buildTierBadge('3', Colors.purple),
+                      if (controller.tier3Rewarded.value)
+                        _buildTierBadge('5', Colors.amber),
+                    ],
+                  ),
+                  SizedBox(height: 12.h),
+                  // Control Buttons
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            controller.simulateFriendJoin();
+                            setState(() {});
+                          },
+                          icon: Icon(Icons.person_add, size: 16.w),
+                          label: Text('+1명', style: TextStyle(fontSize: 12.sp)),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            foregroundColor: Colors.white,
+                            padding: EdgeInsets.symmetric(vertical: 10.h),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 8.w),
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            // Add 3 friends at once
+                            for (int i = 0; i < 3; i++) {
+                              controller.onFriendJoined();
+                            }
+                            setState(() {});
+                            Get.snackbar('🧪', '친구 3명 가입! (총 ${controller.friendsJoined.value}명)',
+                              snackPosition: SnackPosition.TOP,
+                              backgroundColor: Colors.green,
+                              duration: const Duration(seconds: 1),
+                            );
+                          },
+                          icon: Icon(Icons.group_add, size: 16.w),
+                          label: Text('+3명', style: TextStyle(fontSize: 12.sp)),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            foregroundColor: Colors.white,
+                            padding: EdgeInsets.symmetric(vertical: 10.h),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ));
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 티어 배지 빌더
+  Widget _buildTierBadge(String tier, Color color) {
+    return Container(
+      margin: EdgeInsets.only(right: 4.w),
+      padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(8.r),
+      ),
+      child: Text(
+        '✓$tier',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 10.sp,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );

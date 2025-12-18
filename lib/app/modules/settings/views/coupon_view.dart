@@ -197,7 +197,7 @@ class _CouponViewState extends State<CouponView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '쿠폰 코드 입력',
+          'coupon_input_title'.tr,
           style: AppTextStyles.titleMedium.copyWith(
             fontWeight: FontWeight.bold,
             fontSize: 16.sp,

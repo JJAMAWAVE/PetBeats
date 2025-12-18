@@ -785,6 +785,7 @@ const Map<String, String> enUS = {
   'coupon_expires_on': 'Expires on @date',
   'coupon_days_remaining': '@days days remaining',
   'coupon_upgrade_prompt': 'Upgrade to PRO for full access',
+  'coupon_input_title': 'Enter Coupon Code',
   'coupon_input_placeholder': 'Enter coupon code',
   'coupon_input_hint': 'Enter event prizes or referral reward codes.',
   'coupon_register_btn': 'Register',
