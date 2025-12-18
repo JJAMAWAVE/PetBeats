@@ -77,12 +77,14 @@ class RhythmSpecialView extends StatelessWidget {
                           }
                           return _buildActivationStatus(rhythmService);
                         }),
+                        
+                        SizedBox(height: 20.h),
+                        
+                        // Core Value Proposition (같은 Padding 안에서 동일 마진)
+                        _buildCoreValue(),
                       ],
                     ),
                   ),
-                  
-                  // Core Value Proposition
-                  _buildCoreValue(),
                   
                   SizedBox(height: 20.h),
                   
@@ -218,7 +220,7 @@ class RhythmSpecialView extends StatelessWidget {
   /// Core Value Proposition
   Widget _buildCoreValue() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 24.w),
+      width: double.infinity,
       padding: EdgeInsets.all(16.w), // 통일된 패딩
       decoration: BoxDecoration(
         color: AppColors.primaryBlue.withOpacity(0.05),

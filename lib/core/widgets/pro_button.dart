@@ -51,17 +51,21 @@ class ProFeatureCard extends StatelessWidget {
   }
 }
 
-/// 통일된 PRO 버튼 위젯
+/// 통일된 PRO 버튼 위젯 (배너 형태)
 /// 
-/// 레인보우 그라데이션 효과가 적용된 프리미엄 구독 버튼
+/// 레인보우 그라데이션 + 아이콘 + 제목 + 설명 + 화살표
 class ProButton extends StatelessWidget {
-  final String text;
+  final String title;
+  final String subtitle;
+  final IconData icon;
   final VoidCallback? onPressed;
   final double? width;
 
   const ProButton({
     super.key,
-    this.text = 'dialog_start_pro',
+    this.title = 'dialog_start_pro',
+    this.subtitle = 'dialog_pro_desc',
+    this.icon = Icons.diamond,
     this.onPressed,
     this.width,
   });
@@ -76,15 +80,50 @@ class ProButton extends StatelessWidget {
         child: Container(
           width: width ?? double.infinity,
           padding: EdgeInsets.all(16.w),
-          child: Center(
-            child: Text(
-              text.tr,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 16.sp,
+          child: Row(
+            children: [
+              // 아이콘
+              Container(
+                padding: EdgeInsets.all(10.w),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: Icon(icon, color: Colors.white, size: 24.w),
               ),
-            ),
+              SizedBox(width: 14.w),
+              // 텍스트
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      title.tr,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15.sp,
+                      ),
+                    ),
+                    SizedBox(height: 2.h),
+                    Text(
+                      subtitle.tr,
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.9),
+                        fontSize: 12.sp,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // 화살표
+              Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.white.withOpacity(0.8),
+                size: 16.w,
+              ),
+            ],
           ),
         ),
       ),
@@ -122,7 +161,9 @@ class ProFeatureSection extends StatelessWidget {
         ),
         SizedBox(height: 16.h),
         ProButton(
-          text: buttonText,
+          title: buttonText,
+          subtitle: description,
+          icon: icon,
           onPressed: onPressed,
         ),
         SizedBox(height: 8.h),
