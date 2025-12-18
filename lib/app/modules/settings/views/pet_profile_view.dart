@@ -104,12 +104,12 @@ class _PetProfileViewState extends State<PetProfileView> {
         colorText: Colors.green.shade800,
         margin: EdgeInsets.all(16.w),
         borderRadius: 12,
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 3),
       );
       
-      // 토스트 메시지가 보인 후 Settings로 이동
-      await Future.delayed(const Duration(milliseconds: 500));
-      Get.back(); // Settings로 돌아감
+      // 토스트 메시지가 충분히 보인 후 Settings로 이동
+      await Future.delayed(const Duration(seconds: 1));
+      Get.offNamed('/settings'); // Settings로 명시적 이동
     } catch (e) {
       debugPrint('[PetProfileView] Error saving profile: $e');
       Get.snackbar('pet_error'.tr, 'pet_save_fail'.tr);
