@@ -140,64 +140,36 @@ class _HapticSafetyGuideDialogState extends State<HapticSafetyGuideDialog> {
               // Page View with Card Stack Effect
               SizedBox(
                 height: 500.h,
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    return Stack(
-                      children: List.generate(_cards.length, (index) {
-                        // Calculate offset from current page
-                        final offset = index - _currentPage;
-                        
-                        // Only render current and next 2 cards
-                        if (offset < 0 || offset > 2) {
-                          return const SizedBox.shrink();
-                        }
-                        
-                        // Scale and position for stacked effect
-                        final scale = 1.0 - (offset * 0.04);
-                        final translateY = offset * 8.0;
-                        final opacity = offset == 0 ? 1.0 : 0.5 - (offset * 0.15);
-                        
-                        return Positioned.fill(
+                child: Stack(
+                  children: [
+                    // Background cards (stacked effect)
+                    ...List.generate(2, (i) {
+                      final bgIndex = _currentPage + i + 1;
+                      if (bgIndex >= _cards.length) return const SizedBox.shrink();
+                      return Positioned.fill(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20.w),
                           child: Transform.translate(
-                            offset: Offset(0, translateY),
+                            offset: Offset(0, (i + 1) * 8.0),
                             child: Transform.scale(
-                              scale: scale,
+                              scale: 1.0 - ((i + 1) * 0.04),
                               alignment: Alignment.topCenter,
                               child: Opacity(
-                                opacity: opacity.clamp(0.0, 1.0),
-                                child: GestureDetector(
-                                  onHorizontalDragEnd: (details) {
-                                    if (details.primaryVelocity! < 0 && _currentPage < _cards.length - 1) {
-                                      _pageController.nextPage(
-                                        duration: const Duration(milliseconds: 400),
-                                        curve: Curves.easeOutCubic,
-                                      );
-                                    } else if (details.primaryVelocity! > 0 && _currentPage > 0) {
-                                      _pageController.previousPage(
-                                        duration: const Duration(milliseconds: 400),
-                                        curve: Curves.easeOutCubic,
-                                      );
-                                    }
-                                  },
-                                  child: _buildCard(_cards[index], index),
+                                opacity: 0.3 - (i * 0.1),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF2A3A4A),
+                                    borderRadius: BorderRadius.circular(16.r),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        );
-                      }).reversed.toList(),
-                    );
-                  },
-                ),
-              ),
-              
-              // Invisible PageView for controller sync
-              SizedBox(
-                height: 0,
-                child: Opacity(
-                  opacity: 0,
-                  child: IgnorePointer(
-                    child: PageView.builder(
+                        ),
+                      );
+                    }),
+                    // Main PageView
+                    PageView.builder(
                       controller: _pageController,
                       onPageChanged: (index) {
                         setState(() {
@@ -205,9 +177,11 @@ class _HapticSafetyGuideDialogState extends State<HapticSafetyGuideDialog> {
                         });
                       },
                       itemCount: _cards.length,
-                      itemBuilder: (_, __) => const SizedBox(),
+                      itemBuilder: (context, index) {
+                        return _buildCard(_cards[index], index);
+                      },
                     ),
-                  ),
+                  ],
                 ),
               ),
 

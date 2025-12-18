@@ -84,72 +84,47 @@ class _SitterSpecialViewState extends State<SitterSpecialView> {
             children: [
               // 캐러셀 with Card Stack Effect
               Expanded(
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    return Stack(
-                      children: List.generate(_introSlides.length, (index) {
-                        // Calculate offset from current page
-                        final offset = index - _currentPage;
-                        
-                        // Only render current and next 2 cards
-                        if (offset < 0 || offset > 2) {
-                          return const SizedBox.shrink();
-                        }
-                        
-                        // Scale and position for stacked effect
-                        final scale = 1.0 - (offset * 0.04);
-                        final translateY = offset * 10.0;
-                        final opacity = offset == 0 ? 1.0 : 0.5 - (offset * 0.15);
-                        
-                        return Positioned.fill(
+                child: Stack(
+                  children: [
+                    // Background cards (stacked effect)
+                    ...List.generate(2, (i) {
+                      final bgIndex = _currentPage + i + 1;
+                      if (bgIndex >= _introSlides.length) return const SizedBox.shrink();
+                      return Positioned.fill(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 24.w),
                           child: Transform.translate(
-                            offset: Offset(0, translateY),
+                            offset: Offset(0, (i + 1) * 10.0),
                             child: Transform.scale(
-                              scale: scale,
+                              scale: 1.0 - ((i + 1) * 0.04),
                               alignment: Alignment.topCenter,
                               child: Opacity(
-                                opacity: opacity.clamp(0.0, 1.0),
-                                child: GestureDetector(
-                                  onHorizontalDragEnd: (details) {
-                                    if (details.primaryVelocity! < 0 && _currentPage < _introSlides.length - 1) {
-                                      _pageController.nextPage(
-                                        duration: const Duration(milliseconds: 400),
-                                        curve: Curves.easeOutCubic,
-                                      );
-                                    } else if (details.primaryVelocity! > 0 && _currentPage > 0) {
-                                      _pageController.previousPage(
-                                        duration: const Duration(milliseconds: 400),
-                                        curve: Curves.easeOutCubic,
-                                      );
-                                    }
-                                  },
-                                  child: _buildSlideWithEffect(index),
+                                opacity: 0.25 - (i * 0.1),
+                                child: Container(
+                                  margin: EdgeInsets.only(top: 8.h, bottom: 24.h),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(24.r),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        );
-                      }).reversed.toList(),
-                    );
-                  },
-                ),
-              ),
-              
-              // Invisible PageView for controller sync
-              SizedBox(
-                height: 0,
-                child: Opacity(
-                  opacity: 0,
-                  child: IgnorePointer(
-                    child: PageView.builder(
+                        ),
+                      );
+                    }),
+                    // Main PageView
+                    PageView.builder(
                       controller: _pageController,
                       itemCount: _introSlides.length,
                       onPageChanged: (index) {
                         setState(() => _currentPage = index);
                       },
-                      itemBuilder: (_, __) => const SizedBox(),
+                      itemBuilder: (context, index) {
+                        return _buildSlideWithEffect(index);
+                      },
                     ),
-                  ),
+                  ],
                 ),
               ),
               
