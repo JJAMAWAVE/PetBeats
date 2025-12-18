@@ -28,6 +28,11 @@ const Map<String, String> enUS = {
   'onboarding_slide4_title': 'Resonate Together',
   'onboarding_slide4_desc': 'Hold your pet and feel it.\nWhen hearts sync, true healing begins.\nConnect deeply with heartbeat haptics.',
   
+  'onboarding_question_1_title': 'What kind of help\ndoes your pet need?',
+  'onboarding_question_1_limit': 'You can select up to 3',
+  'onboarding_question_2_title': 'Who is this care for?',
+  'onboarding_question_2_limit': 'You can select up to 2',
+  
   // ===== Home Screen (home_view.dart) =====
   'home_premium_therapy': 'Premium Sound Therapy',
   'home_recommended_for': 'Recommended Modes for @species',

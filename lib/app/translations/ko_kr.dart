@@ -28,6 +28,11 @@ const Map<String, String> koKR = {
   'onboarding_slide4_title': '함께 공명하다',
   'onboarding_slide4_desc': '아이를 품에 안고 느껴보세요.\n심장이 맞춰지는 순간, 진정한 치유가 시작됩니다.\n심장 박동 햅틱으로 깊이 교감하세요.',
   
+  'onboarding_question_1_title': '반려동물에게 필요한\n도움은 무엇인가요?',
+  'onboarding_question_1_limit': '최대 3개까지 선택 가능합니다',
+  'onboarding_question_2_title': '누구를 위한\n케어인가요?',
+  'onboarding_question_2_limit': '최대 2개까지 선택 가능합니다',
+  
   // ===== 홈 화면 (home_view.dart) =====
   'home_premium_therapy': '프리미엄 사운드 테라피',
   'home_recommended_for': '@species를 위한 추천 모드',

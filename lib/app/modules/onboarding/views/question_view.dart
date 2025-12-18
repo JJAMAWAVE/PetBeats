@@ -84,7 +84,7 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
                   const SizedBox(height: 40),
                   
                   Text(
-                    '반려동물에게 필요한\n도움은 무엇인가요?',
+                    'onboarding_question_1_title'.tr,
                     style: GoogleFonts.notoSans(
                       fontSize: 28,
                       fontWeight: FontWeight.w700,
@@ -96,7 +96,7 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
                   const SizedBox(height: 12),
                   
                   Text(
-                    '최대 3개까지 선택 가능합니다',
+                    'onboarding_question_1_limit'.tr,
                     style: AppTextStyles.bodyMedium.copyWith(
                       color: AppColors.textGrey,
                     ),
@@ -178,7 +178,7 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
                             disabledForegroundColor: Colors.white.withOpacity(0.5),
                           ),
                           child: Text(
-                            '다음',
+                            'next'.tr,
                             style: GoogleFonts.notoSans(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,

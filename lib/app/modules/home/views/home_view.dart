@@ -469,7 +469,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        '프리미엄 사운드 테라피',
+                        'home_premium_therapy'.tr,
                         style: AppTextStyles.titleMedium.copyWith(
                           color: Colors.white,
                           fontSize: 20,

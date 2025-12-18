@@ -80,7 +80,7 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
                   const SizedBox(height: 20),
                   
                   Text(
-                    '누구를 위한\n케어인가요?',
+                    'onboarding_question_2_title'.tr,
                     style: GoogleFonts.notoSans(
                       fontSize: 28,
                       fontWeight: FontWeight.w700,
@@ -92,7 +92,7 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
                   const SizedBox(height: 12),
                   
                   Text(
-                    '최대 2개까지 선택 가능합니다', // Updated text
+                    'onboarding_question_2_limit'.tr, // Updated text
                     style: AppTextStyles.bodyMedium.copyWith(
                       color: AppColors.textGrey,
                     ),
@@ -176,7 +176,7 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
                             disabledForegroundColor: Colors.white.withOpacity(0.5),
                           ),
                           child: Text(
-                            '시작하기',
+                            'start'.tr,
                             style: GoogleFonts.notoSans(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
