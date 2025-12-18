@@ -601,7 +601,9 @@ const Map<String, String> koKR = {
   'invite_tier1_title': '친구 1명',
   'invite_tier1_reward': '프리미엄 1주일 무료 체험',
   'invite_tier2_title': '친구 3명',
-  'invite_tier2_reward': '프리미엄 1개월 무료 구독',
+  'invite_tier2_reward': '프리미엄 3주 무료 구독',
+  'invite_tier3_title': '친구 5명',
+  'invite_tier3_reward': '프리미엄 1개월 무료 구독',
   'invite_how_title': '참여 방법',
   'invite_step1': '아래 버튼을 눌러 친구에게 초대 링크를 보내세요.',
   'invite_step2': '친구가 링크를 통해 가입하고 앱을 실행하면 카운트됩니다.',
@@ -813,4 +815,16 @@ const Map<String, String> koKR = {
   'coupon_test': '테스트 쿠폰',
   'coupon_settings_title': 'PRO 멤버십',
   'coupon_settings_desc': '구독 및 쿠폰 관리',
+  
+  // ===== Invite Friends =====
+  'invite_share_message': '반려동물을 위한 평온한 음악을 함께 들어요!',
+  'invite_share_benefit': '초대 링크로 가입하시면 특별 혜택이 제공됩니다.',
+  'invite_share_features': '과학적으로 검증된 반려동물 전용 사운드',
+  'invite_share_subject': '초대',
+  'invite_share_error_title': '공유 실패',
+  'invite_share_error_desc': '초대 링크를 공유하는 중 문제가 발생했습니다.',
+  'invite_progress_title': '초대 현황',
+  'invite_friends_joined': '@count명 친구 가입',
+  'invite_next_reward': '@count명 더 초대하면 PRO @days일!',
+  'invite_all_complete': '🎉 모든 보상 획득 완료!',
 };

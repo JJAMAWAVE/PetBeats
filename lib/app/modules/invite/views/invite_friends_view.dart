@@ -201,7 +201,7 @@ class InviteFriendsView extends GetView<InviteController> {
                   ),
                 ),
                 Text(
-                  ' / ${controller.totalFriendsNeeded}',
+                  ' / ${InviteController.tier3Goal}',
                   style: GoogleFonts.notoSans(
                     fontSize: 32,
                     fontWeight: FontWeight.w400,
@@ -212,7 +212,7 @@ class InviteFriendsView extends GetView<InviteController> {
             ),
             const SizedBox(height: 8),
             Text(
-              'invite_friends_joined'.tr,
+              'invite_friends_joined'.trParams({'count': controller.friendsJoined.value.toString()}),
               style: GoogleFonts.notoSans(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
@@ -220,6 +220,30 @@ class InviteFriendsView extends GetView<InviteController> {
                 letterSpacing: 1.2,
               ),
             ),
+            if (!controller.allTiersCompleted) ...[
+              const SizedBox(height: 8),
+              Text(
+                'invite_next_reward'.trParams({
+                  'count': controller.friendsUntilNextReward.toString(),
+                  'days': controller.nextRewardDays.toString(),
+                }),
+                style: GoogleFonts.notoSans(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.orange,
+                ),
+              ),
+            ] else ...[
+              const SizedBox(height: 8),
+              Text(
+                'invite_all_complete'.tr,
+                style: GoogleFonts.notoSans(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.green,
+                ),
+              ),
+            ],
           ],
         ),
       );
@@ -235,14 +259,21 @@ class InviteFriendsView extends GetView<InviteController> {
             friends: 1,
             title: 'invite_tier1_title'.tr,
             reward: 'invite_tier1_reward'.tr,
-            isReached: controller.tier1Reached,
+            isReached: controller.tier1Rewarded,
           ),
           const SizedBox(height: 16),
           _buildRewardCard(
             friends: 3,
             title: 'invite_tier2_title'.tr,
             reward: 'invite_tier2_reward'.tr,
-            isReached: controller.tier2Reached,
+            isReached: controller.tier2Rewarded,
+          ),
+          const SizedBox(height: 16),
+          _buildRewardCard(
+            friends: 5,
+            title: 'invite_tier3_title'.tr,
+            reward: 'invite_tier3_reward'.tr,
+            isReached: controller.tier3Rewarded,
           ),
         ],
       ),

@@ -591,7 +591,9 @@ const Map<String, String> enUS = {
   'invite_tier1_title': '1 Friend',
   'invite_tier1_reward': '1 Week Premium Free',
   'invite_tier2_title': '3 Friends',
-  'invite_tier2_reward': '1 Month Premium Free',
+  'invite_tier2_reward': '3 Weeks Premium Free',
+  'invite_tier3_title': '5 Friends',
+  'invite_tier3_reward': '1 Month Premium Free',
   'invite_how_title': 'HOW IT WORKS',
   'invite_step1': 'Tap the button below to send an invite link to your friend.',
   'invite_step2': 'When your friend signs up through the link and opens the app, it counts.',
@@ -803,4 +805,16 @@ const Map<String, String> enUS = {
   'coupon_test': 'Test Coupon',
   'coupon_settings_title': 'PRO Membership',
   'coupon_settings_desc': 'Manage subscription & coupons',
+  
+  // ===== Invite Friends =====
+  'invite_share_message': 'Listen to calming music for pets together!',
+  'invite_share_benefit': 'Get special rewards when you join via invite link.',
+  'invite_share_features': 'Scientifically proven calming sounds for pets',
+  'invite_share_subject': 'Invitation',
+  'invite_share_error_title': 'Share Failed',
+  'invite_share_error_desc': 'Could not share the invite link.',
+  'invite_progress_title': 'Invite Progress',
+  'invite_friends_joined': '@count friends joined',
+  'invite_next_reward': '@days days PRO after @count more friends!',
+  'invite_all_complete': '🎉 All rewards claimed!',
 };
