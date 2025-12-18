@@ -13,6 +13,7 @@ import 'app/data/services/haptic_service.dart';
 import 'app/data/services/haptic_pattern_player.dart';
 import 'app/data/services/playback_tracking_service.dart';
 import 'app/data/services/review_service.dart';
+import 'app/data/services/audio_service.dart';
 import 'app/data/services/auth_service.dart';
 import 'app/data/services/weather_service.dart';
 import 'app/data/services/ip_geolocation_service.dart';
@@ -51,6 +52,7 @@ void main() async {
   Get.put(ReviewService(), permanent: true);
   
   // New Feature Services
+  Get.put(AudioService(), permanent: true);
   Get.put(AuthService(), permanent: true);
   Get.put(WeatherService(), permanent: true);
   Get.put(IpGeolocationService(), permanent: true);  // ✨ Weather services
