@@ -690,7 +690,7 @@ const Map<String, String> koKR = {
   // ===== AI Dialog =====
   'dialog_ai_playlist_create': 'AI 플레이리스트 생성',
   'dialog_pro_feature': 'PRO 전용 기능',
-  'dialog_pro_desc': 'AI가 자동으로 맞춤 플레이리스트를 생성해드려요',
+  'dialog_pro_desc': 'AI 맞춤 플레이리스트 자동 생성',
   'dialog_start_pro': 'PRO 시작하기',
   'dialog_later': '나중에 할게요',
   'dialog_default_desc': '맞춤 플레이리스트를 생성합니다.',

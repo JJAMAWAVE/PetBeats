@@ -166,10 +166,29 @@ class ProFeatureSection extends StatelessWidget {
           icon: icon,
           onPressed: onPressed,
         ),
-        SizedBox(height: 8.h),
-        TextButton(
-          onPressed: () => Get.back(),
-          child: Text('dialog_later'.tr, style: TextStyle(color: AppColors.textGrey)),
+        SizedBox(height: 12.h),
+        // "나중에 할게요" 버튼 - 더 명확한 스타일
+        GestureDetector(
+          onTap: () => Get.back(),
+          child: Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(vertical: 14.h),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade100,
+              borderRadius: BorderRadius.circular(20.r),
+              border: Border.all(color: Colors.grey.shade300),
+            ),
+            child: Center(
+              child: Text(
+                'dialog_later'.tr,
+                style: TextStyle(
+                  color: AppColors.textGrey,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14.sp,
+                ),
+              ),
+            ),
+          ),
         ),
       ],
     );
