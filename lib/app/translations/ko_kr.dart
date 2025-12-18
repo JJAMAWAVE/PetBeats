@@ -748,6 +748,29 @@ const Map<String, String> koKR = {
   'volume_medium': '보통',
   'volume_high': '크게',
   'common_close': '닫기',
+
+  // Rhythm Special Hardcoded
+  'rhythm_time_slots_title': '시간대별 자동 모드',
+  'rhythm_mode_morning_name': '활력',
+  'rhythm_mode_morning_time': '오전 07~11시',
+  'rhythm_mode_day_name': '안정',
+  'rhythm_mode_day_time': '주간 11~17시',
+  'rhythm_mode_evening_name': '휴식',
+  'rhythm_mode_evening_time': '저녁 17~22시',
+  'rhythm_mode_night_name': '수면',
+  'rhythm_mode_night_time': '심야 22~07시',
+  'rhythm_scientific_title': '과학적 근거',
+  'rhythm_scientific_desc': '반려동물도 인간처럼 서캐디안 리듬(Circadian Rhythm)을 가지고 있습니다. 시간대에 맞춘 사운드 테라피는 자연스러운 활동-휴식 패턴을 유도하여 스트레스 감소와 수면의 질 향상에 도움을 줍니다.',
+  
+  // Settings & Auth match
+  'songs_unit': '곡',
+  'settings_version': '버전 @ver',
+  'auth_login_failed': '로그인 실패',
+  'auth_google_unavailable': '구글 로그인을 사용할 수 없습니다. 나중에 다시 시도해주세요.',
+  'auth_login_unavailable': '로그인 불가',
+  'auth_firebase_not_init': 'Firebase가 초기화되지 않았습니다.',
+  'auth_test_mode': '테스트 모드',
+  'auth_test_success': '가상 로그인 성공 (기능 테스트용)',
   
   // ===== Timer Service =====
   'timer_notify_title': '🌙 수면 타이머 종료',

@@ -301,10 +301,10 @@ class RhythmSpecialView extends StatelessWidget {
   /// Time Slots Grid
   Widget _buildTimeSlots(RhythmCareService? rhythmService) {
     final slots = [
-      {'time': '오전 07~11시', 'mode': '활력', 'iconPath': 'assets/icons/icon_rhythm_morning.png', 'color': Colors.orange, 'modeId': 'energy'},
-      {'time': '주간 11~17시', 'mode': '안정', 'iconPath': 'assets/icons/icon_rhythm_daytime.png', 'color': Colors.blue, 'modeId': 'anxiety'},
-      {'time': '저녁 17~22시', 'mode': '휴식', 'iconPath': 'assets/icons/icon_rhythm_evening.png', 'color': Colors.brown, 'modeId': 'senior'},
-      {'time': '심야 22~07시', 'mode': '수면', 'iconPath': 'assets/icons/icon_rhythm_night.png', 'color': Colors.indigo, 'modeId': 'sleep'},
+      {'time': 'rhythm_mode_morning_time'.tr, 'mode': 'rhythm_mode_morning_name'.tr, 'iconPath': 'assets/icons/icon_rhythm_morning.png', 'color': Colors.orange, 'modeId': 'energy'},
+      {'time': 'rhythm_mode_day_time'.tr, 'mode': 'rhythm_mode_day_name'.tr, 'iconPath': 'assets/icons/icon_rhythm_daytime.png', 'color': Colors.blue, 'modeId': 'anxiety'},
+      {'time': 'rhythm_mode_evening_time'.tr, 'mode': 'rhythm_mode_evening_name'.tr, 'iconPath': 'assets/icons/icon_rhythm_evening.png', 'color': Colors.brown, 'modeId': 'senior'},
+      {'time': 'rhythm_mode_night_time'.tr, 'mode': 'rhythm_mode_night_name'.tr, 'iconPath': 'assets/icons/icon_rhythm_night.png', 'color': Colors.indigo, 'modeId': 'sleep'},
     ];
     
     return Padding(
@@ -313,7 +313,7 @@ class RhythmSpecialView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '시간대별 자동 모드',
+            'rhythm_time_slots_title'.tr,
             style: AppTextStyles.titleMedium.copyWith(
               fontWeight: FontWeight.bold,
               color: AppColors.textDarkNavy,
@@ -426,7 +426,7 @@ class RhythmSpecialView extends StatelessWidget {
               Icon(Icons.science, color: AppColors.primaryBlue, size: 20.w),
               SizedBox(width: 8.w),
               Text(
-                '과학적 근거',
+                'rhythm_scientific_title'.tr,
                 style: AppTextStyles.bodyMedium.copyWith(
                   fontWeight: FontWeight.bold,
                   color: AppColors.textDarkNavy,
@@ -436,9 +436,7 @@ class RhythmSpecialView extends StatelessWidget {
           ),
           SizedBox(height: 12.h),
           Text(
-            '반려동물도 인간처럼 서캐디안 리듬(Circadian Rhythm)을 가지고 있습니다. '
-            '시간대에 맞춘 사운드 테라피는 자연스러운 활동-휴식 패턴을 유도하여 '
-            '스트레스 감소와 수면의 질 향상에 도움을 줍니다.',
+            'rhythm_scientific_desc'.tr,
             style: AppTextStyles.bodySmall.copyWith(
               color: AppColors.textGrey,
               height: 1.6,

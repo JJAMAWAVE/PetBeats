@@ -738,6 +738,29 @@ const Map<String, String> enUS = {
   'volume_medium': 'Medium',
   'volume_high': 'High',
   'common_close': 'Close',
+
+  // Rhythm Special Hardcoded
+  'rhythm_time_slots_title': 'Time-based Auto Modes',
+  'rhythm_mode_morning_name': 'Energy',
+  'rhythm_mode_morning_time': 'Morning 07-11',
+  'rhythm_mode_day_name': 'Calm',
+  'rhythm_mode_day_time': 'Daytime 11-17',
+  'rhythm_mode_evening_name': 'Rest',
+  'rhythm_mode_evening_time': 'Evening 17-22',
+  'rhythm_mode_night_name': 'Sleep',
+  'rhythm_mode_night_time': 'Night 22-07',
+  'rhythm_scientific_title': 'Scientific Basis',
+  'rhythm_scientific_desc': 'Pets also have a circadian rhythm. Sound therapy synchronized with time of day induces natural activity-rest patterns, reducing stress and improving sleep quality.',
+  
+  // Settings & Auth match
+  'songs_unit': 'songs',
+  'settings_version': 'Version @ver',
+  'auth_login_failed': 'Login Failed',
+  'auth_google_unavailable': 'Google Login is unavailable. Please try again later.',
+  'auth_login_unavailable': 'Login Unavailable',
+  'auth_firebase_not_init': 'Firebase is not initialized.',
+  'auth_test_mode': 'Test Mode',
+  'auth_test_success': 'Virtual Login Success (Test)',
   
   // ===== Timer Service =====
   'timer_notify_title': '🌙 Sleep Timer Ended',

@@ -221,7 +221,7 @@ class _AIPlaylistResultViewState extends State<AIPlaylistResultView> {
                     Icon(Icons.music_note, color: Colors.white, size: 16.w),
                     SizedBox(width: 6.w),
                     Text(
-                      '${_tracks!.length}곡  •  ${_formatDuration(_totalDuration)}',
+                      '${_tracks!.length}${'songs_unit'.tr}  •  ${_formatDuration(_totalDuration)}',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,

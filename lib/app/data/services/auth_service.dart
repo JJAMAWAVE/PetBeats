@@ -43,7 +43,7 @@ class AuthService extends GetxService {
   Future<UserCredential?> signInWithGoogle() async {
     if (_auth == null || _googleSignIn == null) {
       debugPrint('AuthService: Firebase not initialized');
-      Get.snackbar('로그인 불가', 'Firebase가 초기화되지 않았습니다.');
+      Get.snackbar('auth_login_unavailable'.tr, 'auth_firebase_not_init'.tr);
       return null;
     }
     
@@ -75,8 +75,8 @@ class AuthService extends GetxService {
       isLoading.value = false;
       debugPrint('Error signing in with Google: $e');
       Get.snackbar(
-        '로그인 실패', 
-        '구글 로그인을 사용할 수 없습니다. 나중에 다시 시도해주세요.',
+        'auth_login_failed'.tr, 
+        'auth_google_unavailable'.tr,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red.shade100,
         colorText: Colors.red.shade900,
@@ -104,7 +104,7 @@ class AuthService extends GetxService {
     // We can't really "fake" a Firebase User easily without a wrapper,
     // but we can set a local state if we abstracted the User model.
     // For now, we just show success message.
-    Get.snackbar('테스트 모드', '가상 로그인 성공 (기능 테스트용)');
+    Get.snackbar('auth_test_mode'.tr, 'auth_test_success'.tr);
     isLoading.value = false;
   }
 }
