@@ -408,6 +408,10 @@ class _DebugBottomSheetState extends State<DebugBottomSheet> {
               
               // ✨ Friend Invite Simulation
               _buildInviteSimulator(),
+              SizedBox(height: 16.h),
+              
+              // ✨ Subscription Expiry Test
+              _buildSubscriptionExpiryTest(),
               SizedBox(height: 24.h),
               
               // Close Button
@@ -633,5 +637,307 @@ class _DebugBottomSheetState extends State<DebugBottomSheet> {
         ),
       ),
     );
+  }
+
+  /// 구독 만료/테스트 시뮬레이터
+  Widget _buildSubscriptionExpiryTest() {
+    return Container(
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(color: Colors.amber.withOpacity(0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.subscriptions, color: Colors.amber, size: 18.w),
+              SizedBox(width: 8.w),
+              Text(
+                '구독 테스트 시뮬레이션',
+                style: TextStyle(color: Colors.amber, fontSize: 14.sp, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          SizedBox(height: 12.h),
+          
+          // Current Status Display
+          Obx(() {
+            final couponService = Get.isRegistered<CouponService>() 
+                ? Get.find<CouponService>() 
+                : null;
+            final expiryDate = couponService?.proExpiryDate.value;
+            final isPro = couponService?.isPro ?? false;
+            final remainingDays = couponService?.proRemainingDays ?? 0;
+            
+            String statusText;
+            Color statusColor;
+            if (isPro) {
+              if (expiryDate != null) {
+                final diff = expiryDate.difference(DateTime.now());
+                if (diff.inMinutes <= 5) {
+                  statusText = '⏰ 곧 만료 (${diff.inMinutes}분 ${diff.inSeconds % 60}초)';
+                  statusColor = Colors.red;
+                } else {
+                  statusText = '✅ PRO ($remainingDays일 남음)';
+                  statusColor = Colors.green;
+                }
+              } else {
+                statusText = '✅ PRO 활성';
+                statusColor = Colors.green;
+              }
+            } else {
+              statusText = '❌ 무료 사용자';
+              statusColor = Colors.grey;
+            }
+            
+            return Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(10.w),
+              decoration: BoxDecoration(
+                color: statusColor.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8.r),
+                border: Border.all(color: statusColor.withOpacity(0.3)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(statusText, style: TextStyle(color: statusColor, fontSize: 13.sp, fontWeight: FontWeight.bold)),
+                  if (expiryDate != null)
+                    Text('만료: ${expiryDate.toString().substring(0, 19)}', 
+                      style: TextStyle(color: Colors.white54, fontSize: 10.sp)),
+                ],
+              ),
+            );
+          }),
+          SizedBox(height: 12.h),
+          
+          // 테스트 시나리오 버튼들
+          Text('📋 테스트 시나리오', style: TextStyle(color: Colors.white70, fontSize: 12.sp)),
+          SizedBox(height: 8.h),
+          
+          // Row 1: 만료 시간 테스트
+          Wrap(
+            spacing: 6.w,
+            runSpacing: 6.h,
+            children: [
+              _buildTestButton('⏱️ 1분 후 만료', Colors.red, () {
+                _setSubscriptionExpiry(Duration(minutes: 1), '1분 후 만료 테스트');
+              }),
+              _buildTestButton('⏱️ 5분 후 만료', Colors.orange, () {
+                _setSubscriptionExpiry(Duration(minutes: 5), '5분 후 만료 테스트');
+              }),
+              _buildTestButton('📅 7일 체험', Colors.blue, () {
+                _setSubscriptionExpiry(Duration(days: 7), '7일 무료 체험');
+              }),
+            ],
+          ),
+          SizedBox(height: 8.h),
+          
+          // Row 2: 구독 상태 시뮬레이션
+          Wrap(
+            spacing: 6.w,
+            runSpacing: 6.h,
+            children: [
+              _buildTestButton('🔄 갱신 성공', Colors.green, () {
+                _simulateRenewal();
+              }),
+              _buildTestButton('❌ 갱신 실패', Colors.red, () {
+                _simulateRenewalFailure();
+              }),
+              _buildTestButton('⏸️ 유예 기간', Colors.amber, () {
+                _simulateGracePeriod();
+              }),
+            ],
+          ),
+          SizedBox(height: 8.h),
+          
+          // Row 3: 기타 시나리오
+          Wrap(
+            spacing: 6.w,
+            runSpacing: 6.h,
+            children: [
+              _buildTestButton('💳 환불', Colors.purple, () {
+                _simulateRefund();
+              }),
+              _buildTestButton('📱 복원', Colors.teal, () {
+                _simulateRestore();
+              }),
+              _buildTestButton('🗑️ 전체 초기화', Colors.grey, () {
+                _resetAllSubscription();
+              }),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 테스트 버튼 빌더
+  Widget _buildTestButton(String label, Color color, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.2),
+          borderRadius: BorderRadius.circular(8.r),
+          border: Border.all(color: color.withOpacity(0.5)),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(color: color, fontSize: 11.sp, fontWeight: FontWeight.w600),
+        ),
+      ),
+    );
+  }
+
+  /// 구독 만료 시간 설정
+  void _setSubscriptionExpiry(Duration duration, String description) {
+    final couponService = Get.find<CouponService>();
+    final homeController = Get.find<HomeController>();
+    final now = DateTime.now();
+    final expiry = now.add(duration);
+    
+    couponService.proExpiryDate.value = expiry;
+    homeController.isPremiumUser.value = true;
+    
+    // 쿠폰 기록 추가
+    couponService.registeredCoupons.insert(0, Coupon(
+      code: 'TEST_${now.millisecondsSinceEpoch}',
+      type: 'pro_days',
+      value: duration.inDays > 0 ? duration.inDays : 1,
+      description: '🧪 $description',
+      registeredAt: now,
+    ));
+    
+    Get.snackbar('🧪 테스트', description,
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.amber,
+      duration: const Duration(seconds: 2),
+    );
+    setState(() {});
+  }
+
+  /// 갱신 성공 시뮬레이션
+  void _simulateRenewal() {
+    final couponService = Get.find<CouponService>();
+    final homeController = Get.find<HomeController>();
+    final now = DateTime.now();
+    
+    // 30일 추가
+    couponService.proExpiryDate.value = now.add(Duration(days: 30));
+    homeController.isPremiumUser.value = true;
+    
+    couponService.registeredCoupons.insert(0, Coupon(
+      code: 'RENEWAL_${now.millisecondsSinceEpoch}',
+      type: 'pro_days',
+      value: 30,
+      description: '🔄 구독 자동 갱신',
+      registeredAt: now,
+    ));
+    
+    Get.snackbar('🔄 갱신 성공', '구독이 자동으로 갱신되었습니다 (+30일)',
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.green,
+      duration: const Duration(seconds: 2),
+    );
+    setState(() {});
+  }
+
+  /// 갱신 실패 시뮬레이션 (결제 실패)
+  void _simulateRenewalFailure() {
+    final couponService = Get.find<CouponService>();
+    final homeController = Get.find<HomeController>();
+    
+    // 만료 처리
+    couponService.proExpiryDate.value = DateTime.now().subtract(Duration(hours: 1));
+    homeController.isPremiumUser.value = false;
+    
+    Get.snackbar('❌ 갱신 실패', '결제 수단에 문제가 있습니다. 결제 정보를 확인해주세요.',
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.red,
+      duration: const Duration(seconds: 3),
+    );
+    setState(() {});
+  }
+
+  /// 유예 기간 시뮬레이션 (Grace Period)
+  void _simulateGracePeriod() {
+    final couponService = Get.find<CouponService>();
+    final homeController = Get.find<HomeController>();
+    
+    // 유예 기간 3일
+    couponService.proExpiryDate.value = DateTime.now().add(Duration(days: 3));
+    homeController.isPremiumUser.value = true;
+    
+    Get.snackbar('⏸️ 유예 기간', '결제 실패로 유예 기간 중입니다 (3일 내 결제 필요)',
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.amber,
+      colorText: Colors.black,
+      duration: const Duration(seconds: 3),
+    );
+    setState(() {});
+  }
+
+  /// 환불 시뮬레이션
+  void _simulateRefund() {
+    final couponService = Get.find<CouponService>();
+    final homeController = Get.find<HomeController>();
+    
+    // 즉시 만료
+    couponService.proExpiryDate.value = null;
+    homeController.isPremiumUser.value = false;
+    
+    Get.snackbar('💳 환불 처리됨', '구독이 환불되어 프리미엄이 해제되었습니다.',
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.purple,
+      duration: const Duration(seconds: 2),
+    );
+    setState(() {});
+  }
+
+  /// 복원 시뮬레이션
+  void _simulateRestore() {
+    final couponService = Get.find<CouponService>();
+    final homeController = Get.find<HomeController>();
+    final now = DateTime.now();
+    
+    // 기존 구독 복원 (30일)
+    couponService.proExpiryDate.value = now.add(Duration(days: 30));
+    homeController.isPremiumUser.value = true;
+    
+    couponService.registeredCoupons.insert(0, Coupon(
+      code: 'RESTORE_${now.millisecondsSinceEpoch}',
+      type: 'pro_days',
+      value: 30,
+      description: '📱 구독 복원',
+      registeredAt: now,
+    ));
+    
+    Get.snackbar('📱 복원 완료', '기존 구독이 복원되었습니다 (+30일)',
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.teal,
+      duration: const Duration(seconds: 2),
+    );
+    setState(() {});
+  }
+
+  /// 전체 초기화
+  void _resetAllSubscription() {
+    final couponService = Get.find<CouponService>();
+    final homeController = Get.find<HomeController>();
+    
+    couponService.resetAll();
+    homeController.isPremiumUser.value = false;
+    
+    Get.snackbar('🗑️ 초기화', '모든 구독 데이터가 초기화되었습니다.',
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.grey,
+      duration: const Duration(seconds: 2),
+    );
+    setState(() {});
   }
 }
