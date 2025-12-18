@@ -107,9 +107,9 @@ class _PetProfileViewState extends State<PetProfileView> {
         duration: const Duration(seconds: 2),
       );
       
-      // 토스트 메시지가 충분히 보인 후 Settings로 이동
+      // 토스트 메시지가 충분히 보인 후 홈으로 이동
       await Future.delayed(const Duration(seconds: 1));
-      Get.offNamed('/settings'); // Settings로 명시적 이동
+      Get.offAllNamed('/home'); // 홈으로 이동
     } catch (e) {
       debugPrint('[PetProfileView] Error saving profile: $e');
       Get.snackbar('pet_error'.tr, 'pet_save_fail'.tr);
