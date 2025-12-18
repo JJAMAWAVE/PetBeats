@@ -178,13 +178,13 @@ const Map<String, String> koKR = {
   'weather_turn_off': '날씨 테라피 끄기',
   'weather_turn_on': '🦋 날씨에 맞춰 자동 재생 켜기',
   
-  'weather_rain': '비 (Rain)',
+
   'weather_sound_rain': '💧 빗소리',
   'weather_desc_rain': '창문을 두드리는 규칙적인 소리',
-  'weather_thunder': '뇌우 (Thunderstorm)',
+
   'weather_sound_white_noise': '☁️ 백색소음',
   'weather_desc_thunder': '불안감을 덮어주는 안정적인 소리',
-  'weather_snow': '눈 (Snow)',
+
   'weather_sound_ambient': '❄️ 포근한 앰비언트',
   'weather_desc_snow': '눈 오는 날의 아늑한 분위기',
   'weather_wind': '강풍 (Windy)',
@@ -193,7 +193,7 @@ const Map<String, String> koKR = {
   'weather_fog': '안개 (Fog)',
   'weather_sound_noise': '🌫️ 차분한 노이즈',
   'weather_desc_fog': '몽환적이고 차분한 공기',
-  'weather_clear': '맑음 (Clear)',
+
   'weather_sound_default': '(기본 음악)',
   'weather_desc_clear': '가장 평온한 일상',
   

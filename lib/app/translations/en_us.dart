@@ -178,13 +178,13 @@ const Map<String, String> enUS = {
   'weather_turn_off': 'Turn Off Weather Therapy',
   'weather_turn_on': '🦋 Turn On Auto Weather Play',
   
-  'weather_rain': 'Rain',
+
   'weather_sound_rain': '💧 Rain Sound',
   'weather_desc_rain': 'Rhythmic sound tapping on the window',
-  'weather_thunder': 'Thunderstorm',
+
   'weather_sound_white_noise': '☁️ White Noise',
   'weather_desc_thunder': 'Stable sound covering anxiety',
-  'weather_snow': 'Snow',
+
   'weather_sound_ambient': '❄️ Cozy Ambient',
   'weather_desc_snow': 'Cozy atmosphere of a snowy day',
   'weather_wind': 'Windy',
@@ -193,7 +193,7 @@ const Map<String, String> enUS = {
   'weather_fog': 'Fog',
   'weather_sound_noise': '🌫️ Calm Noise',
   'weather_desc_fog': 'Dreamy and calm air',
-  'weather_clear': 'Clear',
+
   'weather_sound_default': '(Default Music)',
   'weather_desc_clear': 'Most peaceful daily life',
   
