@@ -104,7 +104,7 @@ class _PetProfileViewState extends State<PetProfileView> {
         colorText: Colors.green.shade800,
         margin: EdgeInsets.all(16.w),
         borderRadius: 12,
-        duration: const Duration(seconds: 3),
+        duration: const Duration(seconds: 2),
       );
       
       // 토스트 메시지가 충분히 보인 후 Settings로 이동
