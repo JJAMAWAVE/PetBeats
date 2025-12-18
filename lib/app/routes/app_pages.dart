@@ -33,6 +33,7 @@ import '../modules/review/controllers/review_controller.dart';
 import '../modules/settings/views/pet_profile_view.dart';
 import '../modules/settings/views/coupon_view.dart';
 import 'app_routes.dart';
+// Note: smooth_page_transitions.dart import removed - using built-in Transition.cupertino instead
 
 class AppPages {
   static const INITIAL = Routes.LOADING;  // 시네마틱 스플래시 먼저 보여줌
@@ -49,24 +50,32 @@ class AppPages {
       page: () => const OnboardingView(),
       binding: OnboardingBinding(),
       preventDuplicates: true,
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: Routes.QUESTION,
       page: () => const QuestionView(),
       binding: OnboardingBinding(),
       preventDuplicates: true,
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: Routes.QUESTION2,
       page: () => const Question2View(),
       binding: OnboardingBinding(),
       preventDuplicates: true,
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: Routes.ONBOARDING_COMPLETE,
       page: () => const OnboardingCompleteView(),
       binding: OnboardingBinding(),
       preventDuplicates: true,
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 500),
     ),
     GetPage(
       name: Routes.LOADING,
@@ -79,56 +88,80 @@ class AppPages {
       page: () => const HomeView(),
       binding: HomeBinding(),
       preventDuplicates: true,
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
       name: Routes.MODE_DETAIL,
       page: () => const ModeDetailView(),
       binding: HomeBinding(),
       preventDuplicates: true,
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 350),
     ),
     GetPage(
       name: Routes.SUBSCRIPTION,
       page: () => const SubscriptionView(),
       binding: SubscriptionBinding(),
       preventDuplicates: true,
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 350),
     ),
     GetPage(
       name: Routes.WEATHER_SPECIAL,
       page: () => const WeatherSpecialView(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 350),
     ),
     GetPage(
       name: Routes.RHYTHM_SPECIAL,
       page: () => const RhythmSpecialView(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 350),
     ),
     GetPage(
       name: Routes.SITTER_SPECIAL,
       page: () => const SitterSpecialView(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 350),
     ),
     GetPage(
       name: Routes.SITTER_SETUP,
       page: () => const SitterSetupView(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 350),
     ),
     GetPage(
       name: Routes.SITTER_MONITORING,
       page: () => const SitterMonitoringView(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 350),
     ),
     GetPage(
       name: Routes.SITTER_REPORT,
       page: () => const SitterReportView(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 350),
     ),
     GetPage(
       name: Routes.AI_RECOMMEND,
       page: () => const AIRecommendView(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 350),
     ),
     GetPage(
       name: Routes.AI_PLAYLIST_RESULT,
       page: () => const AIPlaylistResultView(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 350),
     ),
     GetPage(
       name: Routes.INVITE_FRIENDS,
       page: () => const InviteFriendsView(),
       binding: InviteBinding(),
       preventDuplicates: true,
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 350),
     ),
     GetPage(
       name: Routes.SETTINGS,
@@ -137,12 +170,15 @@ class AppPages {
         Get.put(SettingsController());
       }),
       preventDuplicates: true,
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 350),
     ),
     GetPage(
       name: Routes.NOW_PLAYING,
       page: () => const NowPlayingView(),
       binding: PlayerBinding(),
       transition: Transition.downToUp,
+      transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
       name: Routes.REVIEW,
@@ -150,14 +186,21 @@ class AppPages {
       binding: BindingsBuilder(() {
         Get.put(ReviewController());
       }),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 350),
     ),
     GetPage(
       name: Routes.PET_PROFILE,
       page: () => const PetProfileView(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 350),
     ),
     GetPage(
       name: Routes.COUPON,
       page: () => const CouponView(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 350),
     ),
   ];
 }
+
