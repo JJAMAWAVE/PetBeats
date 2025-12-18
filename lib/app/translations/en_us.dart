@@ -704,4 +704,9 @@ const Map<String, String> enUS = {
   'volume_medium': 'Medium',
   'volume_high': 'High',
   'common_close': 'Close',
+  
+  // ===== Timer Service =====
+  'timer_notify_title': '🌙 Sleep Timer Ended',
+  'timer_notify_desc': 'Playback stopped as scheduled. Have a good night!',
+  'timer_suffix': ' remaining',
 };

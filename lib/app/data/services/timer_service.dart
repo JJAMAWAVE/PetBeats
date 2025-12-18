@@ -71,9 +71,9 @@ class TimerService extends GetxService {
     final secs = remainingSeconds.value % 60;
     
     if (mins > 0) {
-      return '$mins분 ${secs > 0 ? '$secs초' : ''} 후 종료';
+      return '$mins${'ai_minutes'.tr} ${secs > 0 ? '$secs${'ai_seconds'.tr}' : ''}${'timer_suffix'.tr}';
     } else {
-      return '$secs초 후 종료';
+      return '$secs${'ai_seconds'.tr}${'timer_suffix'.tr}';
     }
   }
   
@@ -85,8 +85,8 @@ class TimerService extends GetxService {
     
     // Show notification
     Get.snackbar(
-      '🌙 수면 타이머 종료',
-      '설정한 시간이 지나 재생을 멈춥니다. 편안한 밤 되세요!',
+      'timer_notify_title'.tr,
+      'timer_notify_desc'.tr,
       backgroundColor: Colors.indigo.withOpacity(0.9),
       colorText: Colors.white,
       icon: const Icon(Icons.bedtime, color: Colors.white),

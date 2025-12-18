@@ -714,4 +714,9 @@ const Map<String, String> koKR = {
   'volume_medium': '보통',
   'volume_high': '크게',
   'common_close': '닫기',
+  
+  // ===== Timer Service =====
+  'timer_notify_title': '🌙 수면 타이머 종료',
+  'timer_notify_desc': '설정한 시간이 지나 재생을 멈춥니다. 편안한 밤 되세요!',
+  'timer_suffix': ' 후 종료',
 };
