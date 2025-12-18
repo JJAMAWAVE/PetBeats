@@ -31,6 +31,7 @@ import 'package:petbeats/core/theme/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // Firebase
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart'; // 🔥 Crash reporting
 import 'firebase_options.dart';
 import 'app/translations/app_translations.dart';
 
@@ -42,6 +43,20 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  
+  // 🔥 Crashlytics 초기화 (웹 제외)
+  if (!kIsWeb) {
+    // Flutter 프레임워크 에러 캐치
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+    
+    // Flutter 프레임워크 외부의 비동기 에러 캐치
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
+    
+    debugPrint('🔥 [Crashlytics] Initialized');
+  }
   
   // ⚠️ 테스트용: 항상 신규 유저로 시작 (온보딩 표시)
   // TODO: 배포 전 이 줄 제거
