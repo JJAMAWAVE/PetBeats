@@ -136,6 +136,13 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     // Load premium status
     isPremiumUser.value = _storage.read('isPremium') ?? false;
   }
+  
+  /// Immediately upgrade user to premium status (called from SubscriptionController)
+  void upgradeToPremium() {
+    isPremiumUser.value = true;
+    _storage.write('isPremium', true);
+    print('✅ [HomeController] User upgraded to Premium!');
+  }
 
   void _initModes() {
     modes.value = [

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class AnimatedStrokeText extends StatefulWidget {
   final bool repeat;
   final Curve curve;
   final bool showUnderlines;
+  final Duration? resetInterval; // Restart animation from beginning after this interval
 
   const AnimatedStrokeText({
     super.key,
@@ -25,6 +27,7 @@ class AnimatedStrokeText extends StatefulWidget {
     this.repeat = false,
     this.curve = Curves.easeInOut,
     this.showUnderlines = true,
+    this.resetInterval, // e.g., Duration(seconds: 4)
   });
 
   @override
@@ -35,6 +38,7 @@ class _AnimatedStrokeTextState extends State<AnimatedStrokeText>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
+  Timer? _resetTimer;
 
   @override
   void initState() {
@@ -54,10 +58,19 @@ class _AnimatedStrokeTextState extends State<AnimatedStrokeText>
     } else {
       _controller.forward();
     }
+    
+    // Setup reset timer if interval is provided
+    if (widget.resetInterval != null) {
+      _resetTimer = Timer.periodic(widget.resetInterval!, (_) {
+        _controller.reset();
+        _controller.forward();
+      });
+    }
   }
 
   @override
   void dispose() {
+    _resetTimer?.cancel();
     _controller.dispose();
     super.dispose();
   }

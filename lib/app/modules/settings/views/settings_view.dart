@@ -712,84 +712,71 @@ class SettingsView extends GetView<SettingsController> {
         
         return GestureDetector(
           onTap: () => Get.toNamed(Routes.COUPON),
-          child: Container(
-            padding: EdgeInsets.all(16.w),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: isPro 
-                    ? [const Color(0xFF6366F1), const Color(0xFF8B5CF6)]
-                    : [AppColors.primaryBlue, AppColors.primaryBlue.withOpacity(0.8)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(20.r),
-              boxShadow: [
-                BoxShadow(
-                  color: (isPro ? const Color(0xFF6366F1) : AppColors.primaryBlue).withOpacity(0.3),
-                  blurRadius: 16,
-                  offset: const Offset(0, 8),
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                // 아이콘
-                Container(
-                  padding: EdgeInsets.all(12.w),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(14.r),
+          child: AnimatedRainbowGradient(
+            duration: const Duration(seconds: 4),
+            borderRadius: BorderRadius.circular(20.r),
+            child: Container(
+              padding: EdgeInsets.all(16.w),
+              child: Row(
+                children: [
+                  // 아이콘
+                  Container(
+                    padding: EdgeInsets.all(12.w),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(14.r),
+                    ),
+                    child: Icon(
+                      isPro ? Icons.workspace_premium : Icons.card_giftcard,
+                      color: Colors.white,
+                      size: 28.w,
+                    ),
                   ),
-                  child: Icon(
-                    isPro ? Icons.workspace_premium : Icons.card_giftcard,
-                    color: Colors.white,
-                    size: 28.w,
-                  ),
-                ),
-                SizedBox(width: 14.w),
-                
-                // 정보
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            'coupon_settings_title'.tr,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.bold,
+                  SizedBox(width: 14.w),
+                  
+                  // 정보
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'coupon_settings_title'.tr,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          if (isPro) ...[
-                            SizedBox(width: 8.w),
-                            const RainbowProBadge(),
+                            if (isPro) ...[
+                              SizedBox(width: 8.w),
+                              const RainbowProBadge(),
+                            ],
                           ],
-                        ],
-                      ),
-                      SizedBox(height: 4.h),
-                      Text(
-                        isPro && expiryDate != null
-                            ? 'coupon_days_remaining'.trParams({'days': remainingDays.toString()})
-                            : 'coupon_settings_desc'.tr,
-                        style: TextStyle(
-                          color: Colors.white.withOpacity(0.85),
-                          fontSize: 12.sp,
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 4.h),
+                        Text(
+                          isPro && expiryDate != null
+                              ? 'coupon_days_remaining'.trParams({'days': remainingDays.toString()})
+                              : 'coupon_settings_desc'.tr,
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.85),
+                            fontSize: 12.sp,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                
-                // 화살표
-                Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.white.withOpacity(0.7),
-                  size: 16.w,
-                ),
-              ],
+                  
+                  // 화살표
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.white.withOpacity(0.7),
+                    size: 16.w,
+                  ),
+                ],
+              ),
             ),
           ),
         );
