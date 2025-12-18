@@ -7,6 +7,7 @@ import '../../../data/services/weather_sound_manager.dart';
 import '../../../data/services/sound_mixer_service.dart';  // ✨ For volume control
 import '../../../data/services/rhythm_care_service.dart';  // ✨ For time simulation
 import '../../invite/controllers/invite_controller.dart';  // ✨ For invite simulation
+import '../../../data/services/coupon_service.dart';  // ✨ For subscription reset
 import '../controllers/home_controller.dart';
 import 'dart:ui';
 
@@ -118,12 +119,25 @@ class _DebugBottomSheetState extends State<DebugBottomSheet> {
                         activeColor: Colors.amber,
                         onChanged: (value) {
                           homeController.isPremiumUser.value = value;
+                          
+                          // OFF로 전환 시 모든 구독 데이터 초기화
+                          if (!value) {
+                            // 쿠폰/구독 정보 초기화
+                            if (Get.isRegistered<CouponService>()) {
+                              Get.find<CouponService>().resetAll();
+                            }
+                            // 친구 초대 진행 상황 초기화
+                            if (Get.isRegistered<InviteController>()) {
+                              Get.find<InviteController>().resetProgress();
+                            }
+                          }
+                          
                           Get.snackbar(
                             '🧪 테스트',
-                            value ? '프리미엄 모드 ON' : '무료 모드 (FREE)',
+                            value ? '프리미엄 모드 ON' : '무료 모드 + 구독 데이터 초기화',
                             snackPosition: SnackPosition.BOTTOM,
                             backgroundColor: value ? Colors.amber : Colors.blueGrey,
-                            duration: const Duration(seconds: 1),
+                            duration: const Duration(seconds: 2),
                           );
                         },
                       ),
