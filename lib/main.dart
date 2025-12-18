@@ -24,6 +24,7 @@ import 'app/data/services/rhythm_care_service.dart';  // ✨ Rhythm Care (24h bi
 import 'app/data/services/iot_service.dart';
 import 'app/data/services/timer_service.dart';
 import 'app/data/services/pet_profile_service.dart'; // 🐾 Pet Profile
+import 'app/data/services/coupon_service.dart'; // 🎟️ Coupon System
 import 'package:get_storage/get_storage.dart';
 import 'package:petbeats/core/theme/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -63,6 +64,7 @@ void main() async {
   Get.put(IotService(), permanent: true);
   Get.put(TimerService(), permanent: true);
   Get.put(PetProfileService(), permanent: true);     // 🐾 Pet Profile
+  Get.put(CouponService(), permanent: true);          // 🎟️ Coupon System
   
   // 웹용 BGM 사전 로딩 (웹 플랫폼만)
   if (kIsWeb) {

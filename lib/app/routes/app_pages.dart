@@ -31,6 +31,7 @@ import '../modules/player/bindings/player_binding.dart';
 import '../modules/review/views/review_view.dart';
 import '../modules/review/controllers/review_controller.dart';
 import '../modules/settings/views/pet_profile_view.dart';
+import '../modules/settings/views/coupon_view.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -153,6 +154,10 @@ class AppPages {
     GetPage(
       name: Routes.PET_PROFILE,
       page: () => const PetProfileView(),
+    ),
+    GetPage(
+      name: Routes.COUPON,
+      page: () => const CouponView(),
     ),
   ];
 }

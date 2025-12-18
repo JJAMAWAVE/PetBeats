@@ -8,6 +8,8 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../data/services/auth_service.dart';
 import '../../../data/services/pet_profile_service.dart';
 import '../../../data/services/review_service.dart';
+import '../../../data/services/coupon_service.dart';
+import 'package:intl/intl.dart';
 import '../controllers/settings_controller.dart';
 import '../../../routes/app_routes.dart';
 import '../../home/controllers/home_controller.dart';
@@ -37,6 +39,10 @@ class SettingsView extends GetView<SettingsController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // PRO 멤버십 관리 카드 (최상단)
+            _buildMembershipCard(),
+            SizedBox(height: 24.h),
+            
             // 반려동물 프로필 섹션
             _buildSectionTitle('settings_profile'.tr),
             SizedBox(height: 12.h),
@@ -691,5 +697,145 @@ class SettingsView extends GetView<SettingsController> {
         ),
       ),
     );
+  }
+
+  /// PRO 멤버십 관리 카드
+  Widget _buildMembershipCard() {
+    try {
+      final couponService = Get.find<CouponService>();
+      
+      return Obx(() {
+        final isPro = couponService.isPro;
+        final expiryDate = couponService.proExpiryDate.value;
+        final remainingDays = couponService.proRemainingDays;
+        
+        return GestureDetector(
+          onTap: () => Get.toNamed(Routes.COUPON),
+          child: Container(
+            padding: EdgeInsets.all(16.w),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: isPro 
+                    ? [const Color(0xFF6366F1), const Color(0xFF8B5CF6)]
+                    : [AppColors.primaryBlue, AppColors.primaryBlue.withOpacity(0.8)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(20.r),
+              boxShadow: [
+                BoxShadow(
+                  color: (isPro ? const Color(0xFF6366F1) : AppColors.primaryBlue).withOpacity(0.3),
+                  blurRadius: 16,
+                  offset: const Offset(0, 8),
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                // 아이콘
+                Container(
+                  padding: EdgeInsets.all(12.w),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(14.r),
+                  ),
+                  child: Icon(
+                    isPro ? Icons.workspace_premium : Icons.card_giftcard,
+                    color: Colors.white,
+                    size: 28.w,
+                  ),
+                ),
+                SizedBox(width: 14.w),
+                
+                // 정보
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'coupon_settings_title'.tr,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          if (isPro) ...[
+                            SizedBox(width: 8.w),
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
+                              decoration: BoxDecoration(
+                                color: Colors.amber,
+                                borderRadius: BorderRadius.circular(10.r),
+                              ),
+                              child: Text(
+                                'PRO',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                      SizedBox(height: 4.h),
+                      Text(
+                        isPro && expiryDate != null
+                            ? 'coupon_days_remaining'.trParams({'days': remainingDays.toString()})
+                            : 'coupon_settings_desc'.tr,
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.85),
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                
+                // 화살표
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.white.withOpacity(0.7),
+                  size: 16.w,
+                ),
+              ],
+            ),
+          ),
+        );
+      });
+    } catch (e) {
+      // CouponService가 없는 경우 기본 UI
+      return GestureDetector(
+        onTap: () => Get.toNamed(Routes.COUPON),
+        child: Container(
+          padding: EdgeInsets.all(16.w),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [AppColors.primaryBlue, AppColors.primaryBlue.withOpacity(0.8)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(20.r),
+          ),
+          child: Row(
+            children: [
+              Icon(Icons.card_giftcard, color: Colors.white, size: 28.w),
+              SizedBox(width: 14.w),
+              Expanded(
+                child: Text(
+                  'coupon_settings_title'.tr,
+                  style: TextStyle(color: Colors.white, fontSize: 16.sp, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Icon(Icons.arrow_forward_ios, color: Colors.white70, size: 16.w),
+            ],
+          ),
+        ),
+      );
+    }
   }
 }

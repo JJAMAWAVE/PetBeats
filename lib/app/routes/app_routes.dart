@@ -21,4 +21,5 @@ abstract class Routes {
   static const INVITE_FRIENDS = '/invite_friends';
   static const REVIEW = '/review';
   static const PET_PROFILE = '/pet-profile';
+  static const COUPON = '/coupon';
 }
