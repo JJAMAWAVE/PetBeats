@@ -393,7 +393,7 @@ class _CouponViewState extends State<CouponView> {
                         child: Column(
                           children: [
                             Text(
-                              '🎉 오픈 기념 특별 혜택',
+                              'coupon_free_trial_event'.tr,
                               style: TextStyle(
                                 color: Colors.white.withOpacity(0.9),
                                 fontSize: 12.sp,
@@ -411,7 +411,7 @@ class _CouponViewState extends State<CouponView> {
                                 ),
                               ),
                               child: Text(
-                                '7일 무료로 시작하기',
+                                'coupon_free_trial_cta'.tr,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14.sp,
