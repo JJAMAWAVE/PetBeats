@@ -778,4 +778,10 @@ const Map<String, String> koKR = {
   'timer_notify_title': '🌙 수면 타이머 종료',
   'timer_notify_desc': '설정한 시간이 지나 재생을 멈춥니다. 편안한 밤 되세요!',
   'timer_suffix': ' 후 종료',
+  
+  // ===== Review Service =====
+  'review_error_title': '리뷰 불가',
+  'review_error_desc': '스토어를 열 수 없습니다. 나중에 다시 시도해주세요.',
+  'review_settings_title': 'PetBeats 평가하기',
+  'review_settings_desc': '앱이 마음에 드셨다면 리뷰를 남겨주세요!',
 };

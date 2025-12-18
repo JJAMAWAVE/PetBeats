@@ -7,6 +7,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../data/services/auth_service.dart';
 import '../../../data/services/pet_profile_service.dart';
+import '../../../data/services/review_service.dart';
 import '../controllers/settings_controller.dart';
 import '../../../routes/app_routes.dart';
 import '../../home/controllers/home_controller.dart';
@@ -86,6 +87,11 @@ class SettingsView extends GetView<SettingsController> {
               value: controller.isNotificationEnabled.value,
               onChanged: controller.toggleNotification,
             )),
+            
+            SizedBox(height: 32.h),
+            
+            // 앱 리뷰 섹션
+            _buildReviewButton(),
             
             SizedBox(height: 48.h),
             Center(
@@ -603,6 +609,86 @@ class SettingsView extends GetView<SettingsController> {
             activeTrackColor: AppColors.primaryBlue.withOpacity(0.3),
           ),
         ],
+      ),
+    );
+  }
+
+  /// 앱 리뷰 버튼
+  Widget _buildReviewButton() {
+    return GestureDetector(
+      onTap: () async {
+        try {
+          final reviewService = Get.find<ReviewService>();
+          await reviewService.forceRequestReview();
+        } catch (e) {
+          debugPrint('Error requesting review: $e');
+        }
+      },
+      child: Container(
+        padding: EdgeInsets.all(16.w),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.amber.shade400,
+              Colors.orange.shade400,
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(16.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.amber.withOpacity(0.3),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: EdgeInsets.all(10.w),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: Icon(
+                Icons.star_rounded,
+                color: Colors.white,
+                size: 24.w,
+              ),
+            ),
+            SizedBox(width: 16.w),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'review_settings_title'.tr,
+                    style: AppTextStyles.titleMedium.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.sp,
+                    ),
+                  ),
+                  SizedBox(height: 4.h),
+                  Text(
+                    'review_settings_desc'.tr,
+                    style: AppTextStyles.bodySmall.copyWith(
+                      color: Colors.white.withOpacity(0.9),
+                      fontSize: 12.sp,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white.withOpacity(0.8),
+              size: 16.w,
+            ),
+          ],
+        ),
       ),
     );
   }

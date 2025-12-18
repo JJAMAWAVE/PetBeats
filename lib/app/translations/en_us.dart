@@ -768,4 +768,10 @@ const Map<String, String> enUS = {
   'timer_notify_title': '🌙 Sleep Timer Ended',
   'timer_notify_desc': 'Playback stopped as scheduled. Have a good night!',
   'timer_suffix': ' remaining',
+  
+  // ===== Review Service =====
+  'review_error_title': 'Review Unavailable',
+  'review_error_desc': 'Could not open the app store. Please try again later.',
+  'review_settings_title': 'Rate PetBeats',
+  'review_settings_desc': 'Enjoying the app? Leave us a review!',
 };
