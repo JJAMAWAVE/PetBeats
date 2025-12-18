@@ -27,20 +27,25 @@ class _DebugBottomSheetState extends State<DebugBottomSheet> {
   Widget build(BuildContext context) {
     final homeController = Get.find<HomeController>();
     
-    return ClipRRect(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-        child: Container(
-          padding: EdgeInsets.all(24.w),
-          decoration: BoxDecoration(
-            color: const Color(0xFF1E2A3A),
-            borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
-            border: Border.all(color: Colors.orange.withOpacity(0.5), width: 2),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.85,
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+          child: Container(
+            padding: EdgeInsets.all(24.w),
+            decoration: BoxDecoration(
+              color: const Color(0xFF1E2A3A),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+              border: Border.all(color: Colors.orange.withOpacity(0.5), width: 2),
+            ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
               // Handle bar
               Container(
                 width: 40.w,
@@ -413,9 +418,11 @@ class _DebugBottomSheetState extends State<DebugBottomSheet> {
                   ),
                 ),
               ),
-            ],
+              ],
+            ),
           ),
         ),
+      ),
       ),
     );
   }
