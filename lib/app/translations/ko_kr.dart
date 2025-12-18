@@ -827,4 +827,6 @@ const Map<String, String> koKR = {
   'invite_friends_joined': '@count명 친구 가입',
   'invite_next_reward': '@count명 더 초대하면 PRO @days일!',
   'invite_all_complete': '🎉 모든 보상 획득 완료!',
+  'invite_friend_joined_title': '친구가 가입했어요!',
+  'invite_friend_joined_desc': '새로운 친구가 가입했습니다! 총 @count명',
 };

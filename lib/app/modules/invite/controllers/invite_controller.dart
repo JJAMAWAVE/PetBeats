@@ -44,11 +44,25 @@ class InviteController extends GetxController {
   }
   
   /// 친구 가입 성공 처리 (딥링크 콜백에서 호출)
-  void onFriendJoined() {
+  void onFriendJoined({bool showNotification = true}) {
     friendsJoined.value++;
     _storage.write(_friendsJoinedKey, friendsJoined.value);
     
     debugPrint('📨 [InviteController] Friend joined! Total: ${friendsJoined.value}');
+    
+    // 친구 가입 알림 표시
+    if (showNotification) {
+      Get.snackbar(
+        '🎉 ${'invite_friend_joined_title'.tr}',
+        'invite_friend_joined_desc'.trParams({
+          'count': friendsJoined.value.toString(),
+        }),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.green.shade100,
+        colorText: Colors.green.shade800,
+        duration: const Duration(seconds: 2),
+      );
+    }
     
     // 티어별 보상 체크
     _checkAndGrantRewards();
@@ -151,16 +165,9 @@ $inviteLink
     }
   }
   
-  /// 테스트용: 친구 추가 시뮬레이션
+  /// 테스트용: 친구 추가 시뮬레이션 (실제 알림과 동일하게 표시)
   void simulateFriendJoin() {
-    onFriendJoined();
-    Get.snackbar(
-      '🧪 테스트',
-      '친구 1명이 가입했습니다! (총 ${friendsJoined.value}명)',
-      snackPosition: SnackPosition.TOP,
-      backgroundColor: Colors.blue.shade100,
-      colorText: Colors.blue.shade800,
-    );
+    onFriendJoined(showNotification: true); // 실제 알림과 동일
   }
   
   /// 테스트용: 진행 상황 초기화

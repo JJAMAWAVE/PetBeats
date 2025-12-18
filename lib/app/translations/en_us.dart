@@ -817,4 +817,6 @@ const Map<String, String> enUS = {
   'invite_friends_joined': '@count friends joined',
   'invite_next_reward': '@days days PRO after @count more friends!',
   'invite_all_complete': '🎉 All rewards claimed!',
+  'invite_friend_joined_title': 'Friend Joined!',
+  'invite_friend_joined_desc': 'A new friend joined! Total: @count friends',
 };
