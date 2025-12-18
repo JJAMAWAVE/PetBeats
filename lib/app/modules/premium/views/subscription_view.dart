@@ -89,7 +89,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
                     // Benefits
                     _buildBenefitRow(
                       Icons.music_note,
-                      '90+',
+                      '80+',
                       'premium_benefit_1'.tr,
                     ),
                     SizedBox(height: 16.h),
