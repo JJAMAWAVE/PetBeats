@@ -597,7 +597,6 @@ const Map<String, String> koKR = {
   // ===== Invite Friends =====
   'invite_headline': '친구에게 평온을 선물하고,\n무료 이용권을 받으세요.',
   'invite_headline_desc': '친구를 초대할 때마다 PetBeats 프리미엄 기간이 늘어납니다.',
-  'invite_friends_joined': '가입한 친구',
   'invite_tier1_title': '친구 1명',
   'invite_tier1_reward': '프리미엄 1주일 무료 체험',
   'invite_tier2_title': '친구 3명',

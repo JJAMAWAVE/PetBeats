@@ -587,7 +587,6 @@ const Map<String, String> enUS = {
   // ===== Invite Friends =====
   'invite_headline': 'Gift peace to your friends,\nget free premium.',
   'invite_headline_desc': 'Every friend you invite extends your PetBeats Premium.',
-  'invite_friends_joined': 'Friends Joined',
   'invite_tier1_title': '1 Friend',
   'invite_tier1_reward': '1 Week Premium Free',
   'invite_tier2_title': '3 Friends',
