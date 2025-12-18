@@ -293,7 +293,7 @@ class RhythmSpecialView extends StatelessWidget {
                   color: isCurrent 
                       ? (slot['color'] as Color).withOpacity(0.15) 
                       : Colors.white,
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(20.r),
                   border: Border.all(
                     color: isCurrent 
                         ? (slot['color'] as Color) 
@@ -372,7 +372,7 @@ class RhythmSpecialView extends StatelessWidget {
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: Colors.grey.shade50,
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: Colors.grey.shade200),
       ),
       child: Column(

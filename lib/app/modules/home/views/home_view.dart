@@ -186,7 +186,7 @@ class HomeView extends GetView<HomeController> {
                           decoration: BoxDecoration(
                             // Solid light blue-white background for visibility
                             color: Colors.white.withOpacity(0.85),
-                            borderRadius: BorderRadius.circular(24),
+                            borderRadius: BorderRadius.circular(20.r),
                             // Blue-tinted border for definition
                             border: Border.all(
                               color: AppColors.primaryBlue.withOpacity(0.15),
@@ -201,7 +201,7 @@ class HomeView extends GetView<HomeController> {
                             ],
                           ),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(24),
+                            borderRadius: BorderRadius.circular(20.r),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               physics: const BouncingScrollPhysics(),
@@ -383,7 +383,7 @@ class HomeView extends GetView<HomeController> {
         height: 140,
         clipBehavior: Clip.hardEdge, // Prevent glow from overflowing
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(20.r),
           color: const Color(0xFF000854), // Dark navy blue (matching image)
           boxShadow: [
             BoxShadow(
@@ -394,7 +394,7 @@ class HomeView extends GetView<HomeController> {
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(20.r),
           child: Stack(
             clipBehavior: Clip.hardEdge, // Also clip Stack children
             children: [
@@ -650,7 +650,7 @@ class HomeView extends GetView<HomeController> {
     showDialog(
       context: Get.context!,
       builder: (context) => Dialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
         child: Container(
           padding: const EdgeInsets.all(24),
           child: Column(
@@ -701,7 +701,7 @@ class HomeView extends GetView<HomeController> {
                       backgroundColor: color,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
                     ),
                   ),
                 ),
@@ -737,7 +737,7 @@ class HomeView extends GetView<HomeController> {
                       backgroundColor: AppColors.primaryBlue,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
                     ),
                     child: Text('dialog_start_pro'.tr),
                   ),
@@ -801,7 +801,7 @@ class HomeView extends GetView<HomeController> {
               Colors.grey.shade50,
             ],
           ),
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(20.r),
           // White Outer Border for depth
           border: Border.all(
             color: Colors.white.withOpacity(0.8),
@@ -827,7 +827,7 @@ class HomeView extends GetView<HomeController> {
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: color.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(20.r),
               ),
               child: Image.asset(
                 iconPath,
@@ -884,7 +884,7 @@ class HomeView extends GetView<HomeController> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16), // 크기 확대
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20.r),
                 boxShadow: [
                   BoxShadow(
                     color: AppColors.primaryBlue.withOpacity(0.08),
@@ -927,7 +927,7 @@ class HomeView extends GetView<HomeController> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12), // 패딩 조정
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(24), // 20 -> 24
+              borderRadius: BorderRadius.circular(20.r), // 20 -> 24
               boxShadow: [
                 BoxShadow(
                   color: AppColors.primaryBlue.withOpacity(0.08), // Blue Shadow
@@ -1063,7 +1063,7 @@ class HomeView extends GetView<HomeController> {
               color.withOpacity(0.75),
             ],
           ),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20.r),
           // White Outer Border for 3D effect
           border: Border.all(
             color: Colors.white.withOpacity(0.5),

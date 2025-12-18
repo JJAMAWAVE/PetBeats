@@ -73,7 +73,7 @@ class SettingsController extends GetxController {
     // Show Scanning Dialog
     Get.dialog(
       Dialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(

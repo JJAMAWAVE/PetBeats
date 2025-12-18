@@ -303,7 +303,7 @@ class _AppInfoViewState extends State<AppInfoView> with TickerProviderStateMixin
               child: Container(
                 margin: const EdgeInsets.only(top: 60, bottom: 20),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24),
+                  borderRadius: BorderRadius.circular(20.r),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.1),
@@ -313,7 +313,7 @@ class _AppInfoViewState extends State<AppInfoView> with TickerProviderStateMixin
                   ],
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(24),
+                  borderRadius: BorderRadius.circular(20.r),
                   child: imageWidget,
                 ),
               ),
@@ -396,7 +396,7 @@ class _AppInfoViewState extends State<AppInfoView> with TickerProviderStateMixin
                             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                             decoration: BoxDecoration(
                               color: AppColors.primaryBlue.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.r),
                               border: Border.all(color: AppColors.primaryBlue.withOpacity(0.2)),
                             ),
                             child: Row(
@@ -440,7 +440,7 @@ class _AppInfoViewState extends State<AppInfoView> with TickerProviderStateMixin
                             backgroundColor: AppColors.textDarkNavy,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(20.r),
                             ),
                             elevation: 0,
                           ),

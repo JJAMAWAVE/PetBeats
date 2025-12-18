@@ -75,7 +75,7 @@ class ReviewView extends GetView<ReviewController> {
                 backgroundColor: AppColors.primaryBlue,
                 minimumSize: const Size(double.infinity, 56),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(20.r),
                 ),
                 elevation: 0,
               ),

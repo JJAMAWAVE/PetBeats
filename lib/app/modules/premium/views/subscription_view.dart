@@ -119,7 +119,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
                       children: [
                         AnimatedRainbowGradient(
                           duration: const Duration(seconds: 4),
-                          borderRadius: BorderRadius.circular(16.r),
+                          borderRadius: BorderRadius.circular(20.r),
                           child: _buildPlanCard(
                             title: 'premium_plan_yearly'.tr,
                             price: '₩33,000',
@@ -173,7 +173,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
                         padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 20.w),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(16.r),
+                          borderRadius: BorderRadius.circular(20.r),
                           border: Border.all(color: AppColors.primaryBlue.withOpacity(0.3)),
                           boxShadow: [
                             BoxShadow(
@@ -230,7 +230,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
                           foregroundColor: Colors.white,
                           disabledBackgroundColor: AppColors.primaryBlue.withOpacity(0.5),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16.r),
+                            borderRadius: BorderRadius.circular(20.r),
                           ),
                           elevation: 8,
                           shadowColor: AppColors.primaryBlue.withOpacity(0.4),
@@ -328,7 +328,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
             padding: EdgeInsets.all(16.w),
             decoration: BoxDecoration(
               color: isBest ? null : (isSelected ? AppColors.primaryBlue.withOpacity(0.05) : Colors.white),
-              borderRadius: BorderRadius.circular(16.r),
+              borderRadius: BorderRadius.circular(20.r),
               border: Border.all(
                 color: isBest
                     ? Colors.transparent
@@ -535,7 +535,7 @@ class _ShineEffectState extends State<_ShineEffect> with SingleTickerProviderSta
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
-                    borderRadius: BorderRadius.circular(16.r),
+                    borderRadius: BorderRadius.circular(20.r),
                   ),
                 ),
               );

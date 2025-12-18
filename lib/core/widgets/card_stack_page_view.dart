@@ -240,7 +240,7 @@ class _CardStackPageViewState extends State<CardStackPageView>
                       color: widget.isDarkMode 
                           ? Colors.white.withOpacity(0.1)
                           : Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(24.r),
+                      borderRadius: BorderRadius.circular(20.r),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.1),
@@ -270,7 +270,7 @@ class _CardStackPageViewState extends State<CardStackPageView>
         margin: EdgeInsets.only(top: 8.h, bottom: 80.h),
         decoration: BoxDecoration(
           color: widget.cardBackgroundColor,
-          borderRadius: BorderRadius.circular(24.r),
+          borderRadius: BorderRadius.circular(20.r),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(widget.isDarkMode ? 0.3 : 0.1),
@@ -280,7 +280,7 @@ class _CardStackPageViewState extends State<CardStackPageView>
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(24.r),
+          borderRadius: BorderRadius.circular(20.r),
           child: page.content,
         ),
       ),

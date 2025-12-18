@@ -330,7 +330,7 @@ class _PetProfileViewState extends State<PetProfileView> {
         padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 12.w),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.primaryBlue.withOpacity(0.1) : Colors.white,
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: BorderRadius.circular(20.r),
           border: Border.all(
             color: isSelected ? AppColors.primaryBlue : Colors.grey.shade300,
             width: isSelected ? 2 : 1,

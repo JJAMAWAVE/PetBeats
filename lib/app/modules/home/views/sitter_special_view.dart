@@ -144,7 +144,7 @@ class _SitterSpecialViewState extends State<SitterSpecialView> {
             margin: EdgeInsets.only(top: 8.h, bottom: 24.h),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(24.r),
+              borderRadius: BorderRadius.circular(20.r),
               boxShadow: [
                 BoxShadow(
                   color: AppColors.primaryBlue.withOpacity(0.1),
@@ -154,7 +154,7 @@ class _SitterSpecialViewState extends State<SitterSpecialView> {
               ],
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(24.r),
+              borderRadius: BorderRadius.circular(20.r),
               child: Stack(
                 alignment: Alignment.center,
                 children: [
@@ -254,7 +254,7 @@ class _SitterSpecialViewState extends State<SitterSpecialView> {
                 backgroundColor: AppColors.primaryBlue,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(20.r),
                 ),
                 elevation: 4,
                 shadowColor: AppColors.primaryBlue.withOpacity(0.4),

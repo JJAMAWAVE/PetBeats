@@ -155,7 +155,7 @@ class _PremiumModeButtonState extends State<PremiumModeButton> with TickerProvid
                 width: 110, // Large enough for ~3.8 items visible
                 height: 110,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20.r),
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(

@@ -238,7 +238,7 @@ class _GlassCardSliderState extends State<GlassCardSlider> {
                       color: widget.isDarkMode 
                           ? Colors.white.withOpacity(0.08)
                           : Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(24.r),
+                      borderRadius: BorderRadius.circular(20.r),
                       border: Border.all(
                         color: widget.isDarkMode
                             ? Colors.white.withOpacity(0.1)
@@ -279,7 +279,7 @@ class _GlassCardSliderState extends State<GlassCardSlider> {
                     Colors.grey.shade50,
                   ],
           ),
-          borderRadius: BorderRadius.circular(24.r),
+          borderRadius: BorderRadius.circular(20.r),
           // 글래스 테두리
           border: Border.all(
             color: widget.isDarkMode
@@ -307,7 +307,7 @@ class _GlassCardSliderState extends State<GlassCardSlider> {
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(24.r),
+          borderRadius: BorderRadius.circular(20.r),
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: _buildCardContent(data),
@@ -335,7 +335,7 @@ class _GlassCardSliderState extends State<GlassCardSlider> {
               height: 180.h,
               width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.r),
+                borderRadius: BorderRadius.circular(20.r),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
@@ -345,7 +345,7 @@ class _GlassCardSliderState extends State<GlassCardSlider> {
                 ],
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(16.r),
+                borderRadius: BorderRadius.circular(20.r),
                 child: Image.asset(
                   data.imagePath!,
                   fit: BoxFit.contain,

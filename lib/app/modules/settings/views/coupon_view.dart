@@ -210,7 +210,7 @@ class _CouponViewState extends State<CouponView> {
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(16.r),
+              borderRadius: BorderRadius.circular(20.r),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.05),
@@ -246,7 +246,7 @@ class _CouponViewState extends State<CouponView> {
                       },
                     ),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16.r),
+                      borderRadius: BorderRadius.circular(20.r),
                       borderSide: BorderSide.none,
                     ),
                     filled: true,
@@ -358,7 +358,7 @@ class _CouponViewState extends State<CouponView> {
               padding: EdgeInsets.all(24.w),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(16.r),
+                borderRadius: BorderRadius.circular(20.r),
               ),
               child: Center(
                 child: Column(

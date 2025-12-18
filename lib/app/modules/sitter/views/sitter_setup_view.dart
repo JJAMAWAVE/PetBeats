@@ -116,7 +116,7 @@ class _SitterSetupViewState extends State<SitterSetupView> {
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: AppColors.primaryBlue.withOpacity(0.08),
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: AppColors.primaryBlue.withOpacity(0.3)),
       ),
       child: Row(
@@ -160,7 +160,7 @@ class _SitterSetupViewState extends State<SitterSetupView> {
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: enabled ? AppColors.primaryBlue.withOpacity(0.05) : Colors.grey.shade50,
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(20.r),
         border: Border.all(
           color: enabled ? AppColors.primaryBlue.withOpacity(0.3) : Colors.grey.shade200,
         ),
@@ -240,7 +240,7 @@ class _SitterSetupViewState extends State<SitterSetupView> {
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: Colors.grey.shade200),
       ),
       child: Column(
@@ -304,7 +304,7 @@ class _SitterSetupViewState extends State<SitterSetupView> {
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: Colors.grey.shade200),
       ),
       child: Column(
@@ -389,7 +389,7 @@ class _SitterSetupViewState extends State<SitterSetupView> {
           foregroundColor: Colors.white,
           disabledBackgroundColor: Colors.grey.shade300,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.r),
+            borderRadius: BorderRadius.circular(20.r),
           ),
           elevation: canStart ? 4 : 0,
           shadowColor: AppColors.primaryBlue.withOpacity(0.4),

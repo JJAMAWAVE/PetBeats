@@ -30,12 +30,12 @@ class PremiumBanner extends StatelessWidget {
       onTap: onTap ?? () => Get.toNamed(Routes.SUBSCRIPTION),
       child: AnimatedRainbowGradient(
         duration: const Duration(seconds: 4),
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(20.r),
         child: Container(
           width: width ?? double.infinity,
           padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 18.w),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.r),
+            borderRadius: BorderRadius.circular(20.r),
             boxShadow: [
               BoxShadow(
                 color: const Color(0xFF3F51B5).withOpacity(0.3),

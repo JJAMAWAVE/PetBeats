@@ -279,7 +279,7 @@ class _AIPlaylistResultViewState extends State<AIPlaylistResultView> {
               foregroundColor: Colors.white,
               padding: EdgeInsets.symmetric(vertical: 16.h),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.r),
+                borderRadius: BorderRadius.circular(20.r),
               ),
             ),
           ),

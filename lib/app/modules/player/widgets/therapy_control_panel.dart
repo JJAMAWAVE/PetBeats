@@ -179,7 +179,7 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
         padding: EdgeInsets.symmetric(vertical: 8.h),
         decoration: BoxDecoration(
           color: isSelected ? color.withOpacity(0.2) : Colors.transparent,
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: BorderRadius.circular(20.r),
           border: Border.all(
             color: isSelected ? color : Colors.white.withOpacity(0.2),
             width: isSelected ? 2 : 1,

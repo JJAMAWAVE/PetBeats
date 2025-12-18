@@ -179,7 +179,7 @@ class SleepTimerBottomSheet extends StatelessWidget {
                 Colors.purple.withOpacity(0.2),
               ],
             ),
-            borderRadius: BorderRadius.circular(24.r),
+            borderRadius: BorderRadius.circular(20.r),
             border: Border.all(
               color: Colors.indigo.withOpacity(0.5),
               width: 2,
@@ -238,7 +238,7 @@ class SleepTimerBottomSheet extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: BorderRadius.circular(20.r),
           border: Border.all(
             color: Colors.white.withOpacity(0.2),
           ),

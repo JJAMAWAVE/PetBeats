@@ -59,7 +59,7 @@ class MixPanelBottomSheet extends StatelessWidget {
                         Colors.blue.withOpacity(0.2),
                       ],
                     ),
-                    borderRadius: BorderRadius.circular(16.r),
+                    borderRadius: BorderRadius.circular(20.r),
                   ),
                   child: Icon(
                     Icons.tune,
@@ -154,7 +154,7 @@ class MixPanelBottomSheet extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
               decoration: BoxDecoration(
                 color: Colors.green.withOpacity(0.15),
-                borderRadius: BorderRadius.circular(16.r),
+                borderRadius: BorderRadius.circular(20.r),
                 border: Border.all(color: Colors.green.withOpacity(0.3)),
               ),
               child: Row(

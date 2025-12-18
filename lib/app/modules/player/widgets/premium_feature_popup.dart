@@ -37,7 +37,7 @@ class PremiumFeaturePopup extends StatelessWidget {
               const Color(0xFF16213E),
             ],
           ),
-          borderRadius: BorderRadius.circular(24.r),
+          borderRadius: BorderRadius.circular(20.r),
           border: Border.all(
             color: Colors.amber.withOpacity(0.3),
             width: 1.5,

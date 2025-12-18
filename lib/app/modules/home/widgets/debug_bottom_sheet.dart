@@ -81,7 +81,7 @@ class _DebugBottomSheetState extends State<DebugBottomSheet> {
                 padding: EdgeInsets.all(16.w),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.05),
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(20.r),
                   border: Border.all(color: Colors.white10),
                 ),
                 child: Obx(() {
@@ -152,7 +152,7 @@ class _DebugBottomSheetState extends State<DebugBottomSheet> {
                 padding: EdgeInsets.all(16.w),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.05),
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(20.r),
                   border: Border.all(color: Colors.white10),
                 ),
                 child: Column(
@@ -324,7 +324,7 @@ class _DebugBottomSheetState extends State<DebugBottomSheet> {
                 padding: EdgeInsets.all(16.w),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.05),
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(20.r),
                   border: Border.all(color: Colors.white10),
                 ),
                 child: Column(
@@ -493,7 +493,7 @@ class _DebugBottomSheetState extends State<DebugBottomSheet> {
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: Colors.white10),
       ),
       child: Column(
@@ -645,7 +645,7 @@ class _DebugBottomSheetState extends State<DebugBottomSheet> {
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: Colors.amber.withOpacity(0.3)),
       ),
       child: Column(

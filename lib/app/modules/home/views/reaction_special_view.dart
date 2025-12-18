@@ -99,7 +99,7 @@ class ReactionSpecialView extends StatelessWidget {
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: AppColors.textGrey.withOpacity(0.1)),
       ),
       child: Row(

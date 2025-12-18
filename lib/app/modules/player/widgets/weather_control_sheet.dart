@@ -134,7 +134,7 @@ class _WeatherControlSheetState extends State<WeatherControlSheet> {
                   padding: EdgeInsets.all(16.w),
                   decoration: BoxDecoration(
                     color: weatherColor.withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(16.r),
+                    borderRadius: BorderRadius.circular(20.r),
                     border: Border.all(color: weatherColor.withOpacity(0.3)),
                   ),
                   child: isLoading
@@ -227,7 +227,7 @@ class _WeatherControlSheetState extends State<WeatherControlSheet> {
                       color: isEnabled 
                           ? AppColors.primaryBlue.withOpacity(0.2)
                           : Colors.white.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(16.r),
+                      borderRadius: BorderRadius.circular(20.r),
                       border: Border.all(
                         color: isEnabled 
                             ? AppColors.primaryBlue

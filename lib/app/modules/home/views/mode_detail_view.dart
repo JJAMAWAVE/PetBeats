@@ -143,7 +143,7 @@ class ModeDetailView extends GetView<HomeController> {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: AppColors.primaryBlue.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: AppColors.primaryBlue.withOpacity(0.1)),
       ),
       child: Column(
@@ -211,7 +211,7 @@ class ModeDetailView extends GetView<HomeController> {
             color: isPlaying 
                 ? AppColors.primaryBlue.withOpacity(0.1) 
                 : Colors.white.withOpacity(0.6), // Glassmorphism
-            borderRadius: BorderRadius.circular(20), // 16 -> 20
+            borderRadius: BorderRadius.circular(20.r), // 16 -> 20
             border: Border.all(
               color: isPlaying ? AppColors.primaryBlue.withOpacity(0.3) : AppColors.lineLightBlue
             ),

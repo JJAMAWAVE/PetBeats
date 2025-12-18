@@ -150,7 +150,7 @@ class _AnimatedModeButtonState extends State<_AnimatedModeButton>
               Colors.white.withOpacity(0.75),
             ],
           ),
-          borderRadius: BorderRadius.circular(24.r), // Rounded Square
+          borderRadius: BorderRadius.circular(20.r), // Rounded Square
           boxShadow: [
             BoxShadow(
               color: widget.color.withOpacity(0.15),

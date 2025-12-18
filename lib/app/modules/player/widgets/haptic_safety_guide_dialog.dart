@@ -84,7 +84,7 @@ class _HapticSafetyGuideDialogState extends State<HapticSafetyGuideDialog> {
                 const Color(0xFF162033),
               ],
             ),
-            borderRadius: BorderRadius.circular(24.r),
+            borderRadius: BorderRadius.circular(20.r),
             border: Border.all(
               color: Colors.pinkAccent.withOpacity(0.5),
               width: 2,
@@ -288,7 +288,7 @@ class _HapticSafetyGuideDialogState extends State<HapticSafetyGuideDialog> {
               delay: const Duration(milliseconds: 200),
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(20.r),
                   boxShadow: [
                     BoxShadow(
                       color: (card['titleColor'] as Color).withOpacity(0.2),
@@ -298,7 +298,7 @@ class _HapticSafetyGuideDialogState extends State<HapticSafetyGuideDialog> {
                   ],
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(20.r),
                   child: Image.asset(
                     card['image']!,
                     height: 220.h,

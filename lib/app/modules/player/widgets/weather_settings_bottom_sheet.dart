@@ -164,7 +164,7 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: const Color(0xFFF8F9FF),
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(20.r),
         border: Border.all(
           color: const Color(0xFF5E60CE).withOpacity(0.2),
         ),
@@ -244,7 +244,7 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
             color.withOpacity(0.05),
           ],
         ),
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(20.r),
       ),
       child: Row(
         children: [
@@ -406,7 +406,7 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
                 : const Color(0xFF5E60CE),
             minimumSize: Size(double.infinity, 56.h),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16.r),
+              borderRadius: BorderRadius.circular(20.r),
             ),
             elevation: 0,
           ),

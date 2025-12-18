@@ -102,7 +102,7 @@ class WeatherSpecialView extends GetView<HomeController> {
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(24.r),
+        borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.08),
@@ -112,7 +112,7 @@ class WeatherSpecialView extends GetView<HomeController> {
         ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(20.r),
         child: Image.asset(
           'assets/images/날씨.png',
           fit: BoxFit.contain, // Changed to contain to show full image
@@ -146,7 +146,7 @@ class WeatherSpecialView extends GetView<HomeController> {
               color: isEnabled 
                   ? AppColors.primaryBlue.withOpacity(0.1)
                   : Colors.grey.withOpacity(0.05),
-              borderRadius: BorderRadius.circular(16.r),
+              borderRadius: BorderRadius.circular(20.r),
               border: Border.all(
                 color: isEnabled
                     ? AppColors.primaryBlue.withOpacity(0.3)
@@ -201,7 +201,7 @@ class WeatherSpecialView extends GetView<HomeController> {
                 backgroundColor: isEnabled ? Colors.grey[400] : AppColors.primaryBlue,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.r),
+                  borderRadius: BorderRadius.circular(20.r),
                 ),
                 elevation: isEnabled ? 0 : 4,
               ),
@@ -226,7 +226,7 @@ class WeatherSpecialView extends GetView<HomeController> {
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: AppColors.primaryBlue.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: AppColors.primaryBlue.withOpacity(0.1)),
       ),
       child: Column(
@@ -335,7 +335,7 @@ class WeatherSpecialView extends GetView<HomeController> {
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: AppColors.lineLightBlue),
         boxShadow: [
           BoxShadow(

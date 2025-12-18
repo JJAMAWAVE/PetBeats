@@ -642,7 +642,7 @@ class SettingsView extends GetView<SettingsController> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: BorderRadius.circular(20.r),
           boxShadow: [
             BoxShadow(
               color: Colors.amber.withOpacity(0.3),

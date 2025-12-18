@@ -170,7 +170,7 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
                             elevation: hasSelection ? 8 : 0,
                             shadowColor: AppColors.primaryBlue.withOpacity(0.4),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(20.r),
                             ),
                             disabledBackgroundColor: AppColors.primaryBlue.withOpacity(0.3),
                             disabledForegroundColor: Colors.white.withOpacity(0.5),
@@ -211,7 +211,7 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.primaryBlue.withOpacity(0.08) : Colors.transparent,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20.r),
           border: Border.all(
             color: isSelected ? AppColors.primaryBlue : AppColors.lineLightBlue,
             width: isSelected ? 2.0 : 1.5,
