@@ -10,6 +10,7 @@ import '../../../routes/app_routes.dart';
 import '../widgets/mini_player.dart';
 import '../../../../core/widgets/background_decoration.dart';
 import 'package:petbeats/core/widgets/rainbow_gradient.dart';
+import 'package:petbeats/core/widgets/premium_banner.dart';
 
 class ModeDetailView extends GetView<HomeController> {
   const ModeDetailView({super.key});
@@ -74,56 +75,10 @@ class ModeDetailView extends GetView<HomeController> {
                       // Subscription Banner (if not premium)
                       Obx(() {
                         if (!controller.isPremiumUser.value) {
-                          return GestureDetector(
-                            onTap: () => Get.toNamed(Routes.SUBSCRIPTION),
-                            child: Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                              decoration: BoxDecoration(
-                                gradient: const LinearGradient(
-                                  colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(12),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: const Color(0xFF2575FC).withOpacity(0.3),
-                                    blurRadius: 8,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                children: [
-                                  const Icon(Icons.stars, color: Colors.white),
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'premium_unlock_tracks'.tr,
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                        Text(
-                                          'premium_special_care'.tr,
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.white.withOpacity(0.9),
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
-                                ],
-                              ),
-                            ),
+                          return const PremiumBanner(
+                            title: 'premium_unlock_tracks',
+                            subtitle: 'premium_special_care',
+                            icon: Icons.stars,
                           );
                         }
                         return const SizedBox.shrink();

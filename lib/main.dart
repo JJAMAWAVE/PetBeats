@@ -30,6 +30,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:petbeats/core/theme/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:petbeats/core/widgets/global_particle_overlay.dart';
+import 'package:petbeats/core/widgets/touch_particle_overlay.dart';
 // Firebase
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart'; // 🔥 Crash reporting
@@ -127,10 +128,15 @@ class MyApp extends StatelessWidget {
           locale: Get.deviceLocale ?? const Locale('en', 'US'), 
           fallbackLocale: const Locale('en', 'US'), // 글로벌 스탠다드 (영어)
           builder: (context, widget) {
-            // ScreenUtil 적용을 위한 builder
-            return MediaQuery(
-              data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
-              child: widget!,
+            // ScreenUtil + Touch Particle Effect
+            return TouchParticleOverlay(
+              particleCount: 15,
+              particleColor: const Color(0xFF87CEEB), // Light sky blue
+              maxParticleSize: 10.0,
+              child: MediaQuery(
+                data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+                child: widget!,
+              ),
             );
           },
         );

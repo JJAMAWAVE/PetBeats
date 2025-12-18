@@ -444,13 +444,9 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
           
           // PRO Badge (always visible)
           Positioned(
-            top: -6.h,
-            right: -4.w,
-            child: const RainbowProBadge(
-              fontSize: 7,
-              padding: EdgeInsets.symmetric(horizontal: 4, vertical: 1),
-              borderRadius: BorderRadius.all(Radius.circular(4)),
-            ),
+            top: -8.h,
+            right: -6.w,
+            child: const RainbowProBadge(),
           ),
         ],
       ),

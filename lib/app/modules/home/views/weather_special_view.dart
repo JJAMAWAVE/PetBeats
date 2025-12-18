@@ -8,6 +8,7 @@ import '../controllers/home_controller.dart';
 import '../../../data/services/weather_service.dart';
 import '../../../routes/app_routes.dart';
 import '../widgets/mini_player.dart';
+import 'package:petbeats/core/widgets/premium_banner.dart';
 
 /// Weather Feature Page - Smart Weather Sync
 /// 
@@ -123,57 +124,10 @@ class WeatherSpecialView extends GetView<HomeController> {
 
   /// Premium Banner (Non-Premium Users Only)
   Widget _buildPremiumBanner() {
-    return GestureDetector(
-      onTap: () => Get.toNamed(Routes.SUBSCRIPTION),
-      child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 20.w),
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(16.r),
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xFF2575FC).withOpacity(0.3),
-              blurRadius: 12,
-              offset: const Offset(0, 6),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            const Icon(Icons.stars, color: Colors.white, size: 28),
-            SizedBox(width: 16.w),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'weather_special_premium_title'.tr,
-                    style: GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16.sp,
-                    ),
-                  ),
-                  SizedBox(height: 4.h),
-                  Text(
-                    'weather_special_premium_desc'.tr,
-                    style: GoogleFonts.poppins(
-                      color: Colors.white.withOpacity(0.9),
-                      fontSize: 13.sp,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Icon(Icons.arrow_forward_ios, color: Colors.white, size: 18.w),
-          ],
-        ),
-      ),
+    return const PremiumBanner(
+      title: 'weather_special_premium_title',
+      subtitle: 'weather_special_premium_desc',
+      icon: Icons.stars,
     );
   }
 

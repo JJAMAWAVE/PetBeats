@@ -7,6 +7,7 @@ import '../controllers/home_controller.dart';
 import '../../../data/services/rhythm_care_service.dart';
 import '../../../routes/app_routes.dart';
 import '../widgets/mini_player.dart';
+import 'package:petbeats/core/widgets/premium_banner.dart';
 
 /// Rhythm Care Feature Page
 /// 
@@ -141,54 +142,10 @@ class RhythmSpecialView extends StatelessWidget {
 
   /// Premium Banner (Non-Premium Users Only)
   Widget _buildPremiumBanner() {
-    return GestureDetector(
-      onTap: () => Get.toNamed(Routes.SUBSCRIPTION),
-      child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 20.w),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF6A11CB), Color(0xFFFF6B6B)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(16.r),
-          boxShadow: [
-            BoxShadow(
-              color: Color(0xFF6A11CB).withOpacity(0.3),
-              blurRadius: 12,
-              offset: const Offset(0, 6),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Icon(Icons.schedule, color: Colors.white, size: 28),
-            SizedBox(width: 16.w),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'rhythm_premium_title'.tr,
-                    style: AppTextStyles.bodyLarge.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    'rhythm_premium_desc'.tr,
-                    style: AppTextStyles.bodySmall.copyWith(
-                      color: Colors.white.withOpacity(0.9),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Icon(Icons.arrow_forward_ios, color: Colors.white, size: 18),
-          ],
-        ),
-      ),
+    return const PremiumBanner(
+      title: 'rhythm_premium_title',
+      subtitle: 'rhythm_premium_desc',
+      icon: Icons.schedule,
     );
   }
 
