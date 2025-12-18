@@ -1047,8 +1047,9 @@ class HomeView extends GetView<HomeController> {
   Widget _buildScenarioChip(String title, String id, String iconPath, {Color color = AppColors.primaryBlue}) {
     return GestureDetector(
       onTap: () {
-        // 시나리오 클릭 시 기능 (추후 구현)
-        // controller.onScenarioSelected(id); 
+        final hapticService = Get.find<HapticService>();
+        hapticService.lightImpact();
+        _showScenarioDialog(title, id, color);
       },
       child: Container(
         height: 56,

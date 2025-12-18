@@ -153,14 +153,68 @@ class _AppInfoViewState extends State<AppInfoView> with TickerProviderStateMixin
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          // Page View
-          PageView.builder(
-            controller: _pageController,
-            onPageChanged: _onPageChanged,
-            itemCount: _pages.length,
-            itemBuilder: (context, index) {
-              return _buildPage(_pages[index], index);
+          // Page View with Card Stack Effect
+          LayoutBuilder(
+            builder: (context, constraints) {
+              return Stack(
+                children: List.generate(_pages.length, (index) {
+                  // Calculate offset from current page
+                  final offset = index - _currentPage;
+                  
+                  // Only render current and next 2 cards
+                  if (offset < 0 || offset > 2) {
+                    return const SizedBox.shrink();
+                  }
+                  
+                  // Scale and position for stacked effect
+                  final scale = 1.0 - (offset * 0.05);
+                  final translateY = offset * 12.0;
+                  final opacity = offset == 0 ? 1.0 : 0.6 - (offset * 0.15);
+                  
+                  return Positioned.fill(
+                    child: Transform.translate(
+                      offset: Offset(0, translateY),
+                      child: Transform.scale(
+                        scale: scale,
+                        alignment: Alignment.topCenter,
+                        child: Opacity(
+                          opacity: opacity.clamp(0.0, 1.0),
+                          child: GestureDetector(
+                            onHorizontalDragEnd: (details) {
+                              if (details.primaryVelocity! < 0 && _currentPage < _pages.length - 1) {
+                                _pageController.nextPage(
+                                  duration: const Duration(milliseconds: 400),
+                                  curve: Curves.easeOutCubic,
+                                );
+                              } else if (details.primaryVelocity! > 0 && _currentPage > 0) {
+                                _pageController.previousPage(
+                                  duration: const Duration(milliseconds: 400),
+                                  curve: Curves.easeOutCubic,
+                                );
+                              }
+                            },
+                            child: _buildPage(_pages[index], index),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }).reversed.toList(),
+              );
             },
+          ),
+          
+          // Invisible PageView for controller sync
+          Opacity(
+            opacity: 0,
+            child: IgnorePointer(
+              child: PageView.builder(
+                controller: _pageController,
+                onPageChanged: _onPageChanged,
+                itemCount: _pages.length,
+                itemBuilder: (_, __) => const SizedBox(),
+              ),
+            ),
           ),
 
           // Close Button
