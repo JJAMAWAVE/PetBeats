@@ -73,10 +73,21 @@ class _SitterSpecialViewState extends State<SitterSpecialView> {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.textDarkNavy),
-          onPressed: () => Get.back(),
-        ),
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            icon: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.05),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.close, color: AppColors.textDarkNavy, size: 20),
+            ),
+            onPressed: () => Get.back(),
+          ),
+          SizedBox(width: 8.w),
+        ],
       ),
       body: Stack(
         children: [
