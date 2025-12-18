@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../home/controllers/home_controller.dart';
+import '../../../data/services/coupon_service.dart';
 
 enum SubscriptionPlan {
   monthly,
@@ -168,6 +169,32 @@ class SubscriptionController extends GetxController {
       homeController.upgradeToPremium();
     } catch (e) {
       print('HomeController not found: $e');
+    }
+    
+    // 4. CouponService에 PRO 만료일 설정 (선택된 플랜에 따라)
+    try {
+      final couponService = Get.find<CouponService>();
+      final now = DateTime.now();
+      int days;
+      switch (selectedPlan.value) {
+        case SubscriptionPlan.monthly:
+          days = 30;
+          break;
+        case SubscriptionPlan.quarterly:
+          days = 90;
+          break;
+        case SubscriptionPlan.halfYearly:
+          days = 180;
+          break;
+        case SubscriptionPlan.yearly:
+          days = 365;
+          break;
+      }
+      // 7일 무료체험 추가
+      couponService.proExpiryDate.value = now.add(Duration(days: days + 7));
+      print('✅ [SubscriptionController] CouponService synced with ${days + 7} days');
+    } catch (e) {
+      print('CouponService not found: $e');
     }
     
     // 4. 성공 메시지
