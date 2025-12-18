@@ -410,27 +410,13 @@ class SubscriptionView extends GetView<SubscriptionController> {
                       ),
                       SizedBox(height: 4.h),
                       // 가격 앵커링
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        textBaseline: TextBaseline.alphabetic,
-                        children: [
-                          Text(
-                            priceDetail,
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                              color: isBest ? Colors.white : AppColors.textDarkNavy,
-                            ),
-                          ),
-                          SizedBox(width: 4.w),
-                          Text(
-                            '/ ${'month'.tr}',
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              color: isBest ? Colors.white.withOpacity(0.9) : AppColors.textGrey,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        priceDetail,
+                        style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.bold,
+                          color: isBest ? Colors.white : AppColors.textDarkNavy,
+                        ),
                       ),
                       SizedBox(height: 2.h),
                       Text(

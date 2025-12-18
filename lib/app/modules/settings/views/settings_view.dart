@@ -90,7 +90,7 @@ class SettingsView extends GetView<SettingsController> {
             SizedBox(height: 48.h),
             Center(
               child: Text(
-                'settings_version'.trParams({'ver': '1.0.0'}),
+                'settings_version'.trParams({'version': '1.0.0'}),
                 style: AppTextStyles.bodyMedium.copyWith(
                   color: AppColors.textGrey.withOpacity(0.5),
                   fontSize: 12.sp,

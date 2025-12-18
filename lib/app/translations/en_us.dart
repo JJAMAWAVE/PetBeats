@@ -754,7 +754,7 @@ const Map<String, String> enUS = {
   
   // Settings & Auth match
   'songs_unit': 'songs',
-  'settings_version': 'Version @ver',
+
   'auth_login_failed': 'Login Failed',
   'auth_google_unavailable': 'Google Login is unavailable. Please try again later.',
   'auth_login_unavailable': 'Login Unavailable',

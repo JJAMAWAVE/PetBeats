@@ -442,7 +442,6 @@ class WeatherSpecialView extends GetView<HomeController> {
       await weatherService.enableWeatherSync();
       
       Get.snackbar(
-      Get.snackbar(
         'weather_sync_active_title'.tr,
         'weather_sync_active_desc'.tr,
         snackPosition: SnackPosition.BOTTOM,
@@ -453,7 +452,6 @@ class WeatherSpecialView extends GetView<HomeController> {
         duration: const Duration(seconds: 3),
       );
     } catch (e) {
-      Get.snackbar(
       Get.snackbar(
         'weather_error_title'.tr,
         'weather_error_desc'.tr,
@@ -470,7 +468,6 @@ class WeatherSpecialView extends GetView<HomeController> {
   void _disableWeatherSync(WeatherService weatherService) {
     weatherService.disableWeatherSync();
     
-    Get.snackbar(
     Get.snackbar(
       'weather_sync_inactive_title'.tr,
       'weather_sync_inactive_desc'.tr,

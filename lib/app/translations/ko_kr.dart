@@ -764,7 +764,7 @@ const Map<String, String> koKR = {
   
   // Settings & Auth match
   'songs_unit': '곡',
-  'settings_version': '버전 @ver',
+
   'auth_login_failed': '로그인 실패',
   'auth_google_unavailable': '구글 로그인을 사용할 수 없습니다. 나중에 다시 시도해주세요.',
   'auth_login_unavailable': '로그인 불가',
