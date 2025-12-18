@@ -30,6 +30,14 @@ import '../widgets/debug_bottom_sheet.dart';
 import '../../../../app/data/services/pet_profile_service.dart';
 import 'dart:convert';
 
+import 'package:petbeats/app/modules/home/views/particle_text_demo_view.dart';
+import 'package:petbeats/core/widgets/neon_text.dart';
+import 'package:petbeats/core/widgets/circle_pulse_spinner.dart';
+import 'package:petbeats/core/widgets/animated_stroke_text.dart';
+import 'package:petbeats/core/widgets/snowfall_widget.dart';
+import 'package:petbeats/core/widgets/bubble_text.dart';
+import 'package:petbeats/core/widgets/rainbow_gradient.dart';
+
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
 
@@ -40,7 +48,11 @@ class HomeView extends GetView<HomeController> {
       theme: controller.currentSpeciesTheme.value,
       child: Scaffold(
         backgroundColor: Colors.transparent, // Ripple 애니메이션이 보이도록 투명 처리
-        body: BackgroundDecoration(
+        floatingActionButton: FloatingActionButton(
+        onPressed: () => Get.to(() => const ParticleTextDemoView()),
+        child: const Icon(Icons.text_fields),
+      ),
+      body: BackgroundDecoration(
           child: SafeArea(
             child: Stack(
               children: [
@@ -147,12 +159,22 @@ class HomeView extends GetView<HomeController> {
                     ),
                     const SizedBox(height: 20),
 
+                    // Main Banner - Premium Sound Therapy
+                    StaggeredSlideIn(
+                      index: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                        child: _buildMainBanner(hapticService),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+
                     // SECTION: Recommended Songs (Circular) - NOW FIRST
                     Obx(() {
                       final species = ['species_dog'.tr, 'species_cat'.tr, 'species_guardian'.tr][controller.selectedSpeciesIndex.value];
                       return _buildSectionTitle('home_recommended_for'.trParams({'species': species}));
                     }),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 8),
                     
                     // Modes List - Enhanced UI with Scroll Indicator
                     Obx(() {
@@ -231,7 +253,7 @@ class HomeView extends GetView<HomeController> {
                         ),
                       );
                     }),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 28),
 
                     // SECTION: AI Special Mode (Smart Sync) - NOW SECOND
                     const Padding(
@@ -239,11 +261,11 @@ class HomeView extends GetView<HomeController> {
                       child: AISpecialModeWidget(),
                     ),
 
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 28),
 
                     // SECTION: AI Custom Recommendation (Scenario Chips)
                     _buildSectionTitleWithPro('home_ai_recommend'.tr),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 8),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
                       child: Column(
@@ -271,11 +293,11 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ),
 
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 28),
                     
                     // SECTION: Exercises (2-row Grid Layout)
                     _buildSectionTitle('home_health_activity'.tr),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 8),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                           // 3-Column Row for Health & Activity
@@ -339,8 +361,10 @@ class HomeView extends GetView<HomeController> {
   Widget _buildSectionTitle(String title) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-      child: Text(
-        title,
+      child: BubbleText(
+        text: title,
+        bubbleCount: 6,
+        bubbleColor: AppColors.primaryBlue.withOpacity(0.5),
         style: AppTextStyles.titleMedium.copyWith(
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -349,6 +373,153 @@ class HomeView extends GetView<HomeController> {
     );
   }
   
+  Widget _buildMainBanner(HapticService hapticService) {
+    return ElasticScaleButton(
+      onTap: () {
+        hapticService.lightImpact();
+        Get.to(() => const AppInfoView());
+      },
+      child: Container(
+        height: 140,
+        clipBehavior: Clip.hardEdge, // Prevent glow from overflowing
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          color: const Color(0xFF000854), // Dark navy blue (matching image)
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFF000854).withOpacity(0.5),
+              blurRadius: 20,
+              offset: const Offset(0, 8),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(24),
+          child: Stack(
+            clipBehavior: Clip.hardEdge, // Also clip Stack children
+            children: [
+              // Background image with reduced opacity
+              Positioned.fill(
+                child: Opacity(
+                  opacity: 0.4, // Reduce image visibility to show background color
+                  child: Image.asset(
+                    'assets/images/MainBanner/MainBanner.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              // Dark gradient overlay for text readability
+              Positioned.fill(
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [
+                        const Color(0xFF000854).withOpacity(0.9), // Very dark on left
+                        const Color(0xFF000854).withOpacity(0.6),
+                        const Color(0xFF000854).withOpacity(0.2),
+                        Colors.transparent,
+                      ],
+                      stops: const [0.0, 0.25, 0.5, 0.7],
+                    ),
+                  ),
+                ),
+              ),
+              // Snow effect overlay
+              const Positioned.fill(
+                child: SnowfallWidget(
+                  snowflakeCount: 30,
+                  snowColor: Colors.white,
+                  maxSnowflakeSize: 3.0,
+                ),
+              ),
+            
+            // Main content
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                children: [
+                  // Left content
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end, // Text at bottom
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.15),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                'PetBeats',
+                                style: AppTextStyles.labelSmall.copyWith(
+                                  color: Colors.white.withOpacity(0.9),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        AnimatedStrokeText(
+                          text: '프리미엄 사운드 테라피',
+                          strokeColor: Colors.white,
+                          glowColor: const Color(0xFF00BFFF), // Cyan blue
+                          strokeWidth: 1.5,
+                          duration: const Duration(milliseconds: 2000),
+                          showUnderlines: false, // No underline decoration
+                          style: AppTextStyles.titleMedium.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 23, // 18 * 1.3
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  
+                  // Right arrow button
+                  Container(
+                    width: 44,
+                    height: 44,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.arrow_forward_rounded,
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSoundWaveDecor(double opacity) {
+    return Container(
+      width: 80,
+      height: 80,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: Colors.white.withOpacity(opacity),
+          width: 1.5,
+        ),
+      ),
+    );
+  }
 
 
   Widget _buildBannerCard(HapticService hapticService) {
@@ -854,32 +1025,19 @@ class HomeView extends GetView<HomeController> {
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Row(
         children: [
-          Text(
-            title,
+          BubbleText(
+            text: title,
+            bubbleCount: 6,
+            bubbleColor: AppColors.primaryBlue.withOpacity(0.5),
             style: AppTextStyles.titleMedium.copyWith(
               color: AppColors.textDarkNavy,
               fontWeight: FontWeight.bold,
-              fontSize: 18,
+              fontSize: 20,
             ),
           ),
           const SizedBox(width: 8),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color(0xFF5C6BC0), Color(0xFF29B6F6)],
-              ),
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: const Text(
-              'PRO',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+          // PRO Badge with Rainbow Gradient
+          const RainbowProBadge(),
         ],
       ),
     );
@@ -920,9 +1078,9 @@ class HomeView extends GetView<HomeController> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Icon with white tint
+            // Icon with white tint (1.4x larger)
             if (iconPath.isNotEmpty) ...[
-               Image.asset(iconPath, width: 24, height: 24, color: Colors.white.withOpacity(0.9), errorBuilder: (_,__,___) => const Icon(Icons.star, color: Colors.white, size: 24)),
+               Image.asset(iconPath, width: 34, height: 34, color: Colors.white.withOpacity(0.9), errorBuilder: (_,__,___) => const Icon(Icons.star, color: Colors.white, size: 34)),
                const SizedBox(width: 8),
             ],
             Text(

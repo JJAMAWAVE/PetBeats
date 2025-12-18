@@ -48,6 +48,10 @@ class HomeController extends GetxController with WidgetsBindingObserver {
   // 자동 모드 여부
   final isAutoMode = false.obs;
   
+  // Spinner visibility states (dismissible on tap)
+  final showBellSpinner = true.obs;
+  final showHapticSpinner = true.obs;
+  
   // 하트비트 싱크 활성화 여부
   final isHeartbeatSyncEnabled = true.obs;
 

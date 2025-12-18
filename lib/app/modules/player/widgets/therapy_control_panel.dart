@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import 'package:petbeats/core/widgets/rainbow_gradient.dart';
 import '../../../data/models/haptic_settings_model.dart';
 import '../../home/controllers/home_controller.dart';
 import '../../../data/services/weather_service.dart';
@@ -13,6 +14,7 @@ import 'weather_settings_bottom_sheet.dart';
 import 'weather_control_sheet.dart';
 import 'premium_feature_popup.dart';
 import 'dart:ui';
+import '../../../../core/widgets/circle_pulse_spinner.dart';
 
 class TherapyControlPanel extends StatefulWidget {
   final HapticIntensity hapticIntensity;
@@ -444,30 +446,10 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
           Positioned(
             top: -6.h,
             right: -4.w,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
-                ),
-                borderRadius: BorderRadius.circular(4.r),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.amber.withOpacity(0.5),
-                    blurRadius: 4,
-                    offset: const Offset(0, 1),
-                  ),
-                ],
-              ),
-              child: Text(
-                'PRO',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 7.sp,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.5,
-                ),
-              ),
+            child: const RainbowProBadge(
+              fontSize: 7,
+              padding: EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+              borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
           ),
         ],

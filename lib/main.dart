@@ -29,6 +29,7 @@ import 'app/modules/invite/controllers/invite_controller.dart'; // 📨 Invite F
 import 'package:get_storage/get_storage.dart';
 import 'package:petbeats/core/theme/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:petbeats/core/widgets/global_particle_overlay.dart';
 // Firebase
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart'; // 🔥 Crash reporting

@@ -13,6 +13,7 @@ import 'package:intl/intl.dart';
 import '../controllers/settings_controller.dart';
 import '../../../routes/app_routes.dart';
 import '../../home/controllers/home_controller.dart';
+import 'package:petbeats/core/widgets/rainbow_gradient.dart';
 
 class SettingsView extends GetView<SettingsController> {
   const SettingsView({super.key});
@@ -764,21 +765,7 @@ class SettingsView extends GetView<SettingsController> {
                           ),
                           if (isPro) ...[
                             SizedBox(width: 8.w),
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
-                              decoration: BoxDecoration(
-                                color: Colors.amber,
-                                borderRadius: BorderRadius.circular(10.r),
-                              ),
-                              child: Text(
-                                'PRO',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10.sp,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
+                            const RainbowProBadge(),
                           ],
                         ],
                       ),

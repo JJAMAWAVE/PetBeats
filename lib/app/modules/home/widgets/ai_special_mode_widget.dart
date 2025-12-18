@@ -5,121 +5,68 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../routes/app_routes.dart';
+import 'package:petbeats/core/widgets/bubble_text.dart';
+import 'package:petbeats/core/widgets/rainbow_gradient.dart';
 
 class AISpecialModeWidget extends StatelessWidget {
   const AISpecialModeWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-        borderRadius: BorderRadius.circular(24.r),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.85), // More visible background
-              borderRadius: BorderRadius.circular(24.r),
-              // Blue-tinted border for definition (same as Recommended Songs)
-              border: Border.all(
-                color: AppColors.primaryBlue.withOpacity(0.15),
-                width: 1.5,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // 타이틀 (스마트 싱크 + PRO) - 다른 섹션과 동일한 스타일
+        Row(
+          children: [
+            BubbleText(
+              text: 'special_smart_sync'.tr,
+              bubbleCount: 6,
+              bubbleColor: AppColors.primaryBlue.withOpacity(0.5),
+              style: AppTextStyles.titleMedium.copyWith(
+                color: AppColors.textDarkNavy,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
               ),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.primaryBlue.withOpacity(0.08),
-                  blurRadius: 12,
-                  offset: Offset(0, 4),
-                ),
-              ],
             ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // 프리미엄 타이틀 (왕관 이미지 + PRO)
-          Row(
-            children: [
-              // 왕관 이미지
-              Image.asset(
-                'assets/icons/icon_crown_pro.png',
-                width: 24.w,
-                height: 24.w,
-                fit: BoxFit.contain,
-              ),
-              SizedBox(width: 8.w),
-              Text(
-                'special_smart_sync'.tr,
-                style: AppTextStyles.titleLarge.copyWith(
-                  color: AppColors.textDarkNavy,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(width: 8.w),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xFF5C6BC0), // Indigo
-                      Color(0xFF29B6F6), // Light Blue
-                    ],
-                  ),
-                  borderRadius: BorderRadius.circular(8.r),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color(0xFF5C6BC0).withOpacity(0.4),
-                      blurRadius: 8,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Text(
-                  'PRO',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 10.sp,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.5,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 12.h),
-          Row(
-            children: [
-              _buildModeButton(
-                context,
-                'special_weather'.tr,
-                'assets/icons/icon_special_weather_glass.png',
-                Colors.blue.shade400,
-                () {
-                  // ✨ 새로운 날씨 페이지로 이동
-                  Get.toNamed(Routes.WEATHER_SPECIAL);
-                },
-              ),
-              SizedBox(width: 12.w),
-              _buildModeButton(
-                context,
-                'special_rhythm'.tr,  // ✨ 시간 → 리듬으로 변경 (Rhythm Care)
-                'assets/icons/icon_special_time_glass.png',
-                Colors.orange.shade400,
-                () => Get.toNamed(Routes.RHYTHM_SPECIAL),
-              ),
-              SizedBox(width: 12.w),
-              _buildModeButton(
-                context,
-                'special_sitter'.tr,
-                'assets/icons/icon_special_reaction_glass.png',
-                Colors.purple.shade400,
-                () => Get.toNamed(Routes.SITTER_SPECIAL),
-              ),
-            ],
-          ),
-        ],
-      ),
-    ),
-      ),
+            SizedBox(width: 8.w),
+            // PRO Badge with Rainbow Gradient
+            const RainbowProBadge(),
+          ],
+        ),
+        const SizedBox(height: 8),
+        // 모드 버튼들 - 레이어 없이 바로 표시
+        Row(
+          children: [
+            _buildModeButton(
+              context,
+              'special_weather'.tr,
+              'assets/icons/icon_special_weather_glass.png',
+              Colors.blue.shade400,
+              () {
+                // ✨ 새로운 날씨 페이지로 이동
+                Get.toNamed(Routes.WEATHER_SPECIAL);
+              },
+            ),
+            SizedBox(width: 12.w),
+            _buildModeButton(
+              context,
+              'special_rhythm'.tr,  // ✨ 시간 → 리듬으로 변경 (Rhythm Care)
+              'assets/icons/icon_special_time_glass.png',
+              Colors.orange.shade400,
+              () => Get.toNamed(Routes.RHYTHM_SPECIAL),
+            ),
+            SizedBox(width: 12.w),
+            _buildModeButton(
+              context,
+              'special_sitter'.tr,
+              'assets/icons/icon_special_reaction_glass.png',
+              Colors.purple.shade400,
+              () => Get.toNamed(Routes.SITTER_SPECIAL),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -194,20 +141,16 @@ class _AnimatedModeButtonState extends State<_AnimatedModeButton>
       child: Container(
         height: 120.h,
         decoration: BoxDecoration(
-          // Outer Glass Container
+          // Outer Glass Container - slightly darker background
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Colors.white.withOpacity(0.8),
-              Colors.white.withOpacity(0.4),
+              Colors.white.withOpacity(0.95),
+              Colors.white.withOpacity(0.75),
             ],
           ),
           borderRadius: BorderRadius.circular(24.r), // Rounded Square
-          border: Border.all(
-            color: Colors.white.withOpacity(0.6),
-            width: 1.5,
-          ),
           boxShadow: [
             BoxShadow(
               color: widget.color.withOpacity(0.15),

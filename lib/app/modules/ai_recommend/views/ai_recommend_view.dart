@@ -7,6 +7,7 @@ import '../../premium/controllers/subscription_controller.dart';
 import '../../home/controllers/home_controller.dart';
 import '../../home/widgets/mini_player.dart';
 import '../models/ai_scenario.dart';
+import 'package:petbeats/core/widgets/rainbow_gradient.dart';
 
 class AIRecommendView extends StatelessWidget {
   const AIRecommendView({super.key});
@@ -233,27 +234,16 @@ class AIRecommendView extends StatelessWidget {
               Positioned(
                 top: 12.h,
                 right: 12.w,
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.lock, color: Colors.white, size: 12.w),
-                      SizedBox(width: 2.w),
-                      Text(
-                        'PRO',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.lock, color: Colors.white, size: 12.w),
+                    SizedBox(width: 4.w),
+                    const RainbowProBadge(
+                      fontSize: 9,
+                      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    ),
+                  ],
                 ),
               ),
             

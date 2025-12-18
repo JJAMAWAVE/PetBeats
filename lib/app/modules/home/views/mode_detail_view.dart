@@ -9,6 +9,7 @@ import '../../../data/models/track_model.dart';
 import '../../../routes/app_routes.dart';
 import '../widgets/mini_player.dart';
 import '../../../../core/widgets/background_decoration.dart';
+import 'package:petbeats/core/widgets/rainbow_gradient.dart';
 
 class ModeDetailView extends GetView<HomeController> {
   const ModeDetailView({super.key});
@@ -335,41 +336,9 @@ class ModeDetailView extends GetView<HomeController> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   if (track.isPremium)
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                      margin: const EdgeInsets.only(bottom: 4),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color(0xFFFFD700),
-                            Color(0xFFFFA500),
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(6),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0xFFFFD700).withOpacity(0.4),
-                            blurRadius: 6,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('👑', style: TextStyle(fontSize: 10)),
-                          SizedBox(width: 2),
-                          Text(
-                            'PRO',
-                            style: GoogleFonts.poppins(
-                              color: Colors.white,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 0.5,
-                            ),
-                          ),
-                        ],
-                      ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 4),
+                      child: const RainbowProBadge(),
                     ),
                   Text(
                     track.duration,
