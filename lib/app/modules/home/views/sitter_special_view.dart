@@ -86,7 +86,7 @@ class _SitterSpecialViewState extends State<SitterSpecialView> {
               Expanded(
                 child: Stack(
                   children: [
-                    // Background cards (stacked effect)
+                    // Background stacked cards (visual effect only)
                     ...List.generate(2, (i) {
                       final bgIndex = _currentPage + i + 1;
                       if (bgIndex >= _introSlides.length) return const SizedBox.shrink();
@@ -99,12 +99,19 @@ class _SitterSpecialViewState extends State<SitterSpecialView> {
                               scale: 1.0 - ((i + 1) * 0.04),
                               alignment: Alignment.topCenter,
                               child: Opacity(
-                                opacity: 0.25 - (i * 0.1),
+                                opacity: 0.35 - (i * 0.12),
                                 child: Container(
                                   margin: EdgeInsets.only(top: 8.h, bottom: 24.h),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(24.r),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: AppColors.primaryBlue.withOpacity(0.1),
+                                        blurRadius: 10,
+                                        offset: const Offset(0, 4),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -113,7 +120,7 @@ class _SitterSpecialViewState extends State<SitterSpecialView> {
                         ),
                       );
                     }),
-                    // Main PageView
+                    // Main PageView with actual content
                     PageView.builder(
                       controller: _pageController,
                       itemCount: _introSlides.length,

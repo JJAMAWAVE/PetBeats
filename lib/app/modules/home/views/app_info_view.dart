@@ -156,7 +156,7 @@ class _AppInfoViewState extends State<AppInfoView> with TickerProviderStateMixin
           // Page View with Card Stack Effect
           Stack(
             children: [
-              // Background cards (stacked effect)
+              // Background stacked cards (visual effect only)
               ...List.generate(2, (i) {
                 final bgIndex = _currentPage + i + 1;
                 if (bgIndex >= _pages.length) return const SizedBox.shrink();
@@ -169,12 +169,19 @@ class _AppInfoViewState extends State<AppInfoView> with TickerProviderStateMixin
                         scale: 1.0 - ((i + 1) * 0.05),
                         alignment: Alignment.topCenter,
                         child: Opacity(
-                          opacity: 0.3 - (i * 0.1),
+                          opacity: 0.4 - (i * 0.15),
                           child: Container(
-                            margin: const EdgeInsets.only(top: 60, bottom: 20),
+                            margin: const EdgeInsets.only(top: 60, bottom: 100),
                             decoration: BoxDecoration(
                               color: Colors.grey.shade200,
                               borderRadius: BorderRadius.circular(24),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -183,7 +190,7 @@ class _AppInfoViewState extends State<AppInfoView> with TickerProviderStateMixin
                   ),
                 );
               }),
-              // Main PageView
+              // Main PageView with actual content
               PageView.builder(
                 controller: _pageController,
                 onPageChanged: _onPageChanged,

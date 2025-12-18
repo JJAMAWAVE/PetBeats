@@ -142,7 +142,7 @@ class _HapticSafetyGuideDialogState extends State<HapticSafetyGuideDialog> {
                 height: 500.h,
                 child: Stack(
                   children: [
-                    // Background cards (stacked effect)
+                    // Background stacked cards (visual effect only)
                     ...List.generate(2, (i) {
                       final bgIndex = _currentPage + i + 1;
                       if (bgIndex >= _cards.length) return const SizedBox.shrink();
@@ -168,7 +168,7 @@ class _HapticSafetyGuideDialogState extends State<HapticSafetyGuideDialog> {
                         ),
                       );
                     }),
-                    // Main PageView
+                    // Main PageView with actual content
                     PageView.builder(
                       controller: _pageController,
                       onPageChanged: (index) {
