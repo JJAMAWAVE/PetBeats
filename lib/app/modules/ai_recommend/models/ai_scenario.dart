@@ -66,17 +66,17 @@ extension AIScenarioExt on AIScenario {
   Color get color {
     switch (this) {
       case AIScenario.afterWalk:
-        return const Color(0xFF4A9AD4);
+        return const Color(0xFF4CAF50); // 초록
       case AIScenario.napTime:
-        return const Color(0xFF6B8DD6);
+        return const Color(0xFF6B8DD6); // 연한 파랑
       case AIScenario.hospital:
-        return const Color(0xFFE89B6B);
+        return const Color(0xFFE89B6B); // 주황
       case AIScenario.grooming:
-        return const Color(0xFFE8A96B);
+        return const Color(0xFF9C27B0); // 보라
       case AIScenario.thunder:
-        return const Color(0xFF5AAD7A);
+        return const Color(0xFF7E57C2); // 보라
       case AIScenario.anxiety:
-        return const Color(0xFF8B7BC7);
+        return const Color(0xFFFFC107); // 노랑
     }
   }
 }

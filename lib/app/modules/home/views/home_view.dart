@@ -274,21 +274,21 @@ class HomeView extends GetView<HomeController> {
                         children: [
                           Row(
                             children: [
-                              Expanded(child: _buildScenarioChip('scenario_after_walk'.tr, 'scenario_after_walk', 'assets/icons/icon_scenario_walk.png', color: const Color(0xFF4CAF50))),
+                              Expanded(child: _buildScenarioChip('scenario_after_walk'.tr, 'scenario_after_walk', 'assets/icons/icon_scenario_walk.png', color: const Color(0xFF4CAF50))), // 초록
                               const SizedBox(width: 12),
-                              Expanded(child: _buildScenarioChip('scenario_nap'.tr, 'scenario_nap', 'assets/icons/icon_scenario_nap.png', color: const Color(0xFF673AB7))),
+                              Expanded(child: _buildScenarioChip('scenario_nap'.tr, 'scenario_nap', 'assets/icons/icon_scenario_nap.png', color: const Color(0xFF6B8DD6))), // 연한 파랑
                               const SizedBox(width: 12),
-                              Expanded(child: _buildScenarioChip('scenario_hospital'.tr, 'scenario_hospital', 'assets/icons/icon_scenario_vet.png', color: const Color(0xFFFF9800))),
+                              Expanded(child: _buildScenarioChip('scenario_hospital'.tr, 'scenario_hospital', 'assets/icons/icon_scenario_vet.png', color: const Color(0xFFE89B6B))), // 주황
                             ],
                           ),
                           const SizedBox(height: 12),
                           Row(
                             children: [
-                              Expanded(child: _buildScenarioChip('scenario_grooming'.tr, 'scenario_grooming', 'assets/icons/icon_scenario_grooming.png', color: const Color(0xFFFF7043))), // Deep Orange
+                              Expanded(child: _buildScenarioChip('scenario_grooming'.tr, 'scenario_grooming', 'assets/icons/icon_scenario_grooming.png', color: const Color(0xFF9C27B0))), // 보라
                               const SizedBox(width: 12),
-                              Expanded(child: _buildScenarioChip('scenario_thunder'.tr, 'scenario_thunder', 'assets/icons/icon_scenario_thunder.png', color: const Color(0xFFFFA726))), // Orange Amber
+                              Expanded(child: _buildScenarioChip('scenario_thunder'.tr, 'scenario_thunder', 'assets/icons/icon_scenario_thunder.png', color: const Color(0xFF7E57C2))), // 보라
                               const SizedBox(width: 12),
-                              Expanded(child: _buildScenarioChip('scenario_anxiety'.tr, 'scenario_anxiety', 'assets/icons/icon_scenario_anxiety.png', color: const Color(0xFF9575CD))), // Soft Purple
+                              Expanded(child: _buildScenarioChip('scenario_anxiety'.tr, 'scenario_anxiety', 'assets/icons/icon_scenario_anxiety.png', color: const Color(0xFFFFC107))), // 노랑
                             ],
                           ),
                         ],
