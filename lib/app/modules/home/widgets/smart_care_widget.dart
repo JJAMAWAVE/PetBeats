@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/app_dimensions.dart';
 import '../controllers/smart_care_controller.dart';
 
 class SmartCareWidget extends GetView<SmartCareController> {
@@ -37,7 +38,7 @@ class SmartCareWidget extends GetView<SmartCareController> {
             const Color(0xFF6C63FF).withOpacity(0.7),
           ],
         ),
-        borderRadius: BorderRadius.circular(24.r),
+        borderRadius: BorderRadius.circular(AppDimensions.cardBorderRadius),
         boxShadow: [
           BoxShadow(
             color: const Color(0xFF6C63FF).withOpacity(0.3),
@@ -121,7 +122,7 @@ class SmartCareWidget extends GetView<SmartCareController> {
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(24.r),
+        borderRadius: BorderRadius.circular(AppDimensions.cardBorderRadius),
         border: Border.all(color: AppColors.textGrey.withOpacity(0.1)),
         boxShadow: [
           BoxShadow(

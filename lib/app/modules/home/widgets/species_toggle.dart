@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/app_dimensions.dart';
 import '../controllers/home_controller.dart';
 import '../../../../app/data/services/haptic_service.dart';
 
@@ -100,7 +102,7 @@ class SpeciesToggle extends GetView<HomeController> {
                     style: AppTextStyles.bodyMedium.copyWith(
                       color: isSelected ? AppColors.primaryBlue : AppColors.textGrey,
                       fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                      fontSize: 14, // 축소된 사이즈에 맞춤
+                      fontSize: 14.sp, // 통일된 사이즈
                     ),
                   ),
                 ),
