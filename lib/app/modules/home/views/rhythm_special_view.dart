@@ -327,7 +327,7 @@ class RhythmSpecialView extends StatelessWidget {
                             padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
                             decoration: BoxDecoration(
                               color: slot['color'] as Color,
-                              borderRadius: BorderRadius.circular(8.r),
+                              borderRadius: BorderRadius.circular(12.r),
                             ),
                             child: Text(
                               'NOW',

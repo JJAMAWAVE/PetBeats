@@ -1,11 +1,9 @@
 import os
 import re
 
-# 카드 borderRadius를 20.r로 통일
-# 16, 16.r -> 20.r
-# 24, 24.r -> 20.r (카드용)
-# 12, 12.r -> 12.r (버튼용, 유지)
-# 40 -> 그대로 (pill 형태)
+# 카드 borderRadius를 20.r로, 내부 카드를 12.r로 통일
+# 8, 8.r -> 12.r (내부 카드/버튼)
+# 12 without .r -> 12.r
 
 def process_file(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
@@ -13,16 +11,12 @@ def process_file(filepath):
     
     original = content
     
-    # 16 -> 20.r (카드용)
-    content = re.sub(r'BorderRadius\.circular\(16\)', 'BorderRadius.circular(20.r)', content)
-    content = re.sub(r'BorderRadius\.circular\(16\.r\)', 'BorderRadius.circular(20.r)', content)
+    # 8 -> 12.r (내부 카드/버튼)
+    content = re.sub(r'BorderRadius\.circular\(8\)', 'BorderRadius.circular(12.r)', content)
+    content = re.sub(r'BorderRadius\.circular\(8\.r\)', 'BorderRadius.circular(12.r)', content)
     
-    # 24 -> 20.r (카드용)  
-    content = re.sub(r'BorderRadius\.circular\(24\)', 'BorderRadius.circular(20.r)', content)
-    content = re.sub(r'BorderRadius\.circular\(24\.r\)', 'BorderRadius.circular(20.r)', content)
-    
-    # 20 without .r -> 20.r
-    content = re.sub(r'BorderRadius\.circular\(20\)(?!\.)', 'BorderRadius.circular(20.r)', content)
+    # 12 without .r -> 12.r
+    content = re.sub(r'BorderRadius\.circular\(12\)(?!\.)', 'BorderRadius.circular(12.r)', content)
     
     if content != original:
         with open(filepath, 'w', encoding='utf-8') as f:

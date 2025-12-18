@@ -347,7 +347,7 @@ class SitterReportView extends StatelessWidget {
           height: height.clamp(4.0, 80.h),
           decoration: BoxDecoration(
             color: color,
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(12.r),
           ),
         ),
         SizedBox(height: 8.h),

@@ -245,7 +245,7 @@ class _Question2ViewState extends State<Question2View> with TickerProviderStateM
                     height: 48,
                     decoration: BoxDecoration(
                       color: AppColors.primaryBlue.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Icon(
                       label == '강아지' ? Icons.pets : Icons.cruelty_free,

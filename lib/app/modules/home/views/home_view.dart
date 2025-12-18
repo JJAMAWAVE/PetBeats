@@ -87,7 +87,7 @@ class HomeView extends GetView<HomeController> {
                                     height: 40,
                                     decoration: BoxDecoration(
                                       color: Colors.white,
-                                      borderRadius: BorderRadius.circular(12),
+                                      borderRadius: BorderRadius.circular(12.r),
                                       border: Border.all(color: Colors.orange.withOpacity(0.3)),
                                       boxShadow: [
                                         BoxShadow(
@@ -452,7 +452,7 @@ class HomeView extends GetView<HomeController> {
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                               decoration: BoxDecoration(
                                 color: Colors.white.withOpacity(0.15),
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(12.r),
                               ),
                               child: Text(
                                 'PetBeats',
@@ -711,7 +711,7 @@ class HomeView extends GetView<HomeController> {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.grey.shade100,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Column(
                     children: [

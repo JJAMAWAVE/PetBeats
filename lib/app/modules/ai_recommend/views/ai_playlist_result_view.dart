@@ -411,7 +411,7 @@ class _AIPlaylistResultViewState extends State<AIPlaylistResultView> {
                 color: isCurrentTrack 
                     ? scenario.color 
                     : scenario.color.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(12.r),
               ),
               child: Center(
                 child: isPlaying

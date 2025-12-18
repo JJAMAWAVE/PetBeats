@@ -89,7 +89,7 @@ class MixPanelBottomSheet extends StatelessWidget {
                               gradient: LinearGradient(
                                 colors: [Colors.amber, Colors.orange],
                               ),
-                              borderRadius: BorderRadius.circular(8.r),
+                              borderRadius: BorderRadius.circular(12.r),
                             ),
                             child: Text(
                               'PREMIUM',

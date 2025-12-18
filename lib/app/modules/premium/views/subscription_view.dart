@@ -431,7 +431,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
                     padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                     decoration: BoxDecoration(
                       color: isBest ? Colors.white.withOpacity(0.2) : AppColors.primaryBlue.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8.r),
+                      borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Text(
                       discount,

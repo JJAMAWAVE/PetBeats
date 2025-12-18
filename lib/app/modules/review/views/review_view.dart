@@ -52,15 +52,15 @@ class ReviewView extends GetView<ReviewController> {
                 hintText: 'review_hint'.tr,
                 hintStyle: TextStyle(color: Colors.grey[400]),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide(color: Colors.grey[300]!),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide(color: Colors.grey[300]!),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                   borderSide: const BorderSide(color: AppColors.primaryBlue),
                 ),
                 filled: true,

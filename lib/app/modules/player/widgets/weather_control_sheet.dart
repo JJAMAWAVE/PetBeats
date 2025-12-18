@@ -176,7 +176,7 @@ class _WeatherControlSheetState extends State<WeatherControlSheet> {
                                 padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                                 decoration: BoxDecoration(
                                   color: Colors.green.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(8.r),
+                                  borderRadius: BorderRadius.circular(12.r),
                                 ),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,

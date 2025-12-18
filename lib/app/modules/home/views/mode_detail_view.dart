@@ -366,7 +366,7 @@ class ModeDetailView extends GetView<HomeController> {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: textColor.withOpacity(0.3)),
       ),
       child: Text(

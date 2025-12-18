@@ -75,7 +75,7 @@ class MiniPlayer extends GetView<HomeController> {
                             height: 48,
                             decoration: BoxDecoration(
                               color: mode.color.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(12.r),
                             ),
                             child: Image.asset(
                               mode.iconPath,

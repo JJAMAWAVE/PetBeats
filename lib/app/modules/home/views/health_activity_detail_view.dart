@@ -251,7 +251,7 @@ class HealthActivityDetailView extends StatelessWidget {
             height: 48,
             decoration: BoxDecoration(
               color: color.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
             ),
             child: Icon(
               icon,

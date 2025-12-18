@@ -626,7 +626,7 @@ class _DebugBottomSheetState extends State<DebugBottomSheet> {
       padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(8.r),
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: Text(
         '✓$tier',
@@ -698,7 +698,7 @@ class _DebugBottomSheetState extends State<DebugBottomSheet> {
               padding: EdgeInsets.all(10.w),
               decoration: BoxDecoration(
                 color: statusColor.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(12.r),
                 border: Border.all(color: statusColor.withOpacity(0.3)),
               ),
               child: Column(
@@ -783,7 +783,7 @@ class _DebugBottomSheetState extends State<DebugBottomSheet> {
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
         decoration: BoxDecoration(
           color: color.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(8.r),
+          borderRadius: BorderRadius.circular(12.r),
           border: Border.all(color: color.withOpacity(0.5)),
         ),
         child: Text(

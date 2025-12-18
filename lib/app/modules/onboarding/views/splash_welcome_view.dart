@@ -224,7 +224,7 @@ class _SplashWelcomeViewState extends State<SplashWelcomeView> with TickerProvid
                                     color: AppColors.primaryBlue,
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(12.r),
                                 ),
                                 child: Text(
                                   "FREE EDITION",
@@ -395,7 +395,7 @@ class _ShimmerBadgeState extends State<_ShimmerBadge> with SingleTickerProviderS
             Positioned.fill(
               child: IgnorePointer( // 터치 이벤트 통과시키기
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(12.r),
                   child: AnimatedBuilder(
                     animation: _controller,
                     builder: (context, child) {
