@@ -20,7 +20,7 @@ class RhythmCareService extends GetxService {
   final currentTimeZone = 'sleep'.obs;
   
   /// 현재 시간대 이름 (UI 표시용)
-  final currentTimeZoneName = '심야 (수면)'.obs;
+  final currentTimeZoneName = 'rhythm_night'.tr.obs;
   
   /// 현재 시간대 아이콘
   final currentTimeZoneIcon = '😴'.obs;
@@ -33,7 +33,7 @@ class RhythmCareService extends GetxService {
   /// 시간대 정의
   static const Map<String, TimeZoneConfig> timeZones = {
     'morning': TimeZoneConfig(
-      name: '오전 (활력)',
+      name: 'rhythm_morning',
       icon: '☀️',
       mode: 'energy',  // play/energy mode
       startHour: 7,
@@ -41,7 +41,7 @@ class RhythmCareService extends GetxService {
       color: Color(0xFFFF9500),
     ),
     'daytime': TimeZoneConfig(
-      name: '주간 (안정)',
+      name: 'rhythm_daytime',
       icon: '🌤️',
       mode: 'anxiety',  // anxiety/calm mode
       startHour: 11,
@@ -49,7 +49,7 @@ class RhythmCareService extends GetxService {
       color: Color(0xFF34C759),
     ),
     'evening': TimeZoneConfig(
-      name: '저녁 (휴식)',
+      name: 'rhythm_evening',
       icon: '🌅',
       mode: 'senior',  // senior/rest mode
       startHour: 17,
@@ -57,7 +57,7 @@ class RhythmCareService extends GetxService {
       color: Color(0xFFFF6B6B),
     ),
     'night': TimeZoneConfig(
-      name: '심야 (수면)',
+      name: 'rhythm_night',
       icon: '😴',
       mode: 'sleep',  // sleep mode
       startHour: 22,
@@ -152,7 +152,7 @@ class RhythmCareService extends GetxService {
     
     final config = timeZones[zoneKey]!;
     currentTimeZone.value = config.mode;
-    currentTimeZoneName.value = config.name;
+    currentTimeZoneName.value = config.name.tr;
     currentTimeZoneIcon.value = config.icon;
     
     debugPrint('🕐 Time zone updated: ${config.name} (${config.mode})');

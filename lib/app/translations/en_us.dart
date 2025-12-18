@@ -36,6 +36,33 @@ const Map<String, String> enUS = {
   // ===== Home Screen (home_view.dart) =====
   'home_premium_therapy': 'Premium Sound Therapy',
   'home_recommended_for': 'Recommended Modes for @species',
+  
+  // Weather Special
+  'weather_special_title_layers': 'Smart Sound Layers',
+  'weather_feat_rain_title': 'Calm with Rain',
+  'weather_feat_rain_desc': 'Rain sound layers added automatically on rainy days',
+  'weather_feat_sunny_title': 'Sunny Vitality',
+  'weather_feat_sunny_desc': 'Bright tones provided during sunny weather',
+  'weather_feat_night_title': 'Night Sleep Mode',
+  'weather_feat_night_desc': 'Automatically switches to sleep mode at night',
+  'weather_feat_snow_title': 'Snowy Comfort',
+  'weather_feat_snow_desc': 'Soft ambient sounds added on snowy days',
+  'weather_feat_wind_title': 'Windy Serenity',
+  'weather_feat_wind_desc': 'Brown noise masks external noise on windy days',
+  'weather_feat_cloud_title': 'Cloudy Calm',
+  'weather_feat_cloud_desc': 'Enhanced low-frequency sounds for cloudy weather',
+  'weather_sync_active_title': '✅ Weather Sync Active',
+  'weather_sync_active_desc': 'Check the weather icon in the player!',
+  'weather_error_title': '⚠️ Error',
+  'weather_error_desc': 'Could not fetch weather info',
+  'weather_sync_inactive_title': 'Weather Sync Disabled',
+  'weather_sync_inactive_desc': 'Weather-based sound layers deactivated',
+
+  // Rhythm Care
+  'rhythm_morning': 'Morning (Energy)',
+  'rhythm_daytime': 'Daytime (Calm)',
+  'rhythm_evening': 'Evening (Rest)',
+  'rhythm_night': 'Night (Sleep)',
   'home_ai_recommend': 'AI Recommendations',
   'home_health_activity': 'Health & Activity',
   'home_rest_title': 'Rest',

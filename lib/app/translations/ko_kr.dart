@@ -36,6 +36,33 @@ const Map<String, String> koKR = {
   // ===== 홈 화면 (home_view.dart) =====
   'home_premium_therapy': '프리미엄 사운드 테라피',
   'home_recommended_for': '@species를 위한 추천 모드',
+  
+  // Weather Special
+  'weather_special_title_layers': '날씨별 자동 사운드 레이어',
+  'weather_feat_rain_title': '빗소리와 함께하는 안정',
+  'weather_feat_rain_desc': '비 오는 날, 빗소리 레이어가 자동으로 추가됩니다',
+  'weather_feat_sunny_title': '맑은 날의 활기',
+  'weather_feat_sunny_desc': '화창한 날씨에는 밝은 톤의 사운드를 제공합니다',
+  'weather_feat_night_title': '야간 수면 모드',
+  'weather_feat_night_desc': '밤 시간대에는 자동으로 수면 유도 모드로 전환',
+  'weather_feat_snow_title': '눈 내리는 포근함',
+  'weather_feat_snow_desc': '눈 오는 날, 부드러운 앰비언트 사운드를 더합니다',
+  'weather_feat_wind_title': '강풍 속 평온',
+  'weather_feat_wind_desc': '바람 부는 날, 브라운 노이즈로 외부 소음을 차단합니다',
+  'weather_feat_cloud_title': '구름 낀 차분함',
+  'weather_feat_cloud_desc': '흐린 날씨에는 차분한 저음역 사운드를 강화합니다',
+  'weather_sync_active_title': '✅ 날씨 동기화 활성화',
+  'weather_sync_active_desc': '플레이어에서 날씨 아이콘을 확인하세요!',
+  'weather_error_title': '⚠️ 오류',
+  'weather_error_desc': '날씨 정보를 가져올 수 없습니다',
+  'weather_sync_inactive_title': '날씨 동기화 비활성화',
+  'weather_sync_inactive_desc': '날씨 기반 사운드 레이어가 비활성화되었습니다',
+
+  // Rhythm Care
+  'rhythm_morning': '오전 (활력)',
+  'rhythm_daytime': '주간 (안정)',
+  'rhythm_evening': '저녁 (휴식)',
+  'rhythm_night': '심야 (수면)',
   'home_ai_recommend': 'AI 맞춤 추천',
   'home_health_activity': '건강 & 활동',
   'home_rest_title': '휴식',

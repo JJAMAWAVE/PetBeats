@@ -323,7 +323,7 @@ class WeatherSpecialView extends GetView<HomeController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '날씨별 자동 사운드 레이어',
+            'weather_special_title_layers'.tr,
             style: AppTextStyles.titleMedium.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -331,38 +331,38 @@ class WeatherSpecialView extends GetView<HomeController> {
           SizedBox(height: 16.h),
           _buildFeatureCard(
             icon: '🌧️',
-            title: '빗소리와 함께하는 안정',
-            description: '비 오는 날, 빗소리 레이어가 자동으로 추가됩니다',
+            title: 'weather_feat_rain_title'.tr,
+            description: 'weather_feat_rain_desc'.tr,
             color: Colors.blue,
           ),
           _buildFeatureCard(
             icon: '☀️',
-            title: '맑은 날의 활기',
-            description: '화창한 날씨에는 밝은 톤의 사운드를 제공합니다',
+            title: 'weather_feat_sunny_title'.tr,
+            description: 'weather_feat_sunny_desc'.tr,
             color: Colors.orange,
           ),
           _buildFeatureCard(
             icon: '🌙',
-            title: '야간 수면 모드',
-            description: '밤 시간대에는 자동으로 수면 유도 모드로 전환',
+            title: 'weather_feat_night_title'.tr,
+            description: 'weather_feat_night_desc'.tr,
             color: Colors.indigo,
           ),
           _buildFeatureCard(
             icon: '❄️',
-            title: '눈 내리는 포근함',
-            description: '눈 오는 날, 부드러운 앰비언트 사운드를 더합니다',
+            title: 'weather_feat_snow_title'.tr,
+            description: 'weather_feat_snow_desc'.tr,
             color: Colors.lightBlue,
           ),
           _buildFeatureCard(
             icon: '🌪️',
-            title: '강풍 속 평온',
-            description: '바람 부는 날, 브라운 노이즈로 외부 소음을 차단합니다',
+            title: 'weather_feat_wind_title'.tr,
+            description: 'weather_feat_wind_desc'.tr,
             color: Colors.grey,
           ),
           _buildFeatureCard(
             icon: '☁️',
-            title: '구름 낀 차분함',
-            description: '흐린 날씨에는 차분한 저음역 사운드를 강화합니다',
+            title: 'weather_feat_cloud_title'.tr,
+            description: 'weather_feat_cloud_desc'.tr,
             color: Colors.blueGrey,
           ),
         ],
@@ -442,8 +442,9 @@ class WeatherSpecialView extends GetView<HomeController> {
       await weatherService.enableWeatherSync();
       
       Get.snackbar(
-        '✅ 날씨 동기화 활성화',
-        '플레이어에서 날씨 아이콘을 확인하세요!',
+      Get.snackbar(
+        'weather_sync_active_title'.tr,
+        'weather_sync_active_desc'.tr,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.green,
         colorText: Colors.white,
@@ -453,8 +454,9 @@ class WeatherSpecialView extends GetView<HomeController> {
       );
     } catch (e) {
       Get.snackbar(
-        '⚠️ 오류',
-        '날씨 정보를 가져올 수 없습니다',
+      Get.snackbar(
+        'weather_error_title'.tr,
+        'weather_error_desc'.tr,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red,
         colorText: Colors.white,
@@ -469,8 +471,9 @@ class WeatherSpecialView extends GetView<HomeController> {
     weatherService.disableWeatherSync();
     
     Get.snackbar(
-      '날씨 동기화 비활성화',
-      '날씨 기반 사운드 레이어가 비활성화되었습니다',
+    Get.snackbar(
+      'weather_sync_inactive_title'.tr,
+      'weather_sync_inactive_desc'.tr,
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: Colors.grey[600],
       colorText: Colors.white,

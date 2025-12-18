@@ -81,7 +81,7 @@ class PremiumFeaturePopup extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20.r),
               ),
               child: Text(
-                'PRO 전용 기능',
+                'pro_exclusive'.tr,
                 style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontSize: 12.sp,
@@ -136,7 +136,7 @@ class PremiumFeaturePopup extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      '닫기',
+                      'close'.tr,
                       style: TextStyle(
                         color: Colors.white70,
                         fontSize: 14.sp,
@@ -163,7 +163,7 @@ class PremiumFeaturePopup extends StatelessWidget {
                       elevation: 4,
                     ),
                     child: Text(
-                      '👑 프리미엄 구독하기',
+                      'premium_subscribe_btn'.tr,
                       style: GoogleFonts.poppins(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.bold,
