@@ -33,7 +33,7 @@ class PremiumBanner extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.r),
         child: Container(
           width: width ?? double.infinity,
-          padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 18.w),
+          padding: EdgeInsets.all(16.w),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.r),
             boxShadow: [

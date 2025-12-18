@@ -710,8 +710,9 @@ class HomeView extends GetView<HomeController> {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
+                    color: AppColors.primaryBlue.withOpacity(0.05),
                     borderRadius: BorderRadius.circular(12.r),
+                    border: Border.all(color: AppColors.primaryBlue.withOpacity(0.1)),
                   ),
                   child: Column(
                     children: [
