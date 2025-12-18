@@ -38,6 +38,8 @@ const Map<String, String> enUS = {
   // ===== Home Screen (home_view.dart) =====
   'home_premium_therapy': 'Premium Sound Therapy',
   'home_recommended_for': 'Recommended Modes for @species',
+  'home_add_pet_profile': 'Add your pet profile',
+  'pet_years_old': 'years old',
   
   // Weather Special
   'weather_special_title_layers': 'Smart Sound Layers',

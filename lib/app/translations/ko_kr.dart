@@ -38,6 +38,8 @@ const Map<String, String> koKR = {
   // ===== 홈 화면 (home_view.dart) =====
   'home_premium_therapy': '프리미엄 사운드 테라피',
   'home_recommended_for': '@species를 위한 추천 모드',
+  'home_add_pet_profile': '펫 프로필을 등록해주세요',
+  'pet_years_old': '살',
   
   // Weather Special
   'weather_special_title_layers': '날씨별 자동 사운드 레이어',

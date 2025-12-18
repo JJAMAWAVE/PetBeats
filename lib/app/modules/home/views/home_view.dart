@@ -27,6 +27,8 @@ import 'package:petbeats/core/widgets/mode_animator.dart';
 import 'package:petbeats/core/widgets/staggered_slide_in.dart';
 import 'package:petbeats/core/widgets/animated_gradient_border.dart';
 import '../widgets/debug_bottom_sheet.dart';
+import '../../../../app/data/services/pet_profile_service.dart';
+import 'dart:convert';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
@@ -108,9 +110,20 @@ class HomeView extends GetView<HomeController> {
                     ),
                     const SizedBox(height: 12),
                     
-                    // Species Toggle with Staggered Animation
+                    // Pet Profile Mini Bar
                     StaggeredSlideIn(
                       index: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                        child: _buildPetProfileBar(),
+                      ),
+                    ),
+                    
+                    const SizedBox(height: 12),
+                    
+                    // Species Toggle with Staggered Animation
+                    StaggeredSlideIn(
+                      index: 2,
                       child: const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 24.0),
                         child: SpeciesToggle(),
@@ -790,6 +803,148 @@ class HomeView extends GetView<HomeController> {
         ],
       ),
     ),
+    );
+  }
+
+  /// Pet Profile Mini Bar - 홈 상단에 표시되는 압축된 프로필 정보
+  Widget _buildPetProfileBar() {
+    try {
+      final profileService = Get.find<PetProfileService>();
+      
+      return Obx(() {
+        final profile = profileService.profile.value;
+        final hasProfile = profile.name != null && profile.name!.isNotEmpty;
+        
+        if (!hasProfile) {
+          // 프로필이 없으면 설정 유도
+          return GestureDetector(
+            onTap: () => Get.toNamed(Routes.PET_PROFILE),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                color: AppColors.primaryBlue.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: AppColors.primaryBlue.withOpacity(0.3)),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.pets, color: AppColors.primaryBlue, size: 24),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      'home_add_pet_profile'.tr,
+                      style: AppTextStyles.bodyMedium.copyWith(
+                        color: AppColors.primaryBlue,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  Icon(Icons.add_circle_outline, color: AppColors.primaryBlue, size: 20),
+                ],
+              ),
+            ),
+          );
+        }
+        
+        // 프로필이 있으면 미니 바 표시
+        return GestureDetector(
+          onTap: () => Get.toNamed(Routes.PET_PROFILE),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.06),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                // 프로필 사진 (크게)
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.primaryBlue.withOpacity(0.1),
+                    border: Border.all(
+                      color: AppColors.primaryBlue.withOpacity(0.3),
+                      width: 2,
+                    ),
+                  ),
+                  child: ClipOval(
+                    child: profile.photoPath != null && profile.photoPath!.startsWith('data:')
+                        ? Image.memory(
+                            base64Decode(profile.photoPath!.split(',').last),
+                            fit: BoxFit.cover,
+                            errorBuilder: (_, __, ___) => _buildDefaultPetIcon(profile.species),
+                          )
+                        : _buildDefaultPetIcon(profile.species),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                
+                // 이름과 나이
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        profile.name ?? '',
+                        style: AppTextStyles.titleMedium.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: AppColors.textDarkNavy,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        '${profile.species == 'dog' ? 'species_dog'.tr : 'species_cat'.tr} • ${profile.age ?? 0} ${'pet_years_old'.tr}',
+                        style: AppTextStyles.labelSmall.copyWith(
+                          color: AppColors.textGrey,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                
+                // 수정 아이콘
+                Icon(
+                  Icons.edit_outlined,
+                  color: AppColors.primaryBlue.withOpacity(0.6),
+                  size: 18,
+                ),
+              ],
+            ),
+          ),
+        );
+      });
+    } catch (e) {
+      return const SizedBox.shrink();
+    }
+  }
+  
+  Widget _buildDefaultPetIcon(String? species) {
+    return Container(
+      color: AppColors.primaryBlue.withOpacity(0.1),
+      child: Center(
+        child: Image.asset(
+          species == 'cat' 
+              ? 'assets/icons/icon_species_cat.png'
+              : 'assets/icons/icon_species_dog.png',
+          width: 32,
+          height: 32,
+          fit: BoxFit.contain,
+        ),
+      ),
     );
   }
 }
