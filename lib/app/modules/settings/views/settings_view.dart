@@ -9,6 +9,7 @@ import '../../../data/services/auth_service.dart';
 import '../../../data/services/pet_profile_service.dart';
 import '../controllers/settings_controller.dart';
 import '../../../routes/app_routes.dart';
+import '../../home/controllers/home_controller.dart';
 
 class SettingsView extends GetView<SettingsController> {
   const SettingsView({super.key});
@@ -482,6 +483,15 @@ class SettingsView extends GetView<SettingsController> {
                       // Locale 업데이트
                       final parts = lang['code']!.split('_');
                       Get.updateLocale(Locale(parts[0], parts.length > 1 ? parts[1] : ''));
+                      
+                      // Refresh Home Controller Data
+                      try {
+                         if (Get.isRegistered<HomeController>()) {
+                           Get.find<HomeController>().refreshLocalizedData();
+                         }
+                      } catch (e) {
+                        print('Error refreshing home data: $e');
+                      }
                       
                       Get.back();
                       Get.snackbar(

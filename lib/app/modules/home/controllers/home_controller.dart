@@ -615,6 +615,21 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     _playTimeTimer?.cancel();
   }
   
+  // Force update UI strings when language changes
+  void refreshLocalizedData() {
+    print('🔄 Refreshing localized data...');
+    _initModes();
+    
+    if (speciesTabs.isNotEmpty) {
+      final currentIds = speciesTabs.map((t) => t.id).toList();
+      _initSpeciesTabs(currentIds);
+    } else {
+      _initSpeciesTabs(['dog', 'cat']);
+    }
+
+    _initScenarioPlaylists();
+  }
+
   @override
   void onClose() {
     // 앱 생명주기 감지 해제
