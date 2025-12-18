@@ -3,7 +3,7 @@ import '../models/track_model.dart';
 
 class TrackData {
   // 1. Deep Sleep (수면 유도)
-  static final List<Track> sleepTracks = [
+  static List<Track> get sleepTracks => [
     Track(
       id: 'sleep_01',
       title: 'track_sleep_01_title'.tr,
@@ -151,7 +151,7 @@ class TrackData {
   ];
 
   // 2. Calm Shelter (분리불안)
-  static final List<Track> separationTracks = [
+  static List<Track> get separationTracks => [
     Track(
       id: 'separation_01',
       title: 'track_separation_01_title'.tr,
@@ -299,7 +299,7 @@ class TrackData {
   ];
 
   // 3. Noise Masking (소음 차단)
-  static final List<Track> noiseTracks = [
+  static List<Track> get noiseTracks => [
     Track(
       id: 'noise_01',
       title: 'track_noise_01_title'.tr,
@@ -447,7 +447,7 @@ class TrackData {
   ];
 
   // 4. Energy Boost (활력 증진)
-  static final List<Track> energyTracks = [
+  static List<Track> get energyTracks => [
     Track(
       id: 'energy_01',
       title: 'track_energy_01_title'.tr,
@@ -595,7 +595,7 @@ class TrackData {
   ];
 
   // 5. Senior Care (시니어 펫 케어)
-  static final List<Track> seniorTracks = [
+  static List<Track> get seniorTracks => [
     Track(
       id: 'senior_01',
       title: 'track_senior_01_title'.tr,
@@ -743,7 +743,7 @@ class TrackData {
   ];
 
   // 6. Cat Sleep (고양이 수면 유도)
-  static final List<Track> catSleepTracks = [
+  static List<Track> get catSleepTracks => [
     Track(
       id: 'cat_sleep_01',
       title: 'track_cat_sleep_01_title'.tr,
@@ -883,7 +883,7 @@ class TrackData {
   ];
 
   // 7. Cat Separation (고양이 분리불안) - 재구성된 제목
-  static final List<Track> catSeparationTracks = [
+  static List<Track> get catSeparationTracks => [
     Track(id: 'cat_separation_01', title: 'track_cat_separation_01_title'.tr, description: 'track_cat_separation_01_desc'.tr, audioUrl: 'assets/sound/7_1_안전 가옥/New Composition  263.mp3', midiUrl: 'assets/sound/7_1_안전 가옥/New Composition  263 - Orchestrated.mid', coverUrl: 'assets/images/cat_sep_cover.jpg', bpm: '65 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '65 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Orchestral Harp / Oboe'}, tags: ['All Cat', 'Separation', 'Harp'], isPremium: false),
     Track(id: 'cat_separation_02', title: 'track_cat_separation_02_title'.tr, description: 'track_cat_separation_02_desc'.tr, audioUrl: 'assets/sound/7_2_창가 자리/New Composition  264.mp3', midiUrl: 'assets/sound/7_2_창가 자리/New Composition  264 - Orchestrated.mid', coverUrl: 'assets/images/cat_sep_cover.jpg', bpm: '60 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '60 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Flute / Acoustic Grand Piano'}, tags: ['All Cat', 'Separation', 'Flute'], isPremium: false),
     Track(id: 'cat_separation_03', title: 'track_cat_separation_03_title'.tr, description: 'track_cat_separation_03_desc'.tr, audioUrl: 'assets/sound/7_3_숨숨집의 평화/New Composition  265.mp3', midiUrl: 'assets/sound/7_3_숨숨집의 평화/New Composition  265 - Orchestrated.mid', coverUrl: 'assets/images/cat_sep_cover.jpg', bpm: '55 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '55 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Acoustic Grand Piano'}, tags: ['Small Cat', 'Separation', 'Piano'], isPremium: true),
@@ -895,7 +895,7 @@ class TrackData {
   ];
 
   // 8. Cat Noise Masking (고양이 소음 차단) - 재구성된 제목
-  static final List<Track> catNoiseTracks = [
+  static List<Track> get catNoiseTracks => [
     Track(id: 'cat_noise_01', title: 'track_cat_noise_01_title'.tr, description: 'track_cat_noise_01_desc'.tr, audioUrl: 'assets/sound/8_1_빗소리 커튼/New Composition  271.mp3', midiUrl: 'assets/sound/8_1_빗소리 커튼/New Composition  271 - Orchestrated.mid', coverUrl: 'assets/images/cat_noise_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Acoustic Grand Piano'}, tags: ['All Cat', 'Noise', 'Piano'], isPremium: false),
     Track(id: 'cat_noise_02', title: 'track_cat_noise_02_title'.tr, description: 'track_cat_noise_02_desc'.tr, audioUrl: 'assets/sound/8_2_바람의 노래/New Composition  272.mp3', midiUrl: 'assets/sound/8_2_바람의 노래/New Composition  272 - Orchestrated.mid', coverUrl: 'assets/images/cat_noise_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Orchestral Harp / Oboe'}, tags: ['All Cat', 'Noise', 'Harp'], isPremium: false),
     Track(id: 'cat_noise_03', title: 'track_cat_noise_03_title'.tr, description: 'track_cat_noise_03_desc'.tr, audioUrl: 'assets/sound/8_3_두꺼운 담요/New Composition  273.mp3', midiUrl: 'assets/sound/8_3_두꺼운 담요/New Composition  273 - Orchestrated.mid', coverUrl: 'assets/images/cat_noise_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Acoustic Grand Piano / Contrabass'}, tags: ['Small Cat', 'Noise', 'Piano'], isPremium: true),
@@ -907,7 +907,7 @@ class TrackData {
   ];
 
   // 9. Cat Energy (고양이 활력 증진) - 재구성된 제목
-  static final List<Track> catEnergyTracks = [
+  static List<Track> get catEnergyTracks => [
     Track(id: 'cat_energy_01', title: 'track_cat_energy_01_title'.tr, description: 'track_cat_energy_01_desc'.tr, audioUrl: 'assets/sound/9_1_우다다 타임/New Composition  279.mp3', midiUrl: 'assets/sound/9_1_우다다 타임/New Composition  279 - Orchestrated.mid', coverUrl: 'assets/images/cat_play_cover.jpg', bpm: '125 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '125 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Xylophone / Electric Bass (pick)'}, tags: ['Large Cat', 'Energy', 'Xylophone'], isPremium: true),
     Track(id: 'cat_energy_02', title: 'track_cat_energy_02_title'.tr, description: 'track_cat_energy_02_desc'.tr, audioUrl: 'assets/sound/9_2_잡아라 쥐돌이/New Composition  280.mp3', midiUrl: 'assets/sound/9_2_잡아라 쥐돌이/New Composition  280 - Orchestrated.mid', coverUrl: 'assets/images/cat_play_cover.jpg', bpm: '130 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '130 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Contrabass / Electric Guitar (clean)'}, tags: ['Large Cat', 'Energy', 'Bass'], isPremium: true),
     Track(id: 'cat_energy_03', title: 'track_cat_energy_03_title'.tr, description: 'track_cat_energy_03_desc'.tr, audioUrl: 'assets/sound/9_3_새 사냥/New Composition  281.mp3', midiUrl: 'assets/sound/9_3_새 사냥/New Composition  281 - Orchestrated.mid', coverUrl: 'assets/images/cat_play_cover.jpg', bpm: '115 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '115 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Flute / Viola'}, tags: ['Large Cat', 'Energy', 'Flute'], isPremium: true),
@@ -919,7 +919,7 @@ class TrackData {
   ];
 
   // 10. Cat Senior Care (고양이 시니어 케어) - 재구성된 제목
-  static final List<Track> catSeniorTracks = [
+  static List<Track> get catSeniorTracks => [
     Track(id: 'cat_senior_01', title: 'track_cat_senior_01_title'.tr, description: 'track_cat_senior_01_desc'.tr, audioUrl: 'assets/sound/10_1_치유의 골골송/New Composition  377.mp3', midiUrl: 'assets/sound/10_1_치유의 골골송/New Composition  377 - Orchestrated.mid', coverUrl: 'assets/images/cat_senior_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Acoustic Grand Piano'}, tags: ['Large Cat', 'Senior', 'Piano'], isPremium: true),
     Track(id: 'cat_senior_02', title: 'track_cat_senior_02_title'.tr, description: 'track_cat_senior_02_desc'.tr, audioUrl: 'assets/sound/10_2_따뜻한 찜질/New Composition  378.mp3', midiUrl: 'assets/sound/10_2_따뜻한 찜질/New Composition  378 - Orchestrated.mid', coverUrl: 'assets/images/cat_senior_cover.jpg', bpm: '50 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '50 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Contrabass / Cello'}, tags: ['Large Cat', 'Senior', 'Bass'], isPremium: true),
     Track(id: 'cat_senior_03', title: 'track_cat_senior_03_title'.tr, description: 'track_cat_senior_03_desc'.tr, audioUrl: 'assets/sound/10_3_느린 오후/New Composition  379.mp3', midiUrl: 'assets/sound/10_3_느린 오후/New Composition  379 - Orchestrated.mid', coverUrl: 'assets/images/cat_senior_cover.jpg', bpm: '45 BPM', technicalSpecs: {'Key': 'Auto', 'Tempo': '45 BPM', 'Harmony': 'Simple Chords II', 'Instruments': 'Acoustic Grand Piano / Contrabass'}, tags: ['Large Cat', 'Senior', 'Piano'], isPremium: true),
