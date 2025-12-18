@@ -99,11 +99,17 @@ class _PetProfileViewState extends State<PetProfileView> {
       Get.snackbar(
         'pet_save_complete'.tr,
         'pet_save_complete_desc'.trParams({'name': newProfile.name ?? ''}),
+        snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.green.shade100,
         colorText: Colors.green.shade800,
+        margin: EdgeInsets.all(16.w),
+        borderRadius: 12,
+        duration: const Duration(seconds: 2),
       );
       
-      Get.back();
+      // 토스트 메시지가 보인 후 Settings로 이동
+      await Future.delayed(const Duration(milliseconds: 500));
+      Get.back(); // Settings로 돌아감
     } catch (e) {
       debugPrint('[PetProfileView] Error saving profile: $e');
       Get.snackbar('pet_error'.tr, 'pet_save_fail'.tr);
