@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:get/get.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,24 +15,21 @@ class RollingTipWidget extends StatefulWidget {
 class _RollingTipWidgetState extends State<RollingTipWidget> {
   // ✨ 15개 초간단 한 줄 팁
   final List<String> _tips = [
-    // [진동(햅틱) 활용]
-    "🛋️ 담요나 쿠션 아래 두세요.",
-    "🤗 등 뒤에 살며시 놓아주세요.",
-    "💕 보호자님 품에 안고 써보세요.",
-    "⚠️ 직접 접촉은 피해주세요.",
-    "🌡️ 처음엔 약한 진동부터.",
-    // [사운드/볼륨]
-    "🔈 볼륨은 작게 시작하세요.",
-    "👂 사람 귀에 '약간 작은 듯'이 좋아요.",
-    "🎵 아이 취향의 소리를 찾아보세요.",
-    "🌊 백색소음은 낯선 소리를 덮어줘요.",
-    // [상황/타이밍]
-    "🌙 자기 전, 수면 루틴으로 딱!",
-    "🌧️ 비 오거나 천둥 칠 때 좋아요.",
-    "🚗 외출할 때 안정을 선물하세요.",
-    "🏠 낯선 환경에 갔을 때 틀어주세요.",
-    "⏰ 매일 같은 시간에 틀어주면 더 좋아요.",
-    "💤 리듬 케어로 하루를 맡겨보세요.",
+    'rolling_tip_1',
+    'rolling_tip_2',
+    'rolling_tip_3',
+    'rolling_tip_4',
+    'rolling_tip_5',
+    'rolling_tip_6',
+    'rolling_tip_7',
+    'rolling_tip_8',
+    'rolling_tip_9',
+    'rolling_tip_10',
+    'rolling_tip_11',
+    'rolling_tip_12',
+    'rolling_tip_13',
+    'rolling_tip_14',
+    'rolling_tip_15',
   ];
 
   int _currentIndex = 0;
@@ -105,7 +103,7 @@ class _RollingTipWidgetState extends State<RollingTipWidget> {
             SizedBox(width: 8.w),
             Flexible(
               child: Text(
-                _tips[tipIndex],
+                _tips[tipIndex].tr,
                 style: TextStyle(
                   color: Colors.white.withOpacity(0.75),
                   fontSize: 13.sp,

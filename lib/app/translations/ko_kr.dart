@@ -645,4 +645,55 @@ const Map<String, String> koKR = {
   'special_weather': '날씨',
   'special_rhythm': '리듬',
   'special_sitter': '돌봄',
+
+  // ===== AI Dialog =====
+  'dialog_ai_playlist_create': 'AI 플레이리스트 생성',
+  'dialog_pro_feature': 'PRO 전용 기능',
+  'dialog_pro_desc': 'AI가 자동으로 맞춤 플레이리스트를 생성해드려요',
+  'dialog_start_pro': 'PRO 시작하기',
+  'dialog_later': '나중에 할게요',
+  'dialog_default_desc': '맞춤 플레이리스트를 생성합니다.',
+  
+  // ===== AI Scenario Subtitles =====
+  'scenario_after_walk_subtitle': '활발한 산책 후 차분하게 진정시켜주세요',
+  'scenario_nap_subtitle': '달콤한 낮잠을 위한 수면 유도 사운드',
+  'scenario_hospital_subtitle': '병원 스트레스를 줄여주는 안정 사운드',
+  'scenario_grooming_subtitle': '미용 스트레스 해소를 위한 힐링 사운드',
+  'scenario_thunder_subtitle': '천둥 소리를 덮어주는 마스킹 사운드',
+  'scenario_anxiety_subtitle': '혼자 있을 때도 안심할 수 있도록',
+
+  // ===== Therapy Control Panel =====
+  'haptic_premium_title': '프리미엄 햅틱 테라피',
+  'haptic_mode_sound': '사운드',
+  'haptic_mode_heartbeat': '심장박동',
+  'haptic_mode_calm': '진정모드',
+  'haptic_mode_purr': '골골송',
+  
+  'quick_weather_desc': '실시간 날씨에 맞춰 사운드 레이어가 자동으로 적용됩니다.',
+  'quick_rhythm_desc': '반려동물의 생체 리듬에 맞춰 최적의 사운드를 제공합니다.',
+  'quick_timer': '타이머',
+  'quick_timer_desc': '설정한 시간 후 자동으로 음악이 서서히 꺼집니다.',
+  
+  'rhythm_care_status': '리듬 케어',
+  'rhythm_active': '활성화',
+  'rhythm_inactive': '비활성화',
+  'rhythm_switch_manual': '수동 모드로 전환합니다',
+  'rhythm_current_zone': '현재 시간대:',
+  
+  // ===== Rolling Tips =====
+  'rolling_tip_1': '🛋️ 담요나 쿠션 아래 두세요.',
+  'rolling_tip_2': '🤗 등 뒤에 살며시 놓아주세요.',
+  'rolling_tip_3': '💕 보호자님 품에 안고 써보세요.',
+  'rolling_tip_4': '⚠️ 직접 접촉은 피해주세요.',
+  'rolling_tip_5': '🌡️ 처음엔 약한 진동부터.',
+  'rolling_tip_6': '🔈 볼륨은 작게 시작하세요.',
+  'rolling_tip_7': '👂 사람 귀에 \'약간 작은 듯\'이 좋아요.',
+  'rolling_tip_8': '🎵 아이 취향의 소리를 찾아보세요.',
+  'rolling_tip_9': '🌊 백색소음은 낯선 소리를 덮어줘요.',
+  'rolling_tip_10': '🌙 자기 전, 수면 루틴으로 딱!',
+  'rolling_tip_11': '🌧️ 비 오거나 천둥 칠 때 좋아요.',
+  'rolling_tip_12': '🚗 외출할 때 안정을 선물하세요.',
+  'rolling_tip_13': '🏠 낯선 환경에 갔을 때 틀어주세요.',
+  'rolling_tip_14': '⏰ 매일 같은 시간에 틀어주면 더 좋아요.',
+  'rolling_tip_15': '💤 리듬 케어로 하루를 맡겨보세요.',
 };

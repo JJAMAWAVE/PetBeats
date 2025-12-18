@@ -95,7 +95,7 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
                     style: TextStyle(fontSize: 16.sp),
                   ),
                   Text(
-                    '프리미엄 햅틱 테라피',
+                    'haptic_premium_title'.tr,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15.sp,
@@ -132,25 +132,25 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
         _buildModeButton(
           mode: HapticMode.soundAdaptive, 
           icon: Icons.music_note, 
-          label: '사운드',
+          label: 'haptic_mode_sound'.tr,
           color: Colors.purpleAccent,
         ),
         _buildModeButton(
           mode: HapticMode.heartbeat, 
           icon: Icons.favorite, 
-          label: '심장박동',
+          label: 'haptic_mode_heartbeat'.tr,
           color: Colors.pinkAccent,
         ),
         _buildModeButton(
           mode: HapticMode.rampdown, 
           icon: Icons.trending_down, 
-          label: '진정모드',
+          label: 'haptic_mode_calm'.tr,
           color: Colors.tealAccent,
         ),
         _buildModeButton(
           mode: HapticMode.purr, 
           icon: Icons.pets, 
-          label: '골골송',
+          label: 'haptic_mode_purr'.tr,
           color: Colors.amber,
         ),
       ],
@@ -300,11 +300,11 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
           Expanded(
             child: _buildPremiumQuickAccessButton(
               icon: Icons.wb_cloudy,
-              label: '날씨',
+              label: 'special_weather'.tr,
               color: Colors.lightBlueAccent,
               isActive: isWeatherActive,
               isPremium: isPremium,
-              description: '실시간 날씨에 맞춰 사운드 레이어가 자동으로 적용됩니다.',
+              description: 'quick_weather_desc'.tr,
               onPremiumTap: () {
                 Get.bottomSheet(
                   const WeatherControlSheet(),
@@ -320,20 +320,20 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
           Expanded(
             child: _buildPremiumQuickAccessButton(
               icon: Icons.schedule_outlined,
-              label: '리듬',
+              label: 'special_rhythm'.tr,
               color: Colors.greenAccent,
               isActive: isRhythmActive,
               isPremium: isPremium,
-              description: '반려동물의 생체 리듬에 맞춰 최적의 사운드를 제공합니다.',
+              description: 'quick_rhythm_desc'.tr,
               onPremiumTap: () {
                 // ✨ Toggle Rhythm Care
                 if (rhythmService != null) {
                   rhythmService.toggle();
-                  final status = rhythmService.isEnabled.value ? '활성화' : '비활성화';
+                  final status = rhythmService.isEnabled.value ? 'rhythm_active'.tr : 'rhythm_inactive'.tr;
                   final currentMode = rhythmService.currentTimeZoneName.value;
                   Get.snackbar(
-                    '🕐 리듬 케어 $status',
-                    isRhythmActive ? '수동 모드로 전환합니다' : '현재 시간대: $currentMode',
+                    '🕐 ${'rhythm_care_status'.tr} $status',
+                    isRhythmActive ? 'rhythm_switch_manual'.tr : '${'rhythm_current_zone'.tr} $currentMode',
                     snackPosition: SnackPosition.BOTTOM,
                     backgroundColor: Colors.black87,
                     colorText: Colors.white,
@@ -349,11 +349,11 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
           Expanded(
             child: _buildPremiumQuickAccessButton(
               icon: Icons.timer_outlined,
-              label: '타이머',
+              label: 'quick_timer'.tr,
               color: Colors.amberAccent,
               isActive: false,
               isPremium: isPremium,
-              description: '설정한 시간 후 자동으로 음악이 서서히 꺼집니다.',
+              description: 'quick_timer_desc'.tr,
               onPremiumTap: () {
                 Get.bottomSheet(
                   const SleepTimerBottomSheet(),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 /// AI 맞춤 추천 시나리오
 enum AIScenario {
@@ -14,34 +15,34 @@ extension AIScenarioExt on AIScenario {
   String get title {
     switch (this) {
       case AIScenario.afterWalk:
-        return '산책 후';
+        return 'scenario_after_walk'.tr;
       case AIScenario.napTime:
-        return '낮잠 시간';
+        return 'scenario_nap'.tr;
       case AIScenario.hospital:
-        return '병원 방문';
+        return 'scenario_hospital'.tr;
       case AIScenario.grooming:
-        return '미용 후';
+        return 'scenario_grooming'.tr;
       case AIScenario.thunder:
-        return '천둥/번개';
+        return 'scenario_thunder'.tr;
       case AIScenario.anxiety:
-        return '분리 불안';
+        return 'scenario_anxiety'.tr;
     }
   }
 
   String get description {
     switch (this) {
       case AIScenario.afterWalk:
-        return '활발한 산책 후 차분하게 진정시켜주세요';
+        return 'scenario_after_walk_subtitle'.tr;
       case AIScenario.napTime:
-        return '달콤한 낮잠을 위한 수면 유도 사운드';
+        return 'scenario_nap_subtitle'.tr;
       case AIScenario.hospital:
-        return '병원 스트레스를 줄여주는 안정 사운드';
+        return 'scenario_hospital_subtitle'.tr;
       case AIScenario.grooming:
-        return '미용 스트레스 해소를 위한 힐링 사운드';
+        return 'scenario_grooming_subtitle'.tr;
       case AIScenario.thunder:
-        return '천둥 소리를 덮어주는 마스킹 사운드';
+        return 'scenario_thunder_subtitle'.tr;
       case AIScenario.anxiety:
-        return '혼자 있을 때도 안심할 수 있도록';
+        return 'scenario_anxiety_subtitle'.tr;
     }
   }
 

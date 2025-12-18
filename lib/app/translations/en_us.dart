@@ -635,4 +635,55 @@ const Map<String, String> enUS = {
   'special_weather': 'Weather',
   'special_rhythm': 'Rhythm',
   'special_sitter': 'Sitter',
+
+  // ===== AI Dialog =====
+  'dialog_ai_playlist_create': 'Create AI Playlist',
+  'dialog_pro_feature': 'PRO Feature',
+  'dialog_pro_desc': 'AI automatically creates a personalized playlist',
+  'dialog_start_pro': 'Start PRO',
+  'dialog_later': 'Maybe Later',
+  'dialog_default_desc': 'Creating a personalized playlist.',
+
+  // ===== AI Scenario Subtitles =====
+  'scenario_after_walk_subtitle': 'Calm down after an active walk',
+  'scenario_nap_subtitle': 'Sleep inducing sounds for a sweet nap',
+  'scenario_hospital_subtitle': 'Calming sounds for vet visits',
+  'scenario_grooming_subtitle': 'Healing sounds for grooming stress',
+  'scenario_thunder_subtitle': 'Masking sounds for thunder fears',
+  'scenario_anxiety_subtitle': 'Feel safe even when alone',
+
+  // ===== Therapy Control Panel =====
+  'haptic_premium_title': 'Premium Haptic Therapy',
+  'haptic_mode_sound': 'Sound',
+  'haptic_mode_heartbeat': 'Heartbeat',
+  'haptic_mode_calm': 'Calm Mode',
+  'haptic_mode_purr': 'Purr',
+  
+  'quick_weather_desc': 'Sound layers adapt automatically to real-time weather.',
+  'quick_rhythm_desc': 'Provides optimal sounds based on your pet\'s biorhythm.',
+  'quick_timer': 'Timer',
+  'quick_timer_desc': 'Music fades out automatically after set time.',
+  
+  'rhythm_care_status': 'Rhythm Care',
+  'rhythm_active': 'Active',
+  'rhythm_inactive': 'Inactive',
+  'rhythm_switch_manual': 'Switching to Manual Mode',
+  'rhythm_current_zone': 'Current Zone:',
+  
+  // ===== Rolling Tips =====
+  'rolling_tip_1': '🛋️ Place it under a blanket or cushion.',
+  'rolling_tip_2': '🤗 Place it gently behind their back.',
+  'rolling_tip_3': '💕 Try holding it in your arms.',
+  'rolling_tip_4': '⚠️ Avoid direct contact.',
+  'rolling_tip_5': '🌡️ Start with weak vibration.',
+  'rolling_tip_6': '🔈 Start with low volume.',
+  'rolling_tip_7': '👂 "Slightly quiet" to human ears is best.',
+  'rolling_tip_8': '🎵 Find the sounds your pet likes.',
+  'rolling_tip_9': '🌊 White noise covers strange sounds.',
+  'rolling_tip_10': '🌙 Perfect for bedtime routines!',
+  'rolling_tip_11': '🌧️ Good for rain or thunder.',
+  'rolling_tip_12': '🚗 Use it for calm car rides.',
+  'rolling_tip_13': '🏠 Use it in new environments.',
+  'rolling_tip_14': '⏰ Consistency is key.',
+  'rolling_tip_15': '💤 Trust Rhythm Care for the day.',
 };

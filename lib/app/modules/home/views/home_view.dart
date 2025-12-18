@@ -262,25 +262,25 @@ class HomeView extends GetView<HomeController> {
                         children: [
                           Row(
                             children: [
-                              Expanded(child: _buildScenarioChip('scenario_after_walk'.tr, 'assets/icons/icon_scenario_walk.png')),
+                              Expanded(child: _buildScenarioChip('scenario_after_walk'.tr, 'scenario_after_walk', 'assets/icons/icon_scenario_walk.png')),
                               const SizedBox(width: 12),
-                              Expanded(child: _buildScenarioChip('scenario_nap'.tr, 'assets/icons/icon_scenario_nap.png')),
+                              Expanded(child: _buildScenarioChip('scenario_nap'.tr, 'scenario_nap', 'assets/icons/icon_scenario_nap.png')),
                             ],
                           ),
                           const SizedBox(height: 10),
                           Row(
                             children: [
-                              Expanded(child: _buildScenarioChip('scenario_hospital'.tr, 'assets/icons/icon_scenario_vet.png')),
+                              Expanded(child: _buildScenarioChip('scenario_hospital'.tr, 'scenario_hospital', 'assets/icons/icon_scenario_vet.png')),
                               const SizedBox(width: 12),
-                              Expanded(child: _buildScenarioChip('scenario_grooming'.tr, 'assets/icons/icon_scenario_grooming.png')),
+                              Expanded(child: _buildScenarioChip('scenario_grooming'.tr, 'scenario_grooming', 'assets/icons/icon_scenario_grooming.png')),
                             ],
                           ),
                           const SizedBox(height: 10),
                           Row(
                             children: [
-                              Expanded(child: _buildScenarioChip('scenario_thunder'.tr, 'assets/icons/icon_scenario_thunder.png')),
+                              Expanded(child: _buildScenarioChip('scenario_thunder'.tr, 'scenario_thunder', 'assets/icons/icon_scenario_thunder.png')),
                               const SizedBox(width: 12),
-                              Expanded(child: _buildScenarioChip('scenario_anxiety'.tr, 'assets/icons/icon_scenario_anxiety.png')),
+                              Expanded(child: _buildScenarioChip('scenario_anxiety'.tr, 'scenario_anxiety', 'assets/icons/icon_scenario_anxiety.png')),
                             ],
                           ),
                         ],
@@ -522,30 +522,30 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget _buildScenarioChip(String label, String iconPath) {
+  Widget _buildScenarioChip(String label, String key, String iconPath) {
     // 시나리오별 컬러 코딩
     Color chipColor;
     Color shadowColor;
     
-    switch (label) {
-      case '낮잠 시간':
-      case '분리 불안':
+    switch (key) {
+      case 'scenario_nap':
+      case 'scenario_anxiety':
         // 안정/수면 - Deep Indigo / Soft Purple
         chipColor = AppColors.scenarioCalm;
         shadowColor = AppColors.scenarioCalmLight;
         break;
         
-      case '산책 후':
-      case '미용 후':
+      case 'scenario_after_walk':
+      case 'scenario_grooming':
         // 활력/케어 - Sage Green / Warm Orange
-        chipColor = label == '산책 후' 
+        chipColor = key == 'scenario_after_walk' 
             ? AppColors.scenarioVital 
             : AppColors.scenarioVitalWarm;
         shadowColor = chipColor;
         break;
         
-      case '병원 방문':
-      case '천둥/번개':
+      case 'scenario_hospital':
+      case 'scenario_thunder':
         // 긴급/주의 - Muted Coral / Warm Gray
         chipColor = AppColors.scenarioAlert;
         shadowColor = AppColors.scenarioAlertSoft;
@@ -559,7 +559,7 @@ class HomeView extends GetView<HomeController> {
     return GestureDetector(
       onTap: () {
         // 시나리오 설명 + PRO 체크 다이얼로그
-        _showScenarioDialog(label, chipColor);
+        _showScenarioDialog(label, key, chipColor);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -604,20 +604,11 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  void _showScenarioDialog(String label, Color color) {
-    // 시나리오별 설명
-    final descriptions = {
-      '산책 후': '활발한 산책 후 흥분한 반려동물을 차분하게 진정시켜줍니다.\n\n🎵 진정 효과 음악 + 자연의 소리로 편안한 휴식을 도와드려요.',
-      '낮잠 시간': '낮잠을 위한 부드럽고 편안한 멜로디를 제공합니다.\n\n🎵 수면 유도 음악으로 깊은 휴식을 취할 수 있어요.',
-      '병원 방문': '병원 방문 전후의 불안함을 완화해줍니다.\n\n🎵 안정감을 주는 저주파 음악으로 스트레스를 줄여드려요.',
-      '미용 후': '미용 후의 스트레스를 해소하고 안정을 찾아줍니다.\n\n🎵 릴렉스 효과 음악으로 마음의 평화를 되찾아드려요.',
-      '천둥/번개': '천둥소리나 폭풍우에 대한 공포를 완화해줍니다.\n\n🎵 불안 완화 음악으로 두려움을 잊게 해드려요.',
-      '분리 불안': '혼자 있을 때 느끼는 불안감을 줄여줍니다.\n\n🎵 안정감 있는 음악으로 보호자 없이도 편안하게 지낼 수 있어요.',
-    };
+  void _showScenarioDialog(String label, String key, Color color) {
+    // 시나리오별 설명 (Localized using key)
+    final description = '${key}_desc'.tr; // e.g., scenario_after_walk_desc
     
-    final description = descriptions[label] ?? '맞춤 플레이리스트를 생성합니다.';
-    
-    // PRO 상태 확인 (HomeController의 isPremiumUser 사용 - 구독 시 동기화됨)
+    // PRO 상태 확인
     bool isPremium = controller.isPremiumUser.value;
     
     showDialog(
@@ -643,7 +634,7 @@ class HomeView extends GetView<HomeController> {
               
               // 제목
               Text(
-                label,
+                label, // Already translated
                 style: AppTextStyles.titleLarge.copyWith(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
@@ -665,11 +656,11 @@ class HomeView extends GetView<HomeController> {
                       Navigator.pop(context);
                       // 시나리오에 맞는 AI 플레이리스트 생성
                       Get.toNamed('/ai-playlist-result', arguments: {
-                        'scenario': _getScenarioFromLabel(label),
+                        'scenario': _getScenarioID(key),
                       });
                     },
                     icon: const Icon(Icons.play_circle_filled),
-                    label: const Text('AI 플레이리스트 생성'),
+                    label: Text('dialog_ai_playlist_create'.tr),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: color,
                       foregroundColor: Colors.white,
@@ -690,9 +681,9 @@ class HomeView extends GetView<HomeController> {
                     children: [
                       const Icon(Icons.diamond, color: AppColors.primaryBlue, size: 32),
                       const SizedBox(height: 8),
-                      Text('PRO 전용 기능', style: AppTextStyles.titleMedium.copyWith(fontWeight: FontWeight.bold)),
+                      Text('dialog_pro_feature'.tr, style: AppTextStyles.titleMedium.copyWith(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 4),
-                      Text('AI가 자동으로 맞춤 플레이리스트를 생성해드려요', 
+                      Text('dialog_pro_desc'.tr, 
                            style: AppTextStyles.bodySmall.copyWith(color: AppColors.textGrey),
                            textAlign: TextAlign.center),
                     ],
@@ -712,13 +703,13 @@ class HomeView extends GetView<HomeController> {
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     ),
-                    child: const Text('PRO 시작하기'),
+                    child: Text('dialog_start_pro'.tr),
                   ),
                 ),
                 const SizedBox(height: 8),
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: Text('나중에 할게요', style: TextStyle(color: AppColors.textGrey)),
+                  child: Text('dialog_later'.tr, style: TextStyle(color: AppColors.textGrey)),
                 ),
               ],
             ],
@@ -728,17 +719,17 @@ class HomeView extends GetView<HomeController> {
     );
   }
   
-  // 라벨에서 AIScenario 가져오기 (dynamic import 회피)
-  dynamic _getScenarioFromLabel(String label) {
+  // 키에서 AIScenario ID 가져오기
+  String _getScenarioID(String key) {
     final scenarioMap = {
-      '산책 후': 'afterWalk',
-      '낮잠 시간': 'napTime',
-      '병원 방문': 'hospital',
-      '미용 후': 'grooming',
-      '천둥/번개': 'thunder',
-      '분리 불안': 'anxiety',
+      'scenario_after_walk': 'afterWalk',
+      'scenario_nap': 'napTime',
+      'scenario_hospital': 'hospital',
+      'scenario_grooming': 'grooming',
+      'scenario_thunder': 'thunder',
+      'scenario_anxiety': 'anxiety',
     };
-    return scenarioMap[label] ?? 'afterWalk';
+    return scenarioMap[key] ?? 'afterWalk';
   }
 
   Widget _buildExerciseCard({
