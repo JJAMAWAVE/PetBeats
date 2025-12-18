@@ -607,8 +607,8 @@ const Map<String, String> koKR = {
   'rhythm_desc': '반려동물의 24시간 바이오 리듬에 맞춰,\n시간대별 최적의 사운드를 자동으로 제공합니다.',
   'rhythm_premium_title': '리듬 케어 활성화',
   'rhythm_premium_desc': 'PRO 구독으로 24시간 자동 케어를 경험하세요',
-  'rhythm_active': '리듬 케어 활성화됨',
-  'rhythm_inactive': '리듬 케어 비활성화',
+
+
   'rhythm_core_quote': '"리듬 케어로 하루를 맡겨보세요"',
   'rhythm_core_desc': '복잡한 시간 설정 없이,\n버튼 하나로 아이의 하루를 케어하세요.',
 

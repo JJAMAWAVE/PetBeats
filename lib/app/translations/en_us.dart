@@ -597,8 +597,8 @@ const Map<String, String> enUS = {
   'rhythm_desc': 'Automatically provides optimal sounds based on\nyour pet\'s 24-hour biorhythm.',
   'rhythm_premium_title': 'Activate Rhythm Care',
   'rhythm_premium_desc': 'Experience 24/7 automatic care with PRO',
-  'rhythm_active': 'Rhythm Care Active',
-  'rhythm_inactive': 'Rhythm Care Inactive',
+
+
   'rhythm_core_quote': '"Let Rhythm Care handle the day"',
   'rhythm_core_desc': 'Care for your pet\'s day with just one button,\nno complex time settings needed.',
 

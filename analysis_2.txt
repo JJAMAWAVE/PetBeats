@@ -1,0 +1,470 @@
+Analyzing PetBeats...                                           
+
+   info - Dangling library doc comment - lib\app\data\models\sound_layer.dart:1:1 - dangling_library_doc_comments
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_analyzer_service.dart:42:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_analyzer_service.dart:53:7 - avoid_print
+   info - Use 'const' for final variables initialized to a constant value - lib\app\data\services\audio_analyzer_service.dart:86:5 - prefer_const_declarations
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_analyzer_service.dart:119:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:33:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:37:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:42:11 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:45:13 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:47:13 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:52:11 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:57:11 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:62:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:64:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:67:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:69:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:71:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:72:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:73:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:82:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:85:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:87:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:94:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:99:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:103:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:105:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:112:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:114:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:116:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:127:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:136:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:145:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:148:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:151:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:154:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\audio_service.dart:163:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\daily_routine_service.dart:29:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\daily_routine_service.dart:70:7 - avoid_print
+warning - Unused import: '../models/haptic_envelope.dart' - lib\app\data\services\haptic_pattern_player.dart:5:8 - unused_import
+   info - Don't invoke 'print' in production code - lib\app\data\services\haptic_pattern_player.dart:47:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\haptic_pattern_player.dart:51:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\haptic_pattern_player.dart:88:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\haptic_service.dart:32:5 - avoid_print
+warning - The left operand can't be null, so the right operand is never executed - lib\app\data\services\haptic_service.dart:110:44 - dead_null_aware_expression
+   info - Don't invoke 'print' in production code - lib\app\data\services\haptic_service.dart:180:5 - avoid_print
+warning - The left operand can't be null, so the right operand is never executed - lib\app\data\services\haptic_service.dart:193:44 - dead_null_aware_expression
+   info - Don't invoke 'print' in production code - lib\app\data\services\haptic_service.dart:218:5 - avoid_print
+warning - The left operand can't be null, so the right operand is never executed - lib\app\data\services\haptic_service.dart:236:44 - dead_null_aware_expression
+warning - The left operand can't be null, so the right operand is never executed - lib\app\data\services\haptic_service.dart:264:50 - dead_null_aware_expression
+   info - Use 'const' with the constructor to improve performance - lib\app\data\services\haptic_service.dart:271:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\data\services\haptic_service.dart:303:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\data\services\haptic_service.dart:316:26 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\data\services\haptic_service.dart:323:15 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\data\services\haptic_service.dart:324:19 - prefer_const_constructors
+   info - Don't invoke 'print' in production code - lib\app\data\services\haptic_service.dart:332:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\haptic_service.dart:342:5 - avoid_print
+warning - Duplicate import - lib\app\data\services\iot_service.dart:2:8 - duplicate_import
+warning - The value of the field '_scanSubscription' isn't used - lib\app\data\services\iot_service.dart:16:23 - unused_field
+warning - The value of the field '_heartRateSubscription' isn't used - lib\app\data\services\iot_service.dart:17:23 - unused_field
+   info - The variable name 'HEART_RATE_SERVICE_UUID' isn't a lowerCamelCase identifier - lib\app\data\services\iot_service.dart:20:16 - non_constant_identifier_names
+   info - The variable name 'HEART_RATE_CHARACTERISTIC_UUID' isn't a lowerCamelCase identifier - lib\app\data\services\iot_service.dart:21:16 - non_constant_identifier_names
+   info - Unnecessary override - lib\app\data\services\iot_service.dart:24:8 - unnecessary_overrides
+   info - Use 'const' with the constructor to improve performance - lib\app\data\services\iot_service.dart:36:26 - prefer_const_constructors
+   info - The declaration '_subscribeToHeartRate' isn't referenced - lib\app\data\services\iot_service.dart:97:16 - unused_element
+   info - Don't invoke 'print' in production code - lib\app\data\services\review_service.dart:11:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\review_service.dart:15:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\review_service.dart:27:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:123:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:150:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:151:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:152:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:156:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:160:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:162:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:165:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:167:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:169:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:170:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:191:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:215:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:219:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:229:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:235:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:239:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:252:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\sound_mixer_service.dart:254:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\timer_service.dart:40:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\timer_service.dart:50:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\timer_service.dart:57:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\data\services\timer_service.dart:97:5 - avoid_print
+   info - The declaration '_getSoundAssetPath' isn't referenced - lib\app\data\services\weather_sound_manager.dart:142:10 - unused_element
+   info - The declaration '_getConditionSpecificAsset' isn't referenced - lib\app\data\services\weather_sound_manager.dart:159:10 - unused_element
+warning - Unused import: '../../premium/controllers/subscription_controller.dart' - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:6:8 - unused_import
+warning - The operand can't be null, so the condition is always 'true' - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:64:28 - unnecessary_null_comparison
+warning - The '!' will have no effect because the receiver can't be null - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:65:39 - unnecessary_non_null_assertion
+   info - Unnecessary braces in a string interpolation - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:124:15 - unnecessary_brace_in_string_interps
+   info - Unnecessary braces in a string interpolation - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:124:40 - unnecessary_brace_in_string_interps
+   info - Unnecessary braces in a string interpolation - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:126:13 - unnecessary_brace_in_string_interps
+   info - Unnecessary braces in a string interpolation - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:126:42 - unnecessary_brace_in_string_interps
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:225:30 - prefer_const_constructors
+warning - The operand can't be null, so the condition is always 'true' - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:321:46 - unnecessary_null_comparison
+warning - The '!' will have no effect because the receiver can't be null - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:323:45 - unnecessary_non_null_assertion
+warning - The operand can't be null, so the condition is always 'true' - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:442:41 - unnecessary_null_comparison
+warning - The '!' will have no effect because the receiver can't be null - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:444:40 - unnecessary_non_null_assertion
+warning - The left operand can't be null, so the right operand is never executed - lib\app\modules\ai_recommend\views\ai_playlist_result_view.dart:457:33 - dead_null_aware_expression
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\ai_recommend\views\ai_recommend_view.dart:98:28 - prefer_const_constructors
+warning - Unused import: '../../player/controllers/player_controller.dart' - lib\app\modules\home\controllers\home_controller.dart:15:8 - unused_import
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:98:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:108:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:113:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:235:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:274:5 - avoid_print
+warning - The value of the field '_testAudioUrl' isn't used - lib\app\modules\home\controllers\home_controller.dart:278:16 - unused_field
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:367:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:368:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:369:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:370:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:371:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:374:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:375:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:380:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:381:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:385:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:387:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:393:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:396:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:404:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:407:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:412:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:417:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:420:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:426:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:440:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:459:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:473:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:497:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:539:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:540:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:547:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:571:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:573:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:576:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:602:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:606:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:629:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:633:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:637:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:640:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\home\controllers\home_controller.dart:643:9 - avoid_print
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\controllers\smart_care_controller.dart:87:27 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\controllers\smart_care_controller.dart:88:33 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\controllers\smart_care_controller.dart:89:32 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\controllers\smart_care_controller.dart:90:10 - curly_braces_in_flow_control_structures
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\app_info_view.dart:449:36 - prefer_const_constructors
+warning - Unused import: '../../settings/views/settings_view.dart' - lib\app\modules\home\views\home_view.dart:14:8 - unused_import
+warning - Unused import: '../../../../app/data/services/daily_routine_service.dart' - lib\app\modules\home\views\home_view.dart:18:8 - unused_import
+warning - Unused import: '../../premium/controllers/subscription_controller.dart' - lib\app\modules\home\views\home_view.dart:21:8 - unused_import
+warning - Unused import: '../controllers/smart_care_controller.dart' - lib\app\modules\home\views\home_view.dart:22:8 - unused_import
+warning - Unused import: 'package:petbeats/core/widgets/animated_gradient_border.dart' - lib\app\modules\home\views\home_view.dart:28:8 - unused_import
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\home_view.dart:112:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\home_view.dart:173:43 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\home\views\home_view.dart:176:43 - prefer_const_literals_to_create_immutables
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\views\home_view.dart:213:91 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\views\home_view.dart:214:100 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\views\home_view.dart:215:96 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\views\home_view.dart:216:98 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\app\modules\home\views\home_view.dart:217:98 - curly_braces_in_flow_control_structures
+   info - Unnecessary use of 'toList' in a spread - lib\app\modules\home\views\home_view.dart:235:42 - unnecessary_to_list_in_spreads
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\home_view.dart:351:15 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\home_view.dart:631:24 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\home_view.dart:712:57 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:138:11 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:183:15 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:261:25 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\home\views\mode_detail_view.dart:262:35 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:263:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:264:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:273:36 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:275:37 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:325:35 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\home\views\mode_detail_view.dart:326:35 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:327:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:328:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:334:36 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:336:37 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:343:27 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:343:45 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\mode_detail_view.dart:344:27 - prefer_const_constructors
+   info - Use interpolation to compose strings and values - lib\app\modules\home\views\mode_detail_view.dart:455:14 - prefer_interpolation_to_compose_strings
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:103:11 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:150:21 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\home\views\rhythm_special_view.dart:151:21 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:151:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:151:41 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:158:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:166:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:188:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:267:19 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\home\views\rhythm_special_view.dart:268:19 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:268:20 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:268:39 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:276:43 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\rhythm_special_view.dart:283:22 - prefer_const_constructors
+   info - The declaration '_onCTAPressed' isn't referenced - lib\app\modules\home\views\sitter_special_view.dart:59:8 - unused_element
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\sitter_special_view.dart:112:11 - prefer_const_constructors
+warning - The value of the local variable 'angle' isn't used - lib\app\modules\home\views\sitter_special_view.dart:584:13 - unused_local_variable
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\views\weather_special_view.dart:85:11 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:17:19 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\home\widgets\ai_special_mode_widget.dart:20:19 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:21:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:22:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:23:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:28:18 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:33:20 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:35:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:41:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:70:29 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\home\widgets\ai_special_mode_widget.dart:71:29 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:72:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:73:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:79:30 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:81:31 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\ai_special_mode_widget.dart:178:17 - prefer_const_constructors
+   info - Unnecessary braces in a string interpolation - lib\app\modules\home\widgets\debug_bottom_sheet.dart:424:45 - unnecessary_brace_in_string_interps
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\home\widgets\mini_player.dart:174:39 - prefer_const_constructors
+   info - The declaration '_getIconData' isn't referenced - lib\app\modules\home\widgets\mini_player.dart:195:12 - unused_element
+warning - Unused import: 'dart:math' - lib\app\modules\home\widgets\premium_mode_button.dart:5:8 - unused_import
+   info - 'Share' is deprecated and shouldn't be used. Use SharePlus instead - lib\app\modules\invite\controllers\invite_controller.dart:51:13 - deprecated_member_use
+   info - 'share' is deprecated and shouldn't be used. Use SharePlus.instance.share() instead - lib\app\modules\invite\controllers\invite_controller.dart:51:19 - deprecated_member_use
+   info - Don't invoke 'print' in production code - lib\app\modules\invite\controllers\invite_controller.dart:58:7 - avoid_print
+warning - Unused import: '../../../../core/theme/app_text_styles.dart' - lib\app\modules\invite\views\invite_friends_view.dart:5:8 - unused_import
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\invite\views\invite_friends_view.dart:124:26 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\invite\views\invite_friends_view.dart:372:23 - prefer_const_constructors
+   info - Don't invoke 'print' in production code - lib\app\modules\onboarding\controllers\onboarding_controller.dart:28:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\onboarding\controllers\onboarding_controller.dart:35:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\onboarding\controllers\onboarding_controller.dart:43:5 - avoid_print
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\onboarding\views\loading_view.dart:294:20 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\onboarding\views\loading_view.dart:398:34 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\onboarding\views\loading_view.dart:413:45 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\onboarding\views\loading_view.dart:414:27 - prefer_const_literals_to_create_immutables
+   info - Use 'const' for final variables initialized to a constant value - lib\app\modules\onboarding\views\loading_view.dart:673:5 - prefer_const_declarations
+warning - Unused import: 'dart:math' - lib\app\modules\onboarding\views\onboarding_complete_view.dart:8:8 - unused_import
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\onboarding\views\onboarding_complete_view.dart:153:32 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\onboarding\views\onboarding_complete_view.dart:155:39 - prefer_const_constructors
+warning - Unused import: '../../../../core/widgets/custom_button.dart' - lib\app\modules\onboarding\views\onboarding_view.dart:7:8 - unused_import
+   info - Don't invoke 'print' in production code - lib\app\modules\onboarding\views\onboarding_view.dart:62:5 - avoid_print
+   info - Use 'const' for final variables initialized to a constant value - lib\app\modules\onboarding\views\onboarding_view.dart:786:5 - prefer_const_declarations
+warning - Unused import: '../../../routes/app_routes.dart' - lib\app\modules\onboarding\views\question2_view.dart:6:8 - unused_import
+   info - Don't invoke 'print' in production code - lib\app\modules\onboarding\views\question2_view.dart:241:19 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\onboarding\views\question2_view.dart:242:19 - avoid_print
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\onboarding\views\question2_view.dart:271:15 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\onboarding\views\question_view.dart:256:15 - prefer_const_constructors
+warning - Unused import: 'onboarding_view.dart' - lib\app\modules\onboarding\views\splash_welcome_view.dart:12:8 - unused_import
+   info - A value for optional parameter 'key' isn't ever given - lib\app\modules\onboarding\views\splash_welcome_view.dart:358:30 - unused_element
+   info - Use 'const' for final variables initialized to a constant value - lib\app\modules\onboarding\views\splash_welcome_view.dart:460:5 - prefer_const_declarations
+warning - Unused import: '../widgets/therapy_control_panel.dart' - lib\app\modules\player\controllers\player_controller.dart:3:8 - unused_import
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:50:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:88:11 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:91:11 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:121:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:141:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:147:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:155:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:160:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:162:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:168:5 - avoid_print
+   info - The declaration '_showHapticSafetyGuideIfFirstTime' isn't referenced - lib\app\modules\player\controllers\player_controller.dart:184:8 - unused_element
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:226:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:332:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:367:15 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:371:15 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:376:13 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:386:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:395:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:401:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\controllers\player_controller.dart:406:9 - avoid_print
+warning - Unused import: '../widgets/bio_pulse_widget.dart' - lib\app\modules\player\views\now_playing_view.dart:7:8 - unused_import
+warning - Unused import: '../widgets/audio_reactive_visualizer.dart' - lib\app\modules\player\views\now_playing_view.dart:8:8 - unused_import
+warning - Unused import: '../widgets/midi_flash_overlay.dart' - lib\app\modules\player\views\now_playing_view.dart:10:8 - unused_import
+   info - The declaration '_showTimerBottomSheet' isn't referenced - lib\app\modules\player\views\now_playing_view.dart:78:8 - unused_element
+   info - Don't invoke 'print' in production code - lib\app\modules\player\views\now_playing_view.dart:179:31 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\views\now_playing_view.dart:190:31 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\player\views\now_playing_view.dart:194:29 - avoid_print
+   info - The declaration '_buildMixButton' isn't referenced - lib\app\modules\player\views\now_playing_view.dart:271:10 - unused_element
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\views\now_playing_view.dart:314:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\views\now_playing_view.dart:315:29 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\player\views\now_playing_view.dart:316:29 - prefer_const_literals_to_create_immutables
+   info - Don't invoke 'print' in production code - lib\app\modules\player\widgets\audio_reactive_visualizer.dart:111:7 - avoid_print
+warning - Unused import: 'dart:ui' - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:3:8 - unused_import
+warning - The value of the field '_overallEnergy' isn't used - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:39:10 - unused_field
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:140:11 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:184:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:227:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:235:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:243:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:250:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:429:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\aurora_curtain_visualizer.dart:449:24 - prefer_const_constructors
+   info - Use 'const' for final variables initialized to a constant value - lib\app\modules\player\widgets\bio_pulse_widget.dart:240:5 - prefer_const_declarations
+   info - Convert 'key' to a super parameter - lib\app\modules\player\widgets\haptic_safety_guide_dialog.dart:15:9 - use_super_parameters
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\haptic_safety_guide_dialog.dart:79:23 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\player\widgets\haptic_safety_guide_dialog.dart:82:23 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\haptic_safety_guide_dialog.dart:133:29 - prefer_const_constructors
+   info - The import of 'dart:ui' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' - lib\app\modules\player\widgets\mix_panel_bottom_sheet.dart:5:8 - unnecessary_import
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\mix_panel_bottom_sheet.dart:23:19 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\player\widgets\mix_panel_bottom_sheet.dart:26:19 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\mix_panel_bottom_sheet.dart:89:41 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\player\widgets\mix_panel_bottom_sheet.dart:90:41 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\mix_panel_bottom_sheet.dart:204:15 - prefer_const_constructors
+warning - Unused import: '../../../../core/theme/app_colors.dart' - lib\app\modules\player\widgets\premium_feature_popup.dart:5:8 - unused_import
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\premium_feature_popup.dart:32:21 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\player\widgets\premium_feature_popup.dart:35:21 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\premium_feature_popup.dart:54:27 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\player\widgets\premium_feature_popup.dart:55:27 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\premium_feature_popup.dart:78:27 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\player\widgets\premium_feature_popup.dart:79:27 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\premium_feature_popup.dart:135:31 - prefer_const_constructors
+   info - Convert 'key' to a super parameter - lib\app\modules\player\widgets\reactive_visualizer.dart:15:9 - use_super_parameters
+warning - The value of the field '_currentBass' isn't used - lib\app\modules\player\widgets\reactive_visualizer.dart:39:10 - unused_field
+warning - The value of the field '_currentMid' isn't used - lib\app\modules\player\widgets\reactive_visualizer.dart:40:10 - unused_field
+warning - Unused import: '../../../../core/theme/app_text_styles.dart' - lib\app\modules\player\widgets\therapy_control_panel.dart:6:8 - unused_import
+warning - Unused import: 'weather_settings_bottom_sheet.dart' - lib\app\modules\player\widgets\therapy_control_panel.dart:12:8 - unused_import
+   info - The declaration '_buildWeatherToggle' isn't referenced - lib\app\modules\player\widgets\therapy_control_panel.dart:555:10 - unused_element
+warning - The value of the field '_testConditions' isn't used - lib\app\modules\player\widgets\weather_control_sheet.dart:27:22 - unused_field
+warning - The value of the field '_selectedTestCondition' isn't used - lib\app\modules\player\widgets\weather_control_sheet.dart:28:11 - unused_field
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\weather_control_sheet.dart:257:43 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\app\modules\player\widgets\weather_control_sheet.dart:260:44 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\weather_control_sheet.dart:261:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\weather_control_sheet.dart:391:29 - prefer_const_constructors
+   info - Convert 'key' to a super parameter - lib\app\modules\player\widgets\weather_settings_bottom_sheet.dart:13:9 - use_super_parameters
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\player\widgets\weather_settings_bottom_sheet.dart:538:42 - prefer_const_constructors
+   info - Don't invoke 'print' in production code - lib\app\modules\premium\controllers\subscription_controller.dart:35:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\premium\controllers\subscription_controller.dart:44:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\premium\controllers\subscription_controller.dart:46:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\premium\controllers\subscription_controller.dart:65:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\premium\controllers\subscription_controller.dart:67:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\premium\controllers\subscription_controller.dart:70:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\premium\controllers\subscription_controller.dart:115:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\app\modules\premium\controllers\subscription_controller.dart:170:7 - avoid_print
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\premium\controllers\subscription_controller.dart:180:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\premium\controllers\subscription_controller.dart:181:15 - prefer_const_constructors
+warning - Unused import: 'package:animate_do/animate_do.dart' - lib\app\modules\premium\views\subscription_view.dart:5:8 - unused_import
+warning - Unused import: '../../../../core/theme/app_text_styles.dart' - lib\app\modules\premium\views\subscription_view.dart:7:8 - unused_import
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\premium\views\subscription_view.dart:289:26 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\settings\controllers\settings_controller.dart:82:46 - prefer_const_constructors
+warning - Unused import: 'package:flutter/foundation.dart' - lib\app\modules\settings\views\pet_profile_view.dart:2:8 - unused_import
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\settings\views\pet_profile_view.dart:405:27 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\settings\views\settings_view.dart:476:27 - prefer_const_constructors
+   info - The declaration '_buildLanguageOption' isn't referenced - lib\app\modules\settings\views\settings_view.dart:505:10 - unused_element
+warning - Unused import: '../../../../core/theme/app_colors.dart' - lib\app\modules\sitter\views\sitter_monitoring_view.dart:6:8 - unused_import
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\sitter\views\sitter_report_view.dart:85:11 - prefer_const_constructors
+warning - The value of the local variable 'events' isn't used - lib\app\modules\sitter\views\sitter_report_view.dart:366:38 - unused_local_variable
+   info - Unnecessary braces in a string interpolation - lib\app\modules\sitter\views\sitter_report_view.dart:460:32 - unnecessary_brace_in_string_interps
+   info - Unnecessary braces in a string interpolation - lib\app\modules\sitter\views\sitter_report_view.dart:461:33 - unnecessary_brace_in_string_interps
+   info - Unnecessary braces in a string interpolation - lib\app\modules\sitter\views\sitter_report_view.dart:462:31 - unnecessary_brace_in_string_interps
+   info - 'Share' is deprecated and shouldn't be used. Use SharePlus instead - lib\app\modules\sitter\views\sitter_report_view.dart:468:7 - deprecated_member_use
+   info - 'share' is deprecated and shouldn't be used. Use SharePlus.instance.share() instead - lib\app\modules\sitter\views\sitter_report_view.dart:468:13 - deprecated_member_use
+   info - Use 'const' with the constructor to improve performance - lib\app\modules\sitter\views\sitter_report_view.dart:480:21 - prefer_const_constructors
+warning - Unused import: '../modules/premium/bindings/premium_binding.dart' - lib\app\routes\app_pages.dart:13:8 - unused_import
+warning - Unused import: '../modules/home/views/app_info_view.dart' - lib\app\routes\app_pages.dart:24:8 - unused_import
+warning - Unused import: '../modules/premium/controllers/premium_controller.dart' - lib\app\routes\app_pages.dart:28:8 - unused_import
+   info - The constant name 'INITIAL' isn't a lowerCamelCase identifier - lib\app\routes\app_pages.dart:37:16 - constant_identifier_names
+   info - The constant name 'WELCOME' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:2:16 - constant_identifier_names
+   info - The constant name 'HOME' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:3:16 - constant_identifier_names
+   info - The constant name 'ONBOARDING' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:4:16 - constant_identifier_names
+   info - The constant name 'QUESTION' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:5:16 - constant_identifier_names
+   info - The constant name 'QUESTION2' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:6:16 - constant_identifier_names
+   info - The constant name 'ONBOARDING_COMPLETE' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:7:16 - constant_identifier_names
+   info - The constant name 'LOADING' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:8:16 - constant_identifier_names
+   info - The constant name 'MODE_DETAIL' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:9:16 - constant_identifier_names
+   info - The constant name 'SETTINGS' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:10:16 - constant_identifier_names
+   info - The constant name 'NOW_PLAYING' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:11:16 - constant_identifier_names
+   info - The constant name 'SUBSCRIPTION' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:12:16 - constant_identifier_names
+   info - The constant name 'WEATHER_SPECIAL' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:13:16 - constant_identifier_names
+   info - The constant name 'RHYTHM_SPECIAL' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:14:16 - constant_identifier_names
+   info - The constant name 'SITTER_SPECIAL' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:15:16 - constant_identifier_names
+   info - The constant name 'SITTER_SETUP' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:16:16 - constant_identifier_names
+   info - The constant name 'SITTER_MONITORING' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:17:16 - constant_identifier_names
+   info - The constant name 'SITTER_REPORT' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:18:16 - constant_identifier_names
+   info - The constant name 'AI_RECOMMEND' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:19:16 - constant_identifier_names
+   info - The constant name 'AI_PLAYLIST_RESULT' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:20:16 - constant_identifier_names
+   info - The constant name 'INVITE_FRIENDS' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:21:16 - constant_identifier_names
+   info - The constant name 'REVIEW' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:22:16 - constant_identifier_names
+   info - The constant name 'PET_PROFILE' isn't a lowerCamelCase identifier - lib\app\routes\app_routes.dart:23:16 - constant_identifier_names
+  error - Two keys in a constant map literal can't be equal - lib\app\translations\en_us.dart:668:3 - equal_keys_in_const_map
+  error - Two keys in a constant map literal can't be equal - lib\app\translations\en_us.dart:669:3 - equal_keys_in_const_map
+  error - Two keys in a constant map literal can't be equal - lib\app\translations\ko_kr.dart:678:3 - equal_keys_in_const_map
+  error - Two keys in a constant map literal can't be equal - lib\app\translations\ko_kr.dart:679:3 - equal_keys_in_const_map
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:18:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:32:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:37:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:49:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:51:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:57:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:58:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:60:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\bgm_service.dart:61:5 - avoid_print
+   info - Don't use web-only libraries outside Flutter web plugin packages - lib\core\services\web_audio_service.dart:1:1 - avoid_web_libraries_in_flutter
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:27:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:35:11 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:47:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:51:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:53:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:66:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:73:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:77:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:79:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:90:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:92:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:105:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:107:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:117:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:119:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:132:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:134:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:145:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:155:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_audio_service.dart:157:7 - avoid_print
+warning - Unused import: 'package:get/get.dart' - lib\core\services\web_bgm_service_web.dart:1:8 - unused_import
+warning - Unused import: 'package:flutter/foundation.dart' - lib\core\services\web_bgm_service_web.dart:3:8 - unused_import
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:20:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:36:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:38:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:53:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:56:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:62:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:69:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:72:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:83:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:86:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:95:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\core\services\web_bgm_service_web.dart:107:7 - avoid_print
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:23:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:24:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:25:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:26:18 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:27:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:29:21 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\core\theme\species_theme.dart:32:15 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:33:9 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:34:9 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:38:19 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\core\theme\species_theme.dart:41:15 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:42:9 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:43:9 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:50:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:51:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:52:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:53:18 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:54:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:56:21 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\core\theme\species_theme.dart:59:15 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:60:9 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:61:9 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:65:19 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\core\theme\species_theme.dart:68:15 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:69:9 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\core\theme\species_theme.dart:70:9 - prefer_const_constructors
+   info - Convert 'key' to a super parameter - lib\core\widgets\ad_banner_placeholder.dart:6:9 - use_super_parameters
+warning - Duplicate import - lib\core\widgets\background_decoration.dart:7:8 - duplicate_import
+   info - Convert 'key' to a super parameter - lib\core\widgets\background_decoration.dart:12:9 - use_super_parameters
+   info - Convert 'key' to a super parameter - lib\core\widgets\custom_button.dart:10:9 - use_super_parameters
+warning - Unused import: 'dart:math' - lib\core\widgets\parallax_tilt.dart:2:8 - unused_import
+   info - Convert 'key' to a super parameter - lib\core\widgets\species_theme_transition.dart:11:9 - use_super_parameters
+warning - Unused import: 'core/theme/app_colors.dart' - lib\main.dart:5:8 - unused_import
+warning - Unused import: 'app/routes/app_routes.dart' - lib\main.dart:9:8 - unused_import
+warning - Unused import: 'core/theme/app_text_styles.dart' - lib\main.dart:10:8 - unused_import
+
