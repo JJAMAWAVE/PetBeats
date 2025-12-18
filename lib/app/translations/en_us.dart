@@ -249,6 +249,7 @@ const Map<String, String> enUS = {
   'premium_benefit_sync': 'Smart Sync',
   'premium_benefit_2': ' (Weather/Time/Care) Unlock',
   'premium_benefit_3': ' (Haptic Therapy) Unlimited',
+  'premium_benefit_ai': ' Recommended Playlists',
   'premium_plan_yearly': '1 Year (Yearly)',
   'premium_price_yearly': '₩2,750 / Month',
   'premium_discount_yearly': '30% OFF',

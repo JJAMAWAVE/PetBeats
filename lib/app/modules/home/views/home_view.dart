@@ -472,7 +472,7 @@ class HomeView extends GetView<HomeController> {
                           glowColor: const Color(0xFF00BFFF), // Cyan blue
                           strokeWidth: 1.5,
                           duration: const Duration(milliseconds: 2000),
-                          resetInterval: const Duration(seconds: 4), // Restart every 4 seconds
+                          resetInterval: const Duration(seconds: 6), // Restart every 6 seconds
                           showUnderlines: false, // No underline decoration
                           style: AppTextStyles.titleMedium.copyWith(
                             color: Colors.white,

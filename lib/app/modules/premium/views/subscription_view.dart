@@ -7,6 +7,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../controllers/subscription_controller.dart';
 import '../../../routes/app_routes.dart';
+import 'package:petbeats/core/widgets/rainbow_gradient.dart';
 
 class SubscriptionView extends GetView<SubscriptionController> {
   const SubscriptionView({super.key});
@@ -104,13 +105,21 @@ class SubscriptionView extends GetView<SubscriptionController> {
                       'Haptic',
                       'premium_benefit_3'.tr,
                     ),
+                    SizedBox(height: 16.h),
+                    _buildBenefitRow(
+                      Icons.auto_awesome,
+                      'AI',
+                      'premium_benefit_ai'.tr,
+                    ),
                     
                     SizedBox(height: 40.h),
                     
                     // Plan Selector
                     Obx(() => Column(
                       children: [
-                        _ShineEffect(
+                        AnimatedRainbowGradient(
+                          duration: const Duration(seconds: 4),
+                          borderRadius: BorderRadius.circular(16.r),
                           child: _buildPlanCard(
                             title: 'premium_plan_yearly'.tr,
                             price: '₩33,000',
@@ -318,29 +327,14 @@ class SubscriptionView extends GetView<SubscriptionController> {
           Container(
             padding: EdgeInsets.all(16.w),
             decoration: BoxDecoration(
-              gradient: isBest
-                  ? const LinearGradient(
-                      colors: [Color(0xFFFFD700), Color(0xFFFFE55C)],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    )
-                  : null,
               color: isBest ? null : (isSelected ? AppColors.primaryBlue.withOpacity(0.05) : Colors.white),
               borderRadius: BorderRadius.circular(16.r),
               border: Border.all(
                 color: isBest
-                    ? const Color(0xFFFFD700)
+                    ? Colors.transparent
                     : (isSelected ? AppColors.primaryBlue : Colors.grey.shade300),
-                width: isBest ? 2 : (isSelected ? 2 : 1),
+                width: isSelected ? 2 : 1,
               ),
-              boxShadow: [
-                if (isBest)
-                  BoxShadow(
-                    color: const Color(0xFFFFD700).withOpacity(0.3),
-                    blurRadius: 20,
-                    offset: const Offset(0, 8),
-                  ),
-              ],
             ),
             child: Row(
               children: [
@@ -365,7 +359,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
                             height: 10.w,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: isBest ? const Color(0xFFFFD700) : Colors.white,
+                              color: isBest ? const Color(0xFF7C3AED) : Colors.white,
                             ),
                           ),
                         )
@@ -401,7 +395,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
                                 style: TextStyle(
                                   fontSize: 10.sp,
                                   fontWeight: FontWeight.bold,
-                                  color: const Color(0xFFFFD700),
+                                  color: const Color(0xFF7C3AED),
                                 ),
                               ),
                             ),
@@ -460,7 +454,7 @@ class SubscriptionView extends GetView<SubscriptionController> {
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                 decoration: BoxDecoration(
-                  color: AppColors.textDarkNavy,
+                  color: const Color(0xFF7C3AED),
                   borderRadius: BorderRadius.circular(12.r),
                   boxShadow: [
                     BoxShadow(

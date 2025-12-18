@@ -249,6 +249,7 @@ const Map<String, String> koKR = {
   'premium_benefit_sync': '스마트 싱크',
   'premium_benefit_2': ' (날씨/시간/돌봄) 잠금 해제',
   'premium_benefit_3': ' (진동 테라피) 무제한 사용',
+  'premium_benefit_ai': ' 추천 플레이리스트 제공',
   'premium_plan_yearly': '1년 (Yearly)',
   'premium_price_yearly': '월 2,750원',
   'premium_discount_yearly': '30% 할인',

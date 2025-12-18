@@ -334,11 +334,6 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     _hapticService.selectionClick();
   }
 
-  // 프리미엄 업그레이드
-  void upgradeToPremium() {
-    isPremiumUser.value = true;
-  }
-
   void stopSound() {
     isPlaying.value = false;
     // Don't reset currentTrack - keep it to show track title even when stopped
