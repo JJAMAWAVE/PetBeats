@@ -567,8 +567,8 @@ const Map<String, String> enUS = {
   // ===== Weather Special =====
   'weather_title': 'Smart Weather Sync',
   'weather_preview_desc': 'Sync your pet\'s day with the weather',
-  'weather_premium_title': 'Unlock Smart Weather Sync',
-  'weather_premium_desc': 'Adapt sounds based on real-time weather',
+  'weather_special_premium_title': 'Unlock Smart Weather Sync',
+  'weather_special_premium_desc': 'Adapt sounds based on real-time weather',
   'weather_active': 'Weather Sync Active',
   'weather_inactive': 'Weather Sync Inactive',
   'weather_check_icon': 'Check the weather icon in the player',

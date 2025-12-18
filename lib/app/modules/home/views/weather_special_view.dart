@@ -152,7 +152,7 @@ class WeatherSpecialView extends GetView<HomeController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'weather_premium_title'.tr,
+                    'weather_special_premium_title'.tr,
                     style: GoogleFonts.poppins(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
@@ -161,7 +161,7 @@ class WeatherSpecialView extends GetView<HomeController> {
                   ),
                   SizedBox(height: 4.h),
                   Text(
-                    'weather_premium_desc'.tr,
+                    'weather_special_premium_desc'.tr,
                     style: GoogleFonts.poppins(
                       color: Colors.white.withOpacity(0.9),
                       fontSize: 13.sp,

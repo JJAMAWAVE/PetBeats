@@ -577,8 +577,8 @@ const Map<String, String> koKR = {
   // ===== Weather Special =====
   'weather_title': '스마트 날씨 싱크',
   'weather_preview_desc': '반려동물과 당신의 하루를 날씨와 함께',
-  'weather_premium_title': '스마트 날씨 싱크 잠금해제',
-  'weather_premium_desc': '실시간 날씨 기반 사운드 적응',
+  'weather_special_premium_title': '스마트 날씨 싱크 잠금해제',
+  'weather_special_premium_desc': '실시간 날씨 기반 사운드 적응',
   'weather_active': '날씨 동기화 활성화됨',
   'weather_inactive': '날씨 동기화 비활성화',
   'weather_check_icon': '플레이어에서 날씨 아이콘을 확인하세요',
