@@ -90,247 +90,182 @@ class _OnboardingViewState extends State<OnboardingView> with TickerProviderStat
     ];
 
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1A2E), // Dark background for contrast
-      body: SafeArea(
-        child: Column(
-          children: [
-            const SizedBox(height: 40),
-            
-            // Card Stack Area - Main content
-            Expanded(
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  // Background stacked cards (visible behind)
-                  ...List.generate(3, (i) {
-                    final stackIndex = 2 - i; // 2, 1, 0
-                    return Positioned(
-                      top: 20.0 + (stackIndex * 8),
-                      left: 24.0 + (stackIndex * 4),
-                      right: 24.0 + (stackIndex * 4),
-                      bottom: 60.0 - (stackIndex * 4),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.3 + (i * 0.2)),
-                          borderRadius: BorderRadius.circular(24),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
-                  
-                  // Main PageView with cards
-                  Positioned.fill(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 24, right: 24, top: 20, bottom: 60),
-                      child: PageView.builder(
-                        controller: controller.pageController,
-                        onPageChanged: (index) {
-                          controller.onPageChanged(index);
-                          // Auto navigate to question after last slide
-                          if (index == slides.length - 1) {
-                            Future.delayed(const Duration(milliseconds: 500), () {
-                              // Show "시작하기" button or auto-navigate
-                            });
-                          }
-                        },
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: slides.length,
-                        itemBuilder: (context, index) {
-                          return AnimatedBuilder(
-                            animation: controller.pageController,
-                            builder: (context, child) {
-                              double value = 0.0;
-                              if (controller.pageController.position.haveDimensions) {
-                                value = (controller.pageController.page ?? controller.pageIndex.toDouble()) - index;
-                              }
-                              
-                              // Card stack effect: scale, translate, rotate
-                              final double scale = (1 - (value.abs() * 0.08)).clamp(0.88, 1.0);
-                              final double translateX = value * 30;
-                              final double rotateZ = value * 0.03;
-                              
-                              return Transform(
-                                alignment: Alignment.center,
-                                transform: Matrix4.identity()
-                                  ..translate(translateX, 0, 0)
-                                  ..rotateZ(rotateZ)
-                                  ..scale(scale),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(24),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: const Color(0xFF0055FF).withOpacity(0.2),
-                                        blurRadius: 40,
-                                        offset: const Offset(0, 15),
-                                        spreadRadius: -5,
-                                      ),
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.15),
-                                        blurRadius: 20,
-                                        offset: const Offset(0, 8),
-                                      ),
-                                    ],
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(24),
-                                    child: Column(
-                                      children: [
-                                        // Image area (60%)
-                                        Expanded(
-                                          flex: 6,
-                                          child: Container(
-                                            width: double.infinity,
-                                            padding: const EdgeInsets.all(20),
-                                            child: Stack(
-                                              alignment: Alignment.center,
-                                              children: [
-                                                _BreathingImage(
-                                                  imagePath: slides[index]["image"]!,
-                                                ),
-                                                // Overlays
-                                                if (index == 0)
-                                                  Positioned.fill(
-                                                    child: _GlowingPathOverlay(
-                                                      active: controller.pageIndex == 0,
-                                                    ),
-                                                  ),
-                                                if (index == 1)
-                                                  Positioned.fill(
-                                                    child: _WindEffectOverlay(
-                                                      active: controller.pageIndex == 1,
-                                                    ),
-                                                  ),
-                                                if (index == 2)
-                                                  Positioned.fill(
-                                                    child: _HeartBeatOverlay(
-                                                      active: controller.pageIndex == 2,
-                                                    ),
-                                                  ),
-                                                if (index == 3)
-                                                  Positioned.fill(
-                                                    child: _ResonanceOverlay(
-                                                      active: controller.pageIndex == 3,
-                                                    ),
-                                                  ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        
-                                        // Text area inside card (40%)
-                                        Expanded(
-                                          flex: 4,
-                                          child: Container(
-                                            width: double.infinity,
-                                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                // Title
-                                                Text(
-                                                  slides[index]["title"]!,
-                                                  textAlign: TextAlign.center,
-                                                  style: AppTextStyles.titleLarge.copyWith(
-                                                    color: AppColors.textDarkNavy,
-                                                    fontSize: 22,
-                                                    fontWeight: FontWeight.w700,
-                                                    height: 1.3,
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 12),
-                                                // Description
-                                                Text(
-                                                  slides[index]["desc"]!,
-                                                  textAlign: TextAlign.center,
-                                                  style: AppTextStyles.bodyMedium.copyWith(
-                                                    color: AppColors.textGrey,
-                                                    fontSize: 14,
-                                                    height: 1.5,
-                                                  ),
-                                                  maxLines: 3,
-                                                  overflow: TextOverflow.ellipsis,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            
-            // Page Indicator
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  slides.length,
-                  (i) => _IndicatorDot(
-                    isActive: controller.pageIndex == i,
-                  ),
+      backgroundColor: Colors.white,
+      body: Obx(() => Stack(
+        children: [
+          // Background gradient
+          Positioned.fill(
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: RadialGradient(
+                  center: Alignment(0.0, -0.2),
+                  radius: 0.8,
+                  colors: [
+                    Color(0xFFE8F0FE),
+                    Colors.white,
+                  ],
+                  stops: [0.0, 1.0],
                 ),
               ),
             ),
-            
-            // Start Button (only on last page)
-            Obx(() => AnimatedOpacity(
-              opacity: controller.pageIndex == slides.length - 1 ? 1.0 : 0.0,
-              duration: const Duration(milliseconds: 300),
-              child: controller.pageIndex == slides.length - 1
-                  ? Padding(
-                      padding: const EdgeInsets.only(bottom: 30, left: 40, right: 40),
-                      child: SizedBox(
-                        width: double.infinity,
-                        height: 56,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            try { Get.find<HapticService>().lightImpact(); } catch (e) {}
-                            controller.completeOnboarding();
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primaryBlue,
-                            foregroundColor: Colors.white,
-                            elevation: 8,
-                            shadowColor: AppColors.primaryBlue.withOpacity(0.4),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
+          ),
+          // Content layer with touch detection
+          GestureDetector(
+            onTapDown: _handleTapDown,
+            onTap: _handleTap,
+            behavior: HitTestBehavior.translucent,
+            child: Column(
+              children: [
+                // 60% Image Area
+                Expanded(
+                  flex: 6,
+                  child: PageView.builder(
+                    controller: controller.pageController,
+                    onPageChanged: controller.onPageChanged,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: slides.length,
+                    itemBuilder: (context, index) {
+                      return Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(40),
+                            child: Transform.scale(
+                              scale: 0.8,
+                              child: _BreathingImage(
+                                imagePath: slides[index]["image"]!,
+                              ),
                             ),
                           ),
+                          if (index == 0)
+                            Positioned.fill(
+                              child: Padding(
+                                padding: const EdgeInsets.all(40),
+                                child: _GlowingPathOverlay(
+                                  active: controller.pageIndex == 0,
+                                ),
+                              ),
+                            ),
+                          if (index == 1)
+                            Positioned.fill(
+                              child: Padding(
+                                padding: const EdgeInsets.all(40),
+                                child: _WindEffectOverlay(
+                                  active: controller.pageIndex == 1,
+                                ),
+                              ),
+                            ),
+                          if (index == 2)
+                            Positioned.fill(
+                              child: Padding(
+                                padding: const EdgeInsets.all(40),
+                                child: _HeartBeatOverlay(
+                                  active: controller.pageIndex == 2,
+                                ),
+                              ),
+                            ),
+                          if (index == 3)
+                            Positioned.fill(
+                              child: Padding(
+                                padding: const EdgeInsets.all(40),
+                                child: _ResonanceOverlay(
+                                  active: controller.pageIndex == 3,
+                                ),
+                              ),
+                            ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                
+                // ✨ Fixed Page Indicator Position (between image and text)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      slides.length,
+                      (i) => _IndicatorDot(
+                        isActive: controller.pageIndex == i,
+                      ),
+                    ),
+                  ),
+                ),
+                
+                // Text Area (Modified to be flexible)
+                Expanded(
+                  flex: 4,
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 8),  // ✨ Minimal margins
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,  // Changed from center
+                      children: [
+                        const SizedBox(height: 8),  // Small top spacing
+                        
+                        // Animated Text Switcher
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 500),
+                          child: _AnimatedGradientText(
+                            text: slides[controller.pageIndex]["title"]!,
+                            key: ValueKey('title_${controller.pageIndex}'),
+                          ),
+                        ),
+                        const SizedBox(height: 16), // Reduced height
+                        
+                        // Description
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 500),
                           child: Text(
-                            'onboarding_start'.tr,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                            slides[controller.pageIndex]["desc"]!,
+                            key: ValueKey('desc_${controller.pageIndex}'),
+                            textAlign: TextAlign.center,
+                            style: AppTextStyles.bodyMedium.copyWith(
+                              color: AppColors.textGrey,
+                              height: 1.5,
+                              fontSize: 15, // Slightly reduced font size
                             ),
                           ),
                         ),
+                      ],
+                    ),
+                  ),
+                ),
+                
+                // Tap to Start Text (Fixed at bottom)
+                Container(
+                  padding: const EdgeInsets.only(bottom: 40, top: 10),
+                  child: GestureDetector(
+                    onTap: _handleTap,
+                    behavior: HitTestBehavior.translucent,
+                    child: _BreathingText(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Touch ripple overlay
+          if (_showRipple && _ripplePosition != null)
+            Positioned.fill(
+              child: IgnorePointer(
+                child: AnimatedBuilder(
+                  animation: _rippleController,
+                  builder: (context, child) {
+                    return CustomPaint(
+                      painter: TouchRipplePainter(
+                        center: _ripplePosition!,
+                        progress: _rippleController.value,
+                        color: const Color(0xFF0055FF),
                       ),
-                    )
-                  : const SizedBox(height: 86),
-            )),
-          ],
-        ),
-      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+        ],
+      )),
     );
   }
 }
