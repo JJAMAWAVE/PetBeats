@@ -219,25 +219,22 @@ class RhythmSpecialView extends StatelessWidget {
   Widget _buildCoreValue() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 24.w),
-      padding: EdgeInsets.all(20.w),
+      padding: EdgeInsets.all(16.w), // 통일된 패딩
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xFFF3E5F5), Color(0xFFE8EAF6)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        color: AppColors.primaryBlue.withOpacity(0.05),
         borderRadius: BorderRadius.circular(20.r),
+        border: Border.all(color: AppColors.primaryBlue.withOpacity(0.1)),
       ),
       child: Column(
         children: [
-          Icon(Icons.auto_awesome, color: Color(0xFF6A11CB), size: 40.w),
+          Icon(Icons.auto_awesome, color: AppColors.primaryBlue, size: 40.w),
           SizedBox(height: 12.h),
           Text(
             'rhythm_core_quote'.tr,
             style: AppTextStyles.bodyLarge.copyWith(
               fontWeight: FontWeight.bold,
               fontStyle: FontStyle.italic,
-              color: Color(0xFF6A11CB),
+              color: AppColors.primaryBlue,
             ),
             textAlign: TextAlign.center,
           ),

@@ -23,6 +23,7 @@ import '../../premium/controllers/subscription_controller.dart';
 import '../controllers/smart_care_controller.dart';
 // Bento Style Widgets
 import 'package:petbeats/core/widgets/bento_card.dart';
+import 'package:petbeats/core/widgets/pro_button.dart';
 import 'package:petbeats/core/widgets/elastic_scale_button.dart';
 import 'package:petbeats/core/widgets/mode_animator.dart';
 import 'package:petbeats/core/widgets/staggered_slide_in.dart';
@@ -707,47 +708,12 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
               ] else ...[
-                // 무료 사용자 - PRO 결제 유도
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryBlue.withOpacity(0.05),
-                    borderRadius: BorderRadius.circular(12.r),
-                    border: Border.all(color: AppColors.primaryBlue.withOpacity(0.1)),
-                  ),
-                  child: Column(
-                    children: [
-                      const Icon(Icons.diamond, color: AppColors.primaryBlue, size: 32),
-                      const SizedBox(height: 8),
-                      Text('dialog_pro_feature'.tr, style: AppTextStyles.titleMedium.copyWith(fontWeight: FontWeight.bold)),
-                      const SizedBox(height: 4),
-                      Text('dialog_pro_desc'.tr, 
-                           style: AppTextStyles.bodySmall.copyWith(color: AppColors.textGrey),
-                           textAlign: TextAlign.center),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 16),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      Get.toNamed('/subscription');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryBlue,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
-                    ),
-                    child: Text('dialog_start_pro'.tr),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text('dialog_later'.tr, style: TextStyle(color: AppColors.textGrey)),
+                // 무료 사용자 - PRO 결제 유도 (공통 위젯)
+                ProFeatureSection(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Get.toNamed('/subscription');
+                  },
                 ),
               ],
             ],
