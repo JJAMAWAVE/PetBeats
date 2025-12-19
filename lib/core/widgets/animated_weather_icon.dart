@@ -246,7 +246,9 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
         return Stack(
           children: [
             // 구름
-            _buildCloudy(),
+            Positioned.fill(
+              child: _buildCloudy(),
+            ),
             // 번개
             Positioned(
               right: widget.size * 0.2,
