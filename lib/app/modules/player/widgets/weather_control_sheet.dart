@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/widgets/premium_volume_slider.dart';
 import '../../../data/services/weather_service.dart';
 import '../../../data/services/weather_sound_manager.dart';
 import '../../../data/services/sound_mixer_service.dart';
@@ -307,17 +308,31 @@ class _WeatherControlSheetState extends State<WeatherControlSheet> {
                 
                 return Column(
                   children: [
-                    // Volume percentage label (big)
+                    // Volume percentage indicator
                     Container(
                       width: 80.w,
                       height: 80.w,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: AppColors.primaryBlue.withOpacity(0.15),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            const Color(0xFF275EFE).withOpacity(0.2),
+                            const Color(0xFF275EFE).withOpacity(0.1),
+                          ],
+                        ),
                         border: Border.all(
-                          color: AppColors.primaryBlue.withOpacity(0.4),
+                          color: const Color(0xFF275EFE).withOpacity(0.5),
                           width: 3,
                         ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFF275EFE).withOpacity(0.3),
+                            blurRadius: 15,
+                            spreadRadius: 2,
+                          ),
+                        ],
                       ),
                       child: Center(
                         child: Text(
@@ -330,43 +345,35 @@ class _WeatherControlSheetState extends State<WeatherControlSheet> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 16.h),
+                    SizedBox(height: 20.h),
+                    
+                    // Premium Volume Slider
                     Row(
                       children: [
-                        Icon(Icons.volume_down, color: Colors.white54, size: 24.w),
+                        Icon(Icons.volume_off, color: Colors.white38, size: 20.w),
+                        SizedBox(width: 12.w),
                         Expanded(
-                          child: SliderTheme(
-                            data: SliderThemeData(
-                              trackHeight: 6.h,
-                              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.r),
-                              overlayShape: RoundSliderOverlayShape(overlayRadius: 16.r),
-                              activeTrackColor: AppColors.primaryBlue,
-                              inactiveTrackColor: Colors.white.withOpacity(0.2),
-                              thumbColor: Colors.white,
-                            ),
-                            child: Slider(
-                              value: _volume,
-                              min: 0.0,
-                              max: 1.0,
-                              onChanged: (value) {
-                                setState(() => _volume = value);
-                                // Update mixer volume
-                                if (Get.isRegistered<SoundMixerService>()) {
-                                  Get.find<SoundMixerService>().setMasterVolume(value);
-                                }
-                                // Haptic feedback
-                                HapticFeedback.selectionClick();
-                              },
-                              onChangeEnd: (value) {
-                                // Save volume when user finishes dragging
-                                _saveVolume(value);
-                              },
-                            ),
+                          child: PremiumVolumeSlider(
+                            value: _volume,
+                            activeColor: const Color(0xFF275EFE),
+                            handleColor: const Color(0xFF275EFE),
+                            onChanged: (value) {
+                              setState(() => _volume = value);
+                              if (Get.isRegistered<SoundMixerService>()) {
+                                Get.find<SoundMixerService>().setMasterVolume(value);
+                              }
+                              HapticFeedback.selectionClick();
+                            },
+                            onChangeEnd: (value) {
+                              _saveVolume(value);
+                            },
                           ),
                         ),
-                        Icon(Icons.volume_up, color: Colors.white54, size: 24.w),
+                        SizedBox(width: 12.w),
+                        Icon(Icons.volume_up, color: Colors.white38, size: 20.w),
                       ],
                     ),
+                    SizedBox(height: 8.h),
                     Text(
                       _volume == 0 ? 'volume_mute'.tr : _volume < 0.3 ? 'volume_low'.tr : _volume < 0.7 ? 'volume_medium'.tr : 'volume_high'.tr,
                       style: TextStyle(
