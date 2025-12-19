@@ -21,7 +21,7 @@ class NowPlayingView extends GetView<PlayerController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundDarkNavy,
+      backgroundColor: AppColors.backgroundWhite,
       body: SafeArea(
         child: Column(
           children: [
@@ -42,7 +42,7 @@ class NowPlayingView extends GetView<PlayerController> {
       child: Row(
         children: [
           IconButton(
-            icon: const Icon(Icons.keyboard_arrow_down, color: Colors.white, size: 32),
+            icon: Icon(Icons.keyboard_arrow_down, color: AppColors.textDarkNavy, size: 32),
             onPressed: () => Get.back(),
           ),
           Expanded(
@@ -50,7 +50,7 @@ class NowPlayingView extends GetView<PlayerController> {
               child: Obx(() => Text(
                 controller.currentTrackTitle,
                 style: AppTextStyles.titleMedium.copyWith(
-                  color: Colors.white,
+                  color: AppColors.textDarkNavy,
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w600,
                 ),
@@ -62,7 +62,7 @@ class NowPlayingView extends GetView<PlayerController> {
           IconButton(
             icon: Icon(
               Icons.info_outline,
-              color: Colors.white.withOpacity(0.8),
+              color: AppColors.textDarkNavy.withOpacity(0.8),
               size: 24.w,
             ),
             onPressed: () {
@@ -150,7 +150,7 @@ class NowPlayingView extends GetView<PlayerController> {
                 Obx(() => Text(
                   _formatDuration(controller.currentPosition.value),
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.7),
+                    color: AppColors.textGrey,
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
                   ),
@@ -174,8 +174,8 @@ class NowPlayingView extends GetView<PlayerController> {
                           thumbShape: RoundSliderThumbShape(enabledThumbRadius: 6.r),
                           overlayShape: RoundSliderOverlayShape(overlayRadius: 12.r),
                           activeTrackColor: AppColors.primaryBlue,
-                          inactiveTrackColor: Colors.white.withOpacity(0.2),
-                          thumbColor: Colors.white,
+                          inactiveTrackColor: AppColors.textGrey.withOpacity(0.2),
+                          thumbColor: AppColors.primaryBlue,
                           overlayColor: AppColors.primaryBlue.withOpacity(0.2),
                         ),
                         child: Slider(
@@ -218,7 +218,7 @@ class NowPlayingView extends GetView<PlayerController> {
                 Obx(() => Text(
                   _formatDuration(controller.currentDuration.value),
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.7),
+                    color: AppColors.textGrey,
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
                   ),
@@ -237,13 +237,13 @@ class NowPlayingView extends GetView<PlayerController> {
                   controller.repeatModeIcon,
                   color: controller.isRepeatActive 
                       ? AppColors.primaryBlue 
-                      : Colors.white.withOpacity(0.5),
+                      : AppColors.textGrey.withOpacity(0.5),
                 ),
                 iconSize: 24.w,
                 onPressed: () => controller.toggleRepeatMode(),
               )),
               IconButton(
-                icon: const Icon(Icons.skip_previous, color: Colors.white),
+                icon: Icon(Icons.skip_previous, color: AppColors.textDarkNavy),
                 iconSize: 32.w,
                 onPressed: () => controller.homeController.skipPrevious(),
               ),
@@ -265,13 +265,13 @@ class NowPlayingView extends GetView<PlayerController> {
                   ),
                   child: Icon(
                     controller.isPlaying ? Icons.pause : Icons.play_arrow,
-                    color: AppColors.backgroundDarkNavy,
+                    color: AppColors.primaryBlue,
                     size: 30.w,
                   ),
                 ),
               )),
               IconButton(
-                icon: const Icon(Icons.skip_next, color: Colors.white),
+                icon: Icon(Icons.skip_next, color: AppColors.textDarkNavy),
                 iconSize: 32.w,
                 onPressed: () => controller.homeController.skipNext(),
               ),

@@ -29,19 +29,19 @@ class PremiumFeaturePopup extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(24.w),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              const Color(0xFF1A1A2E),
-              const Color(0xFF16213E),
-            ],
-          ),
+          color: Colors.white,
           borderRadius: BorderRadius.circular(20.r),
           border: Border.all(
-            color: Colors.amber.withOpacity(0.3),
+            color: AppColors.primaryBlue.withOpacity(0.15),
             width: 1.5,
           ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primaryBlue.withOpacity(0.1),
+              blurRadius: 20,
+              offset: const Offset(0, 10),
+            ),
+          ],
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -100,7 +100,7 @@ class PremiumFeaturePopup extends StatelessWidget {
                 Text(
                   featureName,
                   style: GoogleFonts.poppins(
-                    color: Colors.white,
+                    color: AppColors.textDarkNavy,
                     fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
                   ),
@@ -114,7 +114,7 @@ class PremiumFeaturePopup extends StatelessWidget {
               description,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.white70,
+                color: AppColors.textGrey,
                 fontSize: 14.sp,
                 height: 1.5,
               ),
@@ -132,13 +132,13 @@ class PremiumFeaturePopup extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 14.h),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.r),
-                        side: BorderSide(color: Colors.white30),
+                        side: BorderSide(color: AppColors.textGrey.withOpacity(0.3)),
                       ),
                     ),
                     child: Text(
                       'close'.tr,
                       style: TextStyle(
-                        color: Colors.white70,
+                        color: AppColors.textGrey,
                         fontSize: 14.sp,
                       ),
                     ),
