@@ -682,7 +682,8 @@ const Map<String, String> enUS = {
   'dialog_pro_feature': 'PRO Feature',
   'dialog_pro_desc': 'AI automatically creates a personalized playlist',
   'dialog_start_pro': 'Start PRO',
-  'dialog_later': 'Maybe Later',\r\n  'dialog_subscribe': 'Subscribe',
+  'dialog_later': 'Maybe Later',
+  'dialog_subscribe': 'Subscribe',
   'dialog_default_desc': 'Creating a personalized playlist.',
 
   // ===== AI Scenario Subtitles =====
