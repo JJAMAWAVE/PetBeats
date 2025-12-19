@@ -198,28 +198,28 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
 
   /// ❄️ 눈 - 구름 + 눈송이 내림
   Widget _buildSnowy() {
-    return Stack(
+    return Column(
       children: [
         // 구름
-        Positioned(
-          left: 0,
-          top: 0,
-          child: CustomPaint(
-            size: Size(widget.size * 0.9, widget.size * 0.5),
-            painter: _CloudPainter(const Color(0xFFCFD8DC)),
-          ),
+        CustomPaint(
+          size: Size(widget.size * 0.9, widget.size * 0.5),
+          painter: _CloudPainter(const Color(0xFFCFD8DC)),
         ),
         // 눈송이들
         AnimatedBuilder(
           animation: _snowController,
           builder: (context, child) {
             final offset = _snowController.value;
-            return Stack(
-              children: [
-                _buildSnowflake(widget.size * 0.2, widget.size * (0.5 + offset * 0.3)),
-                _buildSnowflake(widget.size * 0.45, widget.size * (0.55 + offset * 0.3)),
-                _buildSnowflake(widget.size * 0.7, widget.size * (0.6 + offset * 0.3)),
-              ],
+            return Transform.translate(
+              offset: Offset(0, 5 * offset),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _buildSnowflake(),
+                  _buildSnowflake(),
+                  _buildSnowflake(),
+                ],
+              ),
             );
           },
         ),
@@ -227,17 +227,13 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
     );
   }
 
-  Widget _buildSnowflake(double left, double top) {
-    return Positioned(
-      left: left,
-      top: top,
-      child: Container(
-        width: 8,
-        height: 8,
-        decoration: const BoxDecoration(
-          color: Color(0xFF81D4FA),
-          shape: BoxShape.circle,
-        ),
+  Widget _buildSnowflake() {
+    return Container(
+      width: 8,
+      height: 8,
+      decoration: const BoxDecoration(
+        color: Color(0xFF81D4FA),
+        shape: BoxShape.circle,
       ),
     );
   }
