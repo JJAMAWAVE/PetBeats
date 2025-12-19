@@ -63,22 +63,22 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Colors.white.withOpacity(0.15),
-                Colors.white.withOpacity(0.08),
+                Colors.black.withOpacity(0.6),
+                Colors.black.withOpacity(0.4),
               ],
             ),
             borderRadius: BorderRadius.circular(28.r),
             border: Border.all(
               color: widget.hapticIntensity != HapticIntensity.off 
                   ? AppColors.primaryBlue.withOpacity(0.5)
-                  : Colors.white.withOpacity(0.2),
+                  : Colors.white.withOpacity(0.15),
               width: 2,
             ),
             boxShadow: [
               BoxShadow(
                 color: widget.hapticIntensity != HapticIntensity.off
                     ? AppColors.primaryBlue.withOpacity(0.3)
-                    : Colors.black.withOpacity(0.15),
+                    : Colors.black.withOpacity(0.3),
                 blurRadius: 24,
                 spreadRadius: 2,
                 offset: const Offset(0, 8),
