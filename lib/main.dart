@@ -60,9 +60,6 @@ void main() async {
     debugPrint('🔥 [Crashlytics] Initialized');
   }
   
-  // ⚠️ 테스트용: 항상 신규 유저로 시작 (온보딩 표시)
-  // TODO: 배포 전 이 줄 제거
-  GetStorage().write('onboarding_completed', false);
   
   // 전역 서비스 초기화
   Get.put(HapticService(), permanent: true);
