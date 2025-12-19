@@ -191,17 +191,14 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
     );
   }
 
-  Widget _buildRainDrop(double leftOffset) {
-    return Positioned(
-      left: leftOffset,
-      top: widget.size * 0.5,
-      child: Container(
-        width: 6,
-        height: 10,
-        decoration: BoxDecoration(
-          color: const Color(0xFF64B5F6),
-          borderRadius: BorderRadius.circular(3),
-        ),
+  Widget _buildRainDrop(double ignore) {
+    return Container(
+      width: 6,
+      height: 10,
+      margin: EdgeInsets.only(top: widget.size * 0.5),
+      decoration: BoxDecoration(
+        color: const Color(0xFF64B5F6),
+        borderRadius: BorderRadius.circular(3),
       ),
     );
   }
