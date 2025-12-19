@@ -56,139 +56,148 @@ class _BackgroundDecorationState extends State<BackgroundDecoration>
 
   @override
   Widget build(BuildContext context) {
-    // HomeController에서 현재 종 테마 가져오기
-    return GetBuilder<HomeController>(
-      init: Get.isRegistered<HomeController>() ? Get.find<HomeController>() : null,
+    // HomeController가 등록되어 있는지 확인
+    if (!Get.isRegistered<HomeController>()) {
+      // HomeController가 없으면 기본 강아지 테마 사용
+      return _buildBackground(
+        primaryColor: dogPrimaryColor,
+        secondaryColor: dogSecondaryColor,
+        accentColor: dogAccentColor,
+        waveColor: dogWaveColor,
+      );
+    }
+
+    // HomeController가 있으면 종에 따라 색상 변경
+    return GetX<HomeController>(
       builder: (controller) {
         final isCat = controller.currentSpeciesTheme.value == SpeciesTheme.cat;
         
-        // 종에 따라 색상 선택
-        final primaryColor = isCat ? catPrimaryColor : dogPrimaryColor;
-        final secondaryColor = isCat ? catSecondaryColor : dogSecondaryColor;
-        final accentColor = isCat ? catAccentColor : dogAccentColor;
-        final waveColor = isCat ? catWaveColor : dogWaveColor;
+        return _buildBackground(
+          primaryColor: isCat ? catPrimaryColor : dogPrimaryColor,
+          secondaryColor: isCat ? catSecondaryColor : dogSecondaryColor,
+          accentColor: isCat ? catAccentColor : dogAccentColor,
+          waveColor: isCat ? catWaveColor : dogWaveColor,
+        );
+      },
+    );
+  }
 
-        return Obx(() {
-          // Obx로 감싸서 종 변경 감지
-          final currentIsCat = controller.currentSpeciesTheme.value == SpeciesTheme.cat;
-          final currentPrimaryColor = currentIsCat ? catPrimaryColor : dogPrimaryColor;
-          final currentSecondaryColor = currentIsCat ? catSecondaryColor : dogSecondaryColor;
-          final currentAccentColor = currentIsCat ? catAccentColor : dogAccentColor;
-          final currentWaveColor = currentIsCat ? catWaveColor : dogWaveColor;
-
-          return AnimatedContainer(
+  Widget _buildBackground({
+    required Color primaryColor,
+    required Color secondaryColor,
+    required Color accentColor,
+    required Color waveColor,
+  }) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+      child: Stack(
+        children: [
+          // 1. Mesh Gradient Background
+          AnimatedContainer(
             duration: const Duration(milliseconds: 500),
             curve: Curves.easeInOut,
-            child: Stack(
-              children: [
-                // 1. Mesh Gradient Background (종에 따라 색상 변경)
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.easeInOut,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        currentPrimaryColor,
-                        Colors.white,
-                        currentSecondaryColor,
-                      ],
-                      stops: const [0.0, 0.4, 1.0],
-                    ),
-                  ),
-                ),
-                
-                // 1.5. Dynamic Orbs (움직이는 빛망울 - 종에 따라 색상 변경)
-                Positioned(
-                  top: -100,
-                  right: -50,
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 500),
-                    width: 350,
-                    height: 350,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: RadialGradient(
-                        colors: [
-                          currentAccentColor.withOpacity(0.25),
-                          Colors.transparent,
-                        ],
-                      ),
-                    ),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 60, sigmaY: 60),
-                      child: Container(color: Colors.transparent),
-                    ),
-                  ),
-                ),
-
-                // 2. 은은한 빛 번짐 효과 (종에 따라 색상 변경)
-                Positioned(
-                  top: 100,
-                  left: -40,
-                  child: Center(
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 500),
-                      width: 400,
-                      height: 400,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: RadialGradient(
-                          colors: [
-                            currentWaveColor.withOpacity(0.15),
-                            Colors.transparent,
-                          ],
-                          stops: const [0.2, 1.0],
-                        ),
-                      ),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 80, sigmaY: 80),
-                        child: Container(color: Colors.transparent),
-                      ),
-                    ),
-                  ),
-                ),
-
-                // 3. 소리 파동 패턴 (Sound Wave Pattern) - 종에 따라 색상 변경
-                Positioned.fill(
-                  child: AnimatedBuilder(
-                    animation: _controller,
-                    builder: (context, child) {
-                      return CustomPaint(
-                        painter: WavePainter(
-                          color: currentWaveColor.withOpacity(0.05),
-                          waves: 3,
-                          amplitude: 20,
-                          animationValue: _controller.value,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-
-                // 3.5. 파티클 이펙트 (Particles)
-                Positioned.fill(
-                  child: AnimatedBuilder(
-                    animation: _controller,
-                    builder: (context, child) {
-                      return CustomPaint(
-                        painter: ParticlePainter(
-                          particles: _particles,
-                          animationValue: _controller.value,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-
-                // 4. 실제 콘텐츠
-                widget.child,
-              ],
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  primaryColor,
+                  Colors.white,
+                  secondaryColor,
+                ],
+                stops: const [0.0, 0.4, 1.0],
+              ),
             ),
-          );
-        });
-      },
+          ),
+          
+          // 1.5. Dynamic Orbs
+          Positioned(
+            top: -100,
+            right: -50,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 500),
+              width: 350,
+              height: 350,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    accentColor.withOpacity(0.25),
+                    Colors.transparent,
+                  ],
+                ),
+              ),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 60, sigmaY: 60),
+                child: Container(color: Colors.transparent),
+              ),
+            ),
+          ),
+
+          // 2. 은은한 빛 번짐 효과
+          Positioned(
+            top: 100,
+            left: -40,
+            child: Center(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 500),
+                width: 400,
+                height: 400,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      waveColor.withOpacity(0.15),
+                      Colors.transparent,
+                    ],
+                    stops: const [0.2, 1.0],
+                  ),
+                ),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 80, sigmaY: 80),
+                  child: Container(color: Colors.transparent),
+                ),
+              ),
+            ),
+          ),
+
+          // 3. 소리 파동 패턴
+          Positioned.fill(
+            child: AnimatedBuilder(
+              animation: _controller,
+              builder: (context, child) {
+                return CustomPaint(
+                  painter: WavePainter(
+                    color: waveColor.withOpacity(0.05),
+                    waves: 3,
+                    amplitude: 20,
+                    animationValue: _controller.value,
+                  ),
+                );
+              },
+            ),
+          ),
+
+          // 3.5. 파티클 이펙트
+          Positioned.fill(
+            child: AnimatedBuilder(
+              animation: _controller,
+              builder: (context, child) {
+                return CustomPaint(
+                  painter: ParticlePainter(
+                    particles: _particles,
+                    animationValue: _controller.value,
+                  ),
+                );
+              },
+            ),
+          ),
+
+          // 4. 실제 콘텐츠
+          widget.child,
+        ],
+      ),
     );
   }
 }
