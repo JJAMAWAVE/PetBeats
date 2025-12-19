@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/custom_button.dart';
 import '../controllers/invite_controller.dart';
 import '../../../../app/data/services/haptic_service.dart';
 
@@ -484,27 +485,13 @@ class InviteFriendsView extends GetView<InviteController> {
       ),
       child: SafeArea(
         top: false,
-        child: ElevatedButton(
+        child: CustomButton(
+          text: 'invite_cta'.tr,
+          icon: Icons.card_giftcard,
           onPressed: () {
             hapticService.lightImpact();
             controller.shareInvite();
           },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primaryBlue,
-            foregroundColor: Colors.white,
-            elevation: 0,
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.r),
-            ),
-          ),
-          child: Text(
-            'invite_cta'.tr,
-            style: GoogleFonts.notoSans(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
         ),
       ),
     );

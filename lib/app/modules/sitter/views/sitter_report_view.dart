@@ -4,6 +4,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/custom_button.dart';
 import '../../home/widgets/mini_player.dart';
 import '../services/sitter_report_storage_service.dart';
 import '../../../../app/data/services/auth_service.dart';
@@ -486,18 +487,10 @@ class SitterReportView extends StatelessWidget {
         ),
         SizedBox(width: 12.w),
         Expanded(
-          child: ElevatedButton.icon(
+          child: CustomButton(
+            text: 'sitter_go_home'.tr,
+            icon: Icons.home,
             onPressed: () => Get.offAllNamed('/home'),
-            icon: const Icon(Icons.home, color: Colors.white),
-            label: Text('sitter_go_home'.tr, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primaryBlue,
-              foregroundColor: Colors.white,
-              padding: EdgeInsets.symmetric(vertical: 14.h),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-            ),
           ),
         ),
       ],

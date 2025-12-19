@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/custom_button.dart';
 import '../../home/widgets/mini_player.dart';
 
 class SitterSetupView extends StatefulWidget {
@@ -370,43 +371,24 @@ class _SitterSetupViewState extends State<SitterSetupView> {
   Widget _buildStartButton() {
     final canStart = _soundDetectionEnabled || _motionDetectionEnabled;
     
-    return SizedBox(
-      width: double.infinity,
-      height: 56.h,
-      child: ElevatedButton(
-        onPressed: canStart ? () {
-          Get.toNamed('/sitter-monitoring', arguments: {
-            'soundEnabled': _soundDetectionEnabled,
-            'motionEnabled': _motionDetectionEnabled,
-            'soundSensitivity': _soundSensitivity,
-            'motionSensitivity': _motionSensitivity,
-            'soundMode': _soundMode,
-            'durationIndex': _playDuration,
-          });
-        } : null,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primaryBlue,
-          foregroundColor: Colors.white,
-          disabledBackgroundColor: Colors.grey.shade300,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.r),
-          ),
-          elevation: canStart ? 4 : 0,
-          shadowColor: AppColors.primaryBlue.withOpacity(0.4),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.play_arrow, size: 24.w),
-            SizedBox(width: 8.w),
-            Text(
-              'sitter_start_monitoring'.tr,
-              style: AppTextStyles.bodyLarge.copyWith(
-                fontWeight: FontWeight.bold,
-                color: canStart ? Colors.white : Colors.grey,
-              ),
-            ),
-          ],
+    return AnimatedOpacity(
+      opacity: canStart ? 1.0 : 0.5,
+      duration: const Duration(milliseconds: 300),
+      child: IgnorePointer(
+        ignoring: !canStart,
+        child: CustomButton(
+          text: 'sitter_start_monitoring'.tr,
+          icon: Icons.play_arrow,
+          onPressed: () {
+            Get.toNamed('/sitter-monitoring', arguments: {
+              'soundEnabled': _soundDetectionEnabled,
+              'motionEnabled': _motionDetectionEnabled,
+              'soundSensitivity': _soundSensitivity,
+              'motionSensitivity': _motionSensitivity,
+              'soundMode': _soundMode,
+              'durationIndex': _playDuration,
+            });
+          },
         ),
       ),
     );

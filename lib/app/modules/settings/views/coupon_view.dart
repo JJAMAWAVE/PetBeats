@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/custom_button.dart';
 import '../../../data/services/coupon_service.dart';
 
 /// 쿠폰 등록 및 멤버십 관리 화면
@@ -262,37 +263,17 @@ class _CouponViewState extends State<CouponView> {
                 // 등록 버튼
                 Padding(
                   padding: EdgeInsets.all(12.w),
-                  child: Obx(() => SizedBox(
-                    width: double.infinity,
-                    height: 48.h,
-                    child: ElevatedButton(
-                      onPressed: _couponController.text.trim().isEmpty || couponService.isLoading.value
-                          ? null
-                          : () => _registerCoupon(couponService),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryBlue,
-                        disabledBackgroundColor: Colors.grey.shade300,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
+                  child: Obx(() => AnimatedOpacity(
+                    opacity: _couponController.text.trim().isEmpty || couponService.isLoading.value ? 0.5 : 1.0,
+                    duration: const Duration(milliseconds: 300),
+                    child: IgnorePointer(
+                      ignoring: _couponController.text.trim().isEmpty || couponService.isLoading.value,
+                      child: CustomButton(
+                        text: 'coupon_register_btn'.tr,
+                        icon: Icons.check,
+                        isLoading: couponService.isLoading.value,
+                        onPressed: () => _registerCoupon(couponService),
                       ),
-                      child: couponService.isLoading.value
-                          ? SizedBox(
-                              width: 20.w,
-                              height: 20.w,
-                              child: const CircularProgressIndicator(
-                                color: Colors.white,
-                                strokeWidth: 2,
-                              ),
-                            )
-                          : Text(
-                              'coupon_register_btn'.tr,
-                              style: TextStyle(
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
                     ),
                   )),
                 ),
