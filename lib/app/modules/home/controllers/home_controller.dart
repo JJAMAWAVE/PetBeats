@@ -198,7 +198,7 @@ class HomeController extends GetxController with WidgetsBindingObserver {
         id: 'cat_sleep',
         title: 'mode_sleep_title'.tr,
         description: 'mode_cat_sleep_desc'.tr,
-        iconPath: 'assets/icons/icon_mode_sleep.png',
+        iconPath: 'assets/icons/sleep.png',
         color: const Color(0xFF5C6BC0), // Indigo
         scientificFacts: ['fact_sleep_1'.tr, 'fact_sleep_2'.tr],
         tracks: TrackData.catSleepTracks,
@@ -207,7 +207,7 @@ class HomeController extends GetxController with WidgetsBindingObserver {
         id: 'cat_separation',
         title: 'mode_anxiety_title'.tr,
         description: 'mode_cat_anxiety_desc'.tr,
-        iconPath: 'assets/icons/icon_mode_separation.png',
+        iconPath: 'assets/icons/separation.png',
         color: const Color(0xFF26A69A), // Teal
         scientificFacts: ['fact_anxiety_1'.tr, 'fact_anxiety_2'.tr],
         tracks: TrackData.catSeparationTracks,
@@ -216,7 +216,7 @@ class HomeController extends GetxController with WidgetsBindingObserver {
         id: 'cat_noise',
         title: 'mode_noise_title'.tr,
         description: 'mode_cat_noise_desc'.tr,
-        iconPath: 'assets/icons/icon_mode_noise.png',
+        iconPath: 'assets/icons/noise.png',
         color: const Color(0xFF7E57C2), // Deep Purple
         scientificFacts: ['fact_noise_1'.tr, 'fact_noise_2'.tr],
         tracks: TrackData.catNoiseTracks,
@@ -225,7 +225,7 @@ class HomeController extends GetxController with WidgetsBindingObserver {
         id: 'cat_energy',
         title: 'mode_energy_title'.tr,
         description: 'mode_cat_energy_desc'.tr,
-        iconPath: 'assets/icons/icon_mode_energy.png',
+        iconPath: 'assets/icons/energy.png',
         color: const Color(0xFFFFA726), // Orange
         scientificFacts: ['fact_energy_1'.tr, 'fact_energy_2'.tr],
         tracks: TrackData.catEnergyTracks,
@@ -234,7 +234,7 @@ class HomeController extends GetxController with WidgetsBindingObserver {
         id: 'cat_senior',
         title: 'mode_senior_title'.tr,
         description: 'mode_cat_senior_desc'.tr,
-        iconPath: 'assets/icons/icon_mode_senior.png',
+        iconPath: 'assets/icons/senior.png',
         color: const Color(0xFF8D6E63), // Brown
         scientificFacts: ['fact_senior_1'.tr, 'fact_senior_2'.tr],
         tracks: TrackData.catSeniorTracks,
