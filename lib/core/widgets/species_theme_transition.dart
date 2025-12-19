@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:petbeats/core/theme/species_theme.dart';
-import 'dart:math' as math;
 
-/// 종(Species) 전환 시 바 로더 애니메이션으로 화면을 채우는 위젯
-/// CSS 로더에서 영감을 받은 물결 형태의 바 트랜지션
+/// 종(Species) 전환 시 바 로더 애니메이션으로 화면을 덮는 위젯
+/// CSS 로더에서 영감을 받은 부드러운 물결 형태의 바 트랜지션
 class SpeciesThemeTransition extends StatefulWidget {
   final Widget child;
   final SpeciesTheme theme;
@@ -13,7 +12,7 @@ class SpeciesThemeTransition extends StatefulWidget {
     Key? key,
     required this.child,
     required this.theme,
-    this.duration = const Duration(milliseconds: 1200),
+    this.duration = const Duration(milliseconds: 1000),
   }) : super(key: key);
 
   @override
@@ -27,20 +26,20 @@ class _SpeciesThemeTransitionState extends State<SpeciesThemeTransition>
   SpeciesTheme? _previousTheme;
   bool _isAnimating = false;
 
-  // 강아지 색상 (오렌지 계열 - CSS 기본값)
+  // 강아지 색상 (블루 계열)
   static const List<Color> dogColors = [
-    Color(0xFFFFA54F), // light
-    Color(0xFFFF9834), // medium
-    Color(0xFFFF8919), // dark
-    Color(0xFFFF7C00), // darkest
+    Color(0xFF64B5F6), // light blue
+    Color(0xFF42A5F5), // blue
+    Color(0xFF2196F3), // primary blue
+    Color(0xFF1E88E5), // dark blue
   ];
 
   // 고양이 색상 (퍼플 계열)
   static const List<Color> catColors = [
-    Color(0xFFD1C4E9), // light lavender
-    Color(0xFFB39DDB), // medium lavender
-    Color(0xFF9575CD), // deep purple light
-    Color(0xFF7E57C2), // deep purple
+    Color(0xFFCE93D8), // light purple
+    Color(0xFFBA68C8), // medium purple
+    Color(0xFFAB47BC), // purple
+    Color(0xFF9C27B0), // deep purple
   ];
 
   @override
@@ -52,7 +51,7 @@ class _SpeciesThemeTransitionState extends State<SpeciesThemeTransition>
     );
     _animation = CurvedAnimation(
       parent: _controller,
-      curve: Curves.easeInOut,
+      curve: Curves.easeInOutCubic, // 더 부드러운 커브
     );
     _previousTheme = widget.theme;
 
@@ -95,33 +94,23 @@ class _SpeciesThemeTransitionState extends State<SpeciesThemeTransition>
       builder: (context, child) {
         return Stack(
           children: [
-            // 이전 테마 배경 (Bottom Layer)
+            // 실제 콘텐츠 (항상 보임)
             Positioned.fill(
               child: Container(
-                color: _isAnimating
-                    ? _previousTheme?.backgroundColor
-                    : widget.theme.backgroundColor,
+                color: widget.theme.backgroundColor,
+                child: child!,
               ),
             ),
 
-            // 바 로더 애니메이션 (애니메이션 중일 때만)
+            // 바 로더 오버레이 (애니메이션 중일 때만, 콘텐츠 위에 표시)
             if (_isAnimating)
               Positioned.fill(
-                child: _WaveBarLoader(
+                child: _SmoothWaveLoader(
                   progress: _animation.value,
                   colors: _getColorsForTheme(widget.theme),
-                  targetBackgroundColor: widget.theme.backgroundColor,
-                  barCount: 8,
+                  barCount: 20, // 더 많은 바
                 ),
               ),
-
-            // 콘텐츠 (페이드 인/아웃)
-            Opacity(
-              opacity: _isAnimating 
-                  ? (_animation.value > 0.7 ? ((_animation.value - 0.7) / 0.3).clamp(0.0, 1.0) : 0.0)
-                  : 1.0,
-              child: child!,
-            ),
           ],
         );
       },
@@ -130,32 +119,32 @@ class _SpeciesThemeTransitionState extends State<SpeciesThemeTransition>
   }
 }
 
-/// 물결 형태 바 로더
-class _WaveBarLoader extends StatelessWidget {
+/// 부드러운 물결 로더 오버레이
+class _SmoothWaveLoader extends StatelessWidget {
   final double progress;
   final List<Color> colors;
-  final Color targetBackgroundColor;
   final int barCount;
 
-  const _WaveBarLoader({
+  const _SmoothWaveLoader({
     required this.progress,
     required this.colors,
-    required this.targetBackgroundColor,
     required this.barCount,
   });
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final barHeight = screenHeight / barCount;
+
     return Column(
       children: List.generate(barCount, (index) {
-        final delay = index * 0.05; // 각 바마다 딜레이
-        return Expanded(
-          child: _DualAnimatedBar(
+        return SizedBox(
+          height: barHeight,
+          child: _SmoothBar(
             progress: progress,
-            delay: delay,
-            colors: colors,
-            targetColor: targetBackgroundColor,
             barIndex: index,
+            totalBars: barCount,
+            colors: colors,
           ),
         );
       }),
@@ -163,83 +152,91 @@ class _WaveBarLoader extends StatelessWidget {
   }
 }
 
-/// CSS 로더 스타일의 듀얼 애니메이션 바
-class _DualAnimatedBar extends StatelessWidget {
+/// 개별 부드러운 바
+class _SmoothBar extends StatelessWidget {
   final double progress;
-  final double delay;
-  final List<Color> colors;
-  final Color targetColor;
   final int barIndex;
+  final int totalBars;
+  final List<Color> colors;
 
-  const _DualAnimatedBar({
+  const _SmoothBar({
     required this.progress,
-    required this.delay,
-    required this.colors,
-    required this.targetColor,
     required this.barIndex,
+    required this.totalBars,
+    required this.colors,
   });
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     
-    // 딜레이 적용된 진행도
-    final delayedProgress = ((progress - delay) / (1.0 - delay)).clamp(0.0, 1.0);
+    // 각 바마다 약간의 딜레이 (물결 효과)
+    final waveDelay = barIndex * 0.02;
+    final delayedProgress = ((progress - waveDelay) / (1.0 - waveDelay * totalBars * 0.5))
+        .clamp(0.0, 1.0);
     
-    // CSS keyframes 시뮬레이션
-    // Phase 1 (0-0.4): 왼쪽에서 오른쪽으로 채움
-    // Phase 2 (0.4-0.6): 잠시 유지
-    // Phase 3 (0.6-1.0): 오른쪽에서 왼쪽으로 배경색으로 전환
+    // 부드러운 easing
+    final easedProgress = _smoothStep(delayedProgress);
     
-    double leftBarWidth = 0;
-    double rightBarWidth = 0;
-    Color leftColor = colors[0];
-    Color rightColor = colors[colors.length - 1];
+    // Phase 1 (0-0.5): 오른쪽으로 채움
+    // Phase 2 (0.5-1.0): 왼쪽으로 빠짐
+    double barWidth;
+    double leftOffset;
     
-    if (delayedProgress < 0.4) {
-      // Phase 1: 왼쪽 바가 확장
-      final t = delayedProgress / 0.4;
-      leftBarWidth = screenWidth * _easeOutQuad(t);
-      leftColor = Color.lerp(colors[0], colors[2], t)!;
-    } else if (delayedProgress < 0.6) {
-      // Phase 2: 풀 컬러
-      leftBarWidth = screenWidth;
-      leftColor = colors[2];
+    if (easedProgress < 0.5) {
+      // 채워지는 단계
+      final t = easedProgress * 2;
+      barWidth = screenWidth * _smoothStep(t);
+      leftOffset = 0;
     } else {
-      // Phase 3: 배경색으로 전환 (오른쪽에서)
-      final t = (delayedProgress - 0.6) / 0.4;
-      rightBarWidth = screenWidth * _easeOutQuad(t);
-      leftBarWidth = screenWidth - rightBarWidth;
-      leftColor = Color.lerp(colors[2], targetColor, t * 0.5)!;
-      rightColor = targetColor;
+      // 빠지는 단계
+      final t = (easedProgress - 0.5) * 2;
+      barWidth = screenWidth * (1 - _smoothStep(t));
+      leftOffset = screenWidth * _smoothStep(t);
     }
     
-    return Row(
+    // 색상 그라데이션 (바 인덱스에 따라)
+    final colorIndex = barIndex % colors.length;
+    final nextColorIndex = (colorIndex + 1) % colors.length;
+    final colorT = (barIndex / totalBars);
+    final barColor = Color.lerp(colors[colorIndex], colors[nextColorIndex], colorT)!;
+    
+    // 부드러운 불투명도 (시작/끝에서 페이드)
+    double opacity = 1.0;
+    if (easedProgress < 0.1) {
+      opacity = easedProgress * 10;
+    } else if (easedProgress > 0.9) {
+      opacity = (1.0 - easedProgress) * 10;
+    }
+    
+    return Stack(
       children: [
-        // 왼쪽 바 (색상)
-        Container(
-          width: leftBarWidth.clamp(0, screenWidth),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                leftColor,
-                Color.lerp(leftColor, colors[barIndex % colors.length], 0.3)!,
-              ],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
+        Positioned(
+          left: leftOffset,
+          top: 0,
+          bottom: 0,
+          child: Container(
+            width: barWidth.clamp(0, screenWidth),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  barColor.withOpacity(opacity * 0.95),
+                  Color.lerp(barColor, colors[(colorIndex + 2) % colors.length], 0.3)!
+                      .withOpacity(opacity * 0.85),
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
             ),
           ),
-        ),
-        // 오른쪽 바 (배경색)
-        Container(
-          width: rightBarWidth.clamp(0, screenWidth),
-          color: rightColor,
         ),
       ],
     );
   }
   
-  double _easeOutQuad(double t) {
-    return 1 - (1 - t) * (1 - t);
+  /// 부드러운 스텝 함수 (더 자연스러운 이징)
+  double _smoothStep(double t) {
+    // Smoother step: 6t^5 - 15t^4 + 10t^3
+    return t * t * t * (t * (t * 6 - 15) + 10);
   }
 }
