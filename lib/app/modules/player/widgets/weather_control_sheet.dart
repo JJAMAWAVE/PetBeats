@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -108,24 +109,24 @@ class _WeatherControlSheetState extends State<WeatherControlSheet> {
                 final location = _weatherService.locationName.value;
                 final isLoading = _weatherService.isLoading.value;
                 
-                IconData weatherIcon = Icons.wb_sunny;
+                String weatherSvg = 'assets/icons/weather/sunny.svg';
                 Color weatherColor = Colors.orange;
                 String weatherLabel = 'weather_clear'.tr;
                 
                 if (condition.contains('Rain') || condition.contains('Drizzle')) {
-                  weatherIcon = Icons.water_drop;
+                  weatherSvg = 'assets/icons/weather/rainy.svg';
                   weatherColor = Colors.blue;
                   weatherLabel = 'weather_rain'.tr;
                 } else if (condition.contains('Snow')) {
-                  weatherIcon = Icons.ac_unit;
+                  weatherSvg = 'assets/icons/weather/snowy.svg';
                   weatherColor = Colors.lightBlue;
                   weatherLabel = 'weather_snow'.tr;
                 } else if (condition.contains('Cloud')) {
-                  weatherIcon = Icons.cloud;
+                  weatherSvg = 'assets/icons/weather/cloudy.svg';
                   weatherColor = Colors.blueGrey;
                   weatherLabel = 'weather_clouds'.tr;
                 } else if (condition.contains('Thunder')) {
-                  weatherIcon = Icons.flash_on;
+                  weatherSvg = 'assets/icons/weather/thunder.svg';
                   weatherColor = Colors.amber;
                   weatherLabel = 'weather_thunder'.tr;
                 }
@@ -147,7 +148,7 @@ class _WeatherControlSheetState extends State<WeatherControlSheet> {
                         )
                       : Row(
                           children: [
-                            Icon(weatherIcon, color: weatherColor, size: 40.w),
+                            SvgPicture.asset(weatherSvg, width: 40.w, height: 40.w),
                             SizedBox(width: 16.w),
                             Expanded(
                               child: Column(

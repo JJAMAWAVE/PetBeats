@@ -1,0 +1,14 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60.7 40">
+  <style>.white{fill:#FFFFFF}.gray{fill:#E0E0E0}</style>
+  <g id="Cloud">
+    <g id="White_cloud">
+      <path class="white" d="M47.2,40H7.9C3.5,40,0,36.5,0,32.1l0,0c0-4.3,3.5-7.9,7.9-7.9h39.4c4.3,0,7.9,3.5,7.9,7.9v0C55.1,36.5,51.6,40,47.2,40z"/>
+      <circle class="white" cx="17.4" cy="22.8" r="9.3"/>
+      <circle class="white" cx="34.5" cy="21.1" r="15.6"/>
+    </g>
+    <g id="Gray_cloud">
+      <path class="gray" d="M54.7,22.3H33.4c-3.3,0-6-2.7-6-6v0c0-3.3,2.7-6,6-6h21.3c3.3,0,6,2.7,6,6v0C60.7,19.6,58,22.3,54.7,22.3z"/>
+      <circle class="gray" cx="45.7" cy="10.7" r="10.7"/>
+    </g>
+  </g>
+</svg>

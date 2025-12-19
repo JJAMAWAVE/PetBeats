@@ -118,6 +118,7 @@ flutter:
     - assets/sound/TEST.mp3
     - assets/haptic_patterns/
     - assets/icons/
+    - assets/icons/weather/
 
   fonts:
     - family: Pretendard
