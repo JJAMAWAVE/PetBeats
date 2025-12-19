@@ -220,7 +220,6 @@ class PlayerController extends GetxController {
 
   // Therapy Controls
   final hapticIntensity = HapticIntensity.off.obs;  // Changed default from soft to off
-  final isWeatherActive = false.obs;
 
   void togglePlay() {
     print('🔘 [PlayerController] togglePlay() called');
@@ -380,12 +379,6 @@ class PlayerController extends GetxController {
     });
   }
 
-  void toggleWeather() {
-    isWeatherActive.value = !isWeatherActive.value;
-    // TODO: Call SoundService to toggle rain layer
-    print('Weather toggled: ${isWeatherActive.value}');
-  }
-  
   /// 반복 모드 토글: Off → Single (1곡) → All (전체) → Off
   void toggleRepeatMode() {
     switch (repeatMode.value) {
