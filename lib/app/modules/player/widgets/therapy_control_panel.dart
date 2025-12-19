@@ -239,28 +239,7 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
               ),
             ),
             Expanded(
-              child: SliderTheme(
-                data: SliderThemeData(
-                  trackHeight: 5.h,
-                  thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8.r),
-                  overlayShape: RoundSliderOverlayShape(overlayRadius: 14.r),
-                  activeTrackColor: AppColors.primaryBlue,
-                  inactiveTrackColor: Colors.white.withOpacity(0.15),
-                  thumbColor: Colors.white,
-                  overlayColor: AppColors.primaryBlue.withOpacity(0.3),
-                ),
-                child: Slider(
-                  value: _getSliderValue(widget.hapticIntensity),
-                  min: 0,
-                  max: 4,
-                  divisions: 4,
-                  onChanged: (value) {
-                    HapticIntensity newIntensity = _getIntensityFromValue(value);
-                    _provideHapticFeedback(newIntensity);
-                    widget.onHapticChange(newIntensity);
-                  },
-                ),
-              ),
+              child: _buildCustomSlider(),
             ),
             Text(
               'MAX',
@@ -554,6 +533,107 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
         ),
       ),
     );
+  }
+  
+  /// CSS 스타일 프리미엄 슬라이더
+  Widget _buildCustomSlider() {
+    final sliderValue = _getSliderValue(widget.hapticIntensity);
+    final normalizedValue = sliderValue / 4; // 0-1 범위로 정규화
+    
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final trackWidth = constraints.maxWidth;
+        final handleSize = 28.w;
+        final handlePosition = (trackWidth - handleSize) * normalizedValue;
+        
+        return GestureDetector(
+          onHorizontalDragStart: (details) {
+            _updateSliderFromPosition(details.localPosition.dx, trackWidth, handleSize);
+          },
+          onHorizontalDragUpdate: (details) {
+            _updateSliderFromPosition(details.localPosition.dx, trackWidth, handleSize);
+          },
+          onTapDown: (details) {
+            _updateSliderFromPosition(details.localPosition.dx, trackWidth, handleSize);
+          },
+          child: Container(
+            height: 40.h,
+            color: Colors.transparent,
+            child: Stack(
+              alignment: Alignment.centerLeft,
+              children: [
+                // 배경 트랙
+                Container(
+                  height: 4.h,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(2.r),
+                  ),
+                ),
+                
+                // 활성 트랙
+                Container(
+                  width: handlePosition + handleSize / 2,
+                  height: 4.h,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        AppColors.primaryBlue.withOpacity(0.6),
+                        AppColors.primaryBlue,
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(2.r),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.primaryBlue.withOpacity(0.4),
+                        blurRadius: 6,
+                        spreadRadius: 1,
+                      ),
+                    ],
+                  ),
+                ),
+                
+                // 핸들
+                Positioned(
+                  left: handlePosition,
+                  child: Container(
+                    width: handleSize,
+                    height: handleSize,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.primaryBlue,
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 3.w,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.primaryBlue.withOpacity(0.5),
+                          blurRadius: 8,
+                          spreadRadius: 2,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+  
+  void _updateSliderFromPosition(double localX, double trackWidth, double handleSize) {
+    final clampedX = localX.clamp(handleSize / 2, trackWidth - handleSize / 2);
+    final newValue = ((clampedX - handleSize / 2) / (trackWidth - handleSize) * 4).round();
+    final clampedValue = newValue.clamp(0, 4);
+    
+    HapticIntensity newIntensity = _getIntensityFromValue(clampedValue.toDouble());
+    if (newIntensity != widget.hapticIntensity) {
+      _provideHapticFeedback(newIntensity);
+      widget.onHapticChange(newIntensity);
+    }
   }
 }
 
