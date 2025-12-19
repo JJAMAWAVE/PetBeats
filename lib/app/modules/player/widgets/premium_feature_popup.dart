@@ -148,7 +148,6 @@ class PremiumFeaturePopup extends StatelessWidget {
                 SizedBox(width: 12.w),
                 // Subscribe Button
                 Expanded(
-                  flex: 2,
                   child: CustomButton(
                     text: 'dialog_subscribe'.tr,
                     icon: Icons.star,
