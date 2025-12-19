@@ -51,58 +51,76 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20.r),
-        border: Border.all(
-          color: AppColors.primaryBlue.withOpacity(0.15),
-          width: 1.5,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.primaryBlue.withOpacity(0.08),
-            blurRadius: 12,
-            offset: const Offset(0, 6),
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Premium 타이틀
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '✨ ',
-                style: TextStyle(fontSize: 16.sp),
-              ),
-              Text(
-                'haptic_premium_title'.tr,
-                style: TextStyle(
-                  color: AppColors.textDarkNavy,
-                  fontSize: 15.sp,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 0.5,
-                ),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(28.r),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.white.withOpacity(0.15),
+                Colors.white.withOpacity(0.08),
+              ],
+            ),
+            borderRadius: BorderRadius.circular(28.r),
+            border: Border.all(
+              color: widget.hapticIntensity != HapticIntensity.off 
+                  ? AppColors.primaryBlue.withOpacity(0.5)
+                  : Colors.white.withOpacity(0.2),
+              width: 2,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: widget.hapticIntensity != HapticIntensity.off
+                    ? AppColors.primaryBlue.withOpacity(0.3)
+                    : Colors.black.withOpacity(0.15),
+                blurRadius: 24,
+                spreadRadius: 2,
+                offset: const Offset(0, 8),
               ),
             ],
           ),
-          SizedBox(height: 16.h),
-          // Haptic Mode Selector (햅틱 모드일 때만 표시)
-          if (widget.showHapticSlider) ...[
-            _buildModeSelector(),
-            SizedBox(height: 16.h),
-            // Haptic 슬라이더
-            _buildHapticSlider(),
-          ] else ...[
-            // 햅틱 없는 모드에서는 퀵 액세스만 표시
-            _buildQuickAccessRow(),
-          ],
-        ],
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Premium 타이틀
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '✨ ',
+                    style: TextStyle(fontSize: 16.sp),
+                  ),
+                  Text(
+                    'haptic_premium_title'.tr,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16.h),
+              // Haptic Mode Selector (햅틱 모드일 때만 표시)
+              if (widget.showHapticSlider) ...[
+                _buildModeSelector(),
+                SizedBox(height: 16.h),
+                // Haptic 슬라이더
+                _buildHapticSlider(),
+              ] else ...[
+                // 햅틱 없는 모드에서는 퀵 액세스만 표시
+                _buildQuickAccessRow(),
+              ],
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -160,10 +178,10 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
         width: 60.w,  // Reduced size for compact appearance
         padding: EdgeInsets.symmetric(vertical: 8.h),
         decoration: BoxDecoration(
-          color: isSelected ? color.withOpacity(0.15) : Colors.grey.shade50,
-          borderRadius: BorderRadius.circular(16.r),
+          color: isSelected ? color.withOpacity(0.2) : Colors.transparent,
+          borderRadius: BorderRadius.circular(20.r),
           border: Border.all(
-            color: isSelected ? color : Colors.grey.shade300,
+            color: isSelected ? color : Colors.white.withOpacity(0.2),
             width: isSelected ? 2 : 1,
           ),
         ),
@@ -172,7 +190,7 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
           children: [
             Icon(
               icon,
-              color: isSelected ? color : AppColors.textGrey,
+              color: isSelected ? color : Colors.white.withOpacity(0.5),
               size: 18.w,  // Reduced icon size
             ),
             SizedBox(height: 4.h),
@@ -180,7 +198,7 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
               label,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: isSelected ? color : AppColors.textGrey,
+                color: isSelected ? color : Colors.white.withOpacity(0.5),
                 fontSize: 10.sp,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
               ),
@@ -213,7 +231,7 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
               _getIntensityLabel(widget.hapticIntensity),
               style: TextStyle(
                 color: widget.hapticIntensity == HapticIntensity.off 
-                    ? AppColors.textGrey
+                    ? Colors.white.withOpacity(0.5)
                     : AppColors.primaryBlue,
                 fontSize: 10.sp,
                 fontWeight: FontWeight.w700,
@@ -227,9 +245,9 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
                   thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8.r),
                   overlayShape: RoundSliderOverlayShape(overlayRadius: 14.r),
                   activeTrackColor: AppColors.primaryBlue,
-                  inactiveTrackColor: Colors.grey.shade200,
-                  thumbColor: AppColors.primaryBlue,
-                  overlayColor: AppColors.primaryBlue.withOpacity(0.2),
+                  inactiveTrackColor: Colors.white.withOpacity(0.15),
+                  thumbColor: Colors.white,
+                  overlayColor: AppColors.primaryBlue.withOpacity(0.3),
                 ),
                 child: Slider(
                   value: _getSliderValue(widget.hapticIntensity),
@@ -249,7 +267,7 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
               style: TextStyle(
                 color: widget.hapticIntensity == HapticIntensity.deep 
                     ? Colors.amber
-                    : AppColors.textGrey.withOpacity(0.5),
+                    : Colors.white.withOpacity(0.3),
                 fontSize: 10.sp,
                 fontWeight: FontWeight.w600,
               ),
@@ -386,17 +404,17 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
             duration: const Duration(milliseconds: 300),
             padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
             decoration: BoxDecoration(
-              color: isActive ? color.withOpacity(0.15) : Colors.grey.shade50,
+              color: isActive ? color.withOpacity(0.25) : Colors.white.withOpacity(0.1),
               borderRadius: BorderRadius.circular(12.r),
               border: Border.all(
-                color: isActive ? color : Colors.grey.shade300,
+                color: isActive ? color : Colors.white.withOpacity(0.2),
                 width: isActive ? 2 : 1,
               ),
               boxShadow: isActive ? [
                 BoxShadow(
-                  color: color.withOpacity(0.3),
-                  blurRadius: 6,
-                  spreadRadius: 0,
+                  color: color.withOpacity(0.4),
+                  blurRadius: 8,
+                  spreadRadius: 1,
                 ),
               ] : null,
             ),
@@ -406,7 +424,7 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
                 // Animated icon for active state
                 isActive 
                   ? _buildPulsingIcon(icon, color)
-                  : Icon(icon, color: AppColors.textGrey, size: 14.w),
+                  : Icon(icon, color: Colors.white.withOpacity(0.6), size: 14.w),
                 SizedBox(width: 3.w),
                 Flexible(
                   child: Text(
@@ -414,7 +432,7 @@ class _TherapyControlPanelState extends State<TherapyControlPanel> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      color: isActive ? color : AppColors.textGrey,
+                      color: isActive ? color : Colors.white.withOpacity(0.6),
                       fontSize: 10.sp,
                       fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
                     ),

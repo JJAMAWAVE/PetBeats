@@ -105,7 +105,7 @@ class _RollingTipWidgetState extends State<RollingTipWidget> {
               child: Text(
                 _tips[tipIndex].tr,
                 style: TextStyle(
-                color: AppColors.textGrey,
+                  color: Colors.white.withOpacity(0.75),
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
                 ),
