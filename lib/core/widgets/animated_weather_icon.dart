@@ -154,16 +154,12 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
 
   /// 🌧️ 비 - 구름 + 빗방울 내림
   Widget _buildRainy() {
-    return Stack(
+    return Column(
       children: [
         // 구름
-        Positioned(
-          left: 0,
-          top: 0,
-          child: CustomPaint(
-            size: Size(widget.size * 0.9, widget.size * 0.5),
-            painter: _CloudPainter(const Color(0xFF90A4AE)),
-          ),
+        CustomPaint(
+          size: Size(widget.size * 0.9, widget.size * 0.5),
+          painter: _CloudPainter(const Color(0xFF90A4AE)),
         ),
         // 빗방울들
         AnimatedBuilder(
@@ -174,13 +170,11 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
               child: Transform.translate(
                 offset: Offset(0, 10 * _rainController.value),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _buildRainDrop(widget.size * 0.25),
-                    SizedBox(width: widget.size * 0.1),
-                    _buildRainDrop(widget.size * 0.45),
-                    SizedBox(width: widget.size * 0.1),
-                    _buildRainDrop(widget.size * 0.65),
+                    _buildRainDrop(),
+                    _buildRainDrop(),
+                    _buildRainDrop(),
                   ],
                 ),
               ),
@@ -191,11 +185,10 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
     );
   }
 
-  Widget _buildRainDrop(double ignore) {
+  Widget _buildRainDrop() {
     return Container(
       width: 6,
       height: 10,
-      margin: EdgeInsets.only(top: widget.size * 0.5),
       decoration: BoxDecoration(
         color: const Color(0xFF64B5F6),
         borderRadius: BorderRadius.circular(3),
