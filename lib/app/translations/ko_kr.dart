@@ -692,7 +692,7 @@ const Map<String, String> koKR = {
   'dialog_pro_feature': 'PRO 전용 기능',
   'dialog_pro_desc': 'AI 맞춤 플레이리스트 자동 생성',
   'dialog_start_pro': 'PRO 시작하기',
-  'dialog_later': '나중에 할게요',
+  'dialog_later': '나중에 할게요',\r\n  'dialog_subscribe': '구독하기',
   'dialog_default_desc': '맞춤 플레이리스트를 생성합니다.',
   
   // ===== AI Scenario Subtitles =====

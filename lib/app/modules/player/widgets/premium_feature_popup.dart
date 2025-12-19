@@ -137,7 +137,7 @@ class PremiumFeaturePopup extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'close'.tr,
+                      'dialog_later'.tr,
                       style: TextStyle(
                         color: AppColors.textGrey,
                         fontSize: 14.sp,
@@ -150,7 +150,7 @@ class PremiumFeaturePopup extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: CustomButton(
-                    text: 'premium_subscribe_btn'.tr,
+                    text: 'dialog_subscribe'.tr,
                     icon: Icons.star,
                     onPressed: () {
                       Get.back();
