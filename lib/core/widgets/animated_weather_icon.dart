@@ -130,7 +130,7 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
                 offset: Offset(-3 * _cloudController.value, 0),
                 child: CustomPaint(
                   size: Size(widget.size * 0.6, widget.size * 0.4),
-                  painter: _CloudPainter(Colors.grey.shade400),
+                  painter: _CloudPainter(const Color(0xFFB0BEC5)),
                 ),
               ),
             ),
@@ -142,7 +142,7 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
                 offset: Offset(5 * _cloudController.value, 0),
                 child: CustomPaint(
                   size: Size(widget.size * 0.9, widget.size * 0.6),
-                  painter: _CloudPainter(Colors.white),
+                  painter: _CloudPainter(const Color(0xFFE0E0E0)),
                 ),
               ),
             ),
@@ -162,7 +162,7 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
           top: 0,
           child: CustomPaint(
             size: Size(widget.size * 0.9, widget.size * 0.5),
-            painter: _CloudPainter(Colors.white),
+            painter: _CloudPainter(const Color(0xFF90A4AE)),
           ),
         ),
         // 빗방울들
@@ -199,7 +199,7 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
         width: 6,
         height: 10,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color(0xFF64B5F6),
           borderRadius: BorderRadius.circular(3),
         ),
       ),
@@ -216,7 +216,7 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
           top: 0,
           child: CustomPaint(
             size: Size(widget.size * 0.9, widget.size * 0.5),
-            painter: _CloudPainter(Colors.white),
+            painter: _CloudPainter(const Color(0xFFCFD8DC)),
           ),
         ),
         // 눈송이들
@@ -245,7 +245,7 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
         width: 8,
         height: 8,
         decoration: const BoxDecoration(
-          color: Colors.white,
+          color: Color(0xFF81D4FA),
           shape: BoxShape.circle,
         ),
       ),
@@ -341,7 +341,7 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
       width: width,
       height: 2,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFF90A4AE),
         borderRadius: BorderRadius.circular(1),
       ),
     );
@@ -371,7 +371,7 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
                 offset: Offset(-3 * _cloudController.value, 0),
                 child: CustomPaint(
                   size: Size(widget.size * 0.6, widget.size * 0.35),
-                  painter: _CloudPainter(Colors.grey.shade400),
+                  painter: _CloudPainter(const Color(0xFFB0BEC5)),
                 ),
               ),
             ),
@@ -382,7 +382,7 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
                 offset: Offset(5 * _cloudController.value, 0),
                 child: CustomPaint(
                   size: Size(widget.size * 0.85, widget.size * 0.5),
-                  painter: _CloudPainter(Colors.white),
+                  painter: _CloudPainter(const Color(0xFFE0E0E0)),
                 ),
               ),
             ),
