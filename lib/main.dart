@@ -61,6 +61,10 @@ void main() async {
   }
   
   
+  // ⚠️ 테스트용: 항상 신규 유저로 시작 (온보딩 표시)
+  // TODO: APK 테스트 완료 후 이 줄 제거
+  GetStorage().write('onboarding_completed', false);
+  
   // 전역 서비스 초기화
   Get.put(HapticService(), permanent: true);
   Get.put(HapticPatternPlayer(), permanent: true);  // MIDI 기반 햅틱 패턴 플레이어
