@@ -556,7 +556,6 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
               syncService.enableAutoSync();  // 이제 날씨 동기화 시작
               
               weatherManager.enableWeatherMix();
-              playerController?.isWeatherActive.value = true;  // ✨ Null-safe
               Get.snackbar(
                 'weather_therapy_active'.tr,
                 'weather_therapy_active_desc'.tr,
@@ -574,7 +573,6 @@ class WeatherSettingsBottomSheet extends StatelessWidget {
               syncService.disableAutoSync();
               
               weatherManager.disableWeatherMix();
-              playerController?.isWeatherActive.value = false;  // ✨ Null-safe
               Get.back();
             }
           },

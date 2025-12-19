@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../data/services/weather_service.dart';
 import '../controllers/player_controller.dart';
 import '../widgets/bio_pulse_widget.dart';
 import '../widgets/audio_reactive_visualizer.dart';
@@ -101,14 +102,29 @@ class NowPlayingView extends GetView<PlayerController> {
       final showHapticSlider = mode != null && 
                         (mode.id == 'sleep' || mode.id == 'anxiety' || mode.id == 'senior');
       
+      // WeatherService에서 날씨 상태 가져오기
+      bool isWeatherActive = false;
+      VoidCallback onWeatherToggle = () {};
+      try {
+        final weatherService = Get.find<WeatherService>();
+        isWeatherActive = weatherService.isEnabled.value;
+        onWeatherToggle = () {
+          if (weatherService.isEnabled.value) {
+            weatherService.disableWeatherSync();
+          } else {
+            weatherService.enableWeatherSync();
+          }
+        };
+      } catch (_) {}
+      
       return TherapyControlPanel(
         hapticIntensity: controller.hapticIntensity.value,
         onHapticChange: controller.setHapticIntensity,
-        isWeatherActive: controller.isWeatherActive.value,
-        onWeatherToggle: controller.toggleWeather,
+        isWeatherActive: isWeatherActive,
+        onWeatherToggle: onWeatherToggle,
         hapticMode: controller.hapticMode.value,
         onHapticModeChange: controller.setHapticMode,
-        showHapticSlider: showHapticSlider,  // 새 파라미터
+        showHapticSlider: showHapticSlider,
       );
     });
   }

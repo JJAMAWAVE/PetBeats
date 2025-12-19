@@ -17,10 +17,10 @@ class InviteController extends GetxController {
   // 진행 상황
   final friendsJoined = 0.obs;
   
-  // 보상 티어 설정
+  // 보상 티어 설정 (1명→7일, 3명→7일, 5명→21일)
   static const int tier1Goal = 1;  // 1명 초대 → 7일
-  static const int tier2Goal = 3;  // 3명 초대 → 21일
-  static const int tier3Goal = 5;  // 5명 초대 → 30일
+  static const int tier2Goal = 3;  // 3명 초대 → 7일 (추가)
+  static const int tier3Goal = 5;  // 5명 초대 → 21일 (추가)
   
   // 보상 지급 여부
   final tier1Rewarded = false.obs;
@@ -116,11 +116,11 @@ class InviteController extends GetxController {
   /// 다음 보상 일수
   int get nextRewardDays {
     if (friendsJoined.value < tier1Goal) {
-      return 7;
+      return 7;  // 1명 → 7일
     } else if (friendsJoined.value < tier2Goal) {
-      return 21;
+      return 7;  // 3명 → 7일
     } else if (friendsJoined.value < tier3Goal) {
-      return 30;
+      return 21;  // 5명 → 21일
     }
     return 0;
   }
@@ -129,18 +129,29 @@ class InviteController extends GetxController {
   bool get allTiersCompleted => 
       tier1Rewarded.value && tier2Rewarded.value && tier3Rewarded.value;
   
+  /// 내 초대 코드 (사용자별 고유)
+  String get myInviteCode {
+    // 저장된 코드가 있으면 사용
+    final savedCode = _storage.read<String>('my_invite_code');
+    if (savedCode != null) return savedCode;
+    
+    // 없으면 새로 생성 (타임스탬프 기반)
+    final code = 'PB${DateTime.now().millisecondsSinceEpoch % 100000}';
+    _storage.write('my_invite_code', code);
+    return code;
+  }
+  
   Future<void> shareInvite() async {
     try {
-      // TODO: Firebase Dynamic Links로 실제 초대 링크 생성
-      final inviteCode = 'PETBEATS${DateTime.now().millisecondsSinceEpoch % 100000}';
-      final inviteLink = 'https://petbeats.app/invite?code=$inviteCode';
+      // 앱 다운로드 링크 (Play Store / App Store)
+      const playStoreLink = 'https://play.google.com/store/apps/details?id=com.resonancespace.petbeats';
       
       final message = '''
 🐾 PetBeats - ${'invite_share_message'.tr}
 
 ${'invite_share_benefit'.tr}
 
-$inviteLink
+📲 다운로드: $playStoreLink
 
 ✨ ${'invite_share_features'.tr}
 ''';

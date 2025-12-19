@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// 쿠폰 모델
 class Coupon {
@@ -181,12 +182,61 @@ class CouponService extends GetxService {
     }
   }
 
-  /// 쿠폰 코드 검증 (Firebase 연동 전 시뮬레이션)
+  /// 쿠폰 코드 검증 (Firestore 연동)
   Future<Map<String, dynamic>?> _validateCouponCode(String code) async {
-    // 시뮬레이션 딜레이
-    await Future.delayed(const Duration(milliseconds: 500));
+    try {
+      // Firestore에서 쿠폰 조회
+      final doc = await FirebaseFirestore.instance
+          .collection('coupons')
+          .doc(code)
+          .get();
+      
+      if (doc.exists) {
+        final data = doc.data()!;
+        
+        // 쿠폰 활성 상태 확인
+        if (data['isActive'] != true) {
+          debugPrint('🎫 [CouponService] Coupon $code is not active');
+          return null;
+        }
+        
+        // 만료일 확인
+        if (data['expiryDate'] != null) {
+          final expiry = (data['expiryDate'] as Timestamp).toDate();
+          if (expiry.isBefore(DateTime.now())) {
+            debugPrint('🎫 [CouponService] Coupon $code is expired');
+            return null;
+          }
+        }
+        
+        // 사용 횟수 확인
+        final maxUses = data['maxUses'] as int?;
+        final usedCount = data['usedCount'] as int? ?? 0;
+        if (maxUses != null && usedCount >= maxUses) {
+          debugPrint('🎫 [CouponService] Coupon $code has reached max uses');
+          return null;
+        }
+        
+        // 사용 횟수 증가 (트랜잭션)
+        await FirebaseFirestore.instance.runTransaction((transaction) async {
+          transaction.update(doc.reference, {
+            'usedCount': FieldValue.increment(1),
+          });
+        });
+        
+        debugPrint('🎫 [CouponService] Coupon $code validated from Firestore');
+        return {
+          'type': data['type'] ?? 'pro_days',
+          'value': data['value'] ?? 0,
+          'description': data['description'] ?? '',
+        };
+      }
+    } catch (e) {
+      debugPrint('🎫 [CouponService] Firestore error: $e');
+      // Firestore 연결 실패 시 로컬 폴백
+    }
     
-    // 테스트 쿠폰 코드들 (나중에 Firebase로 대체)
+    // 로컬 테스트 쿠폰 (폴백 / 개발용)
     final testCoupons = {
       'LAUNCH2024': {'type': 'pro_days', 'value': 30, 'description': 'coupon_launch_event'.tr},
       'FRIEND7': {'type': 'pro_days', 'value': 7, 'description': 'coupon_friend_invite'.tr},

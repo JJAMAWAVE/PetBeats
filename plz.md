@@ -22,3 +22,7 @@
 # 4. FEEDBACK LOOP (질문 금지)
 - "이 작업을 진행할까요?", "확인해 주시겠습니까?" 같은 불필요한 질문을 하지 않는다.
 - 확실하지 않은 치명적인 경우(파일 영구 삭제 등)를 제외하고는 판단하여 진행한다.
+
+# 5. FLUTTER BUILD COMMANDS (빌드 명령어 자동 실행)
+- `flutter clean`, `flutter pub get`, `flutter run`, `flutter analyze` 등 빌드/실행 관련 명령어는 자동 실행한다.
+- 빌드 에러 발생 시 `flutter clean` 후 재시도하는 것도 자동으로 진행한다.
