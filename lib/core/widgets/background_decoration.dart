@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'package:get/get.dart';
 import '../theme/app_colors.dart';
-
-import 'dart:math' as math;
+import '../theme/species_theme.dart';
+import '../../app/modules/home/controllers/home_controller.dart';
 
 import 'dart:math' as math;
 
@@ -20,6 +21,18 @@ class _BackgroundDecorationState extends State<BackgroundDecoration>
   late AnimationController _controller;
   final List<ParticleModel> _particles = [];
   final int _particleCount = 20;
+
+  // 강아지 색상 테마 (블루 계열)
+  static const Color dogPrimaryColor = Color(0xFFDCEAF7);
+  static const Color dogSecondaryColor = Color(0xFFE1EBF5);
+  static const Color dogAccentColor = Color(0xFF9FA8DA);
+  static const Color dogWaveColor = Color(0xFF2196F3);
+
+  // 고양이 색상 테마 (퍼플 계열)
+  static const Color catPrimaryColor = Color(0xFFE8E0F0);
+  static const Color catSecondaryColor = Color(0xFFEDE7F6);
+  static const Color catAccentColor = Color(0xFFB39DDB);
+  static const Color catWaveColor = Color(0xFF7C4DFF);
 
   @override
   void initState() {
@@ -43,111 +56,139 @@ class _BackgroundDecorationState extends State<BackgroundDecoration>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        // 1. 배경은 SpeciesThemeTransition에서 처리 (ripple 애니메이션 지원)
-        // 1. Mesh Gradient Background (Rich Blue & White)
-        Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                const Color(0xFFDCEAF7), // 진한 하늘색 (Top Left)
-                Colors.white,            // 중앙 화이트
-                const Color(0xFFE1EBF5), // 쿨 그레이 블루 (Bottom Right)
-              ],
-              stops: const [0.0, 0.4, 1.0],
-            ),
-          ),
-        ),
+    // HomeController에서 현재 종 테마 가져오기
+    return GetBuilder<HomeController>(
+      init: Get.isRegistered<HomeController>() ? Get.find<HomeController>() : null,
+      builder: (controller) {
+        final isCat = controller.currentSpeciesTheme.value == SpeciesTheme.cat;
         
-        // 1.5. Dynamic Orbs (움직이는 빛망울 - 더 진하고 크게)
-        Positioned(
-          top: -100,
-          right: -50,
-          child: Container(
-            width: 350,
-            height: 350,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: RadialGradient(
-                colors: [
-                  const Color(0xFF9FA8DA).withOpacity(0.25), // Indigo (보라빛)
-                  Colors.transparent,
-                ],
-              ),
-            ),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 60, sigmaY: 60),
-              child: Container(color: Colors.transparent),
-            ),
-          ),
-        ),
+        // 종에 따라 색상 선택
+        final primaryColor = isCat ? catPrimaryColor : dogPrimaryColor;
+        final secondaryColor = isCat ? catSecondaryColor : dogSecondaryColor;
+        final accentColor = isCat ? catAccentColor : dogAccentColor;
+        final waveColor = isCat ? catWaveColor : dogWaveColor;
 
-        // 2. 은은한 빛 번짐 효과 (기존 유지, 위치 조정)
-        Positioned(
-          top: 100, // 위치 살짝 내림
-          left: -40,
-          child: Center(
-            child: Container(
-              width: 400,
-              height: 400,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: RadialGradient(
-                  colors: [
-                    AppColors.primaryBlue.withOpacity(0.15),
-                    Colors.transparent,
-                  ],
-                  stops: const [0.2, 1.0],
+        return Obx(() {
+          // Obx로 감싸서 종 변경 감지
+          final currentIsCat = controller.currentSpeciesTheme.value == SpeciesTheme.cat;
+          final currentPrimaryColor = currentIsCat ? catPrimaryColor : dogPrimaryColor;
+          final currentSecondaryColor = currentIsCat ? catSecondaryColor : dogSecondaryColor;
+          final currentAccentColor = currentIsCat ? catAccentColor : dogAccentColor;
+          final currentWaveColor = currentIsCat ? catWaveColor : dogWaveColor;
+
+          return AnimatedContainer(
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInOut,
+            child: Stack(
+              children: [
+                // 1. Mesh Gradient Background (종에 따라 색상 변경)
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        currentPrimaryColor,
+                        Colors.white,
+                        currentSecondaryColor,
+                      ],
+                      stops: const [0.0, 0.4, 1.0],
+                    ),
+                  ),
                 ),
-              ),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 80, sigmaY: 80),
-                child: Container(color: Colors.transparent),
-              ),
+                
+                // 1.5. Dynamic Orbs (움직이는 빛망울 - 종에 따라 색상 변경)
+                Positioned(
+                  top: -100,
+                  right: -50,
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 500),
+                    width: 350,
+                    height: 350,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: RadialGradient(
+                        colors: [
+                          currentAccentColor.withOpacity(0.25),
+                          Colors.transparent,
+                        ],
+                      ),
+                    ),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 60, sigmaY: 60),
+                      child: Container(color: Colors.transparent),
+                    ),
+                  ),
+                ),
+
+                // 2. 은은한 빛 번짐 효과 (종에 따라 색상 변경)
+                Positioned(
+                  top: 100,
+                  left: -40,
+                  child: Center(
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 500),
+                      width: 400,
+                      height: 400,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: RadialGradient(
+                          colors: [
+                            currentWaveColor.withOpacity(0.15),
+                            Colors.transparent,
+                          ],
+                          stops: const [0.2, 1.0],
+                        ),
+                      ),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 80, sigmaY: 80),
+                        child: Container(color: Colors.transparent),
+                      ),
+                    ),
+                  ),
+                ),
+
+                // 3. 소리 파동 패턴 (Sound Wave Pattern) - 종에 따라 색상 변경
+                Positioned.fill(
+                  child: AnimatedBuilder(
+                    animation: _controller,
+                    builder: (context, child) {
+                      return CustomPaint(
+                        painter: WavePainter(
+                          color: currentWaveColor.withOpacity(0.05),
+                          waves: 3,
+                          amplitude: 20,
+                          animationValue: _controller.value,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
+                // 3.5. 파티클 이펙트 (Particles)
+                Positioned.fill(
+                  child: AnimatedBuilder(
+                    animation: _controller,
+                    builder: (context, child) {
+                      return CustomPaint(
+                        painter: ParticlePainter(
+                          particles: _particles,
+                          animationValue: _controller.value,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
+                // 4. 실제 콘텐츠
+                widget.child,
+              ],
             ),
-          ),
-        ),
-
-        // 3. 소리 파동 패턴 (Sound Wave Pattern) - Animated
-        Positioned.fill(
-          child: AnimatedBuilder(
-            animation: _controller,
-            builder: (context, child) {
-              return CustomPaint(
-                painter: WavePainter(
-                  color: AppColors.primaryBlue.withOpacity(0.05),
-                  waves: 3,
-                  amplitude: 20,
-                  animationValue: _controller.value,
-                ),
-              );
-            },
-          ),
-        ),
-
-        // 3.5. 파티클 이펙트 (Particles)
-        Positioned.fill(
-          child: AnimatedBuilder(
-            animation: _controller,
-            builder: (context, child) {
-              return CustomPaint(
-                painter: ParticlePainter(
-                  particles: _particles,
-                  animationValue: _controller.value,
-                ),
-              );
-            },
-          ),
-        ),
-
-        // 3. 소리 파동 패턴 (Sound Wave Pattern) - Animated
-
-        // 4. 실제 콘텐츠
-        widget.child,
-      ],
+          );
+        });
+      },
     );
   }
 }
@@ -169,31 +210,26 @@ class WavePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     for (int i = 0; i < waves; i++) {
-      // 불규칙한 빛 효과 (자연광)
-      // 각 파동마다, 그리고 시간에 따라 투명도가 변함
       final double shimmer = math.sin((animationValue * 2 * math.pi) + (i * 1.5));
       final double opacity = (0.05 + (0.03 * shimmer)).clamp(0.02, 0.1);
       
       final paint = Paint()
-        ..color = color.withOpacity(opacity) // 기본 색상보다 약간 더 밝거나 어둡게
+        ..color = color.withOpacity(opacity)
         ..style = PaintingStyle.stroke
-        ..strokeWidth = 2.5; // 선 굵기 증가 (1.5 -> 2.5)
+        ..strokeWidth = 2.5;
 
       final path = Path();
-      final yOffset = size.height * 0.5 + (i * 40); // 파동 간격 약간 넓힘
+      final yOffset = size.height * 0.5 + (i * 40);
       
-      // 각 파동마다 속도와 위상을 다르게 설정
-      // Loop가 자연스럽게 되려면 speed는 정수여야 함 (2*pi의 배수가 되어야 하므로)
       final int speed = 1 + i; 
       final phaseShift = i * (math.pi / 2);
       
       path.moveTo(0, yOffset);
       
       for (double x = 0; x <= size.width; x++) {
-        // 사인파 공식 복합 적용
         double y = yOffset + 
             math.sin((x / size.width * 2 * math.pi) + (animationValue * 2 * math.pi * speed) + phaseShift) * amplitude +
-            math.sin((x / size.width * 4 * math.pi) + (animationValue * 4 * math.pi * speed)) * (amplitude * 0.3); // 작은 파동 추가
+            math.sin((x / size.width * 4 * math.pi) + (animationValue * 4 * math.pi * speed)) * (amplitude * 0.3);
             
         path.lineTo(x, y);
       }
@@ -204,7 +240,7 @@ class WavePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant WavePainter oldDelegate) {
-    return oldDelegate.animationValue != animationValue;
+    return oldDelegate.animationValue != animationValue || oldDelegate.color != color;
   }
 }
 
@@ -219,9 +255,9 @@ class ParticleModel {
     final random = math.Random();
     x = random.nextDouble();
     y = random.nextDouble();
-    size = random.nextDouble() * 4 + 2; // 크기 증가 (2 ~ 6)
+    size = random.nextDouble() * 4 + 2;
     speed = random.nextDouble() * 0.2 + 0.05;
-    opacity = random.nextDouble() * 0.5 + 0.3; // 투명도 증가 (0.3 ~ 0.8)
+    opacity = random.nextDouble() * 0.5 + 0.3;
   }
 }
 
@@ -236,10 +272,6 @@ class ParticlePainter extends CustomPainter {
     final paint = Paint()..style = PaintingStyle.fill;
 
     for (var particle in particles) {
-      // 위로 올라가는 움직임 구현
-      // animationValue (0~1)가 계속 반복되므로, 이를 이용하여 y좌표를 계산
-      // (초기y - 속도 * 시간) % 1.0 을 하면 1.0 -> 0.0 으로 자연스럽게 순환
-      
       double currentY = (particle.y - (particle.speed * animationValue * 5)) % 1.0;
       if (currentY < 0) currentY += 1.0;
 
@@ -248,17 +280,12 @@ class ParticlePainter extends CustomPainter {
         currentY * size.height,
       );
 
-      // 반짝이는 효과
       final double twinkle = math.sin((animationValue * 10 + particle.x * 10) * math.pi);
       final double currentOpacity = (particle.opacity + (twinkle * 0.1)).clamp(0.0, 1.0);
 
       paint.color = Colors.white.withOpacity(currentOpacity);
-      
-      // Glow 효과를 위해 마스크 필터 적용 (성능 주의)
-      // 여기서는 간단히 원을 그림
       canvas.drawCircle(position, particle.size, paint);
       
-      // 외곽 Glow
       paint.color = Colors.white.withOpacity(currentOpacity * 0.3);
       canvas.drawCircle(position, particle.size * 2, paint);
     }
