@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/animated_weather_icon.dart';
 import '../controllers/home_controller.dart';
 import '../../../data/services/weather_service.dart';
 import '../../../routes/app_routes.dart';
@@ -284,37 +285,37 @@ class WeatherSpecialView extends GetView<HomeController> {
           ),
           SizedBox(height: 16.h),
           _buildFeatureCard(
-            icon: '🌧️',
+            weatherType: WeatherType.rainy,
             title: 'weather_feat_rain_title'.tr,
             description: 'weather_feat_rain_desc'.tr,
             color: Colors.blue,
           ),
           _buildFeatureCard(
-            icon: '☀️',
+            weatherType: WeatherType.sunny,
             title: 'weather_feat_sunny_title'.tr,
             description: 'weather_feat_sunny_desc'.tr,
             color: Colors.orange,
           ),
           _buildFeatureCard(
-            icon: '🌙',
+            weatherType: WeatherType.night,
             title: 'weather_feat_night_title'.tr,
             description: 'weather_feat_night_desc'.tr,
             color: Colors.indigo,
           ),
           _buildFeatureCard(
-            icon: '❄️',
+            weatherType: WeatherType.snowy,
             title: 'weather_feat_snow_title'.tr,
             description: 'weather_feat_snow_desc'.tr,
             color: Colors.lightBlue,
           ),
           _buildFeatureCard(
-            icon: '🌪️',
+            weatherType: WeatherType.windySunny,
             title: 'weather_feat_wind_title'.tr,
             description: 'weather_feat_wind_desc'.tr,
             color: Colors.grey,
           ),
           _buildFeatureCard(
-            icon: '☁️',
+            weatherType: WeatherType.cloudyWithMoon,
             title: 'weather_feat_cloud_title'.tr,
             description: 'weather_feat_cloud_desc'.tr,
             color: Colors.blueGrey,
@@ -325,7 +326,7 @@ class WeatherSpecialView extends GetView<HomeController> {
   }
 
   Widget _buildFeatureCard({
-    required String icon,
+    required WeatherType weatherType,
     required String title,
     required String description,
     required Color color,
@@ -348,16 +349,16 @@ class WeatherSpecialView extends GetView<HomeController> {
       child: Row(
         children: [
           Container(
-            width: 48.w,
-            height: 48.w,
+            width: 56.w,
+            height: 56.w,
             decoration: BoxDecoration(
               color: color.withOpacity(0.1),
-              shape: BoxShape.circle,
+              borderRadius: BorderRadius.circular(16.r),
             ),
             child: Center(
-              child: Text(
-                icon,
-                style: TextStyle(fontSize: 24.sp),
+              child: AnimatedWeatherIcon(
+                type: weatherType,
+                size: 40.w,
               ),
             ),
           ),
