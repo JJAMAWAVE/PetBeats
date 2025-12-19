@@ -34,30 +34,24 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
   late AnimationController _cloudController;
   late AnimationController _rainController;
   late AnimationController _sunController;
-  late AnimationController _snowController;
 
   @override
   void initState() {
     super.initState();
     _cloudController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 6),
+      duration: const Duration(seconds: 3),
     )..repeat(reverse: true);
 
     _rainController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 800),
     )..repeat();
 
     _sunController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 1000),
     )..repeat(reverse: true);
-
-    _snowController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1500),
-    )..repeat();
   }
 
   @override
@@ -65,7 +59,6 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
     _cloudController.dispose();
     _rainController.dispose();
     _sunController.dispose();
-    _snowController.dispose();
     super.dispose();
   }
 
@@ -105,7 +98,7 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
       animation: _sunController,
       builder: (context, child) {
         return Opacity(
-          opacity: 0.6 + 0.4 * _sunController.value,
+          opacity: 0.7 + 0.3 * _sunController.value,
           child: CustomPaint(
             size: Size(widget.size, widget.size),
             painter: _SunPainter(),
@@ -115,67 +108,52 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
     );
   }
 
-  /// ☁️ 흐림 - 구름 좌우 움직임
+  /// ☁️ 흐림 - 구름
   Widget _buildCloudy() {
     return AnimatedBuilder(
       animation: _cloudController,
       builder: (context, child) {
-        return Stack(
-          children: [
-            // 뒤쪽 회색 구름 (반대로 움직임)
-            Positioned(
-              right: 0,
-              top: 0,
-              child: Transform.translate(
-                offset: Offset(-3 * _cloudController.value, 0),
-                child: CustomPaint(
-                  size: Size(widget.size * 0.6, widget.size * 0.4),
-                  painter: _CloudPainter(const Color(0xFFB0BEC5)),
-                ),
-              ),
-            ),
-            // 앞쪽 흰색 구름
-            Positioned(
-              left: 0,
-              bottom: 0,
-              child: Transform.translate(
-                offset: Offset(5 * _cloudController.value, 0),
-                child: CustomPaint(
-                  size: Size(widget.size * 0.9, widget.size * 0.6),
-                  painter: _CloudPainter(const Color(0xFFE0E0E0)),
-                ),
-              ),
-            ),
-          ],
+        return Transform.translate(
+          offset: Offset(3 * _cloudController.value, 0),
+          child: CustomPaint(
+            size: Size(widget.size, widget.size),
+            painter: _CloudOnlyPainter(),
+          ),
         );
       },
     );
   }
 
-  /// 🌧️ 비 - 구름 + 빗방울 내림
+  /// 🌧️ 비 - 구름 + 빗방울
   Widget _buildRainy() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // 구름
         CustomPaint(
-          size: Size(widget.size * 0.9, widget.size * 0.5),
-          painter: _CloudPainter(const Color(0xFF90A4AE)),
+          size: Size(widget.size * 0.9, widget.size * 0.45),
+          painter: _CloudOnlyPainter(color: const Color(0xFF78909C)),
         ),
-        // 빗방울들
+        SizedBox(height: 4),
         AnimatedBuilder(
           animation: _rainController,
           builder: (context, child) {
             return Opacity(
               opacity: 1 - _rainController.value,
               child: Transform.translate(
-                offset: Offset(0, 10 * _rainController.value),
+                offset: Offset(0, 8 * _rainController.value),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildRainDrop(),
-                    _buildRainDrop(),
-                    _buildRainDrop(),
-                  ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(3, (_) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: Container(
+                      width: 5,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF42A5F5),
+                        borderRadius: BorderRadius.circular(2.5),
+                      ),
+                    ),
+                  )),
                 ),
               ),
             );
@@ -185,40 +163,34 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
     );
   }
 
-  Widget _buildRainDrop() {
-    return Container(
-      width: 6,
-      height: 10,
-      decoration: BoxDecoration(
-        color: const Color(0xFF64B5F6),
-        borderRadius: BorderRadius.circular(3),
-      ),
-    );
-  }
-
-  /// ❄️ 눈 - 구름 + 눈송이 내림
+  /// ❄️ 눈
   Widget _buildSnowy() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // 구름
         CustomPaint(
-          size: Size(widget.size * 0.9, widget.size * 0.5),
-          painter: _CloudPainter(const Color(0xFFCFD8DC)),
+          size: Size(widget.size * 0.9, widget.size * 0.45),
+          painter: _CloudOnlyPainter(color: const Color(0xFFB0BEC5)),
         ),
-        // 눈송이들
+        SizedBox(height: 4),
         AnimatedBuilder(
-          animation: _snowController,
+          animation: _rainController,
           builder: (context, child) {
-            final offset = _snowController.value;
             return Transform.translate(
-              offset: Offset(0, 5 * offset),
+              offset: Offset(0, 5 * _rainController.value),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildSnowflake(),
-                  _buildSnowflake(),
-                  _buildSnowflake(),
-                ],
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(3, (_) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  child: Container(
+                    width: 7,
+                    height: 7,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFF64B5F6),
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                )),
               ),
             );
           },
@@ -227,48 +199,33 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
     );
   }
 
-  Widget _buildSnowflake() {
-    return Container(
-      width: 8,
-      height: 8,
-      decoration: const BoxDecoration(
-        color: Color(0xFF81D4FA),
-        shape: BoxShape.circle,
-      ),
-    );
-  }
-
-  /// ⛈️ 천둥 - 구름 + 번개 깜빡임
+  /// ⛈️ 천둥
   Widget _buildThunder() {
-    return AnimatedBuilder(
-      animation: _sunController,
-      builder: (context, child) {
-        return Stack(
-          children: [
-            // 구름
-            Positioned.fill(
-              child: _buildCloudy(),
-            ),
-            // 번개
-            Positioned(
-              right: widget.size * 0.2,
-              bottom: widget.size * 0.1,
-              child: Opacity(
-                opacity: _sunController.value,
-                child: Icon(
-                  Icons.bolt,
-                  color: Colors.amber,
-                  size: widget.size * 0.4,
-                ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        CustomPaint(
+          size: Size(widget.size * 0.9, widget.size * 0.45),
+          painter: _CloudOnlyPainter(color: const Color(0xFF607D8B)),
+        ),
+        AnimatedBuilder(
+          animation: _sunController,
+          builder: (context, child) {
+            return Opacity(
+              opacity: _sunController.value,
+              child: Icon(
+                Icons.bolt,
+                color: Colors.amber,
+                size: widget.size * 0.35,
               ),
-            ),
-          ],
-        );
-      },
+            );
+          },
+        ),
+      ],
     );
   }
 
-  /// 🌙 밤 - 달
+  /// 🌙 밤
   Widget _buildNight() {
     return Center(
       child: CustomPaint(
@@ -280,103 +237,64 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
 
   /// 💨 바람 + 태양
   Widget _buildWindySunny() {
-    return AnimatedBuilder(
-      animation: _cloudController,
-      builder: (context, child) {
-        return Stack(
-          children: [
-            // 태양
-            Positioned(
-              right: 0,
-              top: 0,
-              child: Opacity(
-                opacity: 0.6 + 0.4 * _sunController.value,
-                child: CustomPaint(
-                  size: Size(widget.size * 0.5, widget.size * 0.5),
-                  painter: _SunPainter(),
-                ),
-              ),
-            ),
-            // 바람 선들
-            Positioned(
-              left: 0,
-              bottom: widget.size * 0.2,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        CustomPaint(
+          size: Size(widget.size * 0.5, widget.size * 0.5),
+          painter: _SunPainter(),
+        ),
+        SizedBox(height: 2),
+        AnimatedBuilder(
+          animation: _cloudController,
+          builder: (context, child) {
+            return Opacity(
+              opacity: 0.4 + 0.5 * _cloudController.value,
               child: Transform.translate(
-                offset: Offset(3 * _cloudController.value, 0),
-                child: Opacity(
-                  opacity: 0.3 + 0.6 * _cloudController.value,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildWindLine(widget.size * 0.6),
-                      SizedBox(height: 4),
-                      _buildWindLine(widget.size * 0.7),
-                      SizedBox(height: 4),
-                      _buildWindLine(widget.size * 0.5),
-                    ],
-                  ),
+                offset: Offset(5 * _cloudController.value, 0),
+                child: Column(
+                  children: [
+                    Container(width: widget.size * 0.7, height: 2, color: const Color(0xFF90A4AE)),
+                    SizedBox(height: 3),
+                    Container(width: widget.size * 0.5, height: 2, color: const Color(0xFF90A4AE)),
+                  ],
                 ),
               ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Widget _buildWindLine(double width) {
-    return Container(
-      width: width,
-      height: 2,
-      decoration: BoxDecoration(
-        color: const Color(0xFF90A4AE),
-        borderRadius: BorderRadius.circular(1),
-      ),
+            );
+          },
+        ),
+      ],
     );
   }
 
   /// 🌙☁️ 구름 낀 밤
   Widget _buildCloudyWithMoon() {
-    return AnimatedBuilder(
-      animation: _cloudController,
-      builder: (context, child) {
-        return Stack(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // 달
-            Positioned(
-              left: widget.size * 0.1,
-              top: 0,
-              child: CustomPaint(
-                size: Size(widget.size * 0.5, widget.size * 0.5),
-                painter: _MoonPainter(),
-              ),
+            CustomPaint(
+              size: Size(widget.size * 0.35, widget.size * 0.35),
+              painter: _MoonPainter(),
             ),
-            // 구름들
-            Positioned(
-              right: 0,
-              top: widget.size * 0.1,
-              child: Transform.translate(
-                offset: Offset(-3 * _cloudController.value, 0),
-                child: CustomPaint(
-                  size: Size(widget.size * 0.6, widget.size * 0.35),
-                  painter: _CloudPainter(const Color(0xFFB0BEC5)),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 0,
-              bottom: 0,
-              child: Transform.translate(
-                offset: Offset(5 * _cloudController.value, 0),
-                child: CustomPaint(
-                  size: Size(widget.size * 0.85, widget.size * 0.5),
-                  painter: _CloudPainter(const Color(0xFFE0E0E0)),
-                ),
-              ),
+            SizedBox(width: 4),
+            AnimatedBuilder(
+              animation: _cloudController,
+              builder: (context, child) {
+                return Transform.translate(
+                  offset: Offset(3 * _cloudController.value, 0),
+                  child: CustomPaint(
+                    size: Size(widget.size * 0.5, widget.size * 0.35),
+                    painter: _CloudOnlyPainter(color: const Color(0xFFB0BEC5)),
+                  ),
+                );
+              },
             ),
           ],
-        );
-      },
+        ),
+      ],
     );
   }
 }
@@ -385,9 +303,9 @@ class _AnimatedWeatherIconState extends State<AnimatedWeatherIcon>
 class _SunPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = const Color(0xFFFFEB3B);
+    final paint = Paint()..color = const Color(0xFFFFD54F);
     final center = Offset(size.width / 2, size.height / 2);
-    final radius = size.width * 0.25;
+    final radius = size.width * 0.28;
 
     // 중심 원
     canvas.drawCircle(center, radius, paint);
@@ -397,8 +315,8 @@ class _SunPainter extends CustomPainter {
     paint.style = PaintingStyle.stroke;
     for (int i = 0; i < 8; i++) {
       final angle = (i * 45) * (3.14159 / 180);
-      final startRadius = radius * 1.4;
-      final endRadius = radius * 1.8;
+      final startRadius = radius * 1.3;
+      final endRadius = radius * 1.7;
       canvas.drawLine(
         Offset(center.dx + cos(angle) * startRadius, center.dy + sin(angle) * startRadius),
         Offset(center.dx + cos(angle) * endRadius, center.dy + sin(angle) * endRadius),
@@ -411,11 +329,11 @@ class _SunPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
-/// 구름 페인터
-class _CloudPainter extends CustomPainter {
+/// 구름 페인터 (단순화)
+class _CloudOnlyPainter extends CustomPainter {
   final Color color;
 
-  _CloudPainter(this.color);
+  _CloudOnlyPainter({this.color = const Color(0xFFB0BEC5)});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -423,10 +341,11 @@ class _CloudPainter extends CustomPainter {
 
     // 구름 형태 - 여러 원의 조합
     canvas.drawCircle(Offset(size.width * 0.25, size.height * 0.6), size.height * 0.35, paint);
-    canvas.drawCircle(Offset(size.width * 0.55, size.height * 0.5), size.height * 0.45, paint);
+    canvas.drawCircle(Offset(size.width * 0.55, size.height * 0.45), size.height * 0.4, paint);
+    canvas.drawCircle(Offset(size.width * 0.8, size.height * 0.55), size.height * 0.3, paint);
     canvas.drawRRect(
       RRect.fromRectAndRadius(
-        Rect.fromLTWH(0, size.height * 0.5, size.width, size.height * 0.45),
+        Rect.fromLTWH(size.width * 0.1, size.height * 0.55, size.width * 0.8, size.height * 0.4),
         Radius.circular(size.height * 0.2),
       ),
       paint,
@@ -441,15 +360,15 @@ class _CloudPainter extends CustomPainter {
 class _MoonPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = const Color(0xFFFFEB3B);
+    final paint = Paint()..color = const Color(0xFFFFD54F);
     final center = Offset(size.width / 2, size.height / 2);
     final radius = size.width * 0.4;
 
     // 달 - 원에서 작은 원을 빼서 초승달 모양
     canvas.drawCircle(center, radius, paint);
     
-    // 어두운 부분 (배경색으로 덮음)
-    final darkPaint = Paint()..color = const Color(0xFF1A1A2E);
+    // 어두운 부분 (진한 남색으로 덮음)
+    final darkPaint = Paint()..color = const Color(0xFF2C3E50);
     canvas.drawCircle(
       Offset(center.dx + radius * 0.5, center.dy - radius * 0.2),
       radius * 0.85,
