@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/custom_button.dart';
 import '../controllers/onboarding_controller.dart';
 import '../../../routes/app_routes.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -153,38 +154,18 @@ class _QuestionViewState extends State<QuestionView> with TickerProviderStateMix
                     
                     return ScaleTransition(
                       scale: hasSelection ? _btnScaleAnimation : const AlwaysStoppedAnimation(1.0),
-                      child: AnimatedContainer(
+                      child: AnimatedOpacity(
+                        opacity: hasSelection ? 1.0 : 0.5,
                         duration: const Duration(milliseconds: 300),
-                        width: double.infinity,
-                        height: 56,
-                        child: ElevatedButton(
-                          onPressed: hasSelection
-                              ? () {
-                                  hapticService.lightImpact();
-                                  controller.stressTriggers.value = selectedItems.toList();
-                                  Get.toNamed(Routes.QUESTION2);
-                                }
-                              : null,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: hasSelection
-                                ? AppColors.primaryBlue
-                                : AppColors.primaryBlue.withOpacity(0.3),
-                            foregroundColor: Colors.white,
-                            elevation: hasSelection ? 8 : 0,
-                            shadowColor: AppColors.primaryBlue.withOpacity(0.4),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.r),
-                            ),
-                            disabledBackgroundColor: AppColors.primaryBlue.withOpacity(0.3),
-                            disabledForegroundColor: Colors.white.withOpacity(0.5),
-                          ),
-                          child: Text(
-                            'next'.tr,
-                            style: GoogleFonts.notoSans(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: hasSelection ? Colors.white : Colors.white.withOpacity(0.5),
-                            ),
+                        child: IgnorePointer(
+                          ignoring: !hasSelection,
+                          child: CustomButton(
+                            text: 'next'.tr,
+                            onPressed: () {
+                              hapticService.lightImpact();
+                              controller.stressTriggers.value = selectedItems.toList();
+                              Get.toNamed(Routes.QUESTION2);
+                            },
                           ),
                         ),
                       ),

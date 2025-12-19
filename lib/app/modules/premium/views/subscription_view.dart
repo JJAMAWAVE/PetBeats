@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/custom_button.dart';
 import '../controllers/subscription_controller.dart';
 import '../../../routes/app_routes.dart';
 import 'package:petbeats/core/widgets/rainbow_gradient.dart';
@@ -218,40 +219,11 @@ class SubscriptionView extends GetView<SubscriptionController> {
                     SizedBox(height: 24.h),
                     
                     // CTA Button
-                    Obx(() => SizedBox(
-                      width: double.infinity,
-                      height: 56.h,
-                      child: ElevatedButton(
-                        onPressed: controller.isLoading.value
-                            ? null
-                            : () => controller.startFreeTrial(),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryBlue,
-                          foregroundColor: Colors.white,
-                          disabledBackgroundColor: AppColors.primaryBlue.withOpacity(0.5),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.r),
-                          ),
-                          elevation: 8,
-                          shadowColor: AppColors.primaryBlue.withOpacity(0.4),
-                        ),
-                        child: controller.isLoading.value
-                            ? SizedBox(
-                                width: 24.w,
-                                height: 24.w,
-                                child: const CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                                  strokeWidth: 2,
-                                ),
-                              )
-                            : Text(
-                                'premium_start_trial'.tr,
-                                style: TextStyle(
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                      ),
+                    Obx(() => CustomButton(
+                      text: 'premium_start_trial'.tr,
+                      icon: Icons.rocket_launch,
+                      isLoading: controller.isLoading.value,
+                      onPressed: () => controller.startFreeTrial(),
                     )),
                     
                     SizedBox(height: 12.h),

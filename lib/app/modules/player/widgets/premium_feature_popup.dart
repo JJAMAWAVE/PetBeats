@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/widgets/custom_button.dart';
 import '../../../routes/app_routes.dart';
 
 /// Premium Feature Popup Dialog
@@ -148,27 +149,13 @@ class PremiumFeaturePopup extends StatelessWidget {
                 // Subscribe Button
                 Expanded(
                   flex: 2,
-                  child: ElevatedButton(
+                  child: CustomButton(
+                    text: 'premium_subscribe_btn'.tr,
+                    icon: Icons.star,
                     onPressed: () {
                       Get.back();
                       Get.toNamed(Routes.SUBSCRIPTION);
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.amber,
-                      foregroundColor: Colors.white,
-                      padding: EdgeInsets.symmetric(vertical: 14.h),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
-                      elevation: 4,
-                    ),
-                    child: Text(
-                      'premium_subscribe_btn'.tr,
-                      style: GoogleFonts.poppins(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                   ),
                 ),
               ],
